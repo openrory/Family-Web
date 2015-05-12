@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.LoginServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SocialworkerServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.SocialworkerServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SocialworkerServlet</servlet-name>
+		<url-pattern>/SocialworkerServlet.do</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>util.FamilyWeb.MyServletContextListener
+		</listener-class>
+	</listener>
+</web-app>
