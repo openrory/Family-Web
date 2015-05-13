@@ -1,0 +1,54 @@
+body {
+	font-family: sans-serif;
+}
+[main] {
+	background-color: #F9F9F9;
+}
+
+core-toolbar {
+	background-color: #C00000;
+}
+
+[drawer] {
+	background-color: #FFFFFF;
+}
+
+#uitloggen_knop_container {
+	width: 100px;
+	margin: 0px auto;
+}
+
+#uitloggen_knop {
+   border-top: 1px solid #000000;
+   background: #c00000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#c00000), to(#c00000));
+   background: -webkit-linear-gradient(top, #c00000, #c00000);
+   background: -moz-linear-gradient(top, #c00000, #c00000);
+   background: -ms-linear-gradient(top, #c00000, #c00000);
+   background: -o-linear-gradient(top, #c00000, #c00000);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+
+#uitloggen_knop:hover {
+   border-top-color: #fcfeff;
+   background: #fcfeff;
+   color: #000000;
+   }
+
+#uitloggen_knop:active {
+   border-top-color: #fcfcfc;
+   background: #fcfcfc;
+   }
+}

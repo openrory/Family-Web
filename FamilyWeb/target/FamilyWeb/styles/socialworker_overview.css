@@ -1,0 +1,37 @@
+﻿#form_container {
+    width: 80%;
+    margin: 10px auto;
+    min-width: 500px;
+    background-color: #babbbe;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#search_container {
+    width: 90%;
+    margin: 5px auto;
+    padding: 5px;
+    background-color: #E9EAEE;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#search_form {
+    width: 40%;
+    margin-left: 60%;
+}
+
+#overview_container {
+    width: 95%;
+    margin: 2px auto;
+    background-color: #E9EAEE;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+}
