@@ -81,7 +81,7 @@ public class MySQLDao implements DatabaseInterface {
 				if(rSet.getString("usertype").equals("administrator")){
 					user = new Administrator(rSet.getString("username"), rSet.getString("password"), rSet.getString("forename"),
 							rSet.getString("surname"), rSet.getDate("dateofbirth"), rSet.getString("postcode"), rSet.getString("street"),
-							rSet.getString("housenuber"), rSet.getString("city"), rSet.getString("nationality"),
+							rSet.getString("housenumber"), rSet.getString("city"), rSet.getString("nationality"),
 							rSet.getString("telephoneNumber"), rSet.getString("mobilePhoneNumber"), rSet.getString("email"),
 							rSet.getString("isActive").equals("Y"), rSet.getString("employeeNumber"), new ArrayList<User>());
 				}else{
