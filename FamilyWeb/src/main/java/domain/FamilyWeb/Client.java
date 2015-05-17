@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @since 2015-04-20
  */
 public class Client {
+	private int client_id;
 	private String forename;
 	private String surname;
 	private Date dateOfBirth;
@@ -77,6 +78,20 @@ public class Client {
 	public Client() {
 		this.myFamilymembers = new ArrayList<Familymember>();
 		this.myNetworks = new ArrayList<Network>();
+	}
+
+	/**
+	 * @return the client_id
+	 */
+	public int getClient_id() {
+		return client_id;
+	}
+
+	/**
+	 * @param client_id the client_id to set
+	 */
+	public void setClient_id(int client_id) {
+		this.client_id = client_id;
 	}
 
 	/**
@@ -294,7 +309,7 @@ public class Client {
 	 */
 	@Override
 	public String toString() {
-		return "Client [Forename = " + getForename() + ", Surname = "
+		return "Client [Client_id = " + getClient_id() + ", Forename = " + getForename() + ", Surname = "
 				+ getSurname() + ", DateOfBirth = " + getDateOfBirth()
 				+ ", Postcode = " + getPostcode() + ", Street = "
 				+ getStreet() + ", HouseNumber =" + getHouseNumber()

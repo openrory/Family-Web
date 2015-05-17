@@ -2,6 +2,10 @@ package databaseControllers.FamilyWeb;
 
 import java.util.ArrayList;
 
+import domain.FamilyWeb.Client;
+import domain.FamilyWeb.Familymember;
+import domain.FamilyWeb.Question;
+import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
 public interface DatabaseInterface {
@@ -15,4 +19,21 @@ public interface DatabaseInterface {
 	public boolean updateUser(User user);
 	public ArrayList<User> getAllSocialworkers();
 	
+	
+	public boolean addClient(Client client);
+	public boolean updateClient(Client client);
+	public Client getClient(int client_id);
+	
+	public ArrayList<Client> getAllClientsOfUser(User user);
+	public boolean addFamilymember(Familymember famMember, Client client);
+	public boolean updateFamilymember(Familymember famMember);
+	public ArrayList<Familymember> getFamilymembersOfClient(Client client);
+	
+	public boolean addSurvey(Survey servey);
+	public boolean updateSurvey(Survey servey);
+	public Survey getSurvey(String surveyName);
+	
+	public boolean addQuestion(Question question);
+	public boolean updateQuestion(Question question);
+	public Question getQuestion(int question_id);
 }
