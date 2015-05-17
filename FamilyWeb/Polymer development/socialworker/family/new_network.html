@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title>Nieuw netwerk</title>
+    <title>Nieuw netwerk</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
@@ -12,6 +12,7 @@
     <link rel="import" href="../../custom_elements/options-menu.html">
     <link rel="import" href="../../bower_components/core-media-query/core-media-query.html">
     <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
     <link rel="stylesheet" href="../../styles/new_network.css">
 </head>
 <body fullbleed layout vertical>
@@ -39,6 +40,26 @@
                     <paper-tab><a href="transfer.html" horizontal center-center layout>Overdragen</a></paper-tab>
 
                 </paper-tabs>
+                <div id="form_container">
+                    <form id="group_form" onsubmit="" method="post">
+                        <div id="select_interviewee">
+                            <div class="information">
+                                <label>Selecteer de ondervraagde:</label>
+                                <select id="interviewee" name="interviewee">
+                                    <option class="select_option" value="hans">Hans</option>
+                                    <option class="select_option" value="billy">Billy</option>
+                                    <option class="select_option" value="adriaan">Adriaan</option>
+                                    <option class="select_option" value="bassie">Bassie</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="buren" class="group">
+                            <h3>Buren</h3>
+                            <core-icon-button onclick="addInput()" icon="add"></core-icon-button>
+                        </div>
+                        <input type="submit" value="Vragenlijst afnemen">
+                </div>
+                </form>
                 <p>Nieuw netwerk aanmaken hier</p>
             </div>
         </core-header-panel>
@@ -46,6 +67,16 @@
     <core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
 
     <script>
+        var countBox = 1;
+        var boxName = 0;
+        var groupName = "buren"
+        function addInput() {
+            var name = "name" + countBox;
+            var role = "role" + countBox;
+            var age = "age" + countBox;
+            document.getElementById('buren').innerHTML += '<div class="person"><div class="information"> <label>Naam:</label><input type="text" id="' + groupName + name + '" name="' + groupName + name + '" value="' + groupName + name + '" "  /></div><div class="information"> <label>Rol:</label><input type="text" id="' + groupName + role + '" name="' + groupName + role + '" value="' + groupName + role + '" "  /></div><div class="information"> <label>Leeftijd:</label><input type="text" id="' + groupName + age + '" name="' + groupName + age + '" value="' + groupName + age + '" "  /></div></div>';
+            countBox += 1;
+        }
 
         document.querySelector('#mediaQuery').addEventListener('core-media-change',
           function (e) {

@@ -5,3 +5,84 @@ paper-tab a {
 	text-decoration: none;
 	color: inherit;
 }
+#container{
+	width: 100%;
+	margin: 5px auto;
+}
+#form_container{
+	width: 90%;
+	margin: 10px auto;
+	padding: 5px;
+	background-color: #FFFFFF;
+	border: solid 1px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#select_interviewee{
+	width: 90%;
+	margin: 10px auto;
+    padding: 2px;
+    background-color: #E5E5E5 ;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+#interviewee{
+    background-color: #FFFFFF;
+}
+.group{
+	width: 90%;
+	margin: 10px auto;
+    padding: 5px;
+    background-color: #D8D8D8;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.group h3{
+    margin: 5px;
+}
+
+.person {
+    margin-top: 5px;
+    background-color: #CCCCCC;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information{
+	width: 90%;
+	margin: auto;
+}
+
+.information select{
+	min-width: 200px;
+	max-width: 300px;
+	margin-left: 30px;
+	padding: 5px;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information input{
+	min-width: 200px;
+	max-width: 300px;
+	margin-left: 30px;
+	padding: 5px;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information label {
+	display: inline-block;
+	width: 200px; 
+	text-align: right;
+}
