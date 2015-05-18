@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Survey {
 	private String name;
+	private int survey_id;
 	private ArrayList<Question> questions;
 	
 	/**
@@ -52,11 +53,25 @@ public class Survey {
 		this.questions = questions;
 	}
 
+	/**
+	 * @return the survey_id
+	 */
+	public int getSurvey_id() {
+		return survey_id;
+	}
+
+	/**
+	 * @param survey_id the survey_id to set
+	 */
+	public void setSurvey_id(int survey_id) {
+		this.survey_id = survey_id;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Survey [Name = " + getName() + "]";
+		return "Survey [survey_id = "+this.getSurvey_id()+", Name = " + getName() + "]";
 	}	
 }

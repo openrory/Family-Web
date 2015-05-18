@@ -258,21 +258,107 @@ public class MySQLDao implements DatabaseInterface {
 		return null;
 	}
 
-	public boolean addSurvey(Survey servey) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addSurvey(Survey survey) {
+		Connection conn = null;
+		boolean b = true;		
+		try {
+			conn = this.getConnection();
+			PreparedStatement pStmt = conn
+					.prepareStatement("insert into surveys(name) values(?)");
+			pStmt.setString(1, survey.getName());
+			pStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		} finally {
+			this.closeConnection(conn);
+		}
+		if (b) {
+			try {
+				conn = this.getConnection();
+				PreparedStatement pStmt = conn
+						.prepareStatement("select * from surveys where name=?");
+				pStmt.setString(1, survey.getName());
+				ResultSet rSet = pStmt.executeQuery();
+				if (rSet.next()) {
+					survey.setSurvey_id(rSet.getInt("survey_id"));
+				} else
+					b = false;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				b = false;
+			} finally {
+				this.closeConnection(conn);
+			}
+			for (Question q : survey.getQuestions()) {
+				int question_id = 0;
+				b &= this.addQuestion(q);
+				if (b) {
+					try {
+						conn = this.getConnection();
+						PreparedStatement pStmt = conn
+								.prepareStatement("select * from questions where question=?");
+						pStmt.setString(1, q.getQuestion());
+						ResultSet rSet = pStmt.executeQuery();
+						if (rSet.next()) {
+							question_id = rSet.getInt("question_id");
+						} else
+							b = false;
+					} catch (SQLException e) {
+						e.printStackTrace();
+						b = false;
+					} finally {
+						this.closeConnection(conn);
+					}
+				}
+				if (b) {
+					try {
+						conn = this.getConnection();
+						PreparedStatement pStmt = conn
+								.prepareStatement("insert into surveys_questions(survey_id, question_id) values(?,?)");
+						pStmt.setInt(1, survey.getSurvey_id());
+						pStmt.setInt(2, question_id);
+						pStmt.executeUpdate();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						b = false;
+					} finally {
+						this.closeConnection(conn);
+					}
+				}
+			}
+		}
+		return b;
 	}
 
-	public boolean updateSurvey(Survey servey) {
-		// TODO Auto-generated method stub
+	public boolean updateSurvey(Survey survey) {
+		Connection conn = null;
+		boolean b = true;
+		try {
+			conn = this.getConnection();
+			PreparedStatement pStmt = conn
+					.prepareStatement("update surveys set name=? where survey_id=?");
+			pStmt.setString(1, survey.getName());
+			pStmt.setInt(2, survey.getSurvey_id());
+			pStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			b = false;
+		} finally {
+			this.closeConnection(conn);
+		}
+		if (b) {
+			for(Question q : survey.getQuestions()){
+				this.updateQuestion(q);
+			}
+		}
 		return false;
 	}
 
 	public Survey getSurvey(String surveyName) {
 		Survey survey = null;
 		Connection conn = null;
-		ArrayList<Integer> questionIDs = new ArrayList<Integer>();		
-		int survey_id = 0;
+		ArrayList<Integer> questionIDs = new ArrayList<Integer>();
 		boolean b = true;
 		try {
 			conn = this.getConnection();
@@ -282,7 +368,7 @@ public class MySQLDao implements DatabaseInterface {
 			ResultSet rSet = pStmt.executeQuery();
 			if (rSet.next()) {
 				survey = new Survey(rSet.getString("name"), null);
-				survey_id = rSet.getInt("survey_id");
+				survey.setSurvey_id(rSet.getInt("survey_id"));
 			} else
 				b = false;
 		} catch (SQLException e) {
@@ -295,7 +381,7 @@ public class MySQLDao implements DatabaseInterface {
 				conn = this.getConnection();
 				PreparedStatement pStmt = conn
 						.prepareStatement("select * from surveys_questions where survey_id=?");
-				pStmt.setInt(1, survey_id);
+				pStmt.setInt(1, survey.getSurvey_id());
 				ResultSet rSet = pStmt.executeQuery();
 				while (rSet.next()) {
 					questionIDs.add(rSet.getInt("question_id"));
@@ -307,14 +393,14 @@ public class MySQLDao implements DatabaseInterface {
 				this.closeConnection(conn);
 			}
 		}
-		if(b) {
+		if (b) {
 			ArrayList<Question> questions = new ArrayList<Question>();
-			for(int i : questionIDs){
+			for (int i : questionIDs) {
 				questions.add(getQuestion(i));
-			}			
+			}
 			survey.setQuestions(questions);
-		}		
-		return (b) ? survey :  null;
+		}
+		return (b) ? survey : null;
 	}
 
 	public boolean addQuestion(Question question) {

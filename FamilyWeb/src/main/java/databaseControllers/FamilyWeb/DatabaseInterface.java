@@ -29,8 +29,8 @@ public interface DatabaseInterface {
 	public boolean updateFamilymember(Familymember famMember);
 	public ArrayList<Familymember> getFamilymembersOfClient(Client client);
 	
-	public boolean addSurvey(Survey servey);
-	public boolean updateSurvey(Survey servey);
+	public boolean addSurvey(Survey survey);
+	public boolean updateSurvey(Survey survey);
 	public Survey getSurvey(String surveyName);
 	
 	public boolean addQuestion(Question question);
