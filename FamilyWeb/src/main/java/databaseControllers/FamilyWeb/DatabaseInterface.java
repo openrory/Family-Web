@@ -20,7 +20,7 @@ public interface DatabaseInterface {
 	public ArrayList<User> getAllSocialworkers();
 	
 	
-	public boolean addClient(Client client);
+	public boolean addClient(Client client, User user);
 	public boolean updateClient(Client client);
 	public Client getClient(int client_id);
 	

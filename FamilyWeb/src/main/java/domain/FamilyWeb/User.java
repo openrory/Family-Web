@@ -43,6 +43,7 @@ public abstract class User {
 	private String email;
 	private boolean isActive;
 	private String employeeNumber;
+	private int user_id;
 
 	private ArrayList<Notification> notifications;
 	private ArrayList<Client> myClients;
@@ -437,6 +438,20 @@ public abstract class User {
 	 */
 	public void setMyClients(ArrayList<Client> myClients) {
 		this.myClients = myClients;
+	}
+
+	/**
+	 * @return the user_id
+	 */
+	public int getUser_id() {
+		return user_id;
+	}
+
+	/**
+	 * @param user_id the user_id to set
+	 */
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public boolean addDB() {
