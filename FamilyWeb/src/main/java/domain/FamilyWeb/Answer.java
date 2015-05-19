@@ -10,18 +10,18 @@ package domain.FamilyWeb;
  */
 public class Answer {
 	private String answer;
-	private int answerWeight;
+	private int answer_id;
 	
 	/**
 	 * Constructor with fields
 	 * 
 	 * @param answer
-	 * @param answerWeight
+	 * @param answer_id
 	 */
-	public Answer(String answer, int answerWeight) {
+	public Answer(String answer, int answer_id) {
 		super();
 		this.answer = answer;
-		this.answerWeight = answerWeight;
+		this.answer_id = answer_id;
 	}
 
 	/**
@@ -48,15 +48,15 @@ public class Answer {
 	/**
 	 * @return the answerWeight
 	 */
-	public int getAnswerWeight() {
-		return answerWeight;
+	public int getAnswerID() {
+		return answer_id;
 	}
 
 	/**
 	 * @param answerWeight the answerWeight to set
 	 */
-	public void setAnswerWeight(int answerWeight) {
-		this.answerWeight = answerWeight;
+	public void setAnswerID(int answerID) {
+		this.answer_id = answerID;
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +64,7 @@ public class Answer {
 	 */
 	@Override
 	public String toString() {
-		return "Answer [Answer = " + getAnswer() + ", AnswerWeight = "
-				+ getAnswerWeight() + "]";
+		return "Answer [Answer_id = "
+				+ getAnswerID() + ", Answer = " + getAnswer() + "]";
 	}
 }

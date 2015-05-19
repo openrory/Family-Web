@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @since 2015-04-20
  */
 public class Familymember {
+	private int member_id;
 	private String forename;
 	private String surname;
 	private Date dateOfBirth;
@@ -233,6 +234,20 @@ public class Familymember {
 	 */
 	public void setMyNetworks(ArrayList<Network> myNetworks) {
 		this.myNetworks = myNetworks;
+	}
+
+	/**
+	 * @return the member_id
+	 */
+	public int getMember_id() {
+		return member_id;
+	}
+
+	/**
+	 * @param member_id the member_id to set
+	 */
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
 	}
 
 	/* (non-Javadoc)
