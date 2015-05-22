@@ -12,7 +12,9 @@ public class MyServletContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {	
 		
 		DatabaseInterface dbController = new MySQLDao();
+		
 		new LoginController(dbController);
+		
 		sce.getServletContext().setAttribute("", dbController);		
 	}
 
