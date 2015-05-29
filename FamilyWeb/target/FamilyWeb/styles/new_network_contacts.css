@@ -1,0 +1,122 @@
+﻿#scrollableTabs{
+	background-color: #DA0000;
+}
+paper-tab a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#comment{
+    width: 90%;
+    max-width: 700px;
+    margin: 10px auto;
+    text-align: center;
+    background-color: #F3F781;
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#form_container{
+    height: auto;
+    height: 100%;
+	width: 90%;
+    max-width: 700px;
+	margin: 15px auto;
+	padding: 5px;
+	background-color: #d50000;
+	border: solid 1px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#select_interviewee{
+	width: 90%;
+    max-width: 600px;
+	margin: 10px auto;
+    padding: 2px;
+    background-color: #ff5252 ;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+#interviewee{
+    background-color: #FFFFFF;
+}
+.group{
+	width: 90%;
+	max-width: 450px;
+	margin: 10px auto;
+    padding: 5px;
+    background-color: #ff5252;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.group h3{
+    margin: 5px;
+    float:left;
+    overflow: hidden;
+}
+
+.add{
+    color: #a4c639;
+    stroke: #a4c639;
+    stroke-width: 2;
+}
+
+.remove{
+    color: #ffffff;
+    stroke: #ffffff;
+    stroke-width: 1;
+}
+
+
+.person {
+    /*min-width:340px;*/
+    margin-top: 5px;
+    background-color: #ff8a80;
+    -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.hidden{
+    display: none;
+}
+
+.information{
+	width: 100%;
+	margin: auto;
+}
+
+.information select{
+	min-width: 200px;
+	max-width: 300px;
+	margin-left: 30px;
+	padding: 5px;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information input{
+	min-width: 200px;
+	max-width: 300px;
+    margin-top: 5px;
+	margin-left: 10px;
+	padding: 5px;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information label {
+	display: inline-block;
+	width: 30%; 
+	text-align: right;
+}

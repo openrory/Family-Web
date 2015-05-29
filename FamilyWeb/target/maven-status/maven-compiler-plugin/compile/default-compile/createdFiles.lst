@@ -17,6 +17,7 @@ domain\FamilyWeb\Administrator.class
 domain\FamilyWeb\Request.class
 domain\FamilyWeb\Notification.class
 databaseControllers\FamilyWeb\DatabaseInterface.class
+servlets\FamilyWeb\ClientServlet.class
 domain\FamilyWeb\Client.class
 domain\FamilyWeb\Answer.class
 util\FamilyWeb\MyServletContextListener.class

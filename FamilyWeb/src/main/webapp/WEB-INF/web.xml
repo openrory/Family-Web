@@ -25,6 +25,10 @@
 		<servlet-name>SocialworkerServlet</servlet-name>
 		<url-pattern>/SocialworkerServlet.do</url-pattern>
 	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>login.html</welcome-file>
+	</welcome-file-list>
 
 	<listener>
 		<listener-class>util.FamilyWeb.MyServletContextListener

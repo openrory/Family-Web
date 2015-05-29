@@ -1,6 +1,37 @@
-﻿#button {
-    background-color: rgb(192, 0, 0);
-    color: rgb(255, 255, 255);
+﻿@media only screen and (max-width: 3840px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 35%;
+        margin-left: auto;
+        margin-top : 2% ;
+         margin-bottom : 2%;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 30%;
+        margin-left: auto;
+        margin-top : 2% ;
+         margin-bottom : 2%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 30%;
+        margin-left: auto;
+        margin-top : 2% ;
+        margin-bottom : 2%;
+    }
 }
 
 #add_socialworker_form {
@@ -8,7 +39,7 @@
 	min-width: 300px;
 	max-width:800px;
 	margin: 20px auto;
-	background-color: #C00000;
+	background-color: #EEEEEE;
 	padding: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -60,3 +91,13 @@
 	text-align: right;
 }
 
+.true{
+        display: none;
+}
+
+.false{
+	display: block;
+	width: 200px;
+	margin: 2px auto;
+	color: red;
+}

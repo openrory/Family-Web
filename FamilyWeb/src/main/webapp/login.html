@@ -22,16 +22,16 @@
 			out.print(<message-window-error message="'" + text + "'"></melding-venster-error>);
 			}
 			%>!-->
-            <form id="login_form" action="administrator/startscreen_administrator.html" method="GET">
+            <form id="login_form" action="LoginServlet.do" method="POST">
                 <fieldset>
                     <legend>Log in</legend>
                     <div class="information">
                         <label>Gebruikersnaam :</label>
-                        <input id="username" type="text" placeholder="Gebruikersnaam value="<!--${param.username}-->" />
+                        <input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="<!--${param.username}-->" />
                     </div>
                     <div class="information">
                         <label>Wachtwoord :</label>
-                        <input id="password" type="text" placeholder="Wachtwoord" />
+                        <input id="password" name="password" type="text" placeholder="Wachtwoord" />
                     </div>
 					<div id="login_button_container">
 					 <input id="login_button" type="submit" value="Inloggen">

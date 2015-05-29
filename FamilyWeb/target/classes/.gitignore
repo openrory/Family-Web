@@ -1,5 +1,5 @@
-/databaseControllers/
 /domain/
 /servletControllers/
-/servlets/
 /util/
+/databaseControllers/
+/servlets/

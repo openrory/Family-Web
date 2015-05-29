@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 			if (controller.isAdministrator(user)) {
 				reqDisp = req.getRequestDispatcher("/administrator/startscreen_administrator.html");
 			} else {
-				reqDisp = req.getRequestDispatcher("/zorgprofessional/startscreen_socialworker.html");
+				reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.html");
 			}
 		} else {
 			req.setAttribute("message", "Gebruikersnaam of wachtwoord onjuist.");

@@ -37,7 +37,7 @@ private HttpServletRequest req = null;
 		
 		// controle wat te doen
 		
-		this.create(message); 
+		//this.create(message); 
 		
 		reqDisp.forward(req, resp);
 		
