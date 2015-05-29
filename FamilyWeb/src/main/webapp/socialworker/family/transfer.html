@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Overdragen</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-cable" content="yes">
+    <meta charset="utf-8">
+    <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../../elements.html">
+    <link rel="import" href="../../custom_elements/responsive-menu-socialworker.html">
+    <link rel="import" href="../../custom_elements/options-menu.html">
+    <link rel="import" href="../../bower_components/core-media-query/core-media-query.html">
+    <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+    <link rel="stylesheet" href="../../styles/transfer.css">
+</head>
+<body fullbleed layout vertical>
+    <core-drawer-panel responsivewidth="1400px">
+        <core-header-panel drawer>
+            <core-toolbar>
+                <core-icon-button core-drawer-toggle icon="close"></core-icon-button>
+                <div flex>Menu</div>
+            </core-toolbar>
+            <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
+        </core-header-panel>
+        <core-header-panel main>
+            <core-toolbar class="medium-tall">
+                <core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
+                <div flex>Overdragen</div>
+                <options-menu></options-menu>
+                <div class="bottom fit" horizontal layout>
+                    <paper-tabs id="scrollableTabs" selected="4" flex scrollable noink>
+
+                        <paper-tab><a href="family_members_overview.html" horizontal center-center layout>Gezinsleden</a></paper-tab>
+                        <paper-tab><a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+                        <paper-tab><a href="new_network_contacts.html" horizontal center-center layout>Nieuw Netwerk</a></paper-tab>
+                        <paper-tab><a href="share_networks.html" horizontal center-center layout>Netwerk(en) delen</a></paper-tab>
+                        <paper-tab><a href="transfer.html" horizontal center-center layout>Overdragen</a></paper-tab>
+
+                    </paper-tabs>
+                </div>
+            </core-toolbar>
+            <div class="content" fit layout vertical>
+                <p>Overdragen van het dossier hier</p>
+            </div>
+        </core-header-panel>
+    </core-drawer-panel>
+    <core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
+
+    <script>
+
+        document.querySelector('#mediaQuery').addEventListener('core-media-change',
+          function (e) {
+              document.body.classList.toggle('core-narrow', e.detail.matches);
+              document.querySelector('#scrollableTabs').updateBar();
+          });
+
+    </script>
+</body>
+
+</html>
