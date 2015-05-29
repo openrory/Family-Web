@@ -19,6 +19,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 	
+		//Get username and password from form
 		String username = req.getParameter("username").trim();
 		String password = req.getParameter("password").trim();
 		
