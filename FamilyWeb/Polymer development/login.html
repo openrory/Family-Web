@@ -16,13 +16,18 @@
             <div id="title">Inloggen</div>
         </core-toolbar>
         <div class="content">
-			<!--<message-window-error message="TEKST VAN DE SERVLET MET FOUTMELDING"></melding-venster-fout> HIER MOET EEN JSP STUKJE OMHEEN!-->
+			<!-- <% string text = request.getAttribute("message");
+			session.setAttribute("message", "");
+			if(!text.equals("") || !text == null ){
+			out.print(<message-window-error message="'" + text + "'"></melding-venster-error>);
+			}
+			%>!-->
             <form id="login_form" action="administrator/startscreen_administrator.html" method="GET">
                 <fieldset>
                     <legend>Log in</legend>
                     <div class="information">
                         <label>Gebruikersnaam :</label>
-                        <input id="username" type="text" placeholder="Gebruikersnaam" />
+                        <input id="username" type="text" placeholder="Gebruikersnaam value="<!--${param.username}-->" />
                     </div>
                     <div class="information">
                         <label>Wachtwoord :</label>
