@@ -1,7 +1,55 @@
-﻿#scrollableTabs{
+#scrollableTabs{
 	background-color: #DA0000;
 }
 paper-tab a {
 	text-decoration: none;
 	color: inherit;
+}
+
+.content{
+
+}
+.network_container{
+	width: 700px;
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #FFFFFF;
+}
+
+.network_title{
+	font-size: 14px;
+}
+
+.network{
+	width: 500px;
+	height: 350px;
+	margin-right: 20px;
+	margin-bottom: 5px;
+	background-color: gray;
+	float: left;
+	overflow: hidden;
+}
+
+.contact_groups{
+	width: 150px;
+	height: 200px;
+	background-color: blue;
+	float: right;
+	overflow: auto;
+}
+
+.contact_groups ul{
+	list-style-type: none;
+}
+
+.timeline{
+	min-width: 300px;
+	min-height: 40px;
+	background-color: green;
+	clear: both;
+}
+
+.general_comment{
+	background-color: red;
+	clear: both;
 }

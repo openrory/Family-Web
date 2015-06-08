@@ -40,7 +40,7 @@
 		<paper-tab>
 		<a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
 		<paper-tab>
-		<a href="new_network_contacts.html" horizontal center-center layout>Nieuw
+		<a href="new_network_contacts.jsp" horizontal center-center layout>Nieuw
 			Netwerk</a></paper-tab> <paper-tab>
 		<a href="share_networks.html" horizontal center-center layout>Netwerk(en)
 			delen</a></paper-tab> <paper-tab>
