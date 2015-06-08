@@ -36,9 +36,20 @@
 		<filter-name>ÀdminFilter</filter-name>
 		<filter-class>util.FamilyWeb.ÀdminFilter</filter-class>
 	</filter>
+	<filter>
+		<description>
+		</description>
+		<display-name>SocialworkerFilter</display-name>
+		<filter-name>SocialworkerFilter</filter-name>
+		<filter-class>util.FamilyWeb.SocialworkerFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>ÀdminFilter</filter-name>
 		<url-pattern>/administrator/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SocialworkerFilter</filter-name>
+		<url-pattern>/socialworker/*</url-pattern>
 	</filter-mapping>
 
 	<listener>
