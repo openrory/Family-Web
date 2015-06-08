@@ -10,18 +10,21 @@ paper-tab a {
 
 }
 .network_container{
-	width: 700px;
-	margin: 20px auto;
+	width: 600px;
+/* 	margin: 20px auto; */
 	padding: 10px;
 	background-color: #FFFFFF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
-.network_title{
+.title{
 	font-size: 14px;
 }
 
 .network{
-	width: 500px;
+	width: 350px;
 	height: 350px;
 	margin-right: 20px;
 	margin-bottom: 5px;
@@ -30,12 +33,22 @@ paper-tab a {
 	overflow: hidden;
 }
 
+.interviewee{
+	float: right;
+	clear: right;
+	margin: -35px 20px 10px 0px; 
+	overflow: hidden;
+}
+
 .contact_groups{
-	width: 150px;
+	width: 140px;
 	height: 200px;
 	background-color: blue;
 	float: right;
 	overflow: auto;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .contact_groups ul{
@@ -47,9 +60,26 @@ paper-tab a {
 	min-height: 40px;
 	background-color: green;
 	clear: both;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .general_comment{
 	background-color: red;
 	clear: both;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#container1{
+	float: left;
+	overflow: auto;
+}
+
+#container2{
+	float: right;
+	margin-left: 30px;
+	overflow: auto;
 }
