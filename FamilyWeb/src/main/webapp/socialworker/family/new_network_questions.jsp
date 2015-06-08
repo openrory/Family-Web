@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nieuw netwerk</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-cable" content="yes">
+    <meta charset="utf-8">
+    <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../../elements.html">
+    <link rel="import" href="../../custom_elements/responsive-menu-socialworker.html">
+    <link rel="import" href="../../custom_elements/options-menu.html">
+    <link rel="import" href="../../bower_components/core-media-query/core-media-query.html">
+    <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+    <link rel="stylesheet" href="../../styles/new_network_questions.css">
+</head>
+<body fullbleed layout vertical>
+    <core-drawer-panel responsivewidth="1400px">
+        <core-header-panel drawer>
+            <core-toolbar>
+                <core-icon-button core-drawer-toggle icon="close"></core-icon-button>
+                <div flex>Menu</div>
+            </core-toolbar>
+            <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
+        </core-header-panel>
+        <core-header-panel main>
+            <core-toolbar class="medium-tall">
+                <core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
+                <div flex>Nieuw netwerk</div>
+                <options-menu></options-menu>
+                <div class="bottom fit" horizontal layout>
+                    <paper-tabs id="scrollableTabs" selected="2" flex scrollable noink>
+
+                        <paper-tab><a href="family_members_overview.html" horizontal center-center layout>Gezinsleden</a></paper-tab>
+                        <paper-tab><a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+                        <paper-tab><a href="new_network_contacts.html" horizontal center-center layout>Nieuw Netwerk</a></paper-tab>
+                        <paper-tab><a href="share_networks.html" horizontal center-center layout>Netwerk(en) delen</a></paper-tab>
+                        <paper-tab><a href="transfer.html" horizontal center-center layout>Overdragen</a></paper-tab>
+
+                    </paper-tabs>
+                </div>
+            </core-toolbar>
+            <div class="content" layout vertical>
+                <message-window-notification message="Beantwoord per contact de vragen."></message-window-notification>
+       			<% if(!(session.getAttribute("message") == null)){%>
+        		<message-window-error message="${message}"></message-window-error>
+        		<% } %>
+				<div id="form_container">
+                    <form id="group_form" onsubmit="hoi" method="post">
+                        <!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
+                        <% for(Contact contact : theContacts){
+							ArrayList<Question> theQuestions = contact.getTheQuestions();
+						%>
+						<div class="contact">
+						<h3><%=contact.getName()%></h3>
+						<core-icon-button class="add" onclick="viewQuestions(<%=contact.getID()%>)" icon="arrow-drop-down"></core-icon-button>
+						<div id="<%=contact.getID()%>" class="questions">
+						<%
+						for(Question question : theQuestions){
+							ArrayList<Anwser> theAnswers = question.getTheAnswers();
+							%>
+							<div id="<%=question.getID()%>">
+								<p><%=question.getName()%></p>
+								for(Answer answer : theAnwers){
+								%>
+								<input type="radio" name="<%=question.getID()%>" value="<%=answer.getName()%>"/><%=answer.getName()%>
+								<%
+								}
+								%>
+							</div>
+							<%
+							}
+						%>
+						<input type="button" onclick="closeQuestions(<%=contact.getID()%>)" value="Volgende contactpersoon"/>
+						</div>
+						<%
+						}
+						%>
+                        <div class="contact">
+                            <h3>Hans Worst</h3>
+                            <core-icon-button class="add" onclick="viewQuestions(1)" icon="arrow-drop-down"></core-icon-button>
+							<!--id="1" staat voor het unieke id dat elke contactpersoon van de serverside moet meekrijgen. Dit getal moet ook bekend blijven bij de servlet om later de vragen te verwerken-->
+							<div id="1" class="questions">
+							<div id="question1">
+								<p>Hoevaak spreekt u met dit contact</p>
+								<input type="radio" name="group1" value="vaak"> vaak
+								<input type="radio" name="group1" value="zelden" checked> zelden
+								<input type="radio" name="group1" value="nooit"> nooit
+								<hr>
+							</div>
+							<div id="question2">
+								<p>Hoever woont dit contact van u vandaan?</p>
+								<input type="radio" name="group1" value="<5km"> <5km
+								<input type="radio" name="group1" value="10km" checked> 10km
+								<input type="radio" name="group1" value="10km>"> 10km>
+								<hr>
+							</div>
+							<input type="button" onclick="closeQuestions(1)" value="Volgende contactpersoon"/>
+                        </div>
+                        <input type="submit" value="Vragenlijsten opsturen" />
+                    </form>
+                </div>
+            </div>
+        </core-header-panel>
+    </core-drawer-panel>
+    <core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
+
+    <script>
+		function viewQuestions(questionsID) {
+            document.getElementById(questionsID).style.display = 'block';
+        }
+		
+		function closeQuestions(questionsID){
+			document.getElementById(questionsID).style.display = 'none';
+		}
+
+        document.querySelector('#mediaQuery').addEventListener('core-media-change',
+          function (e) {
+              document.body.classList.toggle('core-narrow', e.detail.matches);
+              document.querySelector('#scrollableTabs').updateBar();
+          });
+
+    </script>
+</body>
+
+</html>
