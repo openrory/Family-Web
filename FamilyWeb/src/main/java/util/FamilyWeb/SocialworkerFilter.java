@@ -18,13 +18,6 @@ import domain.FamilyWeb.User;
  */
 public class SocialworkerFilter implements Filter {
 	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -35,10 +28,9 @@ public class SocialworkerFilter implements Filter {
 			if(userObject instanceof Socialworker){
 				chain.doFilter(req, response);
 			}else{
-				//not socialworker
 				req.setAttribute("message", "Doesn't have the rights to go there.");
 				req.getRequestDispatcher("/adinistrator/startscreen_administrator.html").forward(req, response);
-				}
+			}
 		}else{
 			req.setAttribute("message", "You have to login to go there.");
 			req.getRequestDispatcher("/login.html").forward(req, response);
@@ -48,8 +40,11 @@ public class SocialworkerFilter implements Filter {
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+	public void init(FilterConfig fConfig) throws ServletException { }
+	
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {	}
 
 }
