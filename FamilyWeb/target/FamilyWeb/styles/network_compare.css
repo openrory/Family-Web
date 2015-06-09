@@ -28,29 +28,30 @@ paper-tab a {
 	width: 450px;
 	height: 350px;
 	margin-bottom: 5px;
-	background-color: gray;
+	background-color: #7E7D7D;
 	float: left;
 	overflow: hidden;
 }
 
 .sidebar{
 	min-width: 150px;
+	height: 350px;
 	float: right;
 	overflow: hidden;
-	background-color: #ff8080;
+	background-color: #8B0000;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
 .interviewee{
-	margin: 10px auto;
+	margin: 10px;
 }
 
 .contact_groups{
 	width: 140px;
-	height: 200px;
-	background-color: blue;
+	height: 280px;
+	background-color: #F72020;
 	overflow: auto;
 	margin: 0px auto;
 	-webkit-border-radius: 5px;
@@ -62,18 +63,26 @@ paper-tab a {
 	list-style-type: none;
 }
 
+.contact_groups li{
+	margin-left: -20px;
+}
+
 .timeline{
 	min-width: 300px;
 	min-height: 40px;
-	background-color: green;
+	background-color: #D30000;
 	clear: both;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
+.slider{
+	width: 450px;
+}
+
 .general_comment{
-	background-color: red;
+	background-color: #FF6161;
 	clear: both;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
