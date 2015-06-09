@@ -7,11 +7,12 @@ paper-tab a {
 }
 
 .content{
-
 }
+
 .network_container{
-	width: 600px;
-/* 	margin: 20px auto; */
+	display: none;
+	min-width: 620px;
+	margin: 20px auto;
 	padding: 10px;
 	background-color: #FFFFFF;
 	-webkit-border-radius: 5px;
@@ -24,28 +25,34 @@ paper-tab a {
 }
 
 .network{
-	width: 350px;
+	width: 450px;
 	height: 350px;
-	margin-right: 20px;
 	margin-bottom: 5px;
 	background-color: gray;
 	float: left;
 	overflow: hidden;
 }
 
-.interviewee{
+.sidebar{
+	min-width: 150px;
 	float: right;
-	clear: right;
-	margin: -35px 20px 10px 0px; 
 	overflow: hidden;
+	background-color: #ff8080;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.interviewee{
+	margin: 10px auto;
 }
 
 .contact_groups{
 	width: 140px;
 	height: 200px;
 	background-color: blue;
-	float: right;
 	overflow: auto;
+	margin: 0px auto;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -80,6 +87,29 @@ paper-tab a {
 
 #container2{
 	float: right;
-	margin-left: 30px;
+	margin-left: auto;
 	overflow: auto;
+}
+
+.resolution_warning_picture{
+	display: block;
+	width: 457px;
+	height: 469px;
+	margin: 30px auto;
+	background-image: url("../images/rotate.png");
+    background-color: #cccccc;
+   	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+@media screen and (min-width:1260px){
+    .network_container {
+        display:block;
+    }
+    
+    .resolution_warning_picture{
+    	display: none;
+    }
+    
 }
