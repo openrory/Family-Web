@@ -62,13 +62,13 @@ public class ContactServlet extends HttpServlet {
 				}
 			}
 		}
-		if (b) {
+		if(b) {
 			String surveyName = "test";
 			Survey survey = user.getDbController().getSurvey(surveyName);
 			if (!b && survey == null) {
 				req.setAttribute("message", "Error occured: Kon de survey niet inladen.");
 				reqDisp = req
-						.getRequestDispatcher("/socialworker/family/new_network_.jsp");
+						.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
 			} else if (b) {
 				req.setAttribute("survey", survey);
 				reqDisp = req
