@@ -32,6 +32,7 @@ public interface DatabaseInterface {
 	public boolean addSurvey(Survey survey);
 	public boolean updateSurvey(Survey survey);
 	public Survey getSurvey(String surveyName);
+	public ArrayList<String> getSurveyNames();
 	
 	public boolean addQuestion(Question question);
 	public boolean updateQuestion(Question question);
