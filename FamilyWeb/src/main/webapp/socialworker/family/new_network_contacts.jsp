@@ -42,89 +42,91 @@
                 </div>
             </core-toolbar>
             <div class="content" layout vertical>
+            <%@ page import="domain.FamilyWeb.Familymember" %>
                 <message-window-notification message="Selecteer een gezinslid en voeg zijn of haar contactpersonen toe aan de contactgroepen."></message-window-notification>
         		<% if(!(session.getAttribute("message") == null)){%>
         		<message-window-error message="${message}"></message-window-error>
         		<% } %>
+        		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<div id="form_container">
-                    <form id="group_form" onsubmit="hoi" method="post">
+                    <form id="group_form" onsubmit="ContactServlet.do" method="post">
 
                         <div id="select_interviewee">
                             <div class="information">
                                 <label>Selecteer de ondervraagde:</label>
+<!--                                 Nog een foreach loop in maken waarin de familymembers uit de session worden gehaald en in een select worden gestopt -->
                                 <select id="interviewee" name="interviewee">
-                                    <option class="select_option" value="hans">Hans</option>
-                                    <option class="select_option" value="billy">Billy</option>
-                                    <option class="select_option" value="adriaan">Adriaan</option>
-                                    <option class="select_option" value="bassie">Bassie</option>
+                                <c:forEach items="${familymembers}" var="familymember">
+                                <option class="select_option" value="${familymember.id}">
+                                </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <!-- elke groep kan ook via een jsp functie worden aangemaakt zolang alle groepen al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
-                        <div id="gezin" class="group">
-                            <input class="hidden" id="countergezin" type="text" value="0" />
+                        <div id="household" class="group">
+                            <input class="hidden" id="counterhousehold" type="text" value="0" />
                             <h3>Gezin</h3>
-                            <core-icon-button class="add" onclick="addInput('gezin')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('household')" icon="add"></core-icon-button>
                         </div>
-                        <div id="familie" class="group">
-                            <input class="hidden" id="counterfamilie" type="text" value="0" />
+                        <div id="family" class="group">
+                            <input class="hidden" id="counterfamily" type="text" value="0" />
                             <h3>Familie</h3>
-                            <core-icon-button class="add" onclick="addInput('familie')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('family')" icon="add"></core-icon-button>
                         </div>
-                        <div id="vrienden" class="group">
-                            <input class="hidden" id="countervrienden" type="text" value="0" />
+                        <div id="friends" class="group">
+                            <input class="hidden" id="counterfriends" type="text" value="0" />
                             <h3>Vrienden</h3>
-                            <core-icon-button class="add" onclick="addInput('vrienden')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('friends')" icon="add"></core-icon-button>
                         </div>
-                        <div id="collegas" class="group">
-                            <input class="hidden" id="countercollegas" type="text" value="0" />
+                        <div id="colleagues" class="group">
+                            <input class="hidden" id="countercolleagues" type="text" value="0" />
                             <h3>Collega's</h3>
-                            <core-icon-button class="add" onclick="addInput('collegas')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('colleagues')" icon="add"></core-icon-button>
                         </div>
-                        <div id="buren" class="group">
-                            <input class="hidden" id="counterburen" type="text" value="0" />
+                        <div id="neighbours" class="group">
+                            <input class="hidden" id="counterneighbours" type="text" value="0" />
                             <h3>Buren</h3>
-                            <core-icon-button class="add" onclick="addInput('buren')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('neighbours')" icon="add"></core-icon-button>
                         </div>
-                        <div id="kennissen " class="group">
-                            <input class="hidden" id="counterkennissen " type="text" value="0" />
+                        <div id="acquaintance" class="group">
+                            <input class="hidden" id="counteracquaintance" type="text" value="0" />
                             <h3>Kennissen </h3>
-                            <core-icon-button class="add" onclick="addInput('kennissen ')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('acquaintance')" icon="add"></core-icon-button>
                         </div>
-                        <div id="onderwijs" class="group">
-                            <input class="hidden" id="counteronderwijs" type="text" value="0" />
+                        <div id="education" class="group">
+                            <input class="hidden" id="countereducation" type="text" value="0" />
                             <h3>Onderwijs</h3>
-                            <core-icon-button class="add" onclick="addInput('onderwijs')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('education')" icon="add"></core-icon-button>
                         </div>
-                        <div id="verenigingen" class="group">
-                            <input class="hidden" id="counterverenigingen" type="text" value="0" />
+                        <div id="club" class="group">
+                            <input class="hidden" id="counterclub" type="text" value="0" />
                             <h3>Verenigingen</h3>
-                            <core-icon-button class="add" onclick="addInput('verenigingen')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('club')" icon="add"></core-icon-button>
                         </div>
-                        <div id="religie" class="group">
-                            <input class="hidden" id="counterreligie" type="text" value="0" />
+                        <div id="religion" class="group">
+                            <input class="hidden" id="counterreligion" type="text" value="0" />
                             <h3>Religie</h3>
-                            <core-icon-button class="add" onclick="addInput('religie')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('religion')" icon="add"></core-icon-button>
                         </div>
-                        <div id="zorginstellingen" class="group">
-                            <input class="hidden" id="counterzorginstellingen" type="text" value="0" />
+                        <div id="careinstitution" class="group">
+                            <input class="hidden" id="countercareinstitution" type="text" value="0" />
                             <h3>Zorginstellingen</h3>
-                            <core-icon-button class="add" onclick="addInput('zorginstellingen')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('careinstitution')" icon="add"></core-icon-button>
                         </div>
-                        <div id="jeugdzorg" class="group">
-                            <input class="hidden" id="counterjeugdzorg" type="text" value="0" />
+                        <div id="youthcare" class="group">
+                            <input class="hidden" id="counteryouthcare" type="text" value="0" />
                             <h3>Jeugdzorg</h3>
-                            <core-icon-button class="add" onclick="addInput('jeugdzorg')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('youthcare')" icon="add"></core-icon-button>
                         </div>
                         <div id="bureauhalt" class="group">
                             <input class="hidden" id="counterbureauhalt" type="text" value="0" />
                             <h3>Bureau HALT</h3>
                             <core-icon-button class="add" onclick="addInput('bureauhalt')" icon="add"></core-icon-button>
                         </div>
-                        <div id="justitie" class="group">
-                            <input class="hidden" id="counterjustitie" type="text" value="0" />
+                        <div id="justice" class="group">
+                            <input class="hidden" id="counterjustice" type="text" value="0" />
                             <h3>Justitie</h3>
-                            <core-icon-button class="add" onclick="addInput('justitie')" icon="add"></core-icon-button>
+                            <core-icon-button class="add" onclick="addInput('justice')" icon="add"></core-icon-button>
                         </div>
                         <input type="submit" value="Vragenlijst afnemen" />
                     </form>
