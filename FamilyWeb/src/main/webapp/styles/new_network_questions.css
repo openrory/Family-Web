@@ -1,4 +1,4 @@
-﻿#scrollableTabs{
+#scrollableTabs{
 	background-color: #DA0000;
 }
 paper-tab a {
@@ -105,4 +105,9 @@ paper-tab a {
 	display: inline-block;
 	width: 30%; 
 	text-align: right;
+}
+
+#submit_button_container{
+	width: 205px;
+	margin: 0 auto;
 }

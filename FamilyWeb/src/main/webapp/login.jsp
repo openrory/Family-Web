@@ -32,7 +32,7 @@
                         <input id="password" name="password" type="password" placeholder="Wachtwoord" />
                     </div>
 					<div id="login_button_container">
-					 <input id="login_button" type="submit" value="Inloggen">
+					 <input class="submit_button" type="submit" value="Inloggen">
 					</div>
                     <p id="forgot_password"><a href="forgot_password.html">Wachtwoord vergeten?</a></p>
                 </fieldset>

@@ -94,8 +94,8 @@ paper-tab a {
 }
 
 .remove{
-    color: #ffffff;
-    stroke: #ffffff;
+    color: #000000;
+    stroke: #000000;
     stroke-width: 1;
 }
 
@@ -153,6 +153,7 @@ paper-tab a {
 	text-align: right;
 }
 
-.submit_button{
+#submit_button_container{
+	width: 205px;
 	margin: 0 auto;
 }
