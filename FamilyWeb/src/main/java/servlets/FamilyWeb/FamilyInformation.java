@@ -29,12 +29,16 @@ public class FamilyInformation extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		user = (User) req.getAttribute("user");
 		RequestDispatcher reqDisp = null;
 		if(user != null){
 			int client_id = Integer.parseInt(req.getParameter("familyID"));
-			ArrayList<Client> clients = (ArrayList<Client>) req.getSession().getAttribute("clients");
+			Object attribute = req.getSession().getAttribute("clients");
+			ArrayList<Client> clients = null;
+			if(attribute instanceof ArrayList<?>)
+				clients = ((ArrayList<Client>) attribute);
 			Client client = null;
 			if(clients != null && !clients.isEmpty()){
 				for(Client c : clients){
