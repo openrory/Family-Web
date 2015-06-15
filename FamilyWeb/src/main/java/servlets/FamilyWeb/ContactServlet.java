@@ -25,20 +25,21 @@ public class ContactServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+			HttpServletResponse response) throws ServletException, IOException {}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		user = (User) req.getAttribute("user");
 		RequestDispatcher reqDisp = null;
-		boolean b = true;
+		boolean b = false;
+		ArrayList<Contact> contacts = null;
+		if(user != null){
+			b = true;
 		String[] contactgroups = { "household", "family", "friends",
 				"colleagues", "neighbours", "acquaintance", "education",
 				"club", "religion", "careinstitution", "youthcare",
 				"bureauhalt", "justice" };
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		contacts = new ArrayList<Contact>();
 		for (String group : contactgroups) {
 			int contactsInGroup = Integer.parseInt(req.getParameter(
 					"counter" + group).trim());
@@ -63,7 +64,7 @@ public class ContactServlet extends HttpServlet {
 			}
 		}
 		
-		if(b) {
+		}if(b) {
 			String surveyName = "test";
 			Survey survey = user.getDbController().getSurvey(surveyName);
 			if (!b && survey == null) {
