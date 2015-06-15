@@ -21,6 +21,8 @@ import databaseControllers.FamilyWeb.DatabaseInterface;
 public abstract class User {
 
 	// Regular Expression Pattern
+	private static final String FORENAME_PATTERN = "[A-Z][a-zA-Z]*";
+	private static final String SURNAME_PATTERN = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 	private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
 	private static final String LETTER_PATTERN = "([a-zA-Z]*(\\s)*)*";
 	private static final String NL_POSTCODE_PATTERN = "^[1-9][0-9]{3}[\\s]?[A-Za-z]{2}$";
@@ -161,7 +163,7 @@ public abstract class User {
 	 */
 	public boolean setForename(String input) {
 		String forename = input.trim();
-		if (forename.matches(LETTER_PATTERN) && forename.length() <= 35) {
+		if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
 			this.forename = forename;
 			return true;
 		} else {
@@ -183,7 +185,7 @@ public abstract class User {
 	 */
 	public boolean setSurname(String input) {
 		String surname = input.trim();
-		if (surname.matches(LETTER_PATTERN) && surname.length() <= 35) {
+		if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
 			this.surname = surname;
 			return true;
 		} else {

@@ -25,6 +25,7 @@ public interface DatabaseInterface {
 	public Client getClient(int client_id);
 	
 	public ArrayList<Client> getAllClientsOfUser(User user);
+	public ArrayList<Client> getAllClients();
 	public boolean addFamilymember(Familymember famMember, Client client);
 	public boolean updateFamilymember(Familymember famMember);
 	public ArrayList<Familymember> getFamilymembersOfClient(Client client);

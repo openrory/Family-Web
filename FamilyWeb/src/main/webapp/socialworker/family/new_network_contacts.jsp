@@ -166,7 +166,7 @@
 				</div>
 				<div id="submit_button_container">
 				<input type="submit" class="submit_button"
-					value="Vragenlijst aanmaken">
+					value="Vragenlijst afnemen">
 				</div>
 			</form>
 		</div>

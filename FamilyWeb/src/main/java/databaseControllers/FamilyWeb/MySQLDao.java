@@ -689,6 +689,11 @@ public class MySQLDao implements DatabaseInterface {
 		question.setTheAnswers(answers);
 		return question;
 	}
+
+	public ArrayList<Client> getAllClients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	public ArrayList<String> getSurveyNames() {
 		Connection conn = null;

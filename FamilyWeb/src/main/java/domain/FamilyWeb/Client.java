@@ -3,8 +3,14 @@
  */
 package domain.FamilyWeb;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+import databaseControllers.FamilyWeb.DatabaseInterface;
 
 /**
  * @author Joery
@@ -12,6 +18,16 @@ import java.util.ArrayList;
  * @since 2015-04-20
  */
 public class Client {
+
+	// Regular Expression Pattern
+	private static final String FORENAME_PATTERN = "[A-Z][a-zA-Z]*";
+	private static final String SURNAME_PATTERN = "[a-zA-z]+([ '-][a-zA-Z]+)*";
+	private static final String NL_POSTCODE_PATTERN = "^[1-9][0-9]{3}[\\s]?[A-Za-z]{2}$";
+	private static final String LETTER_PATTERN = "([a-zA-Z]*(\\s)*)*";
+	private static final String NL_PHONENUMBER = "^(((0)[1-9]{2}[0-9][-]?[1-9][0-9]{5})|((\\\\+31|0|0031)[1-9][0-9][-]?[1-9][0-9]{6}))$";
+	private static final String NL_MOBILEPHONENUMBER = "^(((\\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$";
+	private static final String LETTER_NUMBER_WHITESPACE = "([ ]*+[0-9A-Za-z]++[ ]*+)+";
+
 	private int client_id;
 	private String forename;
 	private String surname;
@@ -26,10 +42,11 @@ public class Client {
 	private String email;
 	private String fileNumber;
 	private Date dateCreated;
-	
+
 	private ArrayList<Familymember> myFamilymembers;
 	private ArrayList<Network> myNetworks;
-	
+	private DatabaseInterface dbController;
+
 	/**
 	 * Constructor with parameters
 	 * 
@@ -67,9 +84,17 @@ public class Client {
 		this.email = email;
 		this.fileNumber = fileNumber;
 		this.dateCreated = dateCreated;
-		
+
 		this.myFamilymembers = new ArrayList<Familymember>();
 		this.myNetworks = new ArrayList<Network>();
+	}
+
+	public DatabaseInterface getDbController() {
+		return dbController;
+	}
+
+	public void setDbController(DatabaseInterface dbController) {
+		this.dbController = dbController;
 	}
 
 	/**
@@ -88,7 +113,8 @@ public class Client {
 	}
 
 	/**
-	 * @param client_id the client_id to set
+	 * @param client_id
+	 *            the client_id to set
 	 */
 	public void setClient_id(int client_id) {
 		this.client_id = client_id;
@@ -102,10 +128,19 @@ public class Client {
 	}
 
 	/**
-	 * @param forename the forename to set
+	 * @param forename
+	 *            the forename to set
 	 */
-	public void setForename(String forename) {
-		this.forename = forename;
+	public boolean setForename(String input) {
+
+		String forename = input.trim().substring(0, 1).toUpperCase()
+				+ input.trim().substring(1);
+		if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
+			this.forename = forename;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -116,10 +151,17 @@ public class Client {
 	}
 
 	/**
-	 * @param surname the surname to set
+	 * @param surname
+	 *            the surname to set
 	 */
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public boolean setSurname(String input) {
+		String surname = input.trim();
+		if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
+			this.surname = surname;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -130,10 +172,26 @@ public class Client {
 	}
 
 	/**
-	 * @param dateOfBirth the dateOfBirth to set
+	 * @param dateOfBirth
+	 *            the dateOfBirth to set
 	 */
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
+		try {
+			int day = Integer.valueOf(inputDay);
+			int month = Integer.valueOf(inputMonth);
+			int year = Integer.valueOf(inputYear);
+
+			if (year > 0 && month > 0 && day > 0) {
+				Calendar cal = Calendar.getInstance();
+				cal.set(year, month - 1, day, 0, 0, 0);
+				this.dateOfBirth = cal.getTime();
+				return true;
+			} else {
+				return false;
+			}
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	/**
@@ -144,10 +202,17 @@ public class Client {
 	}
 
 	/**
-	 * @param postcode the postcode to set
+	 * @param postcode
+	 *            the postcode to set
 	 */
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public boolean setPostcode(String input) {
+		String postcode = input.trim();
+		if (postcode.matches(NL_POSTCODE_PATTERN)) {
+			this.postcode = postcode;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -158,10 +223,17 @@ public class Client {
 	}
 
 	/**
-	 * @param street the street to set
+	 * @param street
+	 *            the street to set
 	 */
-	public void setStreet(String street) {
-		this.street = street;
+	public boolean setStreet(String input) {
+		String street = input.trim();
+		if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
+			this.street = street;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -172,10 +244,18 @@ public class Client {
 	}
 
 	/**
-	 * @param houseNumber the houseNumber to set
+	 * @param houseNumber
+	 *            the houseNumber to set
 	 */
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
+	public boolean setHouseNumber(String input) {
+		String houseNumber = input.trim();
+		if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
+				&& houseNumber.length() <= 10) {
+			this.houseNumber = houseNumber;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -186,10 +266,17 @@ public class Client {
 	}
 
 	/**
-	 * @param city the city to set
+	 * @param city
+	 *            the city to set
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public boolean setCity(String input) {
+		String city = input.trim();
+		if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
+			this.city = city;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -200,10 +287,17 @@ public class Client {
 	}
 
 	/**
-	 * @param nationality the nationality to set
+	 * @param nationality
+	 *            the nationality to set
 	 */
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
+	public boolean setNationality(String input) {
+		String nationality = input.trim();
+		if (nationality.matches(LETTER_PATTERN) && nationality.length() <= 50) {
+			this.nationality = nationality;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -214,10 +308,17 @@ public class Client {
 	}
 
 	/**
-	 * @param telephoneNumber the telephoneNumber to set
+	 * @param telephoneNumber
+	 *            the telephoneNumber to set
 	 */
-	public void setTelephoneNumber(String telephoneNumber) {
-		this.telephoneNumber = telephoneNumber;
+	public boolean setTelephoneNumber(String input) {
+		String telephoneNumber = input.trim();
+		if (telephoneNumber.matches(NL_PHONENUMBER)) {
+			this.telephoneNumber = telephoneNumber;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -228,10 +329,17 @@ public class Client {
 	}
 
 	/**
-	 * @param mobilePhoneNumber the mobilePhoneNumber to set
+	 * @param mobilePhoneNumber
+	 *            the mobilePhoneNumber to set
 	 */
-	public void setMobilePhoneNumber(String mobilePhoneNumber) {
-		this.mobilePhoneNumber = mobilePhoneNumber;
+	public boolean setMobilePhoneNumber(String input) {
+		String mobilePhoneNumber = input.trim();
+		if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
+			this.mobilePhoneNumber = mobilePhoneNumber;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -242,10 +350,20 @@ public class Client {
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public boolean setEmail(String input) {
+		boolean result = true;
+		String email = input.trim();
+		try {
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+			this.email = email;
+		} catch (AddressException ex) {
+			result = false;
+		}
+		return result;
 	}
 
 	/**
@@ -256,7 +374,8 @@ public class Client {
 	}
 
 	/**
-	 * @param fileNumber the fileNumber to set
+	 * @param fileNumber
+	 *            the fileNumber to set
 	 */
 	public void setFileNumber(String fileNumber) {
 		this.fileNumber = fileNumber;
@@ -270,7 +389,8 @@ public class Client {
 	}
 
 	/**
-	 * @param dateCreated the dateCreated to set
+	 * @param dateCreated
+	 *            the dateCreated to set
 	 */
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
@@ -284,7 +404,8 @@ public class Client {
 	}
 
 	/**
-	 * @param myFamilymembers the myFamilymembers to set
+	 * @param myFamilymembers
+	 *            the myFamilymembers to set
 	 */
 	public void setMyFamilymembers(ArrayList<Familymember> myFamilymembers) {
 		this.myFamilymembers = myFamilymembers;
@@ -298,26 +419,43 @@ public class Client {
 	}
 
 	/**
-	 * @param myNetworks the myNetworks to set
+	 * @param myNetworks
+	 *            the myNetworks to set
 	 */
 	public void setMyNetworks(ArrayList<Network> myNetworks) {
 		this.myNetworks = myNetworks;
 	}
 
-	/* (non-Javadoc)
+	public boolean addDB(User user) {
+		return this.dbController.addClient(this, user);
+	}
+
+	// REALISEREN CLIENT KUNNEN KOPPELEN OVERDRAGEN AAN ANDERE USER
+	public boolean updateDB() {
+		return this.dbController.updateClient(this);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Client [Client_id = " + getClient_id() + ", Forename = " + getForename() + ", Surname = "
-				+ getSurname() + ", DateOfBirth = " + getDateOfBirth()
-				+ ", Postcode = " + getPostcode() + ", Street = "
-				+ getStreet() + ", HouseNumber =" + getHouseNumber()
-				+ ", City = " + getCity() + ", Nationality = "
-				+ getNationality() + ", TelephoneNumber = "
-				+ getTelephoneNumber() + ", MobilePhoneNumber = "
-				+ getMobilePhoneNumber() + ", Email = " + getEmail()
-				+ ", FileNumber = " + getFileNumber()
-				+ ", DateCreated = " + getDateCreated() + "]";
+		return "Client [Client_id = " + getClient_id() + ", Forename = "
+				+ getForename() + ", Surname = " + getSurname()
+				+ ", DateOfBirth = " + getDateOfBirth() + ", Postcode = "
+				+ getPostcode() + ", Street = " + getStreet()
+				+ ", HouseNumber =" + getHouseNumber() + ", City = "
+				+ getCity() + ", Nationality = " + getNationality()
+				+ ", TelephoneNumber = " + getTelephoneNumber()
+				+ ", MobilePhoneNumber = " + getMobilePhoneNumber()
+				+ ", Email = " + getEmail() + ", FileNumber = "
+				+ getFileNumber() + ", DateCreated = " + getDateCreated() + "]";
+	}
+
+	public void addDB() {
+		// TODO Auto-generated method stub
+		
 	}
 }
