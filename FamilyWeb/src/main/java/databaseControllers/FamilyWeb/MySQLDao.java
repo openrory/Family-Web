@@ -111,7 +111,7 @@ public class MySQLDao implements DatabaseInterface {
 							rSet.getDate("dateofbirth"),
 							rSet.getString("postcode"),
 							rSet.getString("street"),
-							rSet.getString("housenuber"),
+							rSet.getString("housenumber"),
 							rSet.getString("city"),
 							rSet.getString("nationality"),
 							rSet.getString("telephoneNumber"),
@@ -688,5 +688,24 @@ public class MySQLDao implements DatabaseInterface {
 		}
 		question.setTheAnswers(answers);
 		return question;
+	}
+	
+	public ArrayList<String> getSurveyNames() {
+		Connection conn = null;
+		ArrayList<String> names = new ArrayList<String>();
+		try {
+			conn = this.getConnection();
+			PreparedStatement pStmt = conn
+					.prepareStatement("select name from surveys");			
+			ResultSet rSet = pStmt.executeQuery();
+			while (rSet.next()) {
+				names.add(rSet.getString("names"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn);
+		}
+		return names;
 	}
 }

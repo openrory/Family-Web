@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Contact {
 	private String fullname;
 	private String commentary;	
+	private String role;
+	private int age;
 	private ArrayList<Category> categories;
 	private ArrayList<Result> myResults;
 	
@@ -22,10 +24,13 @@ public class Contact {
 	 * @param fullname
 	 * @param commentary
 	 */
-	public Contact(String fullname, String commentary) {		
+	public Contact(String fullname, String commentary, String role, int age, String group) {			
 		this.fullname = fullname;
 		this.commentary = commentary;
+		this.role = role;
+		this.age = age;
 		this.categories = new ArrayList<Category>();
+		this.getCategories().add(new Category(group));
 		this.myResults = new ArrayList<Result>();
 	}
 
@@ -100,5 +105,33 @@ public class Contact {
 	public String toString() {
 		return "Contact [Fullname = " + getFullname() + ", Commentary = "
 				+ getCommentary() + "]";
+	}
+	
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
+	 * @return the age
+	 */
+	public int getAge() {
+		return age;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(int age) {
+		this.age = age;
 	}
 }
