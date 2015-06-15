@@ -1,50 +1,54 @@
-﻿<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import"
+	href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import"
+	href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import"
+	href="../bower_components/paper-dropdown/paper-dropdown.html">
 <link rel="import" href="../bower_components/core-menu/core-menu.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <polymer-element name="options-menu" attributes="current" noscript>
-    <template>
-        <style>
-		#logout_button{
-				width: 100%;
-			    border-top: 1px solid #000000;
-				background: #c00000;
-				background: -webkit-gradient(linear, left top, left bottom, from(#c00000), to(#c00000));
-			    background: -webkit-linear-gradient(top, #c00000, #c00000);
-			    background: -moz-linear-gradient(top, #c00000, #c00000);
-			    background: -ms-linear-gradient(top, #c00000, #c00000);
-			    background: -o-linear-gradient(top, #c00000, #c00000);
-			    padding: 5px 10px;
-			    -webkit-border-radius: 8px;
-			    -moz-border-radius: 8px;
-			    border-radius: 8px;
-			    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-			    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-			    box-shadow: rgba(0,0,0,1) 0 1px 0;
-			    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-			    color: white;
-			    font-size: 14px;
-			    font-family: Helvetica, Arial, Sans-Serif;
-			    text-decoration: none;
-			    vertical-align: middle;
-		}
-        </style>
-		<paper-menu-button>
-			<paper-icon-button icon="account-box" noink></paper-icon-button>
-			<paper-dropdown halign="right" class="dropdown">
-				<core-menu class="menu">
-					<paper-item>Mijn informatie</paper-item>
-					<paper-item><a href="https://nl.surveymonkey.com" target="_blank">Feedback geven</a></paper-item>
-					<form id="logout_form" action="../login.html" method="GET">
-					<div id="logout_button_container">
-					<input id="logout_button" type="submit" value="Uitloggen">
-					</div>
-					</form>
-				</core-menu>
-			</paper-dropdown>
-		</paper-menu-button>
-    </template>
-</polymer-element>
+<template>
+<style>
+#logout_button {
+	width: 100%;
+	-moz-box-shadow: inset 0px 1px 0px 0px #cf866c;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #cf866c;
+	box-shadow: inset 0px 1px 0px 0px #cf866c;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b
+		), color-stop(1, #bc3315));
+	background: -moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background: -webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background: -o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background: -ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b',
+		endColorstr='#bc3315', GradientType=0);
+	background-color: #d0451b;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #942911;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 11px 24px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #854629;
+}
+</style>
+<paper-menu-button> <paper-icon-button
+	icon="account-box" noink></paper-icon-button> <paper-dropdown
+	halign="right" class="dropdown"> <core-menu
+	class="menu"> <paper-item>Mijn informatie</paper-item> <paper-item>
+<a href="https://nl.surveymonkey.com" target="_blank">Feedback geven</a></paper-item>
+<form id="logout_form" action="LogoutServlet.do" method="post">
+	<div id="logout_button_container">
+		<input id="logout_button" type="submit" value="Uitloggen">
+	</div>
+</form>
+</core-menu> </paper-dropdown> </paper-menu-button> </template> </polymer-element>

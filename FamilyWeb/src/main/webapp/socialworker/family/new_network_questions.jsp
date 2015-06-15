@@ -80,6 +80,9 @@
 						</div>
 					</div>
 				</c:forEach>
+				<div id="submit_button_container">
+					<input class="submit_button" type="submit" value="Netwerk genereren">
+				</div>
 			</form>
 		</div>
 	</div>

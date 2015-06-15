@@ -1,0 +1,510 @@
+﻿-- phpMyAdmin SQL Dump
+-- version 4.3.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Gegenereerd op: 12 jun 2015 om 14:17
+-- Serverversie: 5.6.24
+-- PHP-versie: 5.6.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `familyweb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `answers`
+--
+
+CREATE TABLE IF NOT EXISTS `answers` (
+  `answer_id` int(10) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  `question_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `categories`
+--
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `category_id` int(10) NOT NULL,
+  `name` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `clients`
+--
+
+CREATE TABLE IF NOT EXISTS `clients` (
+  `client_id` int(10) NOT NULL,
+  `forename` varchar(35) NOT NULL,
+  `surname` varchar(35) NOT NULL,
+  `dateofbirth` date NOT NULL,
+  `postcode` varchar(35) NOT NULL,
+  `street` varchar(35) NOT NULL,
+  `housenumber` varchar(10) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `nationality` varchar(50) NOT NULL,
+  `telephonenumber` varchar(50) NOT NULL,
+  `mobilephonenumber` varchar(50) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `filenumber` varchar(50) DEFAULT NULL,
+  `dateCreated` date NOT NULL,
+  `user_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `contacts`
+--
+
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `contact_id` int(10) NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `age` int(11) NOT NULL,
+  `commentary` varchar(4000) DEFAULT NULL,
+  `category_id` int(10) NOT NULL,
+  `network_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `familymembers`
+--
+
+CREATE TABLE IF NOT EXISTS `familymembers` (
+  `member_id` int(10) NOT NULL,
+  `forename` varchar(35) NOT NULL,
+  `surname` varchar(35) NOT NULL,
+  `dateofbirth` date DEFAULT NULL,
+  `postcode` varchar(10) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `housenumber` varchar(30) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `telephonenumber` varchar(50) DEFAULT NULL,
+  `mobilephonenumber` varchar(50) NOT NULL,
+  `nationality` varchar(50) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `client_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `networks`
+--
+
+CREATE TABLE IF NOT EXISTS `networks` (
+  `network_id` int(10) NOT NULL,
+  `datecreated` date NOT NULL,
+  `commentary` varchar(8000) DEFAULT NULL,
+  `client_id` int(10) NOT NULL,
+  `member_id` int(10) NOT NULL,
+  `survey_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `notification_id` int(10) NOT NULL,
+  `notification` varchar(50) NOT NULL,
+  `created` date NOT NULL,
+  `user_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `questions`
+--
+
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(10) NOT NULL,
+  `question` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `requests`
+--
+
+CREATE TABLE IF NOT EXISTS `requests` (
+  `request_id` int(10) NOT NULL,
+  `requestdate` date NOT NULL,
+  `commentary` varchar(255) NOT NULL,
+  `commentaryadmin` varchar(255) NOT NULL,
+  `approved` varchar(1) NOT NULL,
+  `client_id` int(10) NOT NULL,
+  `user_from_id` int(10) NOT NULL,
+  `user_to_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `requests_notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `requests_notifications` (
+  `request_notification` int(10) NOT NULL,
+  `notification_id` int(10) NOT NULL,
+  `request_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `results`
+--
+
+CREATE TABLE IF NOT EXISTS `results` (
+  `result_id` int(10) NOT NULL,
+  `question_id` int(10) NOT NULL,
+  `answer_id` int(10) NOT NULL,
+  `contact_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `shares`
+--
+
+CREATE TABLE IF NOT EXISTS `shares` (
+  `share_id` int(10) NOT NULL,
+  `request_id` int(10) NOT NULL,
+  `network_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `surveys`
+--
+
+CREATE TABLE IF NOT EXISTS `surveys` (
+  `survey_id` int(10) NOT NULL,
+  `name` varchar(35) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `surveys`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `surveys_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `surveys_questions` (
+  `survey_question_id` int(10) NOT NULL,
+  `survey_id` int(10) NOT NULL,
+  `question_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(10) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `forename` varchar(35) NOT NULL,
+  `surname` varchar(35) NOT NULL,
+  `dateofbirth` date NOT NULL,
+  `postcode` varchar(35) NOT NULL,
+  `street` varchar(35) NOT NULL,
+  `housenumber` varchar(10) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `nationality` varchar(50) NOT NULL,
+  `telephonenumber` varchar(50) NOT NULL,
+  `mobilephonenumber` varchar(50) DEFAULT NULL,
+  `usertype` varchar(35) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `isactive` varchar(1) NOT NULL,
+  `employeenumber` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `users`
+--
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`answer_id`), ADD KEY `FKAnswers401861` (`question_id`);
+
+--
+-- Indexen voor tabel `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexen voor tabel `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`client_id`), ADD KEY `FKClients968335` (`user_id`);
+
+--
+-- Indexen voor tabel `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`contact_id`), ADD KEY `FKContacts769798` (`category_id`), ADD KEY `FKContacts114790` (`network_id`);
+
+--
+-- Indexen voor tabel `familymembers`
+--
+ALTER TABLE `familymembers`
+  ADD PRIMARY KEY (`member_id`), ADD KEY `FKFamilymemb507734` (`client_id`);
+
+--
+-- Indexen voor tabel `networks`
+--
+ALTER TABLE `networks`
+  ADD PRIMARY KEY (`network_id`), ADD KEY `FKNetworks173258` (`client_id`), ADD KEY `FKNetworks939190` (`member_id`), ADD KEY `FKNetworks912632` (`survey_id`);
+
+--
+-- Indexen voor tabel `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`), ADD KEY `FKNotificati77649` (`user_id`);
+
+--
+-- Indexen voor tabel `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexen voor tabel `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`request_id`), ADD KEY `FKRequests552865` (`client_id`), ADD KEY `FKRequests602896` (`user_from_id`), ADD KEY `FKRequests860811` (`user_to_id`);
+
+--
+-- Indexen voor tabel `requests_notifications`
+--
+ALTER TABLE `requests_notifications`
+  ADD PRIMARY KEY (`request_notification`), ADD KEY `FKRequests_n351834` (`notification_id`), ADD KEY `FKRequests_n103793` (`request_id`);
+
+--
+-- Indexen voor tabel `results`
+--
+ALTER TABLE `results`
+  ADD PRIMARY KEY (`result_id`), ADD KEY `FKResults545620` (`question_id`), ADD KEY `FKResults424948` (`answer_id`), ADD KEY `FKResults822942` (`contact_id`);
+
+--
+-- Indexen voor tabel `shares`
+--
+ALTER TABLE `shares`
+  ADD PRIMARY KEY (`share_id`), ADD KEY `FKShares94092` (`request_id`), ADD KEY `FKShares53669` (`network_id`);
+
+--
+-- Indexen voor tabel `surveys`
+--
+ALTER TABLE `surveys`
+  ADD PRIMARY KEY (`survey_id`);
+
+--
+-- Indexen voor tabel `surveys_questions`
+--
+ALTER TABLE `surveys_questions`
+  ADD PRIMARY KEY (`survey_question_id`), ADD KEY `FKSurveys_qu287896` (`survey_id`), ADD KEY `FKSurveys_qu168997` (`question_id`);
+
+--
+-- Indexen voor tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `answer_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `client_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `familymembers`
+--
+ALTER TABLE `familymembers`
+  MODIFY `member_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `networks`
+--
+ALTER TABLE `networks`
+  MODIFY `network_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `requests_notifications`
+--
+ALTER TABLE `requests_notifications`
+  MODIFY `request_notification` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `results`
+--
+ALTER TABLE `results`
+  MODIFY `result_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `shares`
+--
+ALTER TABLE `shares`
+  MODIFY `share_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `surveys`
+--
+ALTER TABLE `surveys`
+  MODIFY `survey_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT voor een tabel `surveys_questions`
+--
+ALTER TABLE `surveys_questions`
+  MODIFY `survey_question_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT voor een tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `answers`
+--
+ALTER TABLE `answers`
+ADD CONSTRAINT `FKAnswers401861` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
+
+--
+-- Beperkingen voor tabel `clients`
+--
+ALTER TABLE `clients`
+ADD CONSTRAINT `FKClients968335` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Beperkingen voor tabel `contacts`
+--
+ALTER TABLE `contacts`
+ADD CONSTRAINT `FKContacts114790` FOREIGN KEY (`network_id`) REFERENCES `networks` (`network_id`),
+ADD CONSTRAINT `FKContacts769798` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+
+--
+-- Beperkingen voor tabel `familymembers`
+--
+ALTER TABLE `familymembers`
+ADD CONSTRAINT `FKFamilymemb507734` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`);
+
+--
+-- Beperkingen voor tabel `networks`
+--
+ALTER TABLE `networks`
+ADD CONSTRAINT `FKNetworks173258` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`),
+ADD CONSTRAINT `FKNetworks912632` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`),
+ADD CONSTRAINT `FKNetworks939190` FOREIGN KEY (`member_id`) REFERENCES `familymembers` (`member_id`);
+
+--
+-- Beperkingen voor tabel `notifications`
+--
+ALTER TABLE `notifications`
+ADD CONSTRAINT `FKNotificati77649` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Beperkingen voor tabel `requests`
+--
+ALTER TABLE `requests`
+ADD CONSTRAINT `FKRequests552865` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`),
+ADD CONSTRAINT `FKRequests602896` FOREIGN KEY (`user_from_id`) REFERENCES `users` (`user_id`),
+ADD CONSTRAINT `FKRequests860811` FOREIGN KEY (`user_to_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Beperkingen voor tabel `requests_notifications`
+--
+ALTER TABLE `requests_notifications`
+ADD CONSTRAINT `FKRequests_n103793` FOREIGN KEY (`request_id`) REFERENCES `requests` (`request_id`),
+ADD CONSTRAINT `FKRequests_n351834` FOREIGN KEY (`notification_id`) REFERENCES `notifications` (`notification_id`);
+
+--
+-- Beperkingen voor tabel `results`
+--
+ALTER TABLE `results`
+ADD CONSTRAINT `FKResults424948` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`answer_id`),
+ADD CONSTRAINT `FKResults545620` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
+ADD CONSTRAINT `FKResults822942` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`contact_id`);
+
+--
+-- Beperkingen voor tabel `shares`
+--
+ALTER TABLE `shares`
+ADD CONSTRAINT `FKShares53669` FOREIGN KEY (`network_id`) REFERENCES `networks` (`network_id`),
+ADD CONSTRAINT `FKShares94092` FOREIGN KEY (`request_id`) REFERENCES `requests` (`request_id`);
+
+--
+-- Beperkingen voor tabel `surveys_questions`
+--
+ALTER TABLE `surveys_questions`
+ADD CONSTRAINT `FKSurveys_qu168997` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
+ADD CONSTRAINT `FKSurveys_qu287896` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`);
+
+
+
+INSERT INTO `users` (`username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`) VALUES('admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1');
+INSERT INTO `users` (`username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`) VALUES('test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2');
+
+INSERT INTO `surveys` (`name`) VALUES('test');

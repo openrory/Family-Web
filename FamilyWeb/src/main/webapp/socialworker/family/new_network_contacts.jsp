@@ -68,8 +68,8 @@
 						<label>Selecteer de ondervraagde:</label>
 						<!--                                 Nog een foreach loop in maken waarin de familymembers uit de session worden gehaald en in een select worden gestopt -->
 						<select id="interviewee" name="interviewee">
-							<c:forEach items="${familymembers}" var="familymember">
-								<option class="select_option" value="${familymember.id}">familymember.name</option>
+							<c:forEach items="${client.myFamilymembers}" var="familymember">
+								<option class="select_option" value="${familymember.member_id}">${familymember.forename} ${familymember.surname}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -164,8 +164,10 @@
 						</select>
 					</div>
 				</div>
+				<div id="submit_button_container">
 				<input type="submit" class="submit_button"
 					value="Vragenlijst aanmaken">
+				</div>
 			</form>
 		</div>
 	</div>
