@@ -47,7 +47,6 @@ public class ClientServlet extends HttpServlet {
 		} else if (option.equals("summary")) {
 			int clientID = Integer.valueOf((String) req.getSession().getAttribute("clientID"));
 			this.summary(clientID);
-			
 		} else {
 			this.overview(message);
 			

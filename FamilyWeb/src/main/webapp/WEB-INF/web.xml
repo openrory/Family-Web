@@ -16,14 +16,14 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>SocialworkerServlet</servlet-name>
-		<servlet-class>servlets.FamilyWeb.SocialworkerServlet
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.EmployeeServlet
 		</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>SocialworkerServlet</servlet-name>
-		<url-pattern>/SocialworkerServlet.do</url-pattern>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/EmployeeServlet.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

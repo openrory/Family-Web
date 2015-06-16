@@ -132,12 +132,15 @@ public class Client {
 	 *            the forename to set
 	 */
 	public boolean setForename(String input) {
-
-		String forename = input.trim().substring(0, 1).toUpperCase()
-				+ input.trim().substring(1);
-		if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
-			this.forename = forename;
-			return true;
+		if (!input.trim().equals("")) {
+			String forename = input.trim().substring(0, 1).toUpperCase()
+					+ input.trim().substring(1);
+			if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
+				this.forename = forename;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -155,10 +158,14 @@ public class Client {
 	 *            the surname to set
 	 */
 	public boolean setSurname(String input) {
-		String surname = input.trim();
-		if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
-			this.surname = surname;
-			return true;
+		if (!input.trim().equals("")) {
+			String surname = input.trim();
+			if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
+				this.surname = surname;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -175,7 +182,8 @@ public class Client {
 	 * @param dateOfBirth
 	 *            the dateOfBirth to set
 	 */
-	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
+	public boolean setDateOfBirth(String inputDay, String inputMonth,
+			String inputYear) {
 		try {
 			int day = Integer.valueOf(inputDay);
 			int month = Integer.valueOf(inputMonth);
@@ -206,10 +214,14 @@ public class Client {
 	 *            the postcode to set
 	 */
 	public boolean setPostcode(String input) {
-		String postcode = input.trim();
-		if (postcode.matches(NL_POSTCODE_PATTERN)) {
-			this.postcode = postcode;
-			return true;
+		if (!input.trim().equals("")) {
+			String postcode = input.trim();
+			if (postcode.matches(NL_POSTCODE_PATTERN)) {
+				this.postcode = postcode;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -227,10 +239,14 @@ public class Client {
 	 *            the street to set
 	 */
 	public boolean setStreet(String input) {
-		String street = input.trim();
-		if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
-			this.street = street;
-			return true;
+		if (!input.trim().equals("")) {
+			String street = input.trim();
+			if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
+				this.street = street;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -248,11 +264,15 @@ public class Client {
 	 *            the houseNumber to set
 	 */
 	public boolean setHouseNumber(String input) {
-		String houseNumber = input.trim();
-		if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
-				&& houseNumber.length() <= 10) {
-			this.houseNumber = houseNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String houseNumber = input.trim();
+			if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
+					&& houseNumber.length() <= 10) {
+				this.houseNumber = houseNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -270,10 +290,14 @@ public class Client {
 	 *            the city to set
 	 */
 	public boolean setCity(String input) {
-		String city = input.trim();
-		if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
-			this.city = city;
-			return true;
+		if (!input.trim().equals("")) {
+			String city = input.trim();
+			if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
+				this.city = city;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -291,10 +315,15 @@ public class Client {
 	 *            the nationality to set
 	 */
 	public boolean setNationality(String input) {
-		String nationality = input.trim();
-		if (nationality.matches(LETTER_PATTERN) && nationality.length() <= 50) {
-			this.nationality = nationality;
-			return true;
+		if (!input.trim().equals("")) {
+			String nationality = input.trim();
+			if (nationality.matches(LETTER_PATTERN)
+					&& nationality.length() <= 50) {
+				this.nationality = nationality;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -312,10 +341,14 @@ public class Client {
 	 *            the telephoneNumber to set
 	 */
 	public boolean setTelephoneNumber(String input) {
-		String telephoneNumber = input.trim();
-		if (telephoneNumber.matches(NL_PHONENUMBER)) {
-			this.telephoneNumber = telephoneNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String telephoneNumber = input.trim();
+			if (telephoneNumber.matches(NL_PHONENUMBER)) {
+				this.telephoneNumber = telephoneNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -333,10 +366,14 @@ public class Client {
 	 *            the mobilePhoneNumber to set
 	 */
 	public boolean setMobilePhoneNumber(String input) {
-		String mobilePhoneNumber = input.trim();
-		if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
-			this.mobilePhoneNumber = mobilePhoneNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String mobilePhoneNumber = input.trim();
+			if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
+				this.mobilePhoneNumber = mobilePhoneNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -354,16 +391,20 @@ public class Client {
 	 *            the email to set
 	 */
 	public boolean setEmail(String input) {
-		boolean result = true;
-		String email = input.trim();
-		try {
-			InternetAddress emailAddr = new InternetAddress(email);
-			emailAddr.validate();
-			this.email = email;
-		} catch (AddressException ex) {
-			result = false;
+		if (!input.trim().equals("")) {
+			boolean result = true;
+			String email = input.trim();
+			try {
+				InternetAddress emailAddr = new InternetAddress(email);
+				emailAddr.validate();
+				this.email = email;
+			} catch (AddressException ex) {
+				result = false;
+			}
+			return result;
+		} else {
+			return false;
 		}
-		return result;
 	}
 
 	/**
@@ -434,7 +475,7 @@ public class Client {
 	public boolean updateDB() {
 		return this.dbController.updateClient(this);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -456,6 +497,6 @@ public class Client {
 
 	public void addDB() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
