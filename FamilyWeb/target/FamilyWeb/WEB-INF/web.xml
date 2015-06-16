@@ -26,6 +26,41 @@
 		<url-pattern>/SocialworkerServlet.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<description>
+		</description>
+		<display-name>ContactServlet</display-name>
+		<servlet-name>ContactServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.ContactServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>FamilyInformation</display-name>
+		<servlet-name>FamilyInformation</servlet-name>
+		<servlet-class>servlets.FamilyWeb.FamilyInformation</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>LogoutServlet</display-name>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ContactServlet</servlet-name>
+		<url-pattern>/ContactServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FamilyInformation</servlet-name>
+		<url-pattern>/FamilyInformation</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>

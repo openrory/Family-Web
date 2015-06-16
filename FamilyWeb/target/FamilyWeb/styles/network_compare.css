@@ -112,6 +112,21 @@ paper-tab a {
 	border-radius: 5px;
 }
 
+svg {
+    background: #B8B8B8;
+}
+
+.node {
+    fill: gray;
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.link {
+    stroke: #777;
+    stroke-width: 2px;
+}
+
 @media screen and (min-width:1260px){
     .network_container {
         display:block;
