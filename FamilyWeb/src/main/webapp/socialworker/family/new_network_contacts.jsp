@@ -8,21 +8,21 @@
 <meta name="mobile-web-app-cable" content="yes">
 <meta charset="utf-8">
 <script
-	src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-<link rel="import" href="../../elements.html">
+	src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+<link rel="import" href="/FamilyWeb/elements.html">
 <link rel="import"
-	href="../../custom_elements/responsive-menu-socialworker.html">
-<link rel="import" href="../../custom_elements/options-menu.html">
+	href="/FamilyWeb/custom_elements/responsive-menu-socialworker.html">
+<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
 <link rel="import"
-	href="../../bower_components/core-media-query/core-media-query.html">
+	href="/FamilyWeb/bower_components/core-media-query/core-media-query.html">
 <link rel="import"
-	href="../../bower_components/paper-tabs/paper-tabs.html">
+	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="import"
-	href="../../bower_components/core-icon-button/core-icon-button.html">
+	href="/FamilyWeb/bower_components/core-icon-button/core-icon-button.html">
 <link rel="import"
-	href="../../custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
-<link rel="stylesheet" href="../../styles/new_network_contacts.css">
-<!--     <link rel="stylesheet" href="../../styles/base.css"> -->
+	href="/FamilyWeb/custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
+<link rel="stylesheet" href="/FamilyWeb/styles/new_network_contacts.css">
+<link rel="stylesheet" href="/FamilyWeb/styles/base.css">
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -61,7 +61,7 @@
 		<% } %>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<div id="form_container">
-			<form id="group_form" action="ContactServlet.do" method="post">
+			<form id="group_form" action="/FamilyWeb/ContactServlet.do" method="post">
 
 				<div id="select_box_container">
 					<div class="information">

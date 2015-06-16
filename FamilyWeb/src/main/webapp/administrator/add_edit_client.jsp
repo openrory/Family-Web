@@ -6,13 +6,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../elements.html">
-	<link rel="import" href="../custom_elements/responsive-menu-administrator.html">
-	<link rel="import" href="../custom_elements/options-menu.html">
-	<link rel="import" href="../custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
-	<link rel="stylesheet" href="../styles/add_edit_client.css">
-	<script type="text/javascript" src="../javascripts/validate_add_edit_client.js"></script>
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
+	<link rel="stylesheet" href="/FamilyWeb/styles/add_edit_client.css">
+	<script type="text/javascript" src="/FamilyWeb/javascripts/validate_add_edit_client.js"></script>
 
 </head>
 <body fullbleed layout vertical>
@@ -35,7 +35,7 @@
 				<message-window-error message="${message}"></message-window-error>
 			<% } %>
 			<paper-shadow z="3" animated="true" id="add_edit_client_form">
-                <form id="add_form" onsubmit="return validateForm();" action="ClientServlet.do">
+                <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/ClientServlet.do">
                     <p>
                         Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
                         Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
