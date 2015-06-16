@@ -713,4 +713,9 @@ public class MySQLDao implements DatabaseInterface {
 		}
 		return names;
 	}
+
+	public ArrayList<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

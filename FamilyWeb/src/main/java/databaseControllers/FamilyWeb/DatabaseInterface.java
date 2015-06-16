@@ -38,4 +38,5 @@ public interface DatabaseInterface {
 	public boolean addQuestion(Question question);
 	public boolean updateQuestion(Question question);
 	public Question getQuestion(int question_id);
+	public ArrayList<User> getAllUsers();
 }
