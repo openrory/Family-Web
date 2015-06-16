@@ -2,7 +2,7 @@ function validateForm() {
 
 var isGood = true;
 
-var socialworkerid = document.forms["add_form"]["socialworkerid"].value;
+var employeeid = document.forms["add_form"]["employeeid"].value;
 var forename = document.forms["add_form"]["forename"].value;
 var surname = document.forms["add_form"]["surname"].value;
 var dateofbirth = document.forms["add_form"]["dateofbirth"].value;
@@ -16,11 +16,11 @@ var mobile = document.forms["add_form"]["mobile"].value;
 var email = document.forms["add_form"]["email"].value;
 var email_confirmation = document.forms["add_form"]["email_confirmation"].value;
 
-if (socialworkerid == null || socialworkerid == "") {
-	document.getElementById("socialworkeridWarning").className="false";
+if (employeeid == null || employeeid == "") {
+	document.getElementById("employeeidWarning").className="false";
 	isGood = false;
 } else {
-	document.getElementById("socialworkeridWarning").className="true";
+	document.getElementById("employeeidWarning").className="true";
 }
 
 if (forename == null || forename == "") {
