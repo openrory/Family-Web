@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @since 2015-04-21
  */
 public class Network {
+	private int network_id;
 	private Date dateCreated;
 	private String commentary;
 	private ArrayList<Contact> contacts;
@@ -98,6 +99,20 @@ public class Network {
 	 */
 	public void setContacts(ArrayList<Contact> contacts) {
 		this.contacts = contacts;
+	}
+	
+	/**
+	 * @return the network_id
+	 */
+	public int getNetwork_id() {
+		return network_id;
+	}
+		
+	/**
+	 * @param network_id the network_id to set
+	 */
+	public void setNetwork_id(int network_id) {
+		this.network_id = network_id;
 	}
 
 

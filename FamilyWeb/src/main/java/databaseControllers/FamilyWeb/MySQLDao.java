@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Answer;
 import domain.FamilyWeb.Client;
+import domain.FamilyWeb.Contact;
 import domain.FamilyWeb.Familymember;
+import domain.FamilyWeb.Network;
 import domain.FamilyWeb.Question;
 import domain.FamilyWeb.Socialworker;
 import domain.FamilyWeb.Survey;
@@ -174,10 +176,8 @@ public class MySQLDao implements DatabaseInterface {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			System.out.println("dit is een test" + conn);
 			PreparedStatement pStmt = conn
 					.prepareStatement("select username, password from users where username=? AND password=?");
-			System.out.println("dit is een test2" + conn);
 			pStmt.setString(1, username);
 			pStmt.setString(2, password);
 			ResultSet rSet = pStmt.executeQuery();
@@ -232,7 +232,8 @@ public class MySQLDao implements DatabaseInterface {
 					.prepareStatement("insert into clients(forename,surname,dateofbirth,postcode,street,housenumber,city,nationality,telephonenumber,mobilephonenumber,email,filenumber,dateCreated, user_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pStmt.setString(3, client.getForename());
 			pStmt.setString(4, client.getSurname());
-			pStmt.setDate(5, new java.sql.Date(client.getDateOfBirth().getTime()));
+			pStmt.setDate(5, new java.sql.Date(client.getDateOfBirth()
+					.getTime()));
 			pStmt.setString(6, client.getPostcode());
 			pStmt.setString(7, client.getStreet());
 			pStmt.setString(8, client.getHouseNumber());
@@ -242,7 +243,8 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(13, client.getMobilePhoneNumber());
 			pStmt.setString(15, client.getEmail());
 			pStmt.setString(16, client.getFileNumber());
-			pStmt.setDate(17, new java.sql.Date(client.getDateCreated().getTime()));
+			pStmt.setDate(17, new java.sql.Date(client.getDateCreated()
+					.getTime()));
 			pStmt.setInt(18, user.getUser_id());
 			pStmt.executeUpdate();
 			b = true;
@@ -251,7 +253,7 @@ public class MySQLDao implements DatabaseInterface {
 		} finally {
 			this.closeConnection(conn);
 		}
-		for(Familymember f : client.getMyFamilymembers())
+		for (Familymember f : client.getMyFamilymembers())
 			b &= this.addFamilymember(f, client);
 		return b;
 	}
@@ -265,17 +267,19 @@ public class MySQLDao implements DatabaseInterface {
 					.prepareStatement("update clients set forename=?,surname=?,dateofbirth=?,postcode=?,street=?,housenumber=?,city=?,nationality=?,telephonenumber=?,mobilephonenumber=?,email=?, filenumber=?,dateCreated=? where member_id=?");
 			pStmt.setString(1, client.getForename());
 			pStmt.setString(2, client.getSurname());
-			pStmt.setDate(3, new java.sql.Date(client.getDateOfBirth().getTime()));
+			pStmt.setDate(3, new java.sql.Date(client.getDateOfBirth()
+					.getTime()));
 			pStmt.setString(4, client.getPostcode());
 			pStmt.setString(5, client.getStreet());
 			pStmt.setString(6, client.getHouseNumber());
 			pStmt.setString(7, client.getCity());
 			pStmt.setString(8, client.getNationality());
 			pStmt.setString(9, client.getTelephoneNumber());
-			pStmt.setString(10, client.getMobilePhoneNumber());			
-			pStmt.setString(11, client.getEmail());			
-			pStmt.setString(12, client.getFileNumber());			
-			pStmt.setDate(13, new java.sql.Date(client.getDateCreated().getTime()));
+			pStmt.setString(10, client.getMobilePhoneNumber());
+			pStmt.setString(11, client.getEmail());
+			pStmt.setString(12, client.getFileNumber());
+			pStmt.setDate(13, new java.sql.Date(client.getDateCreated()
+					.getTime()));
 			pStmt.setInt(14, client.getClient_id());
 			pStmt.executeUpdate();
 			b = true;
@@ -284,7 +288,7 @@ public class MySQLDao implements DatabaseInterface {
 		} finally {
 			this.closeConnection(conn);
 		}
-		for(Familymember f : client.getMyFamilymembers())
+		for (Familymember f : client.getMyFamilymembers())
 			this.updateFamilymember(f);
 		return b;
 	}
@@ -306,7 +310,8 @@ public class MySQLDao implements DatabaseInterface {
 						rSet.getString("nationality"),
 						rSet.getString("telephoneNumber"),
 						rSet.getString("mobilePhoneNumber"),
-						rSet.getString("email"),rSet.getString("fileNumber"),rSet.getDate("dateCreated"));
+						rSet.getString("email"), rSet.getString("fileNumber"),
+						rSet.getDate("dateCreated"));
 				client.setClient_id(rSet.getInt("client_id"));
 				clients.add(client);
 			}
@@ -315,7 +320,7 @@ public class MySQLDao implements DatabaseInterface {
 		} finally {
 			this.closeConnection(conn);
 		}
-		for(Client c : clients)
+		for (Client c : clients)
 			c.setMyFamilymembers(this.getFamilymembersOfClient(c));
 		return clients;
 	}
@@ -329,7 +334,8 @@ public class MySQLDao implements DatabaseInterface {
 					.prepareStatement("insert into familymembers(forename,surname,dateofbirth,postcode,street,housenumber,city,nationality,telephonenumber,mobilephonenumber,email,client_id) values(?,?,?,?,?,?,?,?,?,?,?,?)");
 			pStmt.setString(1, famMember.getForename());
 			pStmt.setString(2, famMember.getSurname());
-			pStmt.setDate(3, new java.sql.Date(famMember.getDateOfBirth().getTime()));
+			pStmt.setDate(3, new java.sql.Date(famMember.getDateOfBirth()
+					.getTime()));
 			pStmt.setString(4, famMember.getPostcode());
 			pStmt.setString(5, famMember.getStreet());
 			pStmt.setString(6, famMember.getHouseNumber());
@@ -337,7 +343,7 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(8, famMember.getNationality());
 			pStmt.setString(9, famMember.getTelephoneNumber());
 			pStmt.setString(10, famMember.getMobilePhoneNumber());
-			pStmt.setString(11, famMember.getEmail());			
+			pStmt.setString(11, famMember.getEmail());
 			pStmt.setInt(12, client.getClient_id());
 			pStmt.executeUpdate();
 			b = true;
@@ -358,14 +364,15 @@ public class MySQLDao implements DatabaseInterface {
 					.prepareStatement("update familymembers set forename=?,surname=?,dateofbirth=?,postcode=?,street=?,housenumber=?,city=?,nationality=?,telephonenumber=?,mobilephonenumber=?,email=? where member_id=?");
 			pStmt.setString(1, famMember.getForename());
 			pStmt.setString(2, famMember.getSurname());
-			pStmt.setDate(3, new java.sql.Date(famMember.getDateOfBirth().getTime()));
+			pStmt.setDate(3, new java.sql.Date(famMember.getDateOfBirth()
+					.getTime()));
 			pStmt.setString(4, famMember.getPostcode());
 			pStmt.setString(5, famMember.getStreet());
 			pStmt.setString(6, famMember.getHouseNumber());
 			pStmt.setString(7, famMember.getCity());
 			pStmt.setString(8, famMember.getNationality());
 			pStmt.setString(9, famMember.getTelephoneNumber());
-			pStmt.setString(10, famMember.getMobilePhoneNumber());			
+			pStmt.setString(10, famMember.getMobilePhoneNumber());
 			pStmt.setString(11, famMember.getEmail());
 			pStmt.setInt(12, famMember.getMember_id());
 			pStmt.executeUpdate();
@@ -388,8 +395,9 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setInt(1, client.getClient_id());
 			ResultSet rSet = pStmt.executeQuery();
 			while (rSet.next()) {
-				Familymember member = new Familymember(rSet.getString("forename"),
-						rSet.getString("surname"), rSet.getDate("dateofbirth"),
+				Familymember member = new Familymember(
+						rSet.getString("forename"), rSet.getString("surname"),
+						rSet.getDate("dateofbirth"),
 						rSet.getString("postcode"), rSet.getString("street"),
 						rSet.getString("housenumber"), rSet.getString("city"),
 						rSet.getString("nationality"),
@@ -424,7 +432,8 @@ public class MySQLDao implements DatabaseInterface {
 						rSet.getString("nationality"),
 						rSet.getString("telephoneNumber"),
 						rSet.getString("mobilePhoneNumber"),
-						rSet.getString("email"), rSet.getString("filenumber"),rSet.getDate("dateCreated"));
+						rSet.getString("email"), rSet.getString("filenumber"),
+						rSet.getDate("dateCreated"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -691,17 +700,43 @@ public class MySQLDao implements DatabaseInterface {
 	}
 
 	public ArrayList<Client> getAllClients() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		ArrayList<Client> clients = new ArrayList<Client>();
+		try {
+			conn = this.getConnection();
+			PreparedStatement pStmt = conn
+					.prepareStatement("select * from clients");
+			ResultSet rSet = pStmt.executeQuery();
+			while (rSet.next()) {
+				Client client = new Client(rSet.getString("forename"),
+						rSet.getString("surname"), rSet.getDate("dateofbirth"),
+						rSet.getString("postcode"), rSet.getString("street"),
+						rSet.getString("housenumber"), rSet.getString("city"),
+						rSet.getString("nationality"),
+						rSet.getString("telephoneNumber"),
+						rSet.getString("mobilePhoneNumber"),
+						rSet.getString("email"), rSet.getString("fileNumber"),
+						rSet.getDate("dateCreated"));
+				client.setClient_id(rSet.getInt("client_id"));
+				clients.add(client);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn);
+		}
+		for (Client c : clients)
+			c.setMyFamilymembers(this.getFamilymembersOfClient(c));
+		return clients;
 	}
-	
+
 	public ArrayList<String> getSurveyNames() {
 		Connection conn = null;
 		ArrayList<String> names = new ArrayList<String>();
 		try {
 			conn = this.getConnection();
 			PreparedStatement pStmt = conn
-					.prepareStatement("select name from surveys");			
+					.prepareStatement("select name from surveys");
 			ResultSet rSet = pStmt.executeQuery();
 			while (rSet.next()) {
 				names.add(rSet.getString("names"));
@@ -714,8 +749,102 @@ public class MySQLDao implements DatabaseInterface {
 		return names;
 	}
 
-	public ArrayList<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addNetwork(Network network, int client_id,
+			int familymember_id) {
+		//Connection conn = null;
+		//TODO		
+		boolean b = false;
+		return b;
+	}
+
+	public boolean updateNetwork(Network network) {
+		boolean b = false;
+		//TODO		
+		return b;
+	}
+
+	public ArrayList<Network> getNetworks(int client_id, int familymember_id) {
+		Connection conn = null;
+		ArrayList<Network> networks = new ArrayList<Network>();
+		PreparedStatement pStmt = null;
+		try {
+			conn = this.getConnection();
+			if (client_id == 0) {
+				pStmt = conn
+						.prepareStatement("select * from networks INNER JOIN surveys ON networks.survey_id=surveys.survey_id where client_id=?");
+				pStmt.setInt(1, client_id);
+			} else if (familymember_id == 0) {
+				pStmt = conn
+						.prepareStatement("select * from networks INNER JOIN surveys ON networks.survey_id=surveys.survey_id where member_id=?");
+				pStmt.setInt(1, familymember_id);
+
+			} else
+				return networks;
+			ResultSet rSet = pStmt.executeQuery();
+			while (rSet.next()) {
+				Network network = new Network(rSet.getDate("datecreated"),
+						rSet.getString("commentary"));
+				network.setNetwork_id(rSet.getInt("network_id"));
+				network.setTheSurvey(new Survey(rSet.getString("name"),
+						new ArrayList<Question>()));
+				networks.add(network);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn);
+		}
+		for (Network n : networks) {
+			n.setTheSurvey(this.getSurvey(n.getTheSurvey().getName()));
+			this.setResultsContacts(n);
+		}
+		return networks;
+	}
+
+	private ArrayList<Contact> setResultsContacts(Network n) {
+		Connection conn = null;
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		try {
+			conn = this.getConnection();			
+			for (Contact c : this.getContacts(n)) {		
+				PreparedStatement pStmt = conn
+						.prepareStatement("select * from results where contact_id=?");
+				pStmt.setInt(1, c.getContact_id());
+				ResultSet rSet = pStmt.executeQuery();				
+				while (rSet.next()) {
+					//TODO					
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn);
+		}
+		return contacts;
+	}
+
+	private ArrayList<Contact> getContacts(Network n) {
+		Connection conn = null;
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		try {
+			conn = this.getConnection();
+
+			PreparedStatement pStmt = conn
+					.prepareStatement("select * from contacts INNER JOIN categories ON contacts.category_id=category.category_id where network_id=?");
+			pStmt.setInt(1, n.getNetwork_id());
+			ResultSet rSet = pStmt.executeQuery();
+			while (rSet.next()) {
+				Contact c = new Contact(rSet.getString("fullname"),
+						rSet.getString("commentary"), rSet.getString("role"),
+						rSet.getInt("age"), rSet.getString("name"));
+				c.setContact_id(rSet.getInt("contact_id"));
+				contacts.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn);
+		}
+		return contacts;
 	}
 }

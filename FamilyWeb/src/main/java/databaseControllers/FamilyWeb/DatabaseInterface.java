@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Familymember;
+import domain.FamilyWeb.Network;
 import domain.FamilyWeb.Question;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
@@ -38,5 +39,9 @@ public interface DatabaseInterface {
 	public boolean addQuestion(Question question);
 	public boolean updateQuestion(Question question);
 	public Question getQuestion(int question_id);
-	public ArrayList<User> getAllUsers();
+	//public ArrayList<User> getAllUsers();			DEZE ZAT ALLEEN IN DEZE FILE BIJ HET MERGEN MAAR WORDT IN DE MYSQLDAO NIET GEIMPLEMENTEERD
+	
+	public boolean addNetwork(Network network, int client_id, int familymember_id);
+	public boolean updateNetwork(Network network);
+	public ArrayList<Network> getNetworks(int client_id,int familymember_id);
 }

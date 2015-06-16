@@ -17,6 +17,7 @@ public class Contact {
 	private int age;
 	private ArrayList<Category> categories;
 	private ArrayList<Result> myResults;
+	private int contact_id;
 	
 	/**
 	 * Constructor with fields
@@ -133,5 +134,19 @@ public class Contact {
 	 */
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	/**
+	 * @return the contact_id
+	 */
+	public int getContact_id() {
+		return contact_id;
+	}
+	
+	/**
+	* @param contact_id the contact_id to set
+	*/
+	public void setContact_id(int contact_id) {
+		this.contact_id = contact_id;
 	}
 }

@@ -16,14 +16,14 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>EmployeeServlet</servlet-name>
-		<servlet-class>servlets.FamilyWeb.EmployeeServlet
+		<servlet-name>SocialworkerServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.SocialworkerServlet
 		</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>EmployeeServlet</servlet-name>
-		<url-pattern>/EmployeeServlet.do</url-pattern>
+		<servlet-name>SocialworkerServlet</servlet-name>
+		<url-pattern>/SocialworkerServlet.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -47,18 +47,29 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>servlets.FamilyWeb.LogoutServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>SurveyServlet</display-name>
+		<servlet-name>SurveyServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.SurveyServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>ContactServlet</servlet-name>
-		<url-pattern>/ContactServlet</url-pattern>
+		<url-pattern>/ContactServlet.do</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FamilyInformation</servlet-name>
-		<url-pattern>/FamilyInformation</url-pattern>
+		<url-pattern>/FamilyInformation.do</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/LogoutServlet</url-pattern>
+		<url-pattern>/LogoutServlet.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SurveyServlet</servlet-name>
+		<url-pattern>/SurveyServlet.do</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
