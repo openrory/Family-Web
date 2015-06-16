@@ -1,4 +1,4 @@
-﻿@media only screen and (max-width: 3840px) {
+@media only screen and (max-width: 3840px) {
     #button {
         background-color: rgb(192, 0, 0);
         color: rgb(255, 255, 255);
@@ -34,7 +34,7 @@
     }
 }
 
-#add_socialworker_form {
+#add_edit_employee_form {
 	width: 50%;
 	min-width: 300px;
 	max-width:800px;
