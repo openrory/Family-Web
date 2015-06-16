@@ -1,15 +1,15 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht cliÃ«nten</title>
+	<title>Overzicht cliënten</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../elements.html">
-	<link rel="import" href="../custom_elements/responsive-menu-administrator.html">
-	<link rel="import" href="../custom_elements/options-menu.html">
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
 
 </head>
 <body fullbleed layout vertical>
@@ -24,11 +24,11 @@
         <core-header-panel main>
             <core-toolbar>
 			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-            <div flex>Overzicht cliÃ«nten</div>
+            <div flex>Overzicht cliënten</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>
-			<p>Hier moet een tabel komen met het overzicht van de cliÃ«nten</p>
+			<p>Hier moet een tabel komen met het overzicht van de cliënten</p>
             </div>
         </core-header-panel>
     </core-drawer-panel>

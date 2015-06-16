@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Overzicht zorgprofessionals</title>
@@ -6,11 +6,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../elements.html">
-    <link rel="import" href="../custom_elements/responsive-menu-administrator.html">
-    <link rel="import" href="../custom_elements/options-menu.html">
-    <link rel="stylesheet" href="../styles/socialworker_overview.css">
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+    <link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+    <link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+    <link rel="stylesheet" href="/FamilyWeb/styles/socialworker_overview.css">
 
 </head>
 <body fullbleed layout horizontal>

@@ -5,9 +5,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="elements.html">
-    <link rel="stylesheet" href="styles/login.css">
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+    <link rel="stylesheet" href="/FamilyWeb/styles/login.css">
 
 </head>
 <body fullbleed layout vertical>
@@ -20,7 +20,7 @@
         <message-window-error message="${message}"></message-window-error>
         <% } %>
 			
-            <form id="login_form" action="LoginServlet.do" method="POST">
+            <form id="login_form" action="/FamilyWeb/LoginServlet.do" method="POST">
                 <fieldset>
                     <legend>Log in</legend>
                     <div class="information">
