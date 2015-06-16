@@ -10,6 +10,7 @@
     <link rel="import" href="../elements.html">
 	<link rel="import" href="../custom_elements/responsive-menu-socialworker.html">
 	<link rel="import" href="../custom_elements/options-menu.html">
+	<link rel="stylesheet" href="../styles/client_overview.css">
 
 </head>
 <body fullbleed layout vertical>
@@ -29,10 +30,31 @@
             </core-toolbar>
             <div class="content" fit layout vertical>
 			<p>Hier moet een tabel komen met het overzicht van de cliënten // Hieronder directe link naar zogenaamde familie</p>
-                <a href="family/family_members_overview.html">hoihoi</a>
+               	<form id="familyform" action="FamilyInformation.do" method="post">
+<!--                	Hier wordt de id van de familie neergezet voor de servlets -->
+               	<input id="familyID" type="text" value="">
+               	</form>
+<!--                	Hieronder moet de tabel van Michiel komen te staan -->
+               	<table>
+               		<tr>
+               			<td>Naam</td>
+               			<td>Opties</td>
+               		</tr>
+               		<tr>
+               			<td>Janssen</td>
+               			<td><button onclick="submit(1)">Inzien</button></td>
+               		</tr>
+               	</table>
             </div>
         </core-header-panel>
     </core-drawer-panel>
+    <script>
+    // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
+	function submit(ID) {
+		document.getElementById("familyID").value = ID;
+ 		document.getElementById("familyform").submit()
+	}
+    </script>
 </body>
 </html>
 
