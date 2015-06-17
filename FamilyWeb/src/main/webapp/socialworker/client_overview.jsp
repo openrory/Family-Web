@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>Overzicht cliënten</title>
-    <meta forename="viewport" content="width=device-width, initial-scale=1.0">
-    <meta forename="apple-mobile-web-app-capable" content="yes">
-    <meta forename="mobile-web-app-cable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="../elements.html">
