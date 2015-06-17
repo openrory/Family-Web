@@ -91,7 +91,7 @@
 <%-- 						</c:forEach> --%>
 						</div>
 						<div>
-							<textarea name="general_comment" type=></textarea>
+							<textarea name="general_comment"></textarea>
 						</div>
 						</c:forEach>
 						<input type="button" onclick="closeQuestions(${contact.id})" value="Volgende contactpersoon" />

@@ -12,13 +12,14 @@ core-toolbar {
 	background-color: #FFFFFF;
 }
 
-#title {
+#title{
 	width:200px;
 	margin:auto;
 }
 
-#login_form {
-	min-width: 300px;
+#forgot_username_form {
+	width: 70%;
+	min-width:300px;
 	max-width:550px;
 	margin: 20px auto;
 	background: rgb(246,248,249); /* Old browsers */
@@ -63,12 +64,8 @@ fieldset {
 	width: 200px; 
 	text-align: right;
 }
-#login_button_container {
+
+#retrieve_button_container {
 	width: 100px;
 	margin: 10px auto;
-}
-
-#forgot {
-	float: right;
-	margin-right: 20px;
 }

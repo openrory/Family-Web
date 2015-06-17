@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +7,26 @@
     <meta charset="utf-8">
     <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/FamilyWeb/elements.html">
-    <link rel="stylesheet" href="/FamilyWeb/styles/forgot_password.css">
+    <link rel="stylesheet" href="/FamilyWeb/styles/forgot_username.css">
 
 </head>
 <body fullbleed layout vertical>
     <core-header-panel flex>
         <core-toolbar>
-            <div id="title">Wachtwoord resetten</div>
+            <div id="title">Gebruikersnaam opvragen</div>
         </core-toolbar>
         <div class="content">
-            <form id="forgot_password_form" action="/FamilyWeb/ResetPasswordServlet.do" method="GET">
+            <form id="forgot_username_form" action="/FamilyWeb/RetrieveUsernameServlet.do" method="POST">
                 <fieldset>
-                    <legend>Wachtwoord vergeten</legend>
+                    <legend>Gebruikersnaam opvragen</legend>
                     <div class="information">
-                        <label>Gebruikersnaam :</label>
-                        <input id="username" type="text" placeholder="Gebruikersnaam" />
+                        <label>Email :</label>
+                        <input id="email" type="email" placeholder="Email" />
                     </div>
-					<div id="reset_button_container">
-                        <input class="submit_button" type="submit" value="Resetten">
+					<div id="retrieve_button_container">
+                        <input class="submit_button" type="submit" value="Opvragen">
 					</div>
-                    <p>Als u op de knop "Resetten" drukt wordt er een mail naar u gestuurd met een nieuw wachtwoord</p>
+                    <p>Als u op de knop "Oprvragen" drukt wordt er een mail naar u gestuurd met uw bestaande gebruikersnaam</p>
                 </fieldset>
             </form>
         </div>

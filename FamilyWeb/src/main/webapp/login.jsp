@@ -34,7 +34,8 @@
 					<div id="login_button_container">
 					 <input class="submit_button" type="submit" value="Inloggen">
 					</div>
-                    <p id="forgot_password"><a href="forgot_password.html">Wachtwoord vergeten?</a></p>
+                    <p id="forgot"><a href="forgot_password.jsp">Wachtwoord vergeten?</a></p>
+                    <p id="forgot"><a href="forgot_username.jsp">Gebruikersnaam vergeten?</a></p>
                 </fieldset>
             </form>
         </div>
