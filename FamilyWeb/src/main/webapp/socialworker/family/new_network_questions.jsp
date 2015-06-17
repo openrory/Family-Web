@@ -63,6 +63,7 @@
 			<form id="group_form" onsubmit="hoi" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 				<c:forEach items="${contacts}" var="contact">
 					<div class="contact">
 						<h3>${contact.name}</h3>
@@ -71,9 +72,26 @@
 						<c:forEach items="${contact.questions}" var="question">
 						<div id="${question.id}">
 						<p>${question.name}</p>
-						<c:forEach items="${question.anwsers}" var="anwser">
-						<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name}
-						</c:forEach>
+						<c:choose>
+  						<c:when test="${fn:length(question.anwsers) < 6}">
+   							<c:forEach items="${question.anwsers}" var="anwser">
+								<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name}
+							</c:forEach>
+  						</c:when>
+  						<c:when test="${fn:length(question.anwsers) > 5}">
+						<select name="${question.id}">
+							<c:forEach items="${question.anwsers}" var="anwser">
+								<option class="select_option" value="${answer.name}">${answer.name}</option>
+							</c:forEach>
+						</select>
+  						</c:when>
+  						</c:choose>
+<%-- 						<c:forEach items="${question.anwsers}" var="anwser"> --%>
+<%-- 						<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name} --%>
+<%-- 						</c:forEach> --%>
+						</div>
+						<div>
+							<textarea name="general_comment" type=></textarea>
 						</div>
 						</c:forEach>
 						<input type="button" onclick="closeQuestions(${contact.id})" value="Volgende contactpersoon" />
