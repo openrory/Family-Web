@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.FamilyWeb.MailService;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Socialworker;
@@ -94,7 +95,21 @@ public class EmployeeServlet extends HttpServlet {
 		user.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
 
 		if (this.setValidation().equals("")) {
+			
 			user.addDB();
+			
+			String mailSubject = "Welkom bij FamilyWeb!"; 
+			String mailMessage = "Dank voor het aanmaken van een account bij FamilyWeb. \n" +
+			"Je kunt nu inloggen met de onderstaande inloggegevens. n\" +"
+			+ "Gebruikersnaam: " + this.user.getUsername() + "\n" +
+			"Wachtwoord: " + this.user.getPassword() + "\n\n" +
+			"Bij het eerste keer inloggen moet u het wachtwoord aanpassen.\n\n" +
+			"**Automatische mail, reageren op deze mail kan niet.**\n\n" +
+			"FamilyWeb";
+			
+			MailService mailService = new MailService(this.user, mailSubject, mailMessage);
+			message += (mailService.sendMail()) ? "" : "Mailservice error";
+			
 			message = "Employee " + user.getForename() + " " + user.getSurname() + " succesfully created.";
 			req.setAttribute("message", message);
 			reqDisp = req.getRequestDispatcher("/administrator/employee_overview.jsp");
@@ -142,7 +157,7 @@ public class EmployeeServlet extends HttpServlet {
 
 		user.setActive((req.getParameter("is_active") != null ? true : false));
 
-		user.setPassword("henk");
+		user.setPassword("password");
 		
 		message += (user.setUsername((req.getParameter("username") != null) ? (String) req.getParameter("username") : "")) ? "" : "Username not valid. ";
 		message += (user.setForename((req.getParameter("forename") != null) ? (String) req.getParameter("forename") : "")) ? "" : "Forename not valid. ";
