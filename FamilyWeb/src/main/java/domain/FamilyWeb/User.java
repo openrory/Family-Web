@@ -125,13 +125,15 @@ public abstract class User {
 	public boolean setUsername(String input) {
 
 		String username = input.trim();
+		this.username = username;
+		return true; /**
 		if (username.matches(USERNAME_PATTERN)
 				&& this.dbController.getUser(username) == null) {
 			this.username = username;
 			return true;
 		} else {
 			return false;
-		}
+		} **/
 	}
 
 	/**

@@ -42,7 +42,7 @@
                         toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
                         Het heeft niet alleen vijf eeuwen overleefd
                     </p>
-                   <% if(session.getAttribute("Employee") == null){ %>
+                   <% if(session.getAttribute("employee") == null){ %>
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
@@ -50,7 +50,7 @@
 					<span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
                         <label>Personeelnr :</label>
-                            <input id="employeeid" type="text" placeholder="Personeelnr" value="${Employee.employeenumber}"/>
+                            <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" value="${Employee.employeenumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
@@ -65,7 +65,7 @@
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
                         <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${Employee.dateofbirth}" />
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-YYYY" value="${Employee.dateofbirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
@@ -80,7 +80,7 @@
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label>Huisnummer :</label>
-                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${Employee.streetnumber}" />
+                        <input id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${Employee.streetnumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
@@ -113,6 +113,14 @@
                         <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${Employee.email}"/>
                     </div>
                     <div class="information">
+                    	<label>Gebruikersnaam</label>
+                    	<input id="username" name="username" type="text" >
+                    </div>
+                    <div class="information">
+                    	<label>Is actief?</label>
+                    	<input id="is_active" name="is_active" type="checkbox" >
+                    </div>
+                     <div class="information">
                     	<label>Is administrator?</label>
                     	<input id="is_administrator" name="is_administrator" type="checkbox" >
                     </div>
