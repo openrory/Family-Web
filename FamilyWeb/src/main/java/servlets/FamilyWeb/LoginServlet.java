@@ -29,10 +29,10 @@ public class LoginServlet extends HttpServlet {
 			req.getSession().setAttribute("user", user);
 			
 			if (controller.isAdministrator(user)) {
-				reqDisp = req.getRequestDispatcher("/administrator/startscreen_administrator.html");
+				reqDisp = req.getRequestDispatcher("/administrator/startscreen_administrator.jsp");
 			} else {
 				req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
-				reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.html");
+				reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 			}
 		} else {
 			req.setAttribute("message", "Gebruikersnaam of wachtwoord onjuist.");
