@@ -27,21 +27,23 @@ public class EmployeeServlet extends HttpServlet {
 
 		this.req = req;
 		String message = "";
-		String option = (req.getAttribute("option") != null) ? (String) req.getAttribute("option") : "";
+		String option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
+		
+		System.out.println("dit is option: " + option);
 		
 		// Get current user
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
 
+		System.out.println("dit is current user: " + currentUser.getForename());
+		
 		// Check wich page is called, to overview users, create or update user.
 		if (option.equals("create")) {
-			req.getSession().removeAttribute("employee");
 			this.create(message);
-		} else if (option.equals("update")) {
+		} if (option.equals("update")) {
 			this.update(message);
 		} else if (option.equals("summary")) {
 			if (req.getSession().getAttribute("userID") != null) {
-				req.getSession().removeAttribute("employee");
 				int userID = Integer.valueOf((String) req.getSession().getAttribute("userID"));
 				this.summary(userID);
 				reqDisp = req.getRequestDispatcher("/administrator/add_edit_employee.jsp");
@@ -67,7 +69,7 @@ public class EmployeeServlet extends HttpServlet {
 				break;
 			}
 		}
-		req.getSession().setAttribute("employee", user);
+		req.setAttribute("employee", user);
 	}
 
 	/**
@@ -85,24 +87,18 @@ public class EmployeeServlet extends HttpServlet {
 	 * @param message information string if validation was not valid or user succesfully created.
 	 */
 	private void create(String message) {
+
+		user = (req.getParameter("is_administrator") != null) ? new Administrator() : new Socialworker();
 		
-		System.out.println("DIT IS EEN TEST");
-		
-		user = new Socialworker();
 		// Give user object acces to the databaseinterface.
 		user.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
-		if (this.setValidation().equals("")) {
-			
 
-			System.out.println("DIT IS EEN TEST 2" + user.getForename());
+		if (this.setValidation().equals("")) {
 			user.addDB();
-			message = "Employee" + user.getForename() + " " + user.getSurname() + " succesfully created.";
-			req.setAttribute("message", "Information: " + message);
+			message = "Employee " + user.getForename() + " " + user.getSurname() + " succesfully created.";
+			req.setAttribute("message", message);
 			reqDisp = req.getRequestDispatcher("/administrator/employee_overview.jsp");
 		} else {
-			
-			System.out.println("DIT IS EEN TEST 3");
-			
 			req.setAttribute("message", "Error occurred: " + message);
 			reqDisp = req.getRequestDispatcher("/administrator/add_edit_employee.jsp");
 		}
@@ -117,13 +113,13 @@ public class EmployeeServlet extends HttpServlet {
 		Object employeeObject = req.getSession().getAttribute("employee");	
 		if (employeeObject != null) {
 			
-			User employeeUpdate = (employeeObject instanceof Administrator) ? (Administrator) employeeObject : (Socialworker) employeeObject;
-			this.user = employeeUpdate;
+			this.user = (employeeObject instanceof Administrator) ? (Administrator) employeeObject : (Socialworker) employeeObject;
 			
 			if (this.setValidation().equals("")) {
 				user.updateDB();
 				message = "Employee " + user.getForename() + " " + user.getSurname() + " succesfully updated.";
 				req.setAttribute("message", "Information: " + message);
+				req.removeAttribute("employee");
 				reqDisp = req.getRequestDispatcher("/administrator/employee_overview.jsp");
 			} else {
 				//req.getSession().setAttribute("employee", user);
@@ -144,49 +140,40 @@ public class EmployeeServlet extends HttpServlet {
 
 		String message = "";
 
-		// MOET NOG VIA CHECKBOX WORDEN AFGEVANGEN
-		user.setActive(true);
-		// MOET NOG VIA CHECKBOX WORDEN AFGEVANGEN
-		
-		//if (req.getAttribute("username") != null)
-		
-		if (req.getAttribute("forename") != null) {
-			System.out.println((String) req.getAttribute("forename"));
-		}
-			
-		//message += (user.setUsername((req.getAttribute("username") != null) ? (String) req.getAttribute("username") : "")) ? "" : "Username not valid. ";
-		message += (user.setForename((req.getAttribute("forename") != null) ? (String) req.getAttribute("forename") : "")) ? "" : "Forename not valid. ";
-		message += (user.setSurname((req.getAttribute("surname") != null) ? (String) req.getAttribute("surname") : "")) ? "" : "Surname not valid. ";
-		message += (user.setPostcode((req.getAttribute("postcode") != null) ? (String) req.getAttribute("postcode") : "")) ? "" : "Postcode not valid. ";
-		message += (user.setStreet((req.getAttribute("street") != null) ? (String) req.getAttribute("street") : "")) ? "" : "Street not valid. ";
-		message += (user.setHouseNumber((req.getAttribute("housenumber") != null) ? (String) req.getAttribute("housenumber") : "")) ? "" : "Housenumber not valid. ";
-		message += (user.setCity((req.getAttribute("city") != null) ? (String) req.getAttribute("city") : "")) ? "" : "City not valid. ";
-		message += (user.setNationality((req.getAttribute("nationality") != null) ? (String) req.getAttribute("nationality") : "")) ? "" : "Nationality not valid. ";
-		message += (user.setTelephoneNumber((req.getAttribute("telephonenumber") != null) ? (String) req.getAttribute("telephonenumber") : "")) ? "" : "Telephonenumber not valid. ";
-		message += (user.setMobilePhoneNumber((req.getAttribute("mobilephonenumber") != null) ? (String) req.getAttribute("mobilephonenumber") : "")) ? "" : "Mobilephonenumber not valid. ";
-		message += (user.setEmployeeNumber((req.getAttribute("employeenumber") != null) ? (String) req.getAttribute("employeenumber") : "")) ? "" : "Employeenumber not valid. ";
+		user.setActive((req.getParameter("is_active") != null ? true : false));
 
-		System.out.println(" test 4" + user.getForename() + " " + user.getSurname());
+		user.setPassword("henk");
 		
-		String email1 = (req.getAttribute("email1") != null) ? (String) req.getAttribute("email1") : "";
-		String email2 = (req.getAttribute("email2") != null) ? (String) req.getAttribute("email2") : "";
+		message += (user.setUsername((req.getParameter("username") != null) ? (String) req.getParameter("username") : "")) ? "" : "Username not valid. ";
+		message += (user.setForename((req.getParameter("forename") != null) ? (String) req.getParameter("forename") : "")) ? "" : "Forename not valid. ";
+		message += (user.setSurname((req.getParameter("surname") != null) ? (String) req.getParameter("surname") : "")) ? "" : "Surname not valid. ";
+		message += (user.setPostcode((req.getParameter("postcode") != null) ? (String) req.getParameter("postcode") : "")) ? "" : "Postcode not valid. ";
+		message += (user.setStreet((req.getParameter("street") != null) ? (String) req.getParameter("street") : "")) ? "" : "Street not valid. ";
+		message += (user.setHouseNumber((req.getParameter("housenumber") != null) ? (String) req.getParameter("housenumber") : "")) ? "" : "Housenumber not valid. ";
+		message += (user.setCity((req.getParameter("city") != null) ? (String) req.getParameter("city") : "")) ? "" : "City not valid. ";
+		message += (user.setNationality((req.getParameter("nationality") != null) ? (String) req.getParameter("nationality") : "")) ? "" : "Nationality not valid. ";
+		message += (user.setTelephoneNumber((req.getParameter("phonenumber") != null) ? (String) req.getParameter("phonenumber") : "")) ? "" : "Telephonenumber not valid. ";
+		message += (user.setMobilePhoneNumber((req.getParameter("mobile") != null) ? (String) req.getParameter("mobile") : "")) ? "" : "Mobilephonenumber not valid. ";
+		message += (user.setEmployeeNumber((req.getParameter("employeenumber") != null) ? (String) req.getParameter("employeenumber") : "")) ? "" : "Employeenumber not valid. ";
+		
+		String email1 = (req.getParameter("email") != null) ? (String) req.getParameter("email") : "";
+		String email2 = (req.getParameter("email_confirmation") != null) ? (String) req.getParameter("email_confirmation") : "";
 		
 		if (!email1.equals("") || !email2.equals("") || email1.equals(email2)) {
 			message += (user.setEmail(email1)) ? "" : "Email not valid. ";
 		}
 		
-		String dateOfBirth = (req.getAttribute("dateofbirth") != null) ? (String) req.getAttribute("dateofbirth") : "";
+		String dateOfBirth = (req.getParameter("dateofbirth") != null) ? (String) req.getParameter("dateofbirth") : "";
 		
 		if (!dateOfBirth.equals("")) {
 			String[] parts = dateOfBirth.split("-");
-			String date = parts[0]; 
+			String year = parts[0]; 
 			String month = parts[1]; 
-			String year = parts[2];
+			String date = parts[2];
 			user.setDateOfBirth(date, month, year);
 		} else {
 			message += "Date of birth not valid. ";
 		}
-
 		return message;
 	}
 }

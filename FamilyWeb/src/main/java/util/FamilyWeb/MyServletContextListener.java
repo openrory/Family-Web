@@ -15,7 +15,7 @@ public class MyServletContextListener implements ServletContextListener {
 		
 		new LoginController(dbController);
 		
-		sce.getServletContext().setAttribute("", dbController);		
+		sce.getServletContext().setAttribute("dbController", dbController);		
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {

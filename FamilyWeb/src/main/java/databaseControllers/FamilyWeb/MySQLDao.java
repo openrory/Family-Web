@@ -46,6 +46,7 @@ public class MySQLDao implements DatabaseInterface {
 	public boolean addUser(User user) {
 		Connection conn = null;
 		boolean b = false;
+		
 		try {
 			conn = this.getConnection();
 			PreparedStatement pStmt = conn
@@ -60,14 +61,12 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(8, user.getHouseNumber());
 			pStmt.setString(9, user.getCity());
 			pStmt.setString(10, user.getNationality());
-			pStmt.setString(12, user.getTelephoneNumber());
-			pStmt.setString(13, user.getMobilePhoneNumber());
-			pStmt.setString(14,
-					(user instanceof Administrator) ? "Administrator"
-							: "Socialworker");
-			pStmt.setString(15, user.getEmail());
-			pStmt.setString(16, user.isActive() ? "Y" : "N");
-			pStmt.setString(17, user.getEmployeeNumber());
+			pStmt.setString(11, user.getTelephoneNumber());
+			pStmt.setString(12, user.getMobilePhoneNumber());
+			pStmt.setString(13, (user instanceof Administrator) ? "Administrator" : "Socialworker");
+			pStmt.setString(14, user.getEmail());
+			pStmt.setString(15, user.isActive() ? "Y" : "N");
+			pStmt.setString(16, user.getEmployeeNumber());
 			pStmt.executeUpdate();
 			b = true;
 		} catch (SQLException e) {
