@@ -39,7 +39,7 @@ public interface DatabaseInterface {
 	public boolean addQuestion(Question question);
 	public boolean updateQuestion(Question question);
 	public Question getQuestion(int question_id);
-	//public ArrayList<User> getAllUsers();			DEZE ZAT ALLEEN IN DEZE FILE BIJ HET MERGEN MAAR WORDT IN DE MYSQLDAO NIET GEIMPLEMENTEERD
+	public ArrayList<User> getAllUsers();			
 	
 	public boolean addNetwork(Network network, int client_id, int familymember_id);
 	public boolean updateNetwork(Network network);

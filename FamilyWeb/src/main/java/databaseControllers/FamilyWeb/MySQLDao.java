@@ -847,4 +847,9 @@ public class MySQLDao implements DatabaseInterface {
 		}
 		return contacts;
 	}
+
+	public ArrayList<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
