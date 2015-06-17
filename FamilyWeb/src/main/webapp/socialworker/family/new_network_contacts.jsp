@@ -39,15 +39,15 @@
 		<paper-tabs id="scrollableTabs" selected="2" flex scrollable noink>
 
 		<paper-tab>
-		<a href="family_members_overview.html" horizontal center-center layout>Gezinsleden</a></paper-tab>
+		<a href="family_members_overview.jsp" horizontal center-center layout>Gezinsleden</a></paper-tab>
 		<paper-tab>
 		<a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
 		<paper-tab>
 		<a href="new_network_contacts.jsp" horizontal center-center layout>Nieuw
 			Netwerk</a></paper-tab> <paper-tab>
-		<a href="share_networks.html" horizontal center-center layout>Netwerk(en)
+		<a href="share_networks.jsp" horizontal center-center layout>Netwerk(en)
 			delen</a></paper-tab> <paper-tab>
-		<a href="transfer.html" horizontal center-center layout>Overdragen</a></paper-tab>
+		<a href="transfer.jsp" horizontal center-center layout>Overdragen</a></paper-tab>
 
 		</paper-tabs>
 	</div>
