@@ -85,15 +85,24 @@ public class EmployeeServlet extends HttpServlet {
 	 * @param message information string if validation was not valid or user succesfully created.
 	 */
 	private void create(String message) {
+		
+		System.out.println("DIT IS EEN TEST");
+		
 		user = new Socialworker();
 		// Give user object acces to the databaseinterface.
 		user.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
 		if (this.setValidation().equals("")) {
+			
+
+			System.out.println("DIT IS EEN TEST 2" + user.getForename());
 			user.addDB();
 			message = "Employee" + user.getForename() + " " + user.getSurname() + " succesfully created.";
 			req.setAttribute("message", "Information: " + message);
 			reqDisp = req.getRequestDispatcher("/administrator/employee_overview.jsp");
 		} else {
+			
+			System.out.println("DIT IS EEN TEST 3");
+			
 			req.setAttribute("message", "Error occurred: " + message);
 			reqDisp = req.getRequestDispatcher("/administrator/add_edit_employee.jsp");
 		}
@@ -139,9 +148,13 @@ public class EmployeeServlet extends HttpServlet {
 		user.setActive(true);
 		// MOET NOG VIA CHECKBOX WORDEN AFGEVANGEN
 		
-		if (req.getAttribute("username") != null)
+		//if (req.getAttribute("username") != null)
 		
-		message += (user.setUsername((req.getAttribute("username") != null) ? (String) req.getAttribute("username") : "")) ? "" : "Username not valid. ";
+		if (req.getAttribute("forename") != null) {
+			System.out.println((String) req.getAttribute("forename"));
+		}
+			
+		//message += (user.setUsername((req.getAttribute("username") != null) ? (String) req.getAttribute("username") : "")) ? "" : "Username not valid. ";
 		message += (user.setForename((req.getAttribute("forename") != null) ? (String) req.getAttribute("forename") : "")) ? "" : "Forename not valid. ";
 		message += (user.setSurname((req.getAttribute("surname") != null) ? (String) req.getAttribute("surname") : "")) ? "" : "Surname not valid. ";
 		message += (user.setPostcode((req.getAttribute("postcode") != null) ? (String) req.getAttribute("postcode") : "")) ? "" : "Postcode not valid. ";
@@ -153,6 +166,8 @@ public class EmployeeServlet extends HttpServlet {
 		message += (user.setMobilePhoneNumber((req.getAttribute("mobilephonenumber") != null) ? (String) req.getAttribute("mobilephonenumber") : "")) ? "" : "Mobilephonenumber not valid. ";
 		message += (user.setEmployeeNumber((req.getAttribute("employeenumber") != null) ? (String) req.getAttribute("employeenumber") : "")) ? "" : "Employeenumber not valid. ";
 
+		System.out.println(" test 4" + user.getForename() + " " + user.getSurname());
+		
 		String email1 = (req.getAttribute("email1") != null) ? (String) req.getAttribute("email1") : "";
 		String email2 = (req.getAttribute("email2") != null) ? (String) req.getAttribute("email2") : "";
 		
@@ -174,5 +189,4 @@ public class EmployeeServlet extends HttpServlet {
 
 		return message;
 	}
-
 }
