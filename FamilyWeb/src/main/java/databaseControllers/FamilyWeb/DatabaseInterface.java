@@ -42,6 +42,5 @@ public interface DatabaseInterface {
 	public ArrayList<User> getAllUsers();			
 	
 	public boolean addNetwork(Network network, int client_id, int familymember_id);
-	public boolean updateNetwork(Network network);
 	public ArrayList<Network> getNetworks(int client_id,int familymember_id);
 }

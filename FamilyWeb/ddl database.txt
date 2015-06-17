@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 jun 2015 om 14:17
+-- Gegenereerd op: 17 jun 2015 om 12:42
 -- Serverversie: 5.6.24
 -- PHP-versie: 5.6.8
 
@@ -13,6 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `familyweb`
 --
+CREATE DATABASE IF NOT EXISTS `familyweb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `familyweb`;
 
 -- --------------------------------------------------------
 
@@ -24,7 +26,12 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `answer_id` int(10) NOT NULL,
   `answer` varchar(255) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `answers`
+--
+
 
 -- --------------------------------------------------------
 
@@ -35,7 +42,12 @@ CREATE TABLE IF NOT EXISTS `answers` (
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int(10) NOT NULL,
   `name` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `categories`
+--
+
 
 -- --------------------------------------------------------
 
@@ -59,7 +71,11 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `filenumber` varchar(50) DEFAULT NULL,
   `dateCreated` date NOT NULL,
   `user_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `clients`
+--
 
 -- --------------------------------------------------------
 
@@ -75,7 +91,11 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `commentary` varchar(4000) DEFAULT NULL,
   `category_id` int(10) NOT NULL,
   `network_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `contacts`
+--
 
 -- --------------------------------------------------------
 
@@ -97,7 +117,11 @@ CREATE TABLE IF NOT EXISTS `familymembers` (
   `nationality` varchar(50) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `client_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `familymembers`
+--
 
 -- --------------------------------------------------------
 
@@ -108,11 +132,15 @@ CREATE TABLE IF NOT EXISTS `familymembers` (
 CREATE TABLE IF NOT EXISTS `networks` (
   `network_id` int(10) NOT NULL,
   `datecreated` date NOT NULL,
-  `commentary` varchar(8000) DEFAULT NULL,
-  `client_id` int(10) NOT NULL,
-  `member_id` int(10) NOT NULL,
+  `commentary` varchar(65000) DEFAULT NULL,
+  `client_id` int(10) DEFAULT NULL,
+  `member_id` int(10) DEFAULT NULL,
   `survey_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `networks`
+--
 
 -- --------------------------------------------------------
 
@@ -136,7 +164,11 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 CREATE TABLE IF NOT EXISTS `questions` (
   `question_id` int(10) NOT NULL,
   `question` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `questions`
+--
 
 -- --------------------------------------------------------
 
@@ -178,7 +210,12 @@ CREATE TABLE IF NOT EXISTS `results` (
   `question_id` int(10) NOT NULL,
   `answer_id` int(10) NOT NULL,
   `contact_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `results`
+--
+
 
 -- --------------------------------------------------------
 
@@ -207,7 +244,6 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 -- Gegevens worden geëxporteerd voor tabel `surveys`
 --
 
-
 -- --------------------------------------------------------
 
 --
@@ -218,7 +254,12 @@ CREATE TABLE IF NOT EXISTS `surveys_questions` (
   `survey_question_id` int(10) NOT NULL,
   `survey_id` int(10) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `surveys_questions`
+--
+
 
 -- --------------------------------------------------------
 
@@ -243,12 +284,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usertype` varchar(35) NOT NULL,
   `email` varchar(255) NOT NULL,
   `isactive` varchar(1) NOT NULL,
-  `employeenumber` varchar(50) NOT NULL
+  `employeenumber` varchar(50) NOT NULL,
+  `wwreset` varchar(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
@@ -263,31 +306,31 @@ ALTER TABLE `answers`
 -- Indexen voor tabel `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`);
+  ADD PRIMARY KEY (`category_id`), ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexen voor tabel `clients`
 --
 ALTER TABLE `clients`
-  ADD PRIMARY KEY (`client_id`), ADD KEY `FKClients968335` (`user_id`);
+  ADD PRIMARY KEY (`client_id`), ADD UNIQUE KEY `client_id` (`client_id`), ADD KEY `FKClients968335` (`user_id`);
 
 --
 -- Indexen voor tabel `contacts`
 --
 ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`contact_id`), ADD KEY `FKContacts769798` (`category_id`), ADD KEY `FKContacts114790` (`network_id`);
+  ADD PRIMARY KEY (`contact_id`), ADD UNIQUE KEY `contact_id` (`contact_id`), ADD KEY `FKContacts769798` (`category_id`), ADD KEY `FKContacts114790` (`network_id`);
 
 --
 -- Indexen voor tabel `familymembers`
 --
 ALTER TABLE `familymembers`
-  ADD PRIMARY KEY (`member_id`), ADD KEY `FKFamilymemb507734` (`client_id`);
+  ADD PRIMARY KEY (`member_id`), ADD UNIQUE KEY `member_id` (`member_id`), ADD KEY `FKFamilymemb507734` (`client_id`);
 
 --
 -- Indexen voor tabel `networks`
 --
 ALTER TABLE `networks`
-  ADD PRIMARY KEY (`network_id`), ADD KEY `FKNetworks173258` (`client_id`), ADD KEY `FKNetworks939190` (`member_id`), ADD KEY `FKNetworks912632` (`survey_id`);
+  ADD PRIMARY KEY (`network_id`), ADD UNIQUE KEY `network_id` (`network_id`), ADD KEY `FKNetworks173258` (`client_id`), ADD KEY `FKNetworks939190` (`member_id`), ADD KEY `FKNetworks912632` (`survey_id`);
 
 --
 -- Indexen voor tabel `notifications`
@@ -329,7 +372,7 @@ ALTER TABLE `shares`
 -- Indexen voor tabel `surveys`
 --
 ALTER TABLE `surveys`
-  ADD PRIMARY KEY (`survey_id`);
+  ADD PRIMARY KEY (`survey_id`), ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexen voor tabel `surveys_questions`
@@ -341,7 +384,7 @@ ALTER TABLE `surveys_questions`
 -- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`);
+  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`), ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -351,32 +394,32 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `answer_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `answer_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT voor een tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT voor een tabel `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT voor een tabel `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT voor een tabel `familymembers`
 --
 ALTER TABLE `familymembers`
-  MODIFY `member_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `member_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT voor een tabel `networks`
 --
 ALTER TABLE `networks`
-  MODIFY `network_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `network_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT voor een tabel `notifications`
 --
@@ -386,7 +429,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT voor een tabel `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT voor een tabel `requests`
 --
@@ -401,7 +444,7 @@ ALTER TABLE `requests_notifications`
 -- AUTO_INCREMENT voor een tabel `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT voor een tabel `shares`
 --
@@ -416,7 +459,7 @@ ALTER TABLE `surveys`
 -- AUTO_INCREMENT voor een tabel `surveys_questions`
 --
 ALTER TABLE `surveys_questions`
-  MODIFY `survey_question_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `survey_question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
@@ -503,8 +546,74 @@ ADD CONSTRAINT `FKSurveys_qu168997` FOREIGN KEY (`question_id`) REFERENCES `ques
 ADD CONSTRAINT `FKSurveys_qu287896` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`);
 
 
+INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES
+(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'Y'),
+(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'Y');
 
-INSERT INTO `users` (`username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`) VALUES('admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1');
-INSERT INTO `users` (`username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`) VALUES('test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2');
 
-INSERT INTO `surveys` (`name`) VALUES('test');
+INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
+(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
+
+INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
+(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
+
+
+INSERT INTO `surveys` (`survey_id`, `name`) VALUES
+(1, 'Standaard vragen');
+
+INSERT INTO `categories` (`category_id`, `name`) VALUES
+(6, 'acquantance'),
+(12, 'bureauhalt'),
+(10, 'careinstitution'),
+(8, 'club'),
+(4, 'colleagues'),
+(7, 'education'),
+(2, 'family'),
+(3, 'friends'),
+(1, 'household'),
+(13, 'justice'),
+(5, 'neighbours'),
+(9, 'religion'),
+(11, 'youthcare');
+
+INSERT INTO `questions` (`question_id`, `question`) VALUES
+(1, 'Wat is de meest gebruikelijke manier om contact te hebben met deze persoon?'),
+(2, 'Hoe vaak heeft u contact met deze persoon?'),
+(3, 'Hoever bevind deze persoon zich bij u vandaan?');
+
+
+
+INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES
+(1, 'Telefonisch', 1),
+(2, 'Social media', 1),
+(3, 'Video chat', 1),
+(4, 'Face-to-Face', 1),
+(5, 'Brievenpost', 1),
+(6, 'E-mail', 1),
+(7, 'Maandelijks of langer', 2),
+(8, 'Een aantal keer per maand', 2),
+(9, 'Wekelijks', 2),
+(10, 'Een aantal keer per week', 2),
+(11, 'Dagelijks', 2),
+(12, '< 5 km', 3),
+(13, '5 tot 10 km', 3),
+(14, '10 tot 50 km', 3),
+(15, '50 tot 200 km', 3),
+(16, '> 200 km', 3);
+
+INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
+
+
+INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES
+(1, '2015-06-17', 'Jan is een stille persoon die moeilijk uit zijn woorden komt.', 1, NULL, 1);
+
+INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES
+(1, 'Kees van Aken', 'Beste vriend & buurjongen', 6, 'Naast de beste vriend van Jan is het ook direct een buur jongen.', 3, 1);
+
+INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES
+(1, 1, 4, 1),
+(2, 2, 10, 1),
+(3, 3, 12, 1);

@@ -46,6 +46,7 @@ public abstract class User {
 	private boolean isActive;
 	private String employeeNumber;
 	private int user_id;
+	private boolean wwreset;
 
 	private ArrayList<Notification> notifications;
 	private ArrayList<Client> myClients;
@@ -92,6 +93,7 @@ public abstract class User {
 		this.employeeNumber = employeeNumber;
 		this.notifications = new ArrayList<Notification>();
 		this.myClients = new ArrayList<Client>();
+		this.setWwreset(true);
 	}
 
 	public DatabaseInterface getDbController() {
@@ -504,5 +506,19 @@ public abstract class User {
 			return false;
 		}
 	}
+	
+		/**
+		 * @return the wwreset
+		 */
+		public boolean isWwreset() {
+			return wwreset;
+		}
+	
+		/**
+		 * @param wwreset the wwreset to set
+		 */
+		public void setWwreset(boolean wwreset) {
+			this.wwreset = wwreset;
+		}
 
 }
