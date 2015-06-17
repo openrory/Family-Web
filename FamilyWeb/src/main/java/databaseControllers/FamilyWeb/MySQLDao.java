@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Answer;
@@ -795,35 +794,52 @@ public class MySQLDao implements DatabaseInterface {
 			ResultSet rSet = pStmt.executeQuery();
 			if(rSet.next())
 				network.setNetwork_id(rSet.getInt("network_id"));
-			rSet.close();
-			//create contacts
-			//TODO
+			rSet.close();			
 			//intitialize categories
 			HashMap<String,Integer> categories = new HashMap<String,Integer>();
-			categories.put("household", 1);
-			categories.put("family", 2);
-			categories.put("friends", 3);
-			categories.put("colleagues", 4);
-			categories.put("neighbours", 5);
-			categories.put("acquaintance", 6);
-			categories.put("education", 7);
-			categories.put("club", 8);
-			categories.put("religion", 9);
-			categories.put("careinstitution", 10);
-			categories.put("youthcare", 11);
-			categories.put("bureauhalt", 12);
-			categories.put("justice", 13);
+				categories.put("household", 1);
+				categories.put("family", 2);
+				categories.put("friends", 3);
+				categories.put("colleagues", 4);
+				categories.put("neighbours", 5);
+				categories.put("acquaintance", 6);
+				categories.put("education", 7);
+				categories.put("club", 8);
+				categories.put("religion", 9);
+				categories.put("careinstitution", 10);
+				categories.put("youthcare", 11);
+				categories.put("bureauhalt", 12);
+				categories.put("justice", 13);
+				//create contacts
 			for(Contact c : network.getContacts()){
 				pStmt = conn.prepareStatement("insert into contacts(`fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) values(?,?,?,?,?,?)");
 				pStmt.setString(1, c.getFullname());
-				pStmt.setString(2, network.getCommentary());
-				pStmt.setInt(3, client_id);
-				pStmt.setInt(4, familymember_id);
-				pStmt.setInt(5, network.getTheSurvey().getSurvey_id());
+				pStmt.setString(2, c.getRole());
+				pStmt.setInt(3, c.getAge());
+				pStmt.setString(4, c.getCommentary());
+				pStmt.setInt(5, categories.get(c.getCategories().get(0)) );
+				pStmt.setInt(6, network.getNetwork_id());
 				pStmt.executeUpdate();
+				
+				//get contact_id for results
+				pStmt = conn.prepareStatement("select contact_id from contacts where network_id=? AND fullname=?");
+				pStmt.setInt(1, network.getNetwork_id());
+				pStmt.setString(2, c.getFullname());
+				rSet = pStmt.executeQuery();				
+				if(rSet.next())
+					c.setContact_id(rSet.getInt("contact_id"));
+				rSet.close();				
+			}			
+			// set results
+			for(Contact c : network.getContacts()){	        
+				for(Result r : c.getMyResults()){
+					pStmt = conn.prepareStatement("insert into results(`question_id`, `answer_id`, `contact_id`) values(?,?,?)");
+					pStmt.setInt(1, r.getTheQuestion().getQuestion_id());
+					pStmt.setInt(2, r.getMyAnswer().getAnswerID());
+					pStmt.setInt(3, c.getContact_id());
+					pStmt.executeUpdate();
+				}				
 			}
-			//get contact_id's
-			//TODO
 		} catch (SQLException e) {
 			e.printStackTrace();
 			b = false;
