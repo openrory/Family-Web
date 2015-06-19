@@ -1,7 +1,7 @@
 function validateForm() {
 
     var isGood = true;
-    var employeeid = document.forms["add_form"]["fileid"].value;
+    var employeeid = document.forms["add_form"]["employeeid"].value;
     var forename = document.forms["add_form"]["forename"].value;
     var surname = document.forms["add_form"]["surname"].value;
     var dateofbirth = document.forms["add_form"]["dateofbirth"].value;
