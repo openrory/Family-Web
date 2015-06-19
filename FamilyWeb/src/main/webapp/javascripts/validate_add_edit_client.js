@@ -1,7 +1,6 @@
 function validateForm() {
 
 var isGood = true;
-
 var fileid = document.forms["add_form"]["fileid"].value;
 var forename = document.forms["add_form"]["forename"].value;
 var surname = document.forms["add_form"]["surname"].value;
@@ -16,35 +15,40 @@ var mobile = document.forms["add_form"]["mobile"].value;
 var email = document.forms["add_form"]["email"].value;
 var email_confirmation = document.forms["add_form"]["email_confirmation"].value;
 
-if (fileid == null || fileid == "") {
+    // Custom REGEX Patterns
+var dateReg = /^\d{2}[./-]\d{2}[./-]\d{4}$/
+var postcodeReg = /^\d{4}[-/ ]\D{2}$/
+var emailReg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
+
+if (fileid == null || fileid == "" || fileid == "/D") {
 	document.getElementById("fileidWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("fileidWarning").className="true";
 }
 
-if (forename == null || forename == "") {
+if (forename == null || forename == "" || forename == "/d") {
 	document.getElementById("forenameWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("forenameWarning").className="true";
 }
 
-if (surname == null || surname == "") {
+if (surname == null || surname == "" || surname == "/d") {
 	document.getElementById("surnameWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("surnameWarning").className="true";
 }
 
-if (dateofbirth == null || dateofbirth == "") {
+if (dateofbirth == null || dateofbirth == "" || dateofbirth.matches(dateReg)) {
 	document.getElementById("dateofbirthWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("dateofbirthWarning").className="true";
 }
 
-if (nationality == null || nationality == "") {
+if (nationality == null || nationality == "" || nationality == "/d") {
 	document.getElementById("nationalityWarning").className="false";
 	isGood = false;
 } else {
@@ -58,14 +62,14 @@ if (street == null || street == "") {
 	document.getElementById("streetWarning").className="true";
 }
 
-if (streetnumber == null || streetnumber == "") {
+if (streetnumber == null || streetnumber == "" || streetnumber == "/D") {
 	document.getElementById("streetnumberWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("streetnumberWarning").className="true";
 }
 
-if (postcode == null || postcode == "") {
+if (postcode == null || postcode == "" || postcode.matches(postcodeReg)) {
 	document.getElementById("postcodeWarning").className="false";
 	isGood = false;
 } else {
@@ -79,28 +83,28 @@ if (city == null || city == "") {
 	document.getElementById("cityWarning").className="true";
 }
 
-if (phonenumber == null || phonenumber == "") {
-	document.getElementById("phonenumberWarning").className="false";
-	isGood = false;
+if (phonenumber == null || phonenumber == "" || phonenumber == "/d" || phonenumber.length <= 15) {
+    document.getElementById("phonenumberWarning").className = "false";
+    isGood = false;
 } else {
-	document.getElementById("phonenumberWarning").className="true";
+    document.getElementById("phonenumberWarning").className = "true";
 }
-//
-if (mobile == null || mobile == "") {
-	document.getElementById("mobileWarning").className="false";
-	isGood = false;
+    //
+if (mobile == null || mobile == "" || mobile == "/d" || mobile.length <= 15) {
+    document.getElementById("mobileWarning").className = "false";
+    isGood = false;
 } else {
-	document.getElementById("mobileWarning").className="true";
+    document.getElementById("mobileWarning").className = "true";
 }
 
-if (email == null || email == "") {
+if (email == null || email == "" || email == email_confirmation || email.contains("@") || email.matches(emailReg)) {
 	document.getElementById("emailWarning").className="false";
 	isGood = false;
 } else {
 	document.getElementById("emailWarning").className="true";
 }
 
-if (email_confirmation == null || email_confirmation == "") {
+if (email_confirmation == null || email_confirmation == "" || email_confirmation == email || email_confirmation.contains("@") || email.matches(emailReg)) {
 	document.getElementById("email_confirmationWarning").className="false";
 	isGood = false;
 } else {
