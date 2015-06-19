@@ -64,37 +64,6 @@ public class EmployeeServlet extends HttpServlet {
 		reqDisp.forward(req, resp);
 	}
 	
-	private void setMessage(String messageType, String message) {
-		req.setAttribute("messageType", messageType);
-		req.setAttribute("message", message);
-	}
-	
-	/**
-	 * Method to summary a client.
-	 * @param clientID the client id from the client to summary.
-	 */
-	private void summary(int userID) {
-		this.user = null;
-		for (User u : this.getUsers()) {
-			if (userID == u.getUser_id()) {
-				this.user = u;
-				break;
-			}
-		}
-		req.setAttribute("employee", user);
-		reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_ADD_EDIT);
-	}
-
-	/**
-	 * Method to get all users depending on the current user type
-	 * @return ArrayList of users
-	 */
-	private ArrayList<User> getUsers() {
-		return (currentUser instanceof Administrator) ? currentUser
-				.getDbController().getAllUsers() : currentUser
-				.getDbController().getAllSocialworkers();
-	}
-	
 	/**
 	 * Method to create new employee for add_socialworker page.
 	 */
@@ -113,7 +82,6 @@ public class EmployeeServlet extends HttpServlet {
 			
 			String mailSubject = "Welkom bij FamilyWeb!"; 
 			String mailMessage = "<div class='text'><p>Beste <span class='bold_text'>" + user.getForename() + "</span>,</p><p>Er is een account aangemaakt op FamilyWeb met uw e-mailadres.</p><p>U kunt nu inloggen op <a href='familyweb.balans.nl'>Familyweb</a> met de volgende gegevens:</p></div><div class='information'><table class='custom_table'><tr class='row'><td class='data'>Gebruikersnaam</td><td class='data'>" + this.user.getUsername() + "</td></tr><tr class='row'><td class='data'>Wachtwoord</td><td class='data'>" + this.user.getPassword() + "</td></tr></table></div><div class='text'><p>Mochten er zich problemen voordoen met het inloggen of met het gebruik van de applicatie dan kunt u contact opnemen met de <a href='mailto:info@familyweb.nl'>administrator.</a></p><p>Wij hopen dat u een fijne ervaring heeft met de applicatie.</p><p>FamilyWeb</p></div>";
-			
 			MailService mailService = new MailService(this.user, mailSubject, mailMessage);
 			message += (mailService.sendMail()) ? message : message + " Mailservice fout de mail is niet verzonden, Raadpleeg de administrator om het wachtwoord te resetten.";
 			
@@ -130,7 +98,7 @@ public class EmployeeServlet extends HttpServlet {
 			reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_ADD_EDIT);
 		}
 	}
-	
+
 	/**
 	 * Method to update user for update_socialworker page.
 	 */
@@ -145,6 +113,18 @@ public class EmployeeServlet extends HttpServlet {
 			message = this.setValidation();
 			
 			if (message.equals("")) {
+				
+				if (req.getParameter("reset_password") != null) {
+					user.setWwreset(true);
+					String password = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
+					user.setPassword(password);
+					
+					String mailSubject = "Welkom bij FamilyWeb!"; 
+					String mailMessage = "<div class='text'><p>Beste <span class='bold_text'>" + user.getForename() + "</span>,</p><p>Er is een wachtwoord reset aangevraagd.</p><p>U kunt nu inloggen op <a href='familyweb.balans.nl'>Familyweb</a> met de volgende gegevens:</p></div><div class='information'><table class='custom_table'><tr class='row'><td class='data'>Gebruikersnaam</td><td class='data'>" + this.user.getUsername() + "</td></tr><tr class='row'><td class='data'>Wachtwoord</td><td class='data'>" + this.user.getPassword() + "</td></tr></table></div><div class='text'><p>Mochten er zich problemen voordoen met het inloggen of met het gebruik van de applicatie dan kunt u contact opnemen met de <a href='mailto:info@familyweb.nl'>administrator.</a></p><p>Wij hopen dat u een fijne ervaring heeft met de applicatie.</p><p>FamilyWeb</p></div>";
+					MailService mailService = new MailService(this.user, mailSubject, mailMessage);
+					message += (mailService.sendMail()) ? message : message + " Mailservice fout de mail is niet verzonden, Raadpleeg de administrator om het wachtwoord te resetten.";
+				}
+				
 				user.updateDB();
 				req.removeAttribute("employee");
 				message = "Employee " + user.getForename() + " " + user.getSurname() + " succesvol bijgewerkt.";
@@ -164,7 +144,6 @@ public class EmployeeServlet extends HttpServlet {
 
 	/**
 	 * Method is used by create or update method, to set the attributes and validate the input.
-	 * @return information string if the string is not empty the validation failed.
 	 */
 	private String setValidation() {
 
@@ -210,5 +189,37 @@ public class EmployeeServlet extends HttpServlet {
 		
 		message += (!message.equals("")) ? "niet correct ingevuld" : "";
 		return message;
+	}
+
+	/**
+	 * Method to summary a client.
+	 * @param clientID the client id from the client to summary.
+	 */
+	private void summary(int userID) {
+		this.user = null;
+		for (User u : this.getUsers()) {
+			if (userID == u.getUser_id()) {
+				this.user = u;
+				break;
+			}
+		}
+		req.setAttribute("employee", user);
+		reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_ADD_EDIT);
+	}
+
+	/**
+	 * Method to get all users depending on the current user type
+	 * @return ArrayList of users
+	 */
+	private ArrayList<User> getUsers() {
+		return (currentUser instanceof Administrator) ? currentUser
+				.getDbController().getAllUsers() : currentUser
+				.getDbController().getAllSocialworkers();
+	}
+	
+	
+	private void setMessage(String messageType, String message) {
+		req.setAttribute("messageType", messageType);
+		req.setAttribute("message", message);
 	}
 }

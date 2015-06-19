@@ -27,6 +27,17 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>PasswordresetServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.PasswordresetServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PasswordresetServlet</servlet-name>
+		<url-pattern>/PasswordresetServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<description>
 		</description>
 		<display-name>ContactServlet</display-name>

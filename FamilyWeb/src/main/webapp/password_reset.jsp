@@ -20,7 +20,7 @@
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 			
-            <form id="password_reset_form" action="/FamilyWeb/PasswordResetServlet.do" method="POST">
+            <form id="password_reset_form" action="/FamilyWeb/PasswordresetServlet.do" method="POST">
                 <fieldset>
                     <legend>Wachtwoord resetten</legend>
                     <p>U logt voor de eerste keer in of u wachtwoord is gereset.</p>

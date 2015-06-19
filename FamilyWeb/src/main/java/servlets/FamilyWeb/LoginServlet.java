@@ -17,41 +17,65 @@ public class LoginServlet extends HttpServlet {
 	private LoginController controller = LoginController.getInstance();
 	private RequestDispatcher reqDisp = null;
 	
+	private final String PAGE_STARTSCREEN_ADMINISTRATOR = "/administrator/startscreen_administrator.jsp";
+	private final String PAGE_STARTSCREEN_SOCIALWORKER = "/socialworker/startscreen_socialworker.jsp";
+	private final String PAGE_PASSWORD_RESET = "/password_reset.jsp";
+	private final String PAGE_LOGIN = "/login.jsp";
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 	
-		//Get username and password from form
-		String username = req.getParameter("username").trim();
-		String password = req.getParameter("password").trim();
-		
-		//check if username/password exists in db
-		if (controller.authentication(username, password)) {
+		if (req.getParameter("username") == null && req.getParameter("username") == null) {
+			req.setAttribute("message", "Gebruikersnaam of wachtwoord niet ingevuld.");
+			req.setAttribute("messageType", "warning");
+			reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+		} else {
 			
-			// get the user account
-			User user = (User) controller.getUser(username);
-			req.getSession().setAttribute("user", user);
+			//Get username and password from form
+			String username = req.getParameter("username").trim();
+			String password = req.getParameter("password").trim();
 			
-			//check if administrator
-			if (controller.isAdministrator(user)) {
+			if (!username.equals("") && !password.equals("")) {
 				
-				// dispatch to admin screen
-				reqDisp = req.getRequestDispatcher("/administrator/startscreen_administrator.jsp");
+				//check if username/password exists in db
+				if (controller.authentication(username, password)) {
+					
+					// get the user account
+					User user = (User) controller.getUser(username);
+					req.getSession().setAttribute("user", user);
+					
+					//check if administrator
+					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {
+						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
+					//check if active && password must reset first
+					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){
+						req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
+						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
+					//check if password must reset first
+					} else if (user.isActive() && user.isWwreset()) {
+						req.setAttribute("message", "Wachtwoord reset aangevraagd, verander het wachtwoord.");
+						req.setAttribute("messageType", "warning");
+						reqDisp = req.getRequestDispatcher(PAGE_PASSWORD_RESET);
+					//not active user
+					} else {
+						req.setAttribute("message", "Je kunt niet inloggen, je account is niet actief.");
+						req.setAttribute("messageType", "warning");
+						reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+					}
+				} 
+				// not valid username/password
+				else {
+					req.setAttribute("message", "Gebruikersnaam of wachtwoord onjuist.");
+					req.setAttribute("messageType", "error");
+					reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+				}
+			// not valid username/password
 			} else {
-				
-				// get all clients from socialworker and dispatch to socialworker screen
-				req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
-				reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
+				req.setAttribute("message", "Gebruikersnaam of wachtwoord niet ingevuld.");
+				req.setAttribute("messageType", "warning");
+				reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
 			}
-			
-		} 
-		// not valid username/password
-		else {
-			//set error message and dispatch to login page
-			req.setAttribute("message", "Gebruikersnaam of wachtwoord onjuist.");
-			req.setAttribute("messageType", "error");
-			reqDisp = req.getRequestDispatcher("/login.jsp");
 		}
-		//dispatch to the next page
 		reqDisp.forward(req, resp);
 	}
 }
