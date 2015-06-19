@@ -47,7 +47,7 @@ public class FamilyInformation extends HttpServlet {
 				}
 			}
 			if(client == null){
-				req.setAttribute("messageType", "succes");
+				req.setAttribute("messageType", "error");
 				req.setAttribute("message", "Kon de Client niet goed inladen.");
 				reqDisp = req.getRequestDispatcher("/socialworker/client_overview.html");
 			}else{
