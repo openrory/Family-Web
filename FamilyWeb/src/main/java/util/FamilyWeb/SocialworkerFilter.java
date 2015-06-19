@@ -17,26 +17,56 @@ import domain.FamilyWeb.User;
  * Servlet Filter implementation class SocialworkerFilter
  */
 public class SocialworkerFilter implements Filter {
+	
+	private final String PAGE_STARTSCREEN_ADMINISTRATOR = "/administrator/startscreen_administrator.jsp";
+	private final String PAGE_PASSWORD_RESET = "/password_reset.jsp";
+	private final String PAGE_LOGIN = "/login.jsp";
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		Object userObject = req.getSession().getAttribute("user");
-
+		
+		// User signed in.
 		if((userObject != null) && (userObject instanceof User)){
+			
 			if(userObject instanceof Socialworker){
-				chain.doFilter(req, response);
+				User currentUser = (Socialworker) userObject;
+				
+				// User is active with valid password.
+				if (currentUser.isActive() && !currentUser.isWwreset()) {
+					chain.doFilter(req, response);
+					
+				// User is active with not valid password
+				} else if (currentUser.isActive() && currentUser.isWwreset()) {
+					req.setAttribute("messageType", "warning");
+					req.setAttribute("message", "Je hebt geen rechten om naar deze pagina te gaan, reset eerst je wachtwoord.");
+					req.getRequestDispatcher(PAGE_PASSWORD_RESET).forward(req, response);
+					
+				// User is not active
+				} else {
+					req.setAttribute("messageType", "warning");
+					req.setAttribute("message", "Je hebt geen rechten om naar deze pagina te gaan, je account is niet actief.");
+					req.getRequestDispatcher(PAGE_LOGIN).forward(req, response);
+				}
+				
+			// User is administrator and not socialworker
 			}else{
-				req.setAttribute("message", "Doesn't have the rights to go there.");
-				req.getRequestDispatcher("/adinistrator/startscreen_administrator.html").forward(req, response);
+				req.setAttribute("messageType", "warning");
+				req.setAttribute("message", "Je hebt geen rechten om naar deze pagina te gaan.");
+				req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR).forward(req, response);
 			}
+			
+		// User not signed in.
 		}else{
-			req.setAttribute("message", "You have to login to go there.");
-			req.getRequestDispatcher("/login.html").forward(req, response);
+			req.setAttribute("messageType", "warning");
+			req.setAttribute("message", "Je moet eerst inloggen om verder te gaan.");
+			req.getRequestDispatcher(PAGE_LOGIN).forward(req, response);
 		}
 	}
-
+	
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */

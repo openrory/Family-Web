@@ -42,7 +42,7 @@
                         toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
                         Het heeft niet alleen vijf eeuwen overleefd
                     </p>
-                   <% if(session.getAttribute("employee") == null){ %>
+                   <% if(request.getAttribute("employee") == null){ %>
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
@@ -50,81 +50,81 @@
 					<span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
                         <label>Personeelnr :</label>
-                            <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" value="${Employee.employeenumber}"/>
+                            <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" value="${employee.employeeNumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
                         <label>Voornaam :</label>
-                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${Employee.forename}" />
+                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${employee.forename}" />
                     </div>
 					<span id="surnameWarning" class="true">Geen achternaam ingevuld</span>
                     <div class="information">
                         <label>Achternaam :</label>
-                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${Employee.surname}"/>
+                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${employee.surname}"/>
                     </div>
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
                         <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-YYYY" value="${Employee.dateofbirth}" />
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-YYYY" value="${employee.dateOfBirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
                         <label>Nationaliteit :</label>
-                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${Employee.nationality}"/>
+                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${employee.nationality}"/>
                     </div>
 					<span id="streetWarning" class="true">Geen straatnaam ingevuld</span>
                     <div class="information">
                         <label>Straat :</label>
-                        <input id="street" name="street" type="text" placeholder="Straat" value="${Employee.street}"/>
+                        <input id="street" name="street" type="text" placeholder="Straat" value="${employee.street}"/>
                     </div>
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label>Huisnummer :</label>
-                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${Employee.streetnumber}" />
+                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${employee.houseNumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
                         <label>Postcode :</label>
-                        <input class="short_input" id="postcode" name="postcode" type="text" placeholder="Postcode" value="${Employee.postcode}"/>
+                        <input class="short_input" id="postcode" name="postcode" type="text" placeholder="Postcode" value="${employee.postcode}"/>
                     </div>
 					<span id="cityWarning" class="true">Geen woonplaats ingevuld</span>
                     <div class="information">
                         <label>Woonplaats :</label>
-                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${Employee.city}"/>
+                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${employee.city}"/>
                     </div>
 					<span id="phonenumberWarning" class="true">Geen telefoonnummer ingevuld ingevuld</span>
                     <div class="information">
                         <label>Telefoonnummer vast :</label>
-                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${Employee.phonenumber}"/>
+                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${employee.telephoneNumber}"/>
                     </div>
 					<span id="mobileWarning" class="true">Geen mobiel nummer ingevuld</span>
 					<div class="information">
                         <label>Mobiel nummer :</label>
-                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${Employee.mobile}"/>
+                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${employee.mobilePhoneNumber}"/>
                     </div>
 					<span id="emailWarning" class="true">Geen email ingevuld</span>
                     <div class="information">
                         <label>E-mail :</label>
-                        <input id="email" name="email" type="email" placeholder="E-mail" value="${Employee.email}"/>
+                        <input id="email" name="email" type="email" placeholder="E-mail" value="${employee.email}"/>
                     </div>
 					<span id="email_confirmationWarning" class="true">Geen 2e email ingevuld</span>
 					<div class="information">
                         <label>E-mail bevestiging :</label>
-                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${Employee.email}"/>
+                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${employee.email}"/>
                     </div>
                     <div class="information">
                     	<label>Gebruikersnaam</label>
-                    	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="${Employee.username}">
+                    	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="${employee.username}">
                     </div>
                     <div class="information">
                     	<label>Is actief?</label>
                     	<input id="is_active" name="is_active" type="checkbox" >
                     </div>
+                    <% if(request.getAttribute("employee") == null){ %>
                      <div class="information">
                     	<label>Is administrator?</label>
                     	<input id="is_administrator" name="is_administrator" type="checkbox" >
                     </div>
-                   <% if(session.getAttribute("Employee") == null){ %>
                    <div id="submit_button_container">
 					<input class="submit_button" name="op" type="submit" value="Aanmaken">
 					</div>
