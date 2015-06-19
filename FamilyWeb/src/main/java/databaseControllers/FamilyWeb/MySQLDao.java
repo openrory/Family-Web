@@ -958,7 +958,6 @@ public class MySQLDao implements DatabaseInterface {
 			conn = this.getConnection();
 			PreparedStatement pStmt = conn
 					.prepareStatement("select * from users");
-			pStmt.setString(1, username);
 			ResultSet rSet = pStmt.executeQuery();
 			while(rSet.next()) {
 				if (rSet.getString("usertype").equals("Administrator")) {
