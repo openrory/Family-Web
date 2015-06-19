@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.FamilyWeb.Answer;
 import domain.FamilyWeb.Contact;
 import domain.FamilyWeb.Network;
+import domain.FamilyWeb.Question;
+import domain.FamilyWeb.Result;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
@@ -39,9 +42,21 @@ public class SurveyServlet extends HttpServlet {
 			Network newNetwork = new Network(new Date(new java.util.Date().getTime()), req.getParameter("general_comment"));
 			Survey survey = (Survey) req.getSession().getAttribute("survey");
 			ArrayList<Contact> contacts = (ArrayList<Contact>) req.getSession().getAttribute("contacts");
-			newNetwork.setContacts(contacts);
 			newNetwork.setTheSurvey(survey);
-			
+			for(Contact c : contacts){
+				ArrayList<Result> results = new ArrayList<Result>();
+				for(Question question : survey.getQuestions()){
+					int answerID = Integer.parseInt(req.getParameter(question.getQuestion_id()+":"+c.getContact_id()));
+					Answer answer = null;
+					for(Answer a : question.getTheAnswers()){
+						if(a.getAnswer_id()==answerID)
+							answer = a;
+					}
+					results.add(new Result(question,answer));
+				}
+				c.setMyResults(results);
+			}
+			newNetwork.setContacts(contacts);
 			user.getDbController().addNetwork(newNetwork, client_id, family_id);
 		}else{
 			req.setAttribute("message", "Er is iets onverwachts gelopen, probeer opnieuw in te loggen.");

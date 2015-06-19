@@ -125,6 +125,7 @@ public class MySQLDao implements DatabaseInterface {
 									.equals("Y"),
 							rSet.getString("employeeNumber"),
 							new ArrayList<User>());
+					user.setUser_id(rSet.getInt("user_id"));
 				} else {
 					user = new Socialworker(rSet.getString("username"),
 							rSet.getString("password"),
@@ -141,6 +142,7 @@ public class MySQLDao implements DatabaseInterface {
 							rSet.getString("email"), rSet.getString("isActive")
 									.equals("Y"),
 							rSet.getString("employeeNumber"));
+					user.setUser_id(rSet.getInt("user_id"));
 				}
 				user.setDbController(this);
 				user.setWwreset(rSet.getString("wwreset")
@@ -673,7 +675,7 @@ public class MySQLDao implements DatabaseInterface {
 							.prepareStatement("update answers set answer=?, question_id=? where answer_id=?");
 					pStmt.setString(1, answer.getAnswer());
 					pStmt.setInt(2, question.getQuestion_id());
-					pStmt.setInt(3, answer.getAnswerID());
+					pStmt.setInt(3, answer.getAnswer_id());
 					pStmt.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -764,7 +766,7 @@ public class MySQLDao implements DatabaseInterface {
 					.prepareStatement("select name from surveys");
 			ResultSet rSet = pStmt.executeQuery();
 			while (rSet.next()) {
-				names.add(rSet.getString("names"));
+				names.add(rSet.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -841,7 +843,7 @@ public class MySQLDao implements DatabaseInterface {
 				for(Result r : c.getMyResults()){
 					pStmt = conn.prepareStatement("insert into results(`question_id`, `answer_id`, `contact_id`) values(?,?,?)");
 					pStmt.setInt(1, r.getTheQuestion().getQuestion_id());
-					pStmt.setInt(2, r.getMyAnswer().getAnswerID());
+					pStmt.setInt(2, r.getMyAnswer().getAnswer_id());
 					pStmt.setInt(3, c.getContact_id());
 					pStmt.executeUpdate();
 				}				
@@ -911,7 +913,7 @@ public class MySQLDao implements DatabaseInterface {
 						if(rSet.getInt("question_id")==q.getQuestion_id())
 							question = q;							
 					for(Answer a : question.getTheAnswers())
-						if(rSet.getInt("answer_id")==a.getAnswerID())
+						if(rSet.getInt("answer_id")==a.getAnswer_id())
 							answer = a;	
 					results.add(new Result(question,answer));				
 				}

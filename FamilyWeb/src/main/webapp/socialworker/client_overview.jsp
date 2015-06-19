@@ -33,10 +33,10 @@
             <% if(!(request.getAttribute("message") == null)){%>
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
-			<p>Hier moet een tabel komen met het overzicht van de cliënten // Hieronder directe link naar zogenaamde familie</p>
+			
                	<form id="familyform" action="/FamilyWeb/FamilyInformation.do" method="post">
 <!--                	Hier wordt de id van de familie neergezet voor de servlets -->
-               	<input id="familyID" type="text" value="">
+               	<input id="familyID" name="familyID" type="hidden" value="">
                	</form>
 <!--                	Hieronder moet de tabel van Michiel komen te staan -->
                       <Family-table show="contacts" id="table"></Family-table>
@@ -53,50 +53,7 @@
         document.addEventListener('polymer-ready', function () {
             var obj = document.querySelector('#table');
             console.log("Polymer Ready");
-            var data = [
-                         {
-                             "forename": "Jan",
-                             "surname": "De Man",
-                             "dateOfBirth": "09-08-1990",
-                             "postcode": "1219ZE",
-                             "street": "Lunar Street",
-                             "houseNumber": "5",
-                             "city" : "New York",
-                             "nationality" : "NL",
-                             "telephoneNumber" : "03566778800",
-                             "mobilePhoneNumber" : "0657722020",
-                             "email" : "Jan.DeMan@gmail.com",
-                             "fileNumber" : "1"
-                         },
-                                                  {
-                                                      "forename": "John",
-                                                      "surname": "De Gooijer",
-                                                      "dateOfBirth": "09-08-1990",
-                                                      "postcode": "1219ZE",
-                                                      "street": "Lunar Street",
-                                                      "houseNumber": "5",
-                                                      "city": "New York",
-                                                      "nationality": "NL",
-                                                      "telephoneNumber": "03566774800",
-                                                      "mobilePhoneNumber": "0657722020",
-                                                      "email": "John.DeGooijer@gmail.com",
-                                                      "fileNumber": "2"
-                                                  },
-                                                                           {
-                                                                               "forename": "Joery",
-                                                                               "surname": "?",
-                                                                               "dateOfBirth": "09-08-1990",
-                                                                               "postcode": "1219ZE",
-                                                                               "street": "Lunar Street",
-                                                                               "houseNumber": "5",
-                                                                               "city": "New York",
-                                                                               "nationality": "NL",
-                                                                               "telephoneNumber": "03566778800",
-                                                                               "mobilePhoneNumber": "0657722020",
-                                                                               "email": "Joery.DeMan@gmail.com",
-                                                                               "fileNumber": "3"
-                                                                           }
-            ]
+            var data = ${clientsJSON};
             console.log("JSON OBJECT before table : " + obj);
             obj.loadData(data);
         });

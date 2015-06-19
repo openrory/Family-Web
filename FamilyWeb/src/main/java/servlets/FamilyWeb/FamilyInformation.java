@@ -31,14 +31,11 @@ public class FamilyInformation extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		user = (User) req.getAttribute("user");
+		user = (User) req.getSession().getAttribute("user");
 		RequestDispatcher reqDisp = null;		
 		if(user != null){
-			int client_id = Integer.parseInt(req.getParameter("familyID"));
-			Object attribute = req.getSession().getAttribute("clients");
-			ArrayList<Client> clients = null;
-			if(attribute instanceof ArrayList<?>)
-				clients = ((ArrayList<Client>) attribute);
+			int client_id = Integer.parseInt((req.getParameter("familyID").trim()));
+			ArrayList<Client> clients = (ArrayList<Client>) req.getSession().getAttribute("clients");			
 			Client client = null;
 			if(clients != null && !clients.isEmpty()){
 				for(Client c : clients){
@@ -49,17 +46,17 @@ public class FamilyInformation extends HttpServlet {
 			if(client == null){
 				req.setAttribute("messageType", "error");
 				req.setAttribute("message", "Kon de Client niet goed inladen.");
-				reqDisp = req.getRequestDispatcher("/socialworker/client_overview.html");
+				reqDisp = req.getRequestDispatcher("/socialworker/client_overview.jsp");
 			}else{
 				ArrayList<String> surveys = user.getDbController().getSurveyNames();
 				if(surveys == null || surveys.isEmpty()){
 					req.setAttribute("message", "Kon geen vragenlijsten vinden.");
 					req.setAttribute("messageType", "error");
-					reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.html");
+					reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 				}else{
 					req.getSession().setAttribute("client", client);
 					req.getSession().setAttribute("surveys", surveys);
-					reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.html");
+					reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 				}
 			}
 		}else{

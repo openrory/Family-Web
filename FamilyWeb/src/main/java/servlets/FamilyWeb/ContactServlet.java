@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.FamilyWeb.Answer;
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Contact;
+import domain.FamilyWeb.Question;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
@@ -26,56 +28,63 @@ public class ContactServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {}
+			HttpServletResponse response) throws ServletException, IOException {
+	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		user = (User) req.getAttribute("user");
+		user = (User) req.getSession().getAttribute("user");
 		RequestDispatcher reqDisp = null;
 		boolean b = false;
 		ArrayList<Contact> contacts = null;
-		if(user != null){
+		if (user != null) {
 			b = true;
-		String[] contactgroups = { "household", "family", "friends",
-				"colleagues", "neighbours", "acquaintance", "education",
-				"club", "religion", "careinstitution", "youthcare",
-				"bureauhalt", "justice" };
-		contacts = new ArrayList<Contact>();
-		for (String group : contactgroups) {
-			int contactsInGroup = Integer.parseInt(req.getParameter(
-					"counter" + group).trim());
-			for (int i = 1; i <= contactsInGroup; i++) {
-				String validate = req.getParameter(group + "validate" + i)
-						.trim();
-				if (validate.equals("true")) {
-					String name = req.getParameter(group + "name" + i).trim();
-					String commentary = "";
-					String role = req.getParameter(group + "role" + i).trim();
-					String ageS = req.getParameter(group + "age" + i).trim();
-					int age = 0;
-					try {
-						age = Integer.parseInt(ageS);
-					} catch (NumberFormatException e) {	}
-					if (checkContact(name, role, age))
-						contacts.add(new Contact(name, commentary, role, age,
-								group));
-					else
-						b = false;
+			String[] contactgroups = { "household", "family", "friends",
+					"colleagues", "neighbours", "acquaintance", "education",
+					"club", "religion", "careinstitution", "youthcare",
+					"bureauhalt", "justice" };
+			contacts = new ArrayList<Contact>();
+			for (String group : contactgroups) {
+				int contactsInGroup = Integer.parseInt(req.getParameter(
+						"counter" + group).trim());
+				for (int i = 1; i <= contactsInGroup; i++) {
+					String validate = req.getParameter(group + "validate" + i)
+							.trim();
+					if (validate.equals("true")) {
+						String name = req.getParameter(group + "name" + i)
+								.trim();
+						String commentary = "";
+						String role = req.getParameter(group + "role" + i)
+								.trim();
+						String ageS = req.getParameter(group + "age" + i)
+								.trim();
+						int age = 0;
+						try {
+							age = Integer.parseInt(ageS);
+						} catch (NumberFormatException e) {
+						}
+						if (checkContact(name, role, age))
+							contacts.add(new Contact(name, commentary, role,
+									age, group));
+						else
+							b = false;
+					}
 				}
 			}
-		}		
-		}if(b) {
+		}
+		if (b) {
 			String interviewee = req.getParameter("interviewee");
 			String[] parts = interviewee.split(":");
 			String nameInterviewee = parts[0];
 			int IDInterviewee = Integer.parseInt(parts[1]);
 			Client client = (Client) req.getSession().getAttribute("client");
-			if(client.getClient_id() == IDInterviewee && client.getForename().equals(nameInterviewee)){
+			if (client.getClient_id() == IDInterviewee
+					&& client.getForename().equals(nameInterviewee)) {
 				req.getSession().setAttribute("intervieweeC", IDInterviewee);
 				req.getSession().setAttribute("intervieweeF", 0);
-			}else{						
+			} else {
 				req.getSession().setAttribute("intervieweeF", IDInterviewee);
-				req.getSession().setAttribute("intervieweeC", 0);				
+				req.getSession().setAttribute("intervieweeC", 0);
 			}
 			String surveyName = req.getParameter("survey");
 			Survey survey = user.getDbController().getSurvey(surveyName);
@@ -85,27 +94,29 @@ public class ContactServlet extends HttpServlet {
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
 			} else if (b) {
-				req.getSession().setAttribute("survey", survey);
+				req.getSession().setAttribute("survey", survey);				
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/new_network_questions.jsp");
 			}
 			req.getSession().setAttribute("contacts", contacts);
-		}else{
-			req.setAttribute("message", "Gegevens kloppen niet van één of meerdere contacten.");
+		} else {
+			req.setAttribute("message",
+					"Gegevens kloppen niet van één of meerdere contacten.");
 			req.setAttribute("messageType", "warning");
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
-		
-		}			
+
+		}
 		reqDisp.forward(req, resp);
 	}
-	private boolean checkContact(String name, String role, int age){
+
+	private boolean checkContact(String name, String role, int age) {
 		boolean check = true;
 		check &= (name != null);
 		check &= (!name.equals(""));
 		check &= (role != null);
 		check &= (!role.equals(""));
-		check &= (age <= 0);		
+		check &= !(age <= 0);
 		return check;
 	}
 }

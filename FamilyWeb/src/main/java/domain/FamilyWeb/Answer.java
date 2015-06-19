@@ -48,14 +48,14 @@ public class Answer {
 	/**
 	 * @return the answerWeight
 	 */
-	public int getAnswerID() {
+	public int getAnswer_id() {
 		return answer_id;
 	}
 
 	/**
 	 * @param answerWeight the answerWeight to set
 	 */
-	public void setAnswerID(int answerID) {
+	public void setAnswer_id(int answerID) {
 		this.answer_id = answerID;
 	}
 
@@ -65,6 +65,6 @@ public class Answer {
 	@Override
 	public String toString() {
 		return "Answer [Answer_id = "
-				+ getAnswerID() + ", Answer = " + getAnswer() + "]";
+				+ getAnswer_id() + ", Answer = " + getAnswer() + "]";
 	}
 }

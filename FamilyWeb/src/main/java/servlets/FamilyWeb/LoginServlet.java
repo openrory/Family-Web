@@ -1,7 +1,7 @@
 package servlets.FamilyWeb;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.FamilyWeb.User;
 import servletControllers.FamilyWeb.LoginController;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import domain.FamilyWeb.Client;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
@@ -78,4 +83,24 @@ public class LoginServlet extends HttpServlet {
 		}
 		reqDisp.forward(req, resp);
 	}
+	private JSONArray createJSON(ArrayList<Client> clients) throws JSONException {
+				JSONArray returns = new JSONArray();
+				for(Client c : clients){			
+					JSONObject clientJSON = new JSONObject();
+					clientJSON.put("forename", c.getForename());
+					clientJSON.put("surname", c.getSurname());
+					clientJSON.put("dateOfBirth", c.getDateOfBirth());
+					clientJSON.put("postcode", c.getPostcode());
+					clientJSON.put("street", c.getStreet());
+					clientJSON.put("houseNumber", c.getHouseNumber());
+					clientJSON.put("city", c.getCity());
+					clientJSON.put("nationality", c.getNationality());
+					clientJSON.put("telephoneNumber", c.getTelephoneNumber());
+					clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
+					clientJSON.put("email", c.getEmail());
+					clientJSON.put("fileNumber", c.getClient_id());            
+					returns.put(clientJSON);
+				}		
+				return returns;
+			}
 }

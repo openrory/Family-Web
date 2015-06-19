@@ -68,89 +68,89 @@
 						<label>Selecteer de ondervraagde:</label>
 						<!--                                 Nog een foreach loop in maken waarin de familymembers uit de session worden gehaald en in een select worden gestopt -->
 						<select id="interviewee" name="interviewee">
-							<option class="select_option" value="${client.forname}:${client.id}">${client.forname} ${client.surname}</option>
+							<option class="select_option" value="${client.forename}:${client.client_id}">${client.forename} ${client.surname}</option>
 							<c:forEach items="${client.myFamilymembers}" var="familymember">
-								<option class="select_option" value="${familymember.member_id}">${familymember.forename} ${familymember.surname}</option>
+								<option class="select_option" value="${familymember.forename}:${familymember.member_id}">${familymember.forename} ${familymember.surname}</option>
 							</c:forEach>
 						</select>
 					</div>
 				</div>
 				<!-- elke groep kan ook via een jsp functie worden aangemaakt zolang alle groepen al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<div id="household" class="group">
-					<input id="counterhousehold" type="hidden" value="0" />
+					<input id="counterhousehold"  name="counterhousehold" type="hidden" value="0" />
 					<h3>Gezin</h3>
 					<core-icon-button class="add" onclick="addInput('household')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="family" class="group">
-					<input id="counterfamily" type="hidden" value="0" />
+					<input id="counterfamily" name="counterfamily" type="hidden" value="0" />
 					<h3>Familie</h3>
 					<core-icon-button class="add" onclick="addInput('family')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="friends" class="group">
-					<input id="counterfriends" type="hidden" value="0" />
+					<input id="counterfriends" name="counterfriends" type="hidden" value="0" />
 					<h3>Vrienden</h3>
 					<core-icon-button class="add" onclick="addInput('friends')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="colleagues" class="group">
-					<input id="countercolleagues" type="hidden" value="0" />
+					<input id="countercolleagues" name="countercolleagues" type="hidden" value="0" />
 					<h3>Collega's</h3>
 					<core-icon-button class="add" onclick="addInput('colleagues')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="neighbours" class="group">
-					<input id="counterneighbours" type="hidden" value="0" />
+					<input id="counterneighbours" name="counterneighbours" type="hidden" value="0" />
 					<h3>Buren</h3>
 					<core-icon-button class="add" onclick="addInput('neighbours')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="acquaintance" class="group">
-					<input id="counteracquaintance" type="hidden"
+					<input id="counteracquaintance" name="counteracquaintance" type="hidden"
 						value="0" />
 					<h3>Kennissen</h3>
 					<core-icon-button class="add" onclick="addInput('acquaintance')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="education" class="group">
-					<input id="countereducation" type="hidden" value="0" />
+					<input id="countereducation" name="counterreducation" type="hidden" value="0" />
 					<h3>Onderwijs</h3>
 					<core-icon-button class="add" onclick="addInput('education')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="club" class="group">
-					<input id="counterclub" type="hidden" value="0" />
+					<input id="counterclub" name="counterclub" type="hidden" value="0" />
 					<h3>Verenigingen</h3>
 					<core-icon-button class="add" onclick="addInput('club')" icon="add"></core-icon-button>
 				</div>
 				<div id="religion" class="group">
-					<input id="counterreligion" type="hidden" value="0" />
+					<input id="counterreligion" name="counterreligion" type="hidden" value="0" />
 					<h3>Religie</h3>
 					<core-icon-button class="add" onclick="addInput('religion')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="careinstitution" class="group">
-					<input id="countercareinstitution" type="hidden"
+					<input id="countercareinstitution" name="countercareinstitution" type="hidden"
 						value="0" />
 					<h3>Zorginstellingen</h3>
 					<core-icon-button class="add" onclick="addInput('careinstitution')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="youthcare" class="group">
-					<input id="counteryouthcare" type="hidden" value="0" />
+					<input id="counteryouthcare" name="counteryouthcare" type="hidden" value="0" />
 					<h3>Jeugdzorg</h3>
 					<core-icon-button class="add" onclick="addInput('youthcare')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="bureauhalt" class="group">
-					<input id="counterbureauhalt" type="hidden" value="0" />
+					<input id="counterbureauhalt" name="counterbureauhalt" type="hidden" value="0" />
 					<h3>Bureau HALT</h3>
 					<core-icon-button class="add" onclick="addInput('bureauhalt')"
 						icon="add"></core-icon-button>
 				</div>
 				<div id="justice" class="group">
-					<input id="counterjustice" type="hidden" value="0" />
+					<input id="counterjustice" name="counterjustice" type="hidden" value="0" />
 					<h3>Justitie</h3>
 					<core-icon-button class="add" onclick="addInput('justice')"
 						icon="add"></core-icon-button>
