@@ -56,9 +56,9 @@
 		<%@ page import="domain.FamilyWeb.Contact" %>
 		<%@ page import="domain.FamilyWeb.Question" %>
 		<%@ page import="domain.FamilyWeb.Answer" %>
-		<% if(!(session.getAttribute("message") == null)){%>
-		<message-window-error message="${message}"></message-window-error>
-		<% } %>
+        <% if(!(request.getAttribute("message") == null)){%>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
+        <% } %>
 		<div id="form_container">
 			<form id="group_form" onsubmit="hoi" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->

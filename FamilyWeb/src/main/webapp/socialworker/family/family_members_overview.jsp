@@ -49,9 +49,9 @@
 	</div>
 	</core-toolbar>
 	<div class="content" fit layout vertical>
-		<% if(!(session.getAttribute("message") == null)){%>
-		<message-window-error message="${message}"></message-window-error>
-		<% } %>
+        <% if(!(request.getAttribute("message") == null)){%>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
+        <% } %>
 		<div id="family_members_container">
 			<form id="group_form" action="/FamilyWeb/FamilyMembersServlet.do"
 				method="post">

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Overzicht verzoeken</title>
@@ -29,7 +29,6 @@
             </core-toolbar>
             <div class="content" fit layout vertical>
 			<p>Hier moet een tabel komen met het overzicht verzoeken</p>
-                <a href="family/family_members_overview.html">hoihoi</a>
             </div>
         </core-header-panel>
     </core-drawer-panel>

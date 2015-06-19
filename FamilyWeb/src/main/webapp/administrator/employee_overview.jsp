@@ -29,9 +29,9 @@
                 <options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>
-            	<% if(!(request.getAttribute("message") == null)){%>
-		<message-window-success message="${message}"></message-window-success>
-		<% } %>
+        	<% if(!(request.getAttribute("message") == null)){%>
+        	<message-window-${messageType} message="${message}"></message-window-${messageType}>
+        	<% } %>
                 <p>Hier moet een tabel komen met het overzicht van de zorgprofessionals</p>
                 <div id="form_container">
 								<div id="search_container">

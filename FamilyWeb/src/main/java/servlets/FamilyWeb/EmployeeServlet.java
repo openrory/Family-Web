@@ -30,8 +30,6 @@ public class EmployeeServlet extends HttpServlet {
 		String message = "";
 		String option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
 		
-		System.out.println("dit is option: " + option);
-		
 		// Get current user
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
@@ -93,20 +91,10 @@ public class EmployeeServlet extends HttpServlet {
 		
 		// Give user object acces to the databaseinterface.
 		user.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
-
 		if (this.setValidation().equals("")) {
-			
 			user.addDB();
-			
 			String mailSubject = "Welkom bij FamilyWeb!"; 
-			String mailMessage = "Dank voor het aanmaken van een account bij FamilyWeb. \n" +
-			"Je kunt nu inloggen met de onderstaande inloggegevens. n\" +"
-			+ "Gebruikersnaam: " + this.user.getUsername() + "\n" +
-			"Wachtwoord: " + this.user.getPassword() + "\n\n" +
-			"Bij het eerste keer inloggen moet u het wachtwoord aanpassen.\n\n" +
-			"**Automatische mail, reageren op deze mail kan niet.**\n\n" +
-			"FamilyWeb";
-			
+			String mailMessage = "<div class='text'><p>Beste <span class='bold_text'>Wouter</span>,</p><p>Er is een account aangemaakt op FamilyWeb met uw e-mailadres.</p><p>U kunt nu inloggen op <a href='familyweb.balans.nl'>Familyweb</a> met de volgende gegevens:</p></div><div class='information'><table class='custom_table'><tr class='row'><td class='data'>Gebruikersnaam</td><td class='data'>" + this.user.getUsername() + "</td></tr><tr class='row'><td class='data'>Wachtwoord</td><td class='data'>" + this.user.getPassword() + "</td></tr></table></div><div class='text'><p>Mochten er zich problemen voordoen met het inloggen of met het gebruik van de applicatie dan kunt u contact opnemen met de <a href='mailto:info@familyweb.nl'>administrator.</a></p><p>Wij hopen dat u een fijne ervaring heeft met de applicatie.</p><p>FamilyWeb</p></div>";
 			MailService mailService = new MailService(this.user, mailSubject, mailMessage);
 			message += (mailService.sendMail()) ? "" : "Mailservice error";
 			

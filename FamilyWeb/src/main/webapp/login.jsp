@@ -8,7 +8,7 @@
     <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/FamilyWeb/elements.html">
     <link rel="stylesheet" href="/FamilyWeb/styles/login.css">
-
+	<title>Inloggen</title>
 </head>
 <body fullbleed layout vertical>
     <core-header-panel flex>
@@ -16,8 +16,8 @@
             <div id="title">Inloggen</div>
         </core-toolbar>
         <div class="content">
-        <% if(!(session.getAttribute("message") == null)){%>
-        <message-window-error message="${message}"></message-window-error>
+        <% if(!(request.getAttribute("message") == null)){%>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 			
             <form id="login_form" action="/FamilyWeb/LoginServlet.do" method="POST">

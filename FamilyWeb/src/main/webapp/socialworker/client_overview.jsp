@@ -30,8 +30,11 @@
 			<options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>
+            <% if(!(request.getAttribute("message") == null)){%>
+        	<message-window-${messageType} message="${message}"></message-window-${messageType}>
+        	<% } %>
 			<p>Hier moet een tabel komen met het overzicht van de cliënten // Hieronder directe link naar zogenaamde familie</p>
-               	<form id="familyform" action="FamilyInformation.do" method="post">
+               	<form id="familyform" action="/FamilyWeb/FamilyInformation.do" method="post">
 <!--                	Hier wordt de id van de familie neergezet voor de servlets -->
                	<input id="familyID" type="text" value="">
                	</form>
