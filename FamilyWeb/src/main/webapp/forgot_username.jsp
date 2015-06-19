@@ -8,7 +8,7 @@
     <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/FamilyWeb/elements.html">
     <link rel="stylesheet" href="/FamilyWeb/styles/forgot_username.css">
-
+	<title>Gebruikersnaam opvragen</title>
 </head>
 <body fullbleed layout vertical>
     <core-header-panel flex>
@@ -29,7 +29,7 @@
 					<div id="retrieve_button_container">
                         <input class="submit_button" type="submit" value="Opvragen">
 					</div>
-                    <p>Als u op de knop "Oprvragen" drukt wordt er een mail naar u gestuurd met uw bestaande gebruikersnaam</p>
+                    <p>Als u op de knop "Opvragen" drukt wordt er een mail naar u gestuurd met uw bestaande gebruikersnaam</p>
                 </fieldset>
             </form>
         </div>

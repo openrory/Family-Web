@@ -80,12 +80,12 @@
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label>Huisnummer :</label>
-                        <input id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${Employee.streetnumber}" />
+                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${Employee.streetnumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
                         <label>Postcode :</label>
-                        <input id="postcode" name="postcode" type="text" placeholder="Postcode" value="${Employee.postcode}"/>
+                        <input class="short_input" id="postcode" name="postcode" type="text" placeholder="Postcode" value="${Employee.postcode}"/>
                     </div>
 					<span id="cityWarning" class="true">Geen woonplaats ingevuld</span>
                     <div class="information">
@@ -114,7 +114,7 @@
                     </div>
                     <div class="information">
                     	<label>Gebruikersnaam</label>
-                    	<input id="username" name="username" type="text" >
+                    	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="${Employee.username}">
                     </div>
                     <div class="information">
                     	<label>Is actief?</label>
@@ -124,13 +124,19 @@
                     	<label>Is administrator?</label>
                     	<input id="is_administrator" name="is_administrator" type="checkbox" >
                     </div>
-                    <paper-submit-button-decorator id="button">
                    <% if(session.getAttribute("Employee") == null){ %>
-                    <button name="op" value="Aanmaken" type="submit">Aanmaken</button> Aanmaken
+                   <div id="submit_button_container">
+					<input class="submit_button" name="op" type="submit" value="Aanmaken">
+					</div>
                    <% } else{ %>
-                    <button name="op" value="Opslaan" type="submit">Opslaan</button> Opslaan
+                    <div class="information">
+                    	<label>Wachtwoord resetten?</label>
+                    	<input id="reset_password" name="reset_password" type="checkbox" >
+                    </div>
+                    <div id="submit_button_container">
+                    <input class="submit_button" name="op" type="submit" value="Opslaan">
+                    </div>
                    <% }%>
-                    </paper-submit-button-decorator>
                 </form>
 				</paper-shadow>
             </div>
