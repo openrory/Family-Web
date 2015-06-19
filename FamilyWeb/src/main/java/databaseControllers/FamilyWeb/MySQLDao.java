@@ -977,6 +977,7 @@ public class MySQLDao implements DatabaseInterface {
 									.equals("Y"),
 							rSet.getString("employeeNumber"),
 							new ArrayList<User>());
+					user.setUser_id(rSet.getInt("user_id"));
 				} else {
 					user = new Socialworker(rSet.getString("username"),
 							rSet.getString("password"),
@@ -993,6 +994,7 @@ public class MySQLDao implements DatabaseInterface {
 							rSet.getString("email"), rSet.getString("isActive")
 									.equals("Y"),
 							rSet.getString("employeeNumber"));
+					user.setUser_id(rSet.getInt("user_id"));
 				}
 				user.setDbController(this);
 				user.setWwreset(rSet.getString("wwreset")

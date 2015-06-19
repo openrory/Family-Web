@@ -125,17 +125,19 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setUsername(String input) {
-
-		String username = input.trim();
-		this.username = username;
-		return true; /**
-		if (username.matches(USERNAME_PATTERN)
-				&& this.dbController.getUser(username) == null) {
+		if (!input.trim().equals("")) {
+			String username = input.trim();
 			this.username = username;
-			return true;
+			if (username.matches(USERNAME_PATTERN)
+					&& this.dbController.getUser(username) == null) {
+				this.username = username;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
-		} **/
+		}
 	}
 
 	/**
@@ -166,10 +168,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setForename(String input) {
-		String forename = input.trim();
-		if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
-			this.forename = forename;
-			return true;
+		if (!input.trim().equals("")) {
+			String forename = input.trim();
+			if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
+				this.forename = forename;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -188,10 +194,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setSurname(String input) {
-		String surname = input.trim();
-		if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
-			this.surname = surname;
-			return true;
+		if (!input.trim().equals("")) {
+			String surname = input.trim();
+			if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
+				this.surname = surname;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -217,10 +227,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setPostcode(String input) {
-		String postcode = input.trim();
-		if (postcode.matches(NL_POSTCODE_PATTERN)) {
-			this.postcode = postcode;
-			return true;
+		if (!input.trim().equals("")) {
+			String postcode = input.trim();
+			if (postcode.matches(NL_POSTCODE_PATTERN)) {
+				this.postcode = postcode;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -239,10 +253,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setStreet(String input) {
-		String street = input.trim();
-		if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
-			this.street = street;
-			return true;
+		if (!input.trim().equals("")) {
+			String street = input.trim();
+			if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
+				this.street = street;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -261,11 +279,15 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setHouseNumber(String input) {
-		String houseNumber = input.trim();
-		if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
-				&& houseNumber.length() <= 10) {
-			this.houseNumber = houseNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String houseNumber = input.trim();
+			if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
+					&& houseNumber.length() <= 10) {
+				this.houseNumber = houseNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -284,10 +306,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setCity(String input) {
-		String city = input.trim();
-		if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
-			this.city = city;
-			return true;
+		if (!input.trim().equals("")) {
+			String city = input.trim();
+			if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
+				this.city = city;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -306,10 +332,15 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setNationality(String input) {
-		String nationality = input.trim();
-		if (nationality.matches(LETTER_PATTERN) && nationality.length() <= 50) {
-			this.nationality = nationality;
-			return true;
+		if (!input.trim().equals("")) {
+			String nationality = input.trim();
+			if (nationality.matches(LETTER_PATTERN)
+					&& nationality.length() <= 50) {
+				this.nationality = nationality;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -328,10 +359,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setTelephoneNumber(String input) {
-		String telephoneNumber = input.trim();
-		if (telephoneNumber.matches(NL_PHONENUMBER)) {
-			this.telephoneNumber = telephoneNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String telephoneNumber = input.trim();
+			if (telephoneNumber.matches(NL_PHONENUMBER)) {
+				this.telephoneNumber = telephoneNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -350,10 +385,14 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setMobilePhoneNumber(String input) {
-		String mobilePhoneNumber = input.trim();
-		if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
-			this.mobilePhoneNumber = mobilePhoneNumber;
-			return true;
+		if (!input.trim().equals("")) {
+			String mobilePhoneNumber = input.trim();
+			if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
+				this.mobilePhoneNumber = mobilePhoneNumber;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -372,16 +411,20 @@ public abstract class User {
 	 * @return
 	 */
 	public boolean setEmail(String input) {
-		boolean result = true;
-		String email = input.trim();
-		try {
-			InternetAddress emailAddr = new InternetAddress(email);
-			emailAddr.validate();
-			this.email = email;
-		} catch (AddressException ex) {
-			result = false;
+		if (!input.trim().equals("")) {
+			boolean result = true;
+			String email = input.trim();
+			try {
+				InternetAddress emailAddr = new InternetAddress(email);
+				emailAddr.validate();
+				this.email = email;
+			} catch (AddressException ex) {
+				result = false;
+			}
+			return result;
+		} else {
+			return false;
 		}
-		return result;
 	}
 
 	/**
@@ -411,9 +454,13 @@ public abstract class User {
 	 *            the employeeNumber to set
 	 * @return
 	 */
-	public boolean setEmployeeNumber(String employeeNumber) {
-		this.employeeNumber = employeeNumber;
-		return true;
+	public boolean setEmployeeNumber(String input) {
+		if (!input.trim().equals("")) {
+			this.employeeNumber = input.trim();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -454,7 +501,8 @@ public abstract class User {
 	}
 
 	/**
-	 * @param user_id the user_id to set
+	 * @param user_id
+	 *            the user_id to set
 	 */
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
@@ -488,37 +536,44 @@ public abstract class User {
 				+ ", EmployeeNumber = " + getEmployeeNumber() + "]";
 	}
 
-	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
-		try {
-			int day = Integer.valueOf(inputDay);
-			int month = Integer.valueOf(inputMonth);
-			int year = Integer.valueOf(inputYear);
+	public boolean setDateOfBirth(String inputDay, String inputMonth,
+			String inputYear) {
+		if (!inputDay.trim().equals("") && !inputMonth.trim().equals("")
+				&& !inputYear.trim().equals("")) {
+			try {
+				int day = Integer.valueOf(inputDay);
+				int month = Integer.valueOf(inputMonth);
+				int year = Integer.valueOf(inputYear);
 
-			if (year > 0 && month > 0 && day > 0) {
-				Calendar cal = Calendar.getInstance();
-				cal.set(year, month - 1, day, 0, 0, 0);
-				this.dateOfBirth = cal.getTime();
-				return true;
-			} else {
+				if (year > 0 && month > 0 && day > 0) {
+					Calendar cal = Calendar.getInstance();
+					cal.set(year, month - 1, day, 0, 0, 0);
+					this.dateOfBirth = cal.getTime();
+					return true;
+				} else {
+					return false;
+				}
+			} catch (NumberFormatException e) {
 				return false;
 			}
-		} catch (NumberFormatException e) {
+		} else {
 			return false;
 		}
 	}
-	
-		/**
-		 * @return the wwreset
-		 */
-		public boolean isWwreset() {
-			return wwreset;
-		}
-	
-		/**
-		 * @param wwreset the wwreset to set
-		 */
-		public void setWwreset(boolean wwreset) {
-			this.wwreset = wwreset;
-		}
+
+	/**
+	 * @return the wwreset
+	 */
+	public boolean isWwreset() {
+		return wwreset;
+	}
+
+	/**
+	 * @param wwreset
+	 *            the wwreset to set
+	 */
+	public void setWwreset(boolean wwreset) {
+		this.wwreset = wwreset;
+	}
 
 }
