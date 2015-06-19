@@ -16,6 +16,9 @@
             <div id="title">Gebruikersnaam opvragen</div>
         </core-toolbar>
         <div class="content">
+        <% if(!(request.getAttribute("message") == null)){%>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
+        <% } %>
             <form id="forgot_username_form" action="/FamilyWeb/RetrieveUsernameServlet.do" method="POST">
                 <fieldset>
                     <legend>Gebruikersnaam opvragen</legend>

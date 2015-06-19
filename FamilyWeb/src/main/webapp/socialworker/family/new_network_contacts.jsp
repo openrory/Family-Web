@@ -56,9 +56,9 @@
 		<%@ page import="domain.FamilyWeb.Familymember"%>
 		<message-window-notification
 			message="Selecteer een gezinslid en voeg zijn of haar contactpersonen toe aan de contactgroepen."></message-window-notification>
-		<% if(!(session.getAttribute("message") == null)){%>
-		<message-window-error message="${message}"></message-window-error>
-		<% } %>
+        <% if(!(request.getAttribute("message") == null)){%>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
+        <% } %>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<div id="form_container">
 			<form id="group_form" action="/FamilyWeb/ContactServlet.do" method="post">

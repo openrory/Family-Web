@@ -16,7 +16,7 @@
             <div id="title">Inloggen</div>
         </core-toolbar>
         <div class="content">
-        <% if(!(session.getAttribute("message") == null)){%>
+        <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 			

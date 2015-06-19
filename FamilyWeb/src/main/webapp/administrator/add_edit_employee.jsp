@@ -31,9 +31,9 @@
 			<options-menu></options-menu>
             </core-toolbar>
             <div id="content" >
-            <% if(!(session.getAttribute("message") == null)){%>
-				<message-window-error message="${message}"></message-window-error>
-			<% } %>
+       		<% if(!(request.getAttribute("message") == null)){%>
+        	<message-window-${messageType} message="${message}"></message-window-${messageType}>
+        	<% } %>
 			<paper-shadow z="3" animated="true" id="add_edit_employee_form">
                 <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/EmployeeServlet.do" method="post">
                     <p>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Startscherm administrator</title>
@@ -28,6 +28,9 @@
 			<options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>
+            <% if(!(request.getAttribute("message") == null)){%>
+        	<message-window-${messageType} message="${message}"></message-window-${messageType}>
+        	<% } %>
 			<p>Hier moet een tabel komen met het overzicht van de meldingen</p>
             </div>
         </core-header-panel>
