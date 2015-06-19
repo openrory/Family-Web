@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Contact;
-import domain.FamilyWeb.Familymember;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
@@ -72,14 +71,11 @@ public class ContactServlet extends HttpServlet {
 			int IDInterviewee = Integer.parseInt(parts[1]);
 			Client client = (Client) req.getSession().getAttribute("client");
 			if(client.getClient_id() == IDInterviewee && client.getForename().equals(nameInterviewee)){
-				req.getSession().setAttribute("intervieweeC", client.getClient_id());
-			}else{
-				for(Familymember fm : client.getMyFamilymembers()){
-					if(fm.getMember_id() == IDInterviewee){
-						req.getSession().setAttribute("intervieweeF", fm.getMember_id());		
-						break;
-					}
-				}
+				req.getSession().setAttribute("intervieweeC", IDInterviewee);
+				req.getSession().setAttribute("intervieweeF", 0);
+			}else{						
+				req.getSession().setAttribute("intervieweeF", IDInterviewee);
+				req.getSession().setAttribute("intervieweeC", 0);				
 			}
 			String surveyName = req.getParameter("survey");
 			Survey survey = user.getDbController().getSurvey(surveyName);
