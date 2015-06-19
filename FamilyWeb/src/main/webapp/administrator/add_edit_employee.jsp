@@ -118,7 +118,7 @@
                     </div>
                     <div class="information">
                     	<label>Is actief?</label>
-                    	<input id="is_active" name="is_active" type="checkbox" >
+                    	<input id="is_active" name="is_active" type="checkbox" <c:if test="${employee.isActive}">checked</c:if>>
                     </div>
                     <% if(request.getAttribute("employee") == null){ %>
                      <div class="information">
