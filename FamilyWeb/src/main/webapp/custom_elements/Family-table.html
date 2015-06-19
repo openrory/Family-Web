@@ -242,8 +242,9 @@
 
                 console.log("input array :" + this.familyDataBackGround);
                 if (typeof this.familyDataBackGround !== "undefined") {
+                    var forename = element.forename.toLowerCase();
                     this.familyData = jQuery.grep(this.familyDataBackGround, function (element, index) {
-                        return element.forename.includes(search);
+                        return forename.includes(search);
                     })
                     console.log("filter array :" + this.familyData);
                 }
