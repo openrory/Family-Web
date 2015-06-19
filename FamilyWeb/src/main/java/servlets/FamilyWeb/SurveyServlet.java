@@ -40,7 +40,8 @@ public class SurveyServlet extends HttpServlet {
 			Survey survey = (Survey) req.getSession().getAttribute("survey");
 			ArrayList<Contact> contacts = (ArrayList<Contact>) req.getSession().getAttribute("contacts");
 			newNetwork.setContacts(contacts);
-			newNetwork.setTheSurvey(survey);	
+			newNetwork.setTheSurvey(survey);
+			
 			user.getDbController().addNetwork(newNetwork, client_id, family_id);
 		}else{
 			req.setAttribute("message", "Er is iets onverwachts gelopen, probeer opnieuw in te loggen.");
