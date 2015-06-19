@@ -17,7 +17,7 @@
         </core-toolbar>
         <div class="content">
         <% if(!(session.getAttribute("message") == null)){%>
-        <message-window-error message="${message}"></message-window-error>
+        <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 			
             <form id="login_form" action="/FamilyWeb/LoginServlet.do" method="POST">
