@@ -785,8 +785,14 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt = conn.prepareStatement("insert into networks(datecreated, commentary,client_id,member_id,survey_id) values(?,?,?,?,?)");
 			pStmt.setDate(1, network.getDateCreated());
 			pStmt.setString(2, network.getCommentary());
-			pStmt.setInt(3, client_id);
-			pStmt.setInt(4, familymember_id);
+			if(client_id == 0)
+				pStmt.setString(3, null);
+			else
+				pStmt.setInt(3, client_id);
+			if(familymember_id == 0)
+				pStmt.setString(4, null);
+			else
+				pStmt.setInt(4, familymember_id);
 			pStmt.setInt(5, network.getTheSurvey().getSurvey_id());
 			pStmt.executeUpdate();
 			//get auto generated id
@@ -952,7 +958,6 @@ public class MySQLDao implements DatabaseInterface {
 			conn = this.getConnection();
 			PreparedStatement pStmt = conn
 					.prepareStatement("select * from users");
-			pStmt.setString(1, username);
 			ResultSet rSet = pStmt.executeQuery();
 			while(rSet.next()) {
 				if (rSet.getString("usertype").equals("Administrator")) {

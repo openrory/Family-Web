@@ -26,7 +26,14 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// delete session
 		req.getSession().invalidate();
+		
+		//set message
+		req.setAttribute("message", "Succesvol uitgelogd.");
+		req.setAttribute("messageType", "succes");
+		
+		// dispatch to login page
 		getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
 }
