@@ -32,7 +32,7 @@ public class FamilyInformation extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		user = (User) req.getAttribute("user");
-		RequestDispatcher reqDisp = null;
+		RequestDispatcher reqDisp = null;		
 		if(user != null){
 			int client_id = Integer.parseInt(req.getParameter("familyID"));
 			Object attribute = req.getSession().getAttribute("clients");
@@ -47,12 +47,14 @@ public class FamilyInformation extends HttpServlet {
 				}
 			}
 			if(client == null){
+				req.setAttribute("messageType", "succes");
 				req.setAttribute("message", "Kon de Client niet goed inladen.");
 				reqDisp = req.getRequestDispatcher("/socialworker/client_overview.html");
 			}else{
 				ArrayList<String> surveys = user.getDbController().getSurveyNames();
 				if(surveys == null || surveys.isEmpty()){
 					req.setAttribute("message", "Kon geen vragenlijsten vinden.");
+					req.setAttribute("messageType", "error");
 					reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.html");
 				}else{
 					req.getSession().setAttribute("client", client);
@@ -62,6 +64,7 @@ public class FamilyInformation extends HttpServlet {
 			}
 		}else{
 			req.setAttribute("message", "Er is iets onverwachts gelopen, probeer opnieuw in te loggen.");
+			req.setAttribute("messageType", "error");
 			reqDisp = req.getRequestDispatcher("/login.jsp");
 		}		
 		reqDisp.forward(req, resp);

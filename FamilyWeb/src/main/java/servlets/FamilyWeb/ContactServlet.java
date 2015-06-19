@@ -68,7 +68,8 @@ public class ContactServlet extends HttpServlet {
 			String surveyName = "test";
 			Survey survey = user.getDbController().getSurvey(surveyName);
 			if (!b && survey == null) {
-				req.setAttribute("message", "Error occured: Kon de survey niet inladen.");
+				req.setAttribute("message", "Kon de vragenlijst niet inladen.");
+				req.setAttribute("messageType", "error");
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
 			} else if (b) {
@@ -78,7 +79,8 @@ public class ContactServlet extends HttpServlet {
 			}
 			req.setAttribute("contacts", contacts);
 		}else{
-			req.setAttribute("message", "Error occured: Gegevens kloppen niet van één of meerdere contacten.");
+			req.setAttribute("message", "Gegevens kloppen niet van één of meerdere contacten.");
+			req.setAttribute("messageType", "warning");
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
 		
