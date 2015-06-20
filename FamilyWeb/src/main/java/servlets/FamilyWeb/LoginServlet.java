@@ -54,8 +54,19 @@ public class LoginServlet extends HttpServlet {
 						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
 					//check if active && password must reset first
 					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){
-						req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
-						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
+						ArrayList<Client> clients = user.getDbController().getAllClientsOfUser(user);				
+						for(Client c : clients)
+							System.out.println(c);
+						try {
+							JSONArray clientsJSON = createJSON(clients);
+							req.getSession().setAttribute("clientsJSON", clientsJSON);
+							req.getSession().setAttribute("clients", clients);
+							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
+						} catch (JSONException e) {
+							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
+							req.setAttribute("messageType", "error");
+							reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+						}						
 					//check if password must reset first
 					} else if (user.isActive() && user.isWwreset()) {
 						req.setAttribute("message", "Wachtwoord reset aangevraagd, verander het wachtwoord.");
