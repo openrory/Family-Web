@@ -55,12 +55,7 @@
 
 	<build>
 		<finalName>FamilyWeb</finalName>
-		<plugins>
-			<plugin>
-				<groupId>com.google.appengine</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.9.22</version>
-			</plugin>
+		<plugins>			
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
