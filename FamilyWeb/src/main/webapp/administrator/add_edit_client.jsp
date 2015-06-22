@@ -44,7 +44,7 @@
                     </p>
 					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
-                        <label>Personeelnr :</label>
+                        <label>Dossiernummer :</label>
                             <input id="fileid" type="text" placeholder="Personeelnr" value="${Client.filenumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
