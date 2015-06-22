@@ -1,59 +1,18 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Gegenereerd op: 17 jun 2015 om 12:42
--- Serverversie: 5.6.24
--- PHP-versie: 5.6.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
---
--- Database: `familyweb`
---
 CREATE DATABASE IF NOT EXISTS `familyweb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `familyweb`;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `answers`
---
 
 CREATE TABLE IF NOT EXISTS `answers` (
   `answer_id` int(10) NOT NULL,
   `answer` varchar(255) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `answers`
---
-
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `categories`
---
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int(10) NOT NULL,
   `name` varchar(35) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `categories`
---
-
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `clients`
---
 
 CREATE TABLE IF NOT EXISTS `clients` (
   `client_id` int(10) NOT NULL,
@@ -73,16 +32,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `clients`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `contacts`
---
-
 CREATE TABLE IF NOT EXISTS `contacts` (
   `contact_id` int(10) NOT NULL,
   `fullname` varchar(50) NOT NULL,
@@ -92,16 +41,6 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `category_id` int(10) NOT NULL,
   `network_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `contacts`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `familymembers`
---
 
 CREATE TABLE IF NOT EXISTS `familymembers` (
   `member_id` int(10) NOT NULL,
@@ -119,16 +58,6 @@ CREATE TABLE IF NOT EXISTS `familymembers` (
   `client_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `familymembers`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `networks`
---
-
 CREATE TABLE IF NOT EXISTS `networks` (
   `network_id` int(10) NOT NULL,
   `datecreated` date NOT NULL,
@@ -138,16 +67,6 @@ CREATE TABLE IF NOT EXISTS `networks` (
   `survey_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `networks`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `notifications`
---
-
 CREATE TABLE IF NOT EXISTS `notifications` (
   `notification_id` int(10) NOT NULL,
   `notification` varchar(50) NOT NULL,
@@ -155,26 +74,10 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `questions`
---
-
 CREATE TABLE IF NOT EXISTS `questions` (
   `question_id` int(10) NOT NULL,
   `question` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `questions`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `requests`
---
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `requests` (
   `request_id` int(10) NOT NULL,
@@ -187,23 +90,11 @@ CREATE TABLE IF NOT EXISTS `requests` (
   `user_to_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `requests_notifications`
---
-
 CREATE TABLE IF NOT EXISTS `requests_notifications` (
   `request_notification` int(10) NOT NULL,
   `notification_id` int(10) NOT NULL,
   `request_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `results`
---
 
 CREATE TABLE IF NOT EXISTS `results` (
   `result_id` int(10) NOT NULL,
@@ -212,60 +103,22 @@ CREATE TABLE IF NOT EXISTS `results` (
   `contact_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `results`
---
-
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `shares`
---
-
 CREATE TABLE IF NOT EXISTS `shares` (
   `share_id` int(10) NOT NULL,
   `request_id` int(10) NOT NULL,
   `network_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `surveys`
---
-
 CREATE TABLE IF NOT EXISTS `surveys` (
   `survey_id` int(10) NOT NULL,
   `name` varchar(35) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `surveys`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `surveys_questions`
---
-
 CREATE TABLE IF NOT EXISTS `surveys_questions` (
   `survey_question_id` int(10) NOT NULL,
   `survey_id` int(10) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `surveys_questions`
---
-
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `users`
---
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(10) NOT NULL,
@@ -288,275 +141,130 @@ CREATE TABLE IF NOT EXISTS `users` (
   `wwreset` varchar(1) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Gegevens worden geëxporteerd voor tabel `users`
---
-
---
--- Indexen voor geëxporteerde tabellen
---
-
---
--- Indexen voor tabel `answers`
---
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`answer_id`), ADD KEY `FKAnswers401861` (`question_id`);
 
---
--- Indexen voor tabel `categories`
---
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`), ADD UNIQUE KEY `name` (`name`);
 
---
--- Indexen voor tabel `clients`
---
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`client_id`), ADD UNIQUE KEY `client_id` (`client_id`), ADD KEY `FKClients968335` (`user_id`);
 
---
--- Indexen voor tabel `contacts`
---
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`contact_id`), ADD UNIQUE KEY `contact_id` (`contact_id`), ADD KEY `FKContacts769798` (`category_id`), ADD KEY `FKContacts114790` (`network_id`);
 
---
--- Indexen voor tabel `familymembers`
---
 ALTER TABLE `familymembers`
   ADD PRIMARY KEY (`member_id`), ADD UNIQUE KEY `member_id` (`member_id`), ADD KEY `FKFamilymemb507734` (`client_id`);
 
---
--- Indexen voor tabel `networks`
---
 ALTER TABLE `networks`
   ADD PRIMARY KEY (`network_id`), ADD UNIQUE KEY `network_id` (`network_id`), ADD KEY `FKNetworks173258` (`client_id`), ADD KEY `FKNetworks939190` (`member_id`), ADD KEY `FKNetworks912632` (`survey_id`);
 
---
--- Indexen voor tabel `notifications`
---
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`notification_id`), ADD KEY `FKNotificati77649` (`user_id`);
 
---
--- Indexen voor tabel `questions`
---
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`question_id`);
 
---
--- Indexen voor tabel `requests`
---
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`request_id`), ADD KEY `FKRequests552865` (`client_id`), ADD KEY `FKRequests602896` (`user_from_id`), ADD KEY `FKRequests860811` (`user_to_id`);
 
---
--- Indexen voor tabel `requests_notifications`
---
 ALTER TABLE `requests_notifications`
   ADD PRIMARY KEY (`request_notification`), ADD KEY `FKRequests_n351834` (`notification_id`), ADD KEY `FKRequests_n103793` (`request_id`);
 
---
--- Indexen voor tabel `results`
---
 ALTER TABLE `results`
   ADD PRIMARY KEY (`result_id`), ADD KEY `FKResults545620` (`question_id`), ADD KEY `FKResults424948` (`answer_id`), ADD KEY `FKResults822942` (`contact_id`);
 
---
--- Indexen voor tabel `shares`
---
 ALTER TABLE `shares`
   ADD PRIMARY KEY (`share_id`), ADD KEY `FKShares94092` (`request_id`), ADD KEY `FKShares53669` (`network_id`);
 
---
--- Indexen voor tabel `surveys`
---
 ALTER TABLE `surveys`
   ADD PRIMARY KEY (`survey_id`), ADD UNIQUE KEY `name` (`name`);
 
---
--- Indexen voor tabel `surveys_questions`
---
 ALTER TABLE `surveys_questions`
   ADD PRIMARY KEY (`survey_question_id`), ADD KEY `FKSurveys_qu287896` (`survey_id`), ADD KEY `FKSurveys_qu168997` (`question_id`);
 
---
--- Indexen voor tabel `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`), ADD UNIQUE KEY `user_id` (`user_id`);
 
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
 
---
--- AUTO_INCREMENT voor een tabel `answers`
---
 ALTER TABLE `answers`
-  MODIFY `answer_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT voor een tabel `categories`
---
+  MODIFY `answer_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 ALTER TABLE `categories`
   MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT voor een tabel `clients`
---
 ALTER TABLE `clients`
   MODIFY `client_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `contacts`
---
 ALTER TABLE `contacts`
   MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `familymembers`
---
 ALTER TABLE `familymembers`
   MODIFY `member_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `networks`
---
 ALTER TABLE `networks`
   MODIFY `network_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `notifications`
---
 ALTER TABLE `notifications`
   MODIFY `notification_id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT voor een tabel `questions`
---
 ALTER TABLE `questions`
-  MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT voor een tabel `requests`
---
+  MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 ALTER TABLE `requests`
   MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT voor een tabel `requests_notifications`
---
 ALTER TABLE `requests_notifications`
   MODIFY `request_notification` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT voor een tabel `results`
---
 ALTER TABLE `results`
   MODIFY `result_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT voor een tabel `shares`
---
 ALTER TABLE `shares`
   MODIFY `share_id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT voor een tabel `surveys`
---
 ALTER TABLE `surveys`
   MODIFY `survey_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `surveys_questions`
---
 ALTER TABLE `surveys_questions`
-  MODIFY `survey_question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT voor een tabel `users`
---
+  MODIFY `survey_question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 ALTER TABLE `users`
   MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- Beperkingen voor geëxporteerde tabellen
---
 
---
--- Beperkingen voor tabel `answers`
---
 ALTER TABLE `answers`
 ADD CONSTRAINT `FKAnswers401861` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
 
---
--- Beperkingen voor tabel `clients`
---
 ALTER TABLE `clients`
 ADD CONSTRAINT `FKClients968335` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
---
--- Beperkingen voor tabel `contacts`
---
 ALTER TABLE `contacts`
 ADD CONSTRAINT `FKContacts114790` FOREIGN KEY (`network_id`) REFERENCES `networks` (`network_id`),
 ADD CONSTRAINT `FKContacts769798` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
---
--- Beperkingen voor tabel `familymembers`
---
 ALTER TABLE `familymembers`
 ADD CONSTRAINT `FKFamilymemb507734` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`);
 
---
--- Beperkingen voor tabel `networks`
---
 ALTER TABLE `networks`
 ADD CONSTRAINT `FKNetworks173258` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`),
 ADD CONSTRAINT `FKNetworks912632` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`),
 ADD CONSTRAINT `FKNetworks939190` FOREIGN KEY (`member_id`) REFERENCES `familymembers` (`member_id`);
 
---
--- Beperkingen voor tabel `notifications`
---
 ALTER TABLE `notifications`
 ADD CONSTRAINT `FKNotificati77649` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
---
--- Beperkingen voor tabel `requests`
---
 ALTER TABLE `requests`
 ADD CONSTRAINT `FKRequests552865` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`),
 ADD CONSTRAINT `FKRequests602896` FOREIGN KEY (`user_from_id`) REFERENCES `users` (`user_id`),
 ADD CONSTRAINT `FKRequests860811` FOREIGN KEY (`user_to_id`) REFERENCES `users` (`user_id`);
 
---
--- Beperkingen voor tabel `requests_notifications`
---
 ALTER TABLE `requests_notifications`
 ADD CONSTRAINT `FKRequests_n103793` FOREIGN KEY (`request_id`) REFERENCES `requests` (`request_id`),
 ADD CONSTRAINT `FKRequests_n351834` FOREIGN KEY (`notification_id`) REFERENCES `notifications` (`notification_id`);
 
---
--- Beperkingen voor tabel `results`
---
 ALTER TABLE `results`
 ADD CONSTRAINT `FKResults424948` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`answer_id`),
 ADD CONSTRAINT `FKResults545620` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
 ADD CONSTRAINT `FKResults822942` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`contact_id`);
 
---
--- Beperkingen voor tabel `shares`
---
 ALTER TABLE `shares`
 ADD CONSTRAINT `FKShares53669` FOREIGN KEY (`network_id`) REFERENCES `networks` (`network_id`),
 ADD CONSTRAINT `FKShares94092` FOREIGN KEY (`request_id`) REFERENCES `requests` (`request_id`);
 
---
--- Beperkingen voor tabel `surveys_questions`
---
 ALTER TABLE `surveys_questions`
 ADD CONSTRAINT `FKSurveys_qu168997` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`),
 ADD CONSTRAINT `FKSurveys_qu287896` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`);
 
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES
-(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'Y'),
-(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'Y');
-
-
-INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
-(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
-
-INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
-(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
-
+(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'N'),
+(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'N');
 
 INSERT INTO `surveys` (`survey_id`, `name`) VALUES
 (1, 'Standaard vragen');
@@ -582,6 +290,10 @@ INSERT INTO `questions` (`question_id`, `question`) VALUES
 (3, 'Hoever bevind deze persoon zich bij u vandaan?');
 
 
+INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES
 (1, 'Telefonisch', 1),
@@ -601,10 +313,11 @@ INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES
 (15, '50 tot 200 km', 3),
 (16, '> 200 km', 3);
 
-INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3);
+INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
+(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
+
+INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
+(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
 
 
 INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES

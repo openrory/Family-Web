@@ -45,10 +45,11 @@ public class ContactServlet extends HttpServlet {
 					"bureauhalt", "justice" };
 			contacts = new ArrayList<Contact>();
 			int j =0;
+			int id = 1;
 			for (String group : contactgroups) {
 				j++;
-				int contactsInGroup = Integer.parseInt(req.getParameter(
-						"counter" + group).trim());
+				int contactsInGroup = Integer.valueOf(req.getParameter(
+						"counter" + group));
 				for (int i = 1; i <= contactsInGroup; i++) {
 					String validate = req.getParameter(group + "validate" + i)
 							.trim();
@@ -56,19 +57,25 @@ public class ContactServlet extends HttpServlet {
 						String name = req.getParameter(group + "name" + i)
 								.trim();
 						String commentary = "";
+						String com = req.getParameter(group + "comment" + i);
+						if(com != null && com.trim().equals(""))
+							commentary = com.trim();
 						String role = req.getParameter(group + "role" + i)
 								.trim();
 						String ageS = req.getParameter(group + "age" + i)
 								.trim();
 						int age = 0;
 						try {
-							age = Integer.parseInt(ageS);
+							age = Integer.valueOf(ageS);
 						} catch (NumberFormatException e) {
 						}
-						if (checkContact(name, role, age))
-							contacts.add(new Contact(name, commentary, role,
-									age, group,j));
-						else
+						if (checkContact(name, role, age)){
+							Contact c = new Contact(name, commentary, role,
+									age, group,j);
+							c.setContact_id(id);
+							id++;
+							contacts.add(c);							
+						}else
 							b = false;
 					}
 				}

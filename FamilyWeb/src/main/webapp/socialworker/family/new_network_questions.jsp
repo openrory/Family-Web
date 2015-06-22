@@ -60,7 +60,7 @@
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 		<div id="form_container">
-			<form id="group_form" onsubmit="ServletHIER" method="post">
+			<form id="group_form" onsubmit="/FamilyWeb/SurveyServlet.do" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -68,7 +68,7 @@
 					<div class="contact">
 						<h3>${contact.fullname} - ${contact.role}</h3>
 						<core-icon-button class="add" onclick="viewQuestions(${contact.contact_id})" icon="arrow-drop-down"></core-icon-button>
-						<div id="${contact.contact_id}" class="questions">
+						<div id="contact${contact.contact_id}" class="questions">
 						<c:forEach items="${survey.questions}" var="question">
 						<div id="${question.question_id}">
 						<p class="questionTitle">${question.question}</p>
@@ -91,16 +91,16 @@
 <%-- 						<c:forEach items="${question.anwsers}" var="anwser"> --%>
 <%-- 						<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name} --%>
 <%-- 						</c:forEach> --%>
-						</div>
-						
-						</c:forEach>
-                   		 <div>
-                        <label>Algemene opmerking:</label>
-                        <textarea name="general_comment" placeholder="Algemene opmerking"> </textarea>
-						<input type="button" onclick="closeQuestions(${contact.contact_id})" value="Volgende contactpersoon" />
+						</div>						
+						</c:forEach>                   		
+						<div><input type="button" onclick="closeQuestions(${contact.contact_id})" value="Volgende contactpersoon" /></div>						
 						</div>
 					</div>
 				</c:forEach>
+				<div>
+                    <h4><label>Algemene opmerking:</label></h4>
+                    <textarea name="general_comment" placeholder="Algemene opmerking"></textarea>
+                </div>
 				<div id="submit_button_container">
 					<input class="submit_button" type="submit" value="Netwerk genereren">
 				</div>
@@ -113,11 +113,11 @@
 
 	<script>
 		function viewQuestions(questionsID) {
-            document.getElementById(questionsID).style.display = 'block';
+            document.getElementById("contact"+questionsID).style.display = 'block';
         }
 		
 		function closeQuestions(questionsID){
-			document.getElementById(questionsID).style.display = 'none';
+			document.getElementById("contact"+questionsID).style.display = 'none';
 		}
 
         document.querySelector('#mediaQuery').addEventListener('core-media-change',
