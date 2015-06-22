@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import servletControllers.FamilyWeb.OverviewController;
 import domain.FamilyWeb.Client;
@@ -26,9 +26,7 @@ public class FamilyInformation extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,9 +59,11 @@ public class FamilyInformation extends HttpServlet {
 					req.getSession().setAttribute("client", client);
 					req.getSession().setAttribute("surveys", surveys);	
 					try {
-						JSONArray[] networks = OverviewController.getInstance().createJSONNetworks(client);
+						JSONObject[] networks = OverviewController.getInstance().createJSONNetworks(client);
 						req.getSession().setAttribute("nodesNetwork", networks[0]);
 						req.getSession().setAttribute("linksNetwork", networks[1]);
+						System.out.println(networks[0].toString());
+						System.out.println(networks[1].toString());
 						reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 					} catch (JSONException e) {
 						req.setAttribute("message", "Kan de netwerken van "+client.getForename()+" "+client.getSurname()+" niet goed ophalen, log opnieuw in en probeer het opnieuw.");

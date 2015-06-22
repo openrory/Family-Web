@@ -44,7 +44,9 @@ public class ContactServlet extends HttpServlet {
 					"club", "religion", "careinstitution", "youthcare",
 					"bureauhalt", "justice" };
 			contacts = new ArrayList<Contact>();
+			int j =0;
 			for (String group : contactgroups) {
+				j++;
 				int contactsInGroup = Integer.parseInt(req.getParameter(
 						"counter" + group).trim());
 				for (int i = 1; i <= contactsInGroup; i++) {
@@ -65,7 +67,7 @@ public class ContactServlet extends HttpServlet {
 						}
 						if (checkContact(name, role, age))
 							contacts.add(new Contact(name, commentary, role,
-									age, group));
+									age, group,j));
 						else
 							b = false;
 					}

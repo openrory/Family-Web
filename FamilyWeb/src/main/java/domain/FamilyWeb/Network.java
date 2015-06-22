@@ -121,7 +121,7 @@ public class Network {
 	 */
 	@Override
 	public String toString() {
-		return "Network [DateCreated = " + getDateCreated()
-				+ ", Commentary = " + getCommentary() + "]";
+		return "Network [id = "+getNetwork_id()+", DateCreated = " + getDateCreated()
+				+ ", Commentary = " + getCommentary()+", contacts = "+ getContacts().toString()+", survey = "+ getTheSurvey().toString() + "]";
 	}
 }
