@@ -60,7 +60,7 @@
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 		<div id="form_container">
-			<form id="group_form" onsubmit="hoi" method="post">
+			<form id="group_form" onsubmit="ServletHIER" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -71,11 +71,13 @@
 						<div id="${contact.contact_id}" class="questions">
 						<c:forEach items="${survey.questions}" var="question">
 						<div id="${question.question_id}">
-						<p>${question.question}</p>
+						<p class="questionTitle">${question.question}</p>
 						<c:choose>
   						<c:when test="${fn:length(question.theAnswers) < 6}">
    							<c:forEach items="${question.theAnswers}" var="answer">
+								<div class="radio">
 								<input type="radio" name="${question.question_id}:${contact.contact_id}" value="${answer.answer_id}" />${answer.answer}
+								</div>
 							</c:forEach>
   						</c:when>
   						<c:when test="${fn:length(question.theAnswers) > 5}">
@@ -92,9 +94,9 @@
 						</div>
 						
 						</c:forEach>
-						<div>
-							<textarea name="general_comment"></textarea>
-						</div>
+                   		 <div>
+                        <label>Algemene opmerking:</label>
+                        <textarea name="general_comment" placeholder="Algemene opmerking"> </textarea>
 						<input type="button" onclick="closeQuestions(${contact.contact_id})" value="Volgende contactpersoon" />
 						</div>
 					</div>
