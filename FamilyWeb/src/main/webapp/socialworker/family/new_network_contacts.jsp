@@ -23,6 +23,8 @@
 	href="/FamilyWeb/custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
 <link rel="stylesheet" href="/FamilyWeb/styles/new_network_contacts.css">
 <link rel="stylesheet" href="/FamilyWeb/styles/base.css">
+<script type="text/javascript" src="/FamilyWeb/javascripts/manage_new_network_contacts.js"></script>
+
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -65,7 +67,7 @@
 
 				<div id="select_box_container">
 					<div class="information">
-						<label>Selecteer de ondervraagde:</label>
+						<label class="selectLabel">Selecteer de ondervraagde:</label>
 						<!--                                 Nog een foreach loop in maken waarin de familymembers uit de session worden gehaald en in een select worden gestopt -->
 						<select id="interviewee" name="interviewee">
 							<option class="select_option" value="${client.forename}:${client.client_id}">${client.forename} ${client.surname}</option>
@@ -157,7 +159,7 @@
 				</div>
 				<div id="select_box_container">
 					<div class="information">
-						<label>Selecteer de vragenlijst die u wilt afnemen:</label> <select
+						<label class="selectLabel">Selecteer de vragenlijst die u wilt afnemen:</label> <select
 							id="survey_selection" name="survey">
 							<c:forEach items="${surveys}" var="survey">
 								<option class="select_option" value="${survey}">${survey}</option>
@@ -174,40 +176,6 @@
 	</div>
 	</core-header-panel> </core-drawer-panel>
 	<core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
-
-	<script>
-		function addInput(groupName) {
-			var countBox = parseInt(document.getElementById("counter"
-					+ groupName).value);
-			countBox += 1;
-			var name = "name" + countBox;
-			var role = "role" + countBox;
-			var age = "age" + countBox;
-			var validate = "validate" + countBox;
-			document.getElementById(groupName).innerHTML += '<div id="' + groupName + countBox + '" class="person"> <div class="contact"> <div class="information"> <label>Naam:</label> <input type="text" id="' + groupName + name + '" name="' + groupName + name + '" placeholder="Volledige naam"/> </div> <div class="information"> <label>Rol:</label> <input type="text" id="' + groupName + role + '" name="' + groupName + role + '" placeholder="Rol" /> </div> <div class="information"> <label>Leeftijd:</label> <input type="text" id="' + groupName + age + '" name="' + groupName + age + '" placeholder="Leeftijd" /> </div> <input type="hidden" id="' + groupName + validate + '" name="' + groupName + validate + '" value="true" /> </div> <core-icon-button class="remove" icon="highlight-remove" onclick="'
-					+ " removeInput("
-					+ countBox
-					+ ","
-					+ "'"
-					+ groupName
-					+ "'"
-					+ ")" + '"></core-icon-button> </div>';
-			document.getElementById("counter" + groupName).value = countBox;
-		}
-
-		function removeInput(personNumber, groupName) {
-			document.getElementById(groupName + personNumber).style.display = 'none';
-			document.getElementById(groupName + "validate" + personNumber).value = "false";
-		}
-
-		document.querySelector('#mediaQuery').addEventListener(
-				'core-media-change',
-				function(e) {
-					document.body.classList.toggle('core-narrow',
-							e.detail.matches);
-					document.querySelector('#scrollableTabs').updateBar();
-				});
-	</script>
 </body>
 
 </html>
