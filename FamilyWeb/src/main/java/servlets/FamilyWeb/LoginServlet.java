@@ -51,7 +51,17 @@ public class LoginServlet extends HttpServlet {
 					
 					//check if administrator
 					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {
-						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
+						ArrayList<User> users = user.getDbController().getAllUsers();
+						
+						try {
+							JSONArray usersJSON = createJSONUsers(users);
+							req.getSession().setAttribute("usersJSON", usersJSON);
+							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
+						} catch (JSONException e) {
+							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
+							req.setAttribute("messageType", "error");
+							reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+						}						
 					//check if active && password must reset first
 					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){
 						ArrayList<Client> clients = user.getDbController().getAllClientsOfUser(user);				
@@ -93,6 +103,28 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 		reqDisp.forward(req, resp);
+	}
+	private JSONArray createJSONUsers(ArrayList<User> users) throws JSONException {
+		JSONArray returns = new JSONArray();
+		for(User u : users){
+			JSONObject userJSON = new JSONObject();
+			userJSON.put("forename", u.getForename());
+			userJSON.put("surname", u.getSurname());
+			userJSON.put("username", u.getUsername());
+			userJSON.put("dateOfBirth", u.getDateOfBirth());
+            userJSON.put("isActive", u.isActive());
+            userJSON.put("postcode", u.getPostcode());
+			userJSON.put("street", u.getStreet());
+			userJSON.put("houseNumber", u.getHouseNumber());
+			userJSON.put("city", u.getCity());
+			userJSON.put("nationality", u.getNationality());
+			userJSON.put("telephoneNumber", u.getTelephoneNumber());
+			userJSON.put("mobilePhoneNumber", u.getMobilePhoneNumber());
+			userJSON.put("email", u.getEmail());
+			userJSON.put("employeeNumber", u.getEmployeeNumber());
+			returns.put(userJSON);
+		}
+		return returns;
 	}
 	private JSONArray createJSON(ArrayList<Client> clients) throws JSONException {
 				JSONArray returns = new JSONArray();
