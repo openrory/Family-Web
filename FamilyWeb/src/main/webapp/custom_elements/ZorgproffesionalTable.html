@@ -1,0 +1,272 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-icons/core-icons.html">
+<!--<link rel="import" href="../filters/filter.html" />-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<polymer-element name="Zorgproffesional-table">
+    <template>
+        <style>
+             :host {
+                position: relative;
+            }
+
+            #table_header {
+                background-color: #FF5621;
+                color: white;
+                height: 100%;
+                width: 100%;
+                font-size: 12px;
+            }
+
+            #table {
+                background-color: #FFCBBB;
+                margin-left: 5% ;
+                height: 100%;
+                width: 90%;
+                min-width: 675px ;
+                border: none;
+            }
+
+            .table_column {
+                margin-top: 0.5%;
+                font-size: 12px;
+            }
+
+            .scrollWrapper{
+                height: 100%;
+                width: 90%;
+                overflow:hidden;
+            }
+
+            #searchInput {
+                background-color: white;
+                color: black;
+                height: 80%;
+                margin-top: 0.35%;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .unhide {
+                display: block;
+            }
+
+            p{
+                text-align : center ;
+            }
+
+            @media all and (max-width: 2160px) and (min-width: 1060px) {
+            :host {
+                position: relative;
+            }
+
+            #table_header {
+                background-color: #FF5621;
+                color: white;
+                height: 100%;
+                width: 100%;
+                font-size: 12px;
+            }
+
+            #table {
+                background-color: #FFCBBB;
+                margin-left: 5% ;
+                height: 100%;
+                width: 90%;
+                 min-width: 675px ;
+                border: none;
+            }
+
+            .table_column {
+                margin-top: 0.5%;
+                font-size: 12px;
+            }
+
+            .scrollWrapper{
+                height: 100%;
+                width: 90%;
+                overflow:hidden;
+            }
+
+            #searchInput {
+                background-color: white;
+                color: black;
+                height: 80%;
+                margin-top: 0.35%;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .unhide {
+                display: block;
+            }
+
+            p{
+                text-align : center ;
+            }
+
+}
+
+@media all and (max-width: 1060px) and (min-width: 120px) {
+
+    :host {
+                position: relative;
+            }
+
+            #table_header {
+                background-color: #FF5621;
+                color: white;
+                height: 100%;
+                width: 100%;
+                font-size: 12px;
+            }
+
+            #table {
+                background-color: #FFCBBB;
+                margin-left: 5% ;
+                height: 100%;
+                width: 90%;
+                 min-width: 675px ;
+                border: none;
+            }
+
+            .table_column {
+                margin-top: 0.5%;
+                font-size: 12px;
+            }
+
+            .scrollWrapper{
+                height: 100%;
+                width: 90%;
+                overflow:scroll;
+            }
+
+            #searchInput {
+                background-color: white;
+                color: black;
+                height: 80%;
+                margin-top: 0.35%;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .unhide {
+                display: block;
+            }
+
+            p{
+                text-align : center ;
+            }
+
+}
+            
+
+        </style>
+
+            <div class="scrollWrapper">
+                <table id="table" cellspacing="0" cellpadding="0">
+                    <thead id="table_header">
+                        <tr>
+                            <th id="first_header_tag"><p>employeeNr</p></th>
+                            <th class="table_header_tag"><p>Voornaam</p></th>
+                            <th class="table_header_tag"><p>Achternaam</p></th>
+                            <th class="table_header_tag"><p>Username</p></th>
+                            <th class="table_header_tag"><p>Actief</p></th>
+                            <th class="table_header_tag"><p>Geb. Datum</p></th>
+                            <th class="table_header_tag"><p>Mobiel Nr.</p></th>
+                            <th class="table_header_tag"><p>Postcode</p></th>
+                            <th class="table_header_tag"><p>Street</p></th>
+                            <th class="table_header_tag"><p>HuisNr</p></th>
+                            <th class="table_header_tag"><p>Stad</p></th>
+                            <th class="table_header_options"><p> <paper-input id="searchInput" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
+                        </tr>
+                    </thead>
+
+                    <h1 id="searchNotFound" class="hidden">No Search Results Found!</h1>
+                    <div class="hidden">{{searchObject | filterArray}}</div>
+
+                    <tbody>
+                        <template repeat="{{person in zorgproffesionalData}}">
+                            <tr class="table_column">
+
+                                
+                                <td id="first_table_content"><p>{{person.employeeNumber}}</p></td>                   
+                                <td class="table_contents"><p>{{person.forename}}</p></td>
+                                <td class="table_contents"><p>{{person.surname}}</p></td>
+                                <td class="table_contents"><p>{{person.username}}</p></td>
+                                <td class="table_contents"><p>{{person.isActive}}</p></td>
+                                <td class="table_contents"><p>{{person.dateOfBirth}}</p></td>
+                                <td class="table_contents"><p>{{person.mobilePhoneNumber}}</p></td>
+                                <td class="table_contents"><p>{{person.postcode}}</p></td>
+                                <td class="table_contents"><p>{{person.street}}</p></td>
+                                <td class="table_contents"><p>{{person.houseNumber}}</p></td>
+                                <td class="table_contents"><p>{{person.city}}</p></td>
+                               
+                                <td class="icon_content"><p><core-icon icon="search" onclick="submit({{person.employeeNumber}})"  value="" /></p></td>
+                            </tr>
+                        </template>
+
+                    </tbody>
+                </table>
+            </div>
+
+</template>
+
+    <script>
+        // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
+        function submit(ID) {
+            document.getElementById("familyID").value = ID;
+            document.getElementById("familyform").submit();
+        };
+
+        Polymer({
+            ready: function () {
+                console.log("Tabel is bereikt!");
+                if (this.attributes.hasOwnProperty("initialData")) {
+                    console.log("initialData is ontvangen");
+                    this.zorgproffesionalData = JSON.parse(this.attributes['initialData'].value);
+                }
+            },
+
+            loadData: function (dt) {
+                console.log("JSON via Javascript ontvangen")
+                this.zorgproffesionalData = dt;
+                this.zorgproffesionalDataBackGround = dt;
+            },
+
+            filterArray: function () {
+                console.log('test');
+                var search = "";
+                if (this.searchObject !== undefined) {
+                    search = this.searchObject;
+                }
+                console.log("search input :" + this.searchObject);
+                console.log("search value :" + search);
+
+
+                console.log("input array :" + this.zorgproffesionalDataBackGround);
+                if (typeof this.zorgproffesionalDataBackGround !== "undefined") {
+                    this.zorgproffesionalData = jQuery.grep(this.zorgproffesionalDataBackGround, function (element, index) {
+                        var nrBool = (element.employeeNumber.toLowerCase()).includes(search.toLowerCase());
+                        var totalnameBool = (element.forename.toLowerCase() + " " + element.surname.toLowerCase()).includes(search.toLowerCase());
+                        
+
+                        if (totalnameBool || nrBool) {
+                            return true;
+                        } else{
+                            return false;
+                        }
+
+                    })
+                    console.log("filter array :" + this.zorgproffesionalData);
+                }
+            }
+        });
+    </script>
+
+</polymer-element>

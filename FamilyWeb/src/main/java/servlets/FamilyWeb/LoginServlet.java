@@ -1,7 +1,7 @@
 package servlets.FamilyWeb;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.FamilyWeb.User;
 import servletControllers.FamilyWeb.LoginController;
+import servletControllers.FamilyWeb.OverviewController;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import domain.FamilyWeb.Client;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
@@ -50,17 +49,21 @@ public class LoginServlet extends HttpServlet {
 					req.getSession().setAttribute("user", user);
 					
 					//check if administrator
-					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {
-						reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
-					//check if active && password must reset first
-					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){
-						ArrayList<Client> clients = user.getDbController().getAllClientsOfUser(user);				
-						for(Client c : clients)
-							System.out.println(c);
+					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {			
 						try {
-							JSONArray clientsJSON = createJSON(clients);
-							req.getSession().setAttribute("clientsJSON", clientsJSON);
-							req.getSession().setAttribute("clients", clients);
+							JSONArray usersJSON = OverviewController.getInstance().createJSONUsers();
+							req.getSession().setAttribute("usersJSON", usersJSON);
+							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
+						} catch (JSONException e) {
+							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
+							req.setAttribute("messageType", "error");
+							reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
+						}						
+					//check if active && password must reset first
+					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){						
+						try {
+							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().createJSONClientsOfUser(user));
+							req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
 						} catch (JSONException e) {
 							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
@@ -94,24 +97,5 @@ public class LoginServlet extends HttpServlet {
 		}
 		reqDisp.forward(req, resp);
 	}
-	private JSONArray createJSON(ArrayList<Client> clients) throws JSONException {
-				JSONArray returns = new JSONArray();
-				for(Client c : clients){			
-					JSONObject clientJSON = new JSONObject();
-					clientJSON.put("forename", c.getForename());
-					clientJSON.put("surname", c.getSurname());
-					clientJSON.put("dateOfBirth", c.getDateOfBirth());
-					clientJSON.put("postcode", c.getPostcode());
-					clientJSON.put("street", c.getStreet());
-					clientJSON.put("houseNumber", c.getHouseNumber());
-					clientJSON.put("city", c.getCity());
-					clientJSON.put("nationality", c.getNationality());
-					clientJSON.put("telephoneNumber", c.getTelephoneNumber());
-					clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
-					clientJSON.put("email", c.getEmail());
-					clientJSON.put("fileNumber", c.getClient_id());            
-					returns.put(clientJSON);
-				}		
-				return returns;
-			}
+	
 }

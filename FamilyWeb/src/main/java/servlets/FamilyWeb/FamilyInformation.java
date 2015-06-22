@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import servletControllers.FamilyWeb.OverviewController;
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.User;
 
@@ -55,8 +59,18 @@ public class FamilyInformation extends HttpServlet {
 					reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 				}else{
 					req.getSession().setAttribute("client", client);
-					req.getSession().setAttribute("surveys", surveys);
-					reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
+					req.getSession().setAttribute("surveys", surveys);	
+					try {
+						JSONArray[] networks = OverviewController.getInstance().createJSONNetworks(client);
+						req.getSession().setAttribute("nodesNetwork", networks[0]);
+						req.getSession().setAttribute("linksNetwork", networks[1]);
+						reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
+					} catch (JSONException e) {
+						req.setAttribute("message", "Kan de netwerken van "+client.getForename()+" "+client.getSurname()+" niet goed ophalen, log opnieuw in en probeer het opnieuw.");
+						req.setAttribute("messageType", "error");
+						reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");						
+					}				
+					
 				}
 			}
 		}else{
