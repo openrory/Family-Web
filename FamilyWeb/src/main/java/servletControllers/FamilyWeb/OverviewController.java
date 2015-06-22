@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import databaseControllers.FamilyWeb.MySQLDao;
 import domain.FamilyWeb.Client;
+import domain.FamilyWeb.Network;
 import domain.FamilyWeb.User;
 
 public class OverviewController {
@@ -74,5 +75,22 @@ public class OverviewController {
 			returns.put(clientJSON);
 		}
 		return returns;
+	}
+	
+	public JSONArray[] createJSONNetworks(Client client) throws JSONException {
+		JSONArray nodes = new JSONArray();
+		JSONArray links = new JSONArray();
+//		for(Network n : db.getNetworks(client.getClient_id(), 0)){
+//			
+//		}
+//		for(Familymember fm : client.getMyFamilymembers()){
+//			for(){
+//				
+//			}
+//		}
+		//TODO
+		
+		JSONArray[] network = {nodes,links};
+		return network;
 	}
 }

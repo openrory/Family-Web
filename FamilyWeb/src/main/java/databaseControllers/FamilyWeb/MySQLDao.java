@@ -863,11 +863,11 @@ public class MySQLDao implements DatabaseInterface {
 		PreparedStatement pStmt = null;
 		try {
 			conn = this.getConnection();
-			if (client_id == 0) {
+			if (client_id != 0) {
 				pStmt = conn
 						.prepareStatement("select * from networks INNER JOIN surveys ON networks.survey_id=surveys.survey_id where client_id=?");
 				pStmt.setInt(1, client_id);
-			} else if (familymember_id == 0) {
+			} else if (familymember_id != 0) {
 				pStmt = conn
 						.prepareStatement("select * from networks INNER JOIN surveys ON networks.survey_id=surveys.survey_id where member_id=?");
 				pStmt.setInt(1, familymember_id);
