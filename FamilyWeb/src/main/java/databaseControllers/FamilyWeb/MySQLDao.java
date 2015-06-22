@@ -890,8 +890,8 @@ public class MySQLDao implements DatabaseInterface {
 		}
 		for (Network n : networks) {
 			n.setTheSurvey(this.getSurvey(n.getTheSurvey().getName()));
-			this.setResultsContacts(n);
-		}
+			n.setContacts(this.setResultsContacts(n));
+		}		
 		return networks;
 	}
 
@@ -918,6 +918,7 @@ public class MySQLDao implements DatabaseInterface {
 					results.add(new Result(question,answer));				
 				}
 				c.setMyResults(results);
+				contacts.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -934,13 +935,13 @@ public class MySQLDao implements DatabaseInterface {
 			conn = this.getConnection();
 
 			PreparedStatement pStmt = conn
-					.prepareStatement("select * from contacts INNER JOIN categories ON contacts.category_id=category.category_id where network_id=?");
+					.prepareStatement("select * from contacts INNER JOIN categories ON contacts.category_id=categories.category_id where network_id=?");
 			pStmt.setInt(1, n.getNetwork_id());
 			ResultSet rSet = pStmt.executeQuery();
 			while (rSet.next()) {
 				Contact c = new Contact(rSet.getString("fullname"),
 						rSet.getString("commentary"), rSet.getString("role"),
-						rSet.getInt("age"), rSet.getString("name"));
+						rSet.getInt("age"), rSet.getString("name"),rSet.getInt("category_id"));
 				c.setContact_id(rSet.getInt("contact_id"));
 				contacts.add(c);
 			}

@@ -25,13 +25,13 @@ public class Contact {
 	 * @param fullname
 	 * @param commentary
 	 */
-	public Contact(String fullname, String commentary, String role, int age, String group) {			
+	public Contact(String fullname, String commentary, String role, int age, String group,int group_id) {			
 		this.fullname = fullname;
 		this.commentary = commentary;
 		this.role = role;
 		this.age = age;
 		this.categories = new ArrayList<Category>();
-		this.getCategories().add(new Category(group));
+		this.getCategories().add(new Category(group,group_id));
 		this.myResults = new ArrayList<Result>();
 	}
 
@@ -105,7 +105,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contact [Fullname = " + getFullname() + ", Commentary = "
-				+ getCommentary() + "]";
+				+ getCommentary() +", category ="+getCategories() + ", results = "+getMyResults()+"]";
 	}
 	
 	/**
