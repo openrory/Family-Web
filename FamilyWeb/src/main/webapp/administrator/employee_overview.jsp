@@ -6,12 +6,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../elements.html">
-    <link rel="import" href="../custom_elements/responsive-menu-administrator.html">
-    <link rel="import" href="../custom_elements/options-menu.html">
-    	<link rel="import" href="../custom_elements/ZorgproffesionalTable.html">
-    <link rel="stylesheet" href="../styles/socialworker_overview.css">
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+    <link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+    <link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+    	<link rel="import" href="/FamilyWeb/custom_elements/ZorgproffesionalTable.html">
+    <link rel="stylesheet" href="/FamilyWeb/styles/socialworker_overview.css">
 
 </head>
 <body fullbleed layout horizontal>
@@ -36,7 +36,8 @@
 			<p>Hieronder Ziet u een overzicht van alle gebruikers.</p>
                	<form id="zorgproffesionalform" action="/FamilyWeb/EmployeeServlet.do" method="post">
 <!--                	Hier wordt de id van de familie neergezet voor de servlets -->
-               	<input id="zorgproffesionalID" type="hidden" value="">
+               	<input id="userID" name="userID" type="hidden" value="">
+               	<input name="option" type="hidden" value="summary">
 				 	</form>
                     <!--hieronder staat de complete tabel met alle zorgprofessionals-->
                     <Zorgproffesional-table show="contacts" id="table"></Zorgproffesional-table>
@@ -46,7 +47,7 @@
         <script>
     // id van de familie wordt in zorgproffesionalID neergezet en het formulier wordt verstuurd
         function submit(ID) {
-            document.getElementById("zorgproffesionalID").value = ID;
+            document.getElementById("userID").value = ID;
             document.getElementById("zorgproffesionalform").submit()
         };
         document.addEventListener('polymer-ready', function () {

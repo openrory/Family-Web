@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+
+import servletControllers.FamilyWeb.OverviewController;
 import util.FamilyWeb.MailService;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import domain.FamilyWeb.Administrator;
@@ -24,22 +27,24 @@ public class EmployeeServlet extends HttpServlet {
 	
 	private final String PAGE_EMPLOYEE_OVERVIEW = "/administrator/employee_overview.jsp";
 	private final String PAGE_EMPLOYEE_ADD_EDIT = "/administrator/add_edit_employee.jsp";
-			
+	
 	private RequestDispatcher reqDisp = null;
 	private HttpServletRequest req = null;
 	private User user = null;
 	private User currentUser = null;
+	
+	private String option = "";
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		this.req = req;
-		String option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
+		option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
 		
 		// Get current user
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
-		
+
 		// Check wich page is called, to overview users, create or update user.
 		if (option.equals("create")) {
 			this.create();
@@ -86,11 +91,20 @@ public class EmployeeServlet extends HttpServlet {
 			message += (mailService.sendMail()) ? message : message + " Mailservice fout de mail is niet verzonden, Raadpleeg de administrator om het wachtwoord te resetten.";
 			
 			if (message.equals("")) {
-				message = "Employee " + user.getForename() + " " + user.getSurname() + " succesvol toegevoegd.";
+				message += "Gebruiker " + user.getForename() + " " + user.getSurname() + " succesvol toegevoegd.";
 				this.setMessage(MESSAGE_SUCCESS, message);
 			} else {
 				this.setMessage(MESSAGE_ERROR, message);
 			}
+			
+			try {
+				req.getSession().setAttribute("usersJSON", OverviewController.getInstance().createJSONUsers());
+			} catch (JSONException e) {
+				//e.printStackTrace();
+				message += " Overzicht door een onbekende fout niet herladen.";
+				this.setMessage(MESSAGE_ERROR, message);
+			}
+			
 			reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_OVERVIEW);
 			
 		} else {
@@ -103,6 +117,15 @@ public class EmployeeServlet extends HttpServlet {
 	 * Method to update user for update_socialworker page.
 	 */
 	private void update() {
+		
+		if (req.getParameter("userID") != null) {
+			try {
+				int userID = Integer.valueOf(req.getParameter("userID"));
+				this.summary(userID);
+			} catch (NumberFormatException e) {
+				//e.printStackTrace();
+			}
+		}
 		
 		String message = "";
 		Object employeeObject = req.getAttribute("employee");	
@@ -129,6 +152,15 @@ public class EmployeeServlet extends HttpServlet {
 				req.removeAttribute("employee");
 				message = "Employee " + user.getForename() + " " + user.getSurname() + " succesvol bijgewerkt.";
 				this.setMessage(MESSAGE_SUCCESS, message);
+				
+				try {
+					req.getSession().setAttribute("usersJSON", OverviewController.getInstance().createJSONUsers());
+				} catch (JSONException e) {
+					//e.printStackTrace();
+					message += " Overzicht door een onbekende fout niet herladen.";
+					this.setMessage(MESSAGE_ERROR, message);
+				}
+				
 				reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_OVERVIEW);
 			} else {
 				this.setMessage(MESSAGE_ERROR, message);
@@ -180,12 +212,13 @@ public class EmployeeServlet extends HttpServlet {
 			message += (user.setEmail(email1)) ? "" : "Email, ";
 		}
 		
+		if (!option.equals("update")) {
 		message += (user.setUsername((req.getParameter("username") != null) ? (String) req.getParameter("username") : "")) ? "" : "Gebruikersnaam, ";
-
-		user.setActive((req.getParameter("is_active") != null ? true : false));
-
 		String password = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
 		user.setPassword(password);
+		}
+		
+		user.setActive((req.getParameter("is_active") != null ? true : false));
 		
 		message += (!message.equals("")) ? "niet correct ingevuld" : "";
 		return message;
