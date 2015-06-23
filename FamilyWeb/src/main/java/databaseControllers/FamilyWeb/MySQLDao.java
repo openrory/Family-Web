@@ -250,7 +250,7 @@ public class MySQLDao implements DatabaseInterface {
 		return users;
 	}
 
-	public boolean addClient(Client client, User user) {
+	public boolean addClient(Client client, int user_id) {
 		Connection conn = null;
 		boolean b = false;
 		try {
@@ -272,7 +272,7 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(16, client.getFileNumber());
 			pStmt.setDate(17, new java.sql.Date(client.getDateCreated()
 					.getTime()));
-			pStmt.setInt(18, user.getUser_id());
+			pStmt.setInt(18, user_id);
 			pStmt.executeUpdate();
 			b = true;
 		} catch (SQLException e) {
@@ -285,13 +285,19 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
-	public boolean updateClient(Client client) {
+	public boolean updateClient(Client client, int user_id) {
 		Connection conn = null;
 		boolean b = false;
+		
 		try {
 			conn = this.getConnection();
-			PreparedStatement pStmt = conn
-					.prepareStatement("update clients set forename=?,surname=?,dateofbirth=?,postcode=?,street=?,housenumber=?,city=?,nationality=?,telephonenumber=?,mobilephonenumber=?,email=?, filenumber=?,dateCreated=? where member_id=?");
+			PreparedStatement pStmt = null;
+			if(user_id == 0)
+				pStmt = conn
+					.prepareStatement("update clients set forename=?,surname=?,dateofbirth=?,postcode=?,street=?,housenumber=?,city=?,nationality=?,telephonenumber=?,mobilephonenumber=?,email=?, filenumber=?,dateCreated=? where client_id=?");
+			else
+				pStmt = conn
+				.prepareStatement("update clients set forename=?,surname=?,dateofbirth=?,postcode=?,street=?,housenumber=?,city=?,nationality=?,telephonenumber=?,mobilephonenumber=?,email=?, filenumber=?,dateCreated=?, user_id=? where client_id=?");
 			pStmt.setString(1, client.getForename());
 			pStmt.setString(2, client.getSurname());
 			pStmt.setDate(3, new java.sql.Date(client.getDateOfBirth()
@@ -307,7 +313,12 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(12, client.getFileNumber());
 			pStmt.setDate(13, new java.sql.Date(client.getDateCreated()
 					.getTime()));
-			pStmt.setInt(14, client.getClient_id());
+			if(user_id == 0)
+				pStmt.setInt(14, client.getClient_id());
+			else{
+				pStmt.setInt(14, user_id);
+				pStmt.setInt(15, client.getClient_id());
+			}
 			pStmt.executeUpdate();
 			b = true;
 		} catch (SQLException e) {

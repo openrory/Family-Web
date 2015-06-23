@@ -21,8 +21,8 @@ public interface DatabaseInterface {
 	public ArrayList<User> getAllSocialworkers();
 	
 	
-	public boolean addClient(Client client, User user);
-	public boolean updateClient(Client client);
+	public boolean addClient(Client client, int userID);
+	public boolean updateClient(Client client, int userID);
 	public Client getClient(int client_id);
 	
 	public ArrayList<Client> getAllClientsOfUser(User user);

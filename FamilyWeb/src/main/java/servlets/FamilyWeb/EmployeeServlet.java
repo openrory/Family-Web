@@ -98,7 +98,7 @@ public class EmployeeServlet extends HttpServlet {
 			}
 			
 			try {
-				req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers());
+				req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
 			} catch (JSONException e) {
 				//e.printStackTrace();
 				message += " Overzicht door een onbekende fout niet herladen.";
@@ -154,7 +154,7 @@ public class EmployeeServlet extends HttpServlet {
 				this.setMessage(MESSAGE_SUCCESS, message);
 				
 				try {
-					req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers());
+					req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
 				} catch (JSONException e) {
 					//e.printStackTrace();
 					message += " Overzicht door een onbekende fout niet herladen.";
