@@ -2,7 +2,6 @@ package servlets.FamilyWeb;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ import domain.FamilyWeb.User;
 @SuppressWarnings("serial")
 public class PasswordresetServlet extends HttpServlet { 
 
-	private RequestDispatcher reqDisp = null;
 	private final String PAGE_LOGIN = "/login.jsp";
 	private final String PAGE_PASSWORD_RESET = "/password_reset.jsp";
 	

@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 					//check if administrator
 					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {			
 						try {
-							JSONArray usersJSON = OverviewController.getInstance().createJSONUsers();
+							JSONArray usersJSON = OverviewController.getInstance().RefreshOverviewUsers(user);
 							req.getSession().setAttribute("usersJSON", usersJSON);
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
 						} catch (JSONException e) {
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 					//check if active && password must reset first
 					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){						
 						try {
-							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().createJSONClientsOfUser(user));
+							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(user));
 							req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
 						} catch (JSONException e) {

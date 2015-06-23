@@ -10,6 +10,7 @@ import java.util.Calendar;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import servletControllers.FamilyWeb.OverviewController;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 
 /**
@@ -471,12 +472,12 @@ public class Client {
 	}
 
 	public boolean addDB(int userID) {
-		return this.dbController.addClient(this, userID);
+		return OverviewController.getInstance().getDb().addClient(this, userID);
 	}
 
 	// REALISEREN CLIENT KUNNEN KOPPELEN OVERDRAGEN AAN ANDERE USER
-	public boolean updateDB() {
-		return this.dbController.updateClient(this);
+	public boolean updateDB(int user_id) {
+		return this.dbController.updateClient(this, user_id);
 	}
 
 	/*

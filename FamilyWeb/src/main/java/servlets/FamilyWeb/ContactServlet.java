@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.FamilyWeb.Answer;
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Contact;
-import domain.FamilyWeb.Question;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 

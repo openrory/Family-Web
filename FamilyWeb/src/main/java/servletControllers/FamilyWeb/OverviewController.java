@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import databaseControllers.FamilyWeb.MySQLDao;
+import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Contact;
 import domain.FamilyWeb.Familymember;
@@ -36,48 +37,18 @@ public class OverviewController {
 		return oc;
 	}
 
-	public JSONArray createJSONUsers() throws JSONException {
-		JSONArray returns = new JSONArray();
-		for (User u : db.getAllUsers()) {
-			JSONObject userJSON = new JSONObject();
-			userJSON.put("forename", u.getForename());
-			userJSON.put("surname", u.getSurname());
-			userJSON.put("username", u.getUsername());
-			userJSON.put("dateOfBirth", u.getDateOfBirth());
-			userJSON.put("isActive", u.isActive());
-			userJSON.put("postcode", u.getPostcode());
-			userJSON.put("street", u.getStreet());
-			userJSON.put("houseNumber", u.getHouseNumber());
-			userJSON.put("city", u.getCity());
-			userJSON.put("nationality", u.getNationality());
-			userJSON.put("telephoneNumber", u.getTelephoneNumber());
-			userJSON.put("mobilePhoneNumber", u.getMobilePhoneNumber());
-			userJSON.put("email", u.getEmail());
-			userJSON.put("employeeNumber", u.getEmployeeNumber());
-			returns.put(userJSON);
-		}
-		return returns;
+	/**
+	 * @return the db
+	 */
+	public DatabaseInterface getDb() {
+		return db;
 	}
 
-	public JSONArray createJSONClientsOfUser(User user) throws JSONException {
-		JSONArray returns = new JSONArray();
-		for (Client c : db.getAllClientsOfUser(user)) {
-			JSONObject clientJSON = new JSONObject();
-			clientJSON.put("forename", c.getForename());
-			clientJSON.put("surname", c.getSurname());
-			clientJSON.put("dateOfBirth", c.getDateOfBirth());
-			clientJSON.put("postcode", c.getPostcode());
-			clientJSON.put("street", c.getStreet());
-			clientJSON.put("houseNumber", c.getHouseNumber());
-			clientJSON.put("city", c.getCity());
-			clientJSON.put("nationality", c.getNationality());
-			clientJSON.put("telephoneNumber", c.getTelephoneNumber());
-			clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
-			clientJSON.put("email", c.getEmail());
-			clientJSON.put("fileNumber", c.getClient_id());
-			returns.put(clientJSON);
-		}
-		return returns;
+	/**
+	 * @param db the db to set
+	 */
+	public void setDb(DatabaseInterface db) {
+		this.db = db;
 	}
 
 	public JSONObject[] createJSONNetworks(Client client) throws JSONException {
@@ -225,13 +196,76 @@ public class OverviewController {
 		return link;
 	}
 
-	public JSONObject RefreshOverviewClients(User currentUser) {
-		// TODO Auto-generated method stub
-		return null;
+	public JSONArray RefreshOverviewClients(User currentUser) throws JSONException {
+		JSONArray returns = new JSONArray();
+		ArrayList<Client> clients = new ArrayList<Client>();
+		if(currentUser instanceof Administrator){
+			for (Client c : db.getAllClients()) {
+				clients.add(c);
+				JSONObject clientJSON = new JSONObject();
+				clientJSON.put("forename", c.getForename());
+				clientJSON.put("surname", c.getSurname());
+				clientJSON.put("dateOfBirth", c.getDateOfBirth());
+				clientJSON.put("postcode", c.getPostcode());
+				clientJSON.put("street", c.getStreet());
+				clientJSON.put("houseNumber", c.getHouseNumber());
+				clientJSON.put("city", c.getCity());
+				clientJSON.put("nationality", c.getNationality());
+				clientJSON.put("telephoneNumber", c.getTelephoneNumber());
+				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
+				clientJSON.put("email", c.getEmail());
+				clientJSON.put("fileNumber", c.getClient_id());
+				returns.put(clientJSON);
+			}
+		}else{
+			for (Client c : db.getAllClientsOfUser(currentUser)) {
+				clients.add(c);
+				JSONObject clientJSON = new JSONObject();
+				clientJSON.put("forename", c.getForename());
+				clientJSON.put("surname", c.getSurname());
+				clientJSON.put("dateOfBirth", c.getDateOfBirth());
+				clientJSON.put("postcode", c.getPostcode());
+				clientJSON.put("street", c.getStreet());
+				clientJSON.put("houseNumber", c.getHouseNumber());
+				clientJSON.put("city", c.getCity());
+				clientJSON.put("nationality", c.getNationality());
+				clientJSON.put("telephoneNumber", c.getTelephoneNumber());
+				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
+				clientJSON.put("email", c.getEmail());
+				clientJSON.put("fileNumber", c.getClient_id());
+				returns.put(clientJSON);
+			}
+		}		
+		currentUser.setMyClients(clients);
+		return returns;
 	}
 
-	public JSONObject RefreshOverviewUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public JSONArray RefreshOverviewUsers(User user) throws JSONException {
+		JSONArray returns = new JSONArray();
+		ArrayList<User> users = new ArrayList<User>();
+		for (User u : db.getAllUsers()) {
+			JSONObject userJSON = new JSONObject();
+			users.add(u);
+			userJSON.put("forename", u.getForename());
+			userJSON.put("surname", u.getSurname());
+			userJSON.put("username", u.getUsername());
+			userJSON.put("dateOfBirth", u.getDateOfBirth());
+			userJSON.put("isActive", u.isActive());
+			userJSON.put("postcode", u.getPostcode());
+			userJSON.put("street", u.getStreet());
+			userJSON.put("houseNumber", u.getHouseNumber());
+			userJSON.put("city", u.getCity());
+			userJSON.put("nationality", u.getNationality());
+			userJSON.put("telephoneNumber", u.getTelephoneNumber());
+			userJSON.put("mobilePhoneNumber", u.getMobilePhoneNumber());
+			userJSON.put("email", u.getEmail());
+			userJSON.put("employeeNumber", u.getEmployeeNumber());
+			returns.put(userJSON);
+		}
+		if(user instanceof Administrator){
+			Administrator admin = (Administrator) user;
+			admin.setUsers(users);
+		}
+		return returns;
 	}
 }
