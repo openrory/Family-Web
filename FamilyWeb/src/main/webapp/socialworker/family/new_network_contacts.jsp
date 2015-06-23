@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/FamilyWeb/styles/new_network_contacts.css">
 <link rel="stylesheet" href="/FamilyWeb/styles/base.css">
 <script type="text/javascript" src="/FamilyWeb/javascripts/manage_new_network_contacts.js"></script>
+<script type="text/javascript" src="/FamilyWeb/javascripts/validate_new_network_contacts.js"></script>
 
 </head>
 <body fullbleed layout vertical>
@@ -63,7 +64,7 @@
         <% } %>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<div id="form_container">
-			<form id="group_form" action="/FamilyWeb/ContactServlet.do" method="post">
+			<form id="group_form" onsubmit="return validateForm();" action="/FamilyWeb/ContactServlet.do" method="post">
 
 				<div id="select_box_container">
 					<div class="information">
