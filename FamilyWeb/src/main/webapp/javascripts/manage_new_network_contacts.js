@@ -10,15 +10,17 @@
             var button = "button" + countBox;
 			document.getElementById("counter" + groupName).value = countBox;
             
-            // MOGELIJK OVERBODIGE DIV!
-            //var person = document.createElement('div');
-           // person.className="person";
-           // person.setAttribute("id", groupName + countBox);
-            
             // de wrapper van alle contact informatie.
             var contact = document.createElement('div');
             contact.className="contact";
             contact.setAttribute("id", groupName + countBox);
+            
+            // waarschuwing voor de naam mocht het niet goed zijn ingevuld
+            var nameWarning = document.createElement('span');
+            nameWarning.className="true";
+            nameWarning.setAttribute("id", groupName + "warning" + name);
+            var nameWarningText = document.createTextNode("Naam niet correct ingevuld!"); 
+            nameWarning.appendChild(nameWarningText);
             
             // de input voor de naam
             var informationName = document.createElement('div');
@@ -29,7 +31,6 @@
             var textName = document.createTextNode("Naam:");        
             labelName.appendChild(textName);
             var inputName = document.createElement('input');
-            //inputName.setAttribute("id", groupName + name);
             inputName.setAttribute("name", groupName + name);
             inputName.setAttribute("placeholder", "Volledige naam");
             inputName.setAttribute("type", "text");
@@ -39,8 +40,15 @@
             displayButton.className="displayButton";
             displayButton.setAttribute("id", groupName + button);
             displayButton.setAttribute("type", "button");
-            displayButton.setAttribute("onclick","hideContact(" + countBox + "," + "'" + groupName + "'" +")")
-            displayButton.setAttribute("value", "Verbergen")
+            displayButton.setAttribute("onclick","hideContact(" + countBox + "," + "'" + groupName + "'" +")");
+            displayButton.setAttribute("value", "Verbergen");
+            
+            // waarschuwing voor de rol mocht het niet goed zijn ingevuld
+            var roleWarning = document.createElement('span');
+            roleWarning.className="true";
+            roleWarning.setAttribute("id", groupName + "warning" + role);
+            var roleWarningText = document.createTextNode("Rol niet correct ingevuld!"); 
+            roleWarning.appendChild(roleWarningText);
             
             // de input voor de rol
             var informationRole = document.createElement('div');
@@ -51,10 +59,16 @@
             var textRole = document.createTextNode("Rol:");        
             labelRole.appendChild(textRole);
             var inputRole = document.createElement('input');
-            //inputRole.setAttribute("id", groupName + role);
             inputRole.setAttribute("name", groupName + role);
             inputRole.setAttribute("placeholder", "Rol");
             inputRole.setAttribute("type", "text");
+            
+            // waarschuwing voor de leeftijd mocht het niet goed zijn ingevuld
+            var ageWarning = document.createElement('span');
+            ageWarning.className="true";
+            ageWarning.setAttribute("id", groupName + "warning" + age);
+            var ageWarningText = document.createTextNode("Leeftijd niet correct ingevuld!"); 
+            ageWarning.appendChild(ageWarningText);
             
             // de input voor de leeftijd
             var informationAge = document.createElement('div');
@@ -65,7 +79,6 @@
             var textAge = document.createTextNode("Leeftijd:");        
             labelAge.appendChild(textAge);
             var inputAge = document.createElement('input');
-            //inputAge.setAttribute("id", groupName + age);
             inputAge.setAttribute("name", groupName + age);
             inputAge.setAttribute("placeholder", "Leeftijd");
             inputAge.setAttribute("type", "text");
@@ -79,7 +92,6 @@
             var textComment = document.createTextNode("Opmerking:");        
             labelComment.appendChild(textComment);
             var inputComment = document.createElement('textarea');
-            //inputComment.setAttribute("id", groupName + comment);
             inputComment.setAttribute("name", groupName + comment);
             inputComment.setAttribute("placeholder", "Opmerking");
             
@@ -99,16 +111,27 @@
 
             
             //het koppelen van alle tags aan elkaar
+            // eerst de waarschuwing mocht de naam niet goed zijn ingevuld
+            contact.appendChild(nameWarning);
             
+            // de naam input met alle bijbehorende elementen
             informationName.appendChild(labelName);
             informationName.appendChild(inputName);
             informationName.appendChild(displayButton);
             contact.appendChild(informationName);
             
+            // eerst de waarschuwing mocht de role niet goed zijn ingevuld
+            contact.appendChild(roleWarning);
+            
+            // de rol input met alle bijbehorende elementen
             informationRole.appendChild(labelRole);
             informationRole.appendChild(inputRole);
             contact.appendChild(informationRole);
             
+            // eerst de waarschuwing mocht de leeftijd niet goed zijn ingevuld
+            contact.appendChild(ageWarning);
+
+            // de leeftijd input met alle bijbehorende elementen
             informationAge.appendChild(labelAge);
             informationAge.appendChild(inputAge);
             contact.appendChild(informationAge);
