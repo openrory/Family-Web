@@ -52,7 +52,7 @@ public class ClientServlet extends HttpServlet {
 
 		} else if (option.equals("summary")) {
 
-			if (req.getParameter("userID") != null) {
+			if (req.getParameter("clientID") != null) {
 				int clientID = Integer.valueOf((String) req.getParameter("clientID"));
 				this.summary(clientID);
 			} else {
@@ -84,7 +84,7 @@ public class ClientServlet extends HttpServlet {
 			userID = this.currentUser.getUser_id();
 		} else {
 			try {
-				userID = Integer.valueOf(req.getParameter("user_id"));
+				userID = Integer.valueOf(req.getParameter("socialworker_id"));
 			} catch (NumberFormatException e) {
 				message += "Zorgprofessional niet gevonden."; //e.printStackTrace();
 			}
@@ -138,10 +138,17 @@ public class ClientServlet extends HttpServlet {
 			
 			client = (Client) clientObject;
 			message = this.setValidation();
-			
+			int socialworkerID = 0;
+						if(currentUser instanceof Administrator) {
+							try {
+								socialworkerID = Integer.valueOf(req.getParameter("socialworker_id"));
+							} catch (NumberFormatException e) {
+								message += "Zorgprofessional niet gevonden."; //e.printStackTrace();
+							}
+						} 
 			if (message.equals("")) {
 				
-				client.updateDB();
+				client.updateDB(socialworkerID);
 				req.removeAttribute("client");
 				message = "Client " + client.getForename() + " " + client.getSurname() + " succesvol bijgewerkt.";
 				this.setMessage(MESSAGE_SUCCESS, message);

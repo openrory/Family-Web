@@ -45,7 +45,8 @@ public class OverviewController {
 	}
 
 	/**
-	 * @param db the db to set
+	 * @param db
+	 *            the db to set
 	 */
 	public void setDb(DatabaseInterface db) {
 		this.db = db;
@@ -54,11 +55,11 @@ public class OverviewController {
 	public JSONObject[] createJSONNetworks(Client client) throws JSONException {
 		// client.getForename() + " " + client.getSurname()
 		// fm.getForename() + " " + fm.getSurname()
-		JSONArray netwerkNodes = new JSONArray();		
+		JSONArray netwerkNodes = new JSONArray();
 		JSONArray netwerkLinks = new JSONArray();
 		JSONArray netwerks1 = new JSONArray();
 		JSONArray netwerks2 = new JSONArray();
-		
+
 		JSONObject nodesPerson = new JSONObject();
 		JSONObject linksPerson = new JSONObject();
 		JSONObject netwerkPerson = new JSONObject();
@@ -91,8 +92,10 @@ public class OverviewController {
 		if (!clientNetworks.isEmpty()) {
 			netwerkNodes.put(nodesPerson);
 			netwerkLinks.put(linksPerson);
-			netwerkPerson.put(client.getForename() + " " + client.getSurname(), netwerkNodes);
-			netwerkLink.put(client.getForename() + " " + client.getSurname(), netwerkLinks);
+			netwerkPerson.put(client.getForename() + " " + client.getSurname(),
+					netwerkNodes);
+			netwerkLink.put(client.getForename() + " " + client.getSurname(),
+					netwerkLinks);
 			netwerks1.put(netwerkPerson);
 			netwerks2.put(netwerkLink);
 		}
@@ -126,8 +129,10 @@ public class OverviewController {
 			if (!familyNetworks.isEmpty()) {
 				netwerkNodes.put(nodesPerson);
 				netwerkLinks.put(linksPerson);
-				netwerkPerson.put(fm.getForename() + " " + fm.getSurname(), netwerkNodes);
-				netwerkLink.put(fm.getForename() + " " + fm.getSurname(), netwerkLinks);
+				netwerkPerson.put(fm.getForename() + " " + fm.getSurname(),
+						netwerkNodes);
+				netwerkLink.put(fm.getForename() + " " + fm.getSurname(),
+						netwerkLinks);
 				netwerks1.put(netwerkPerson);
 				netwerks2.put(netwerkLink);
 			}
@@ -196,10 +201,11 @@ public class OverviewController {
 		return link;
 	}
 
-	public JSONArray RefreshOverviewClients(User currentUser) throws JSONException {
+	public JSONArray RefreshOverviewClients(User currentUser)
+			throws JSONException {
 		JSONArray returns = new JSONArray();
 		ArrayList<Client> clients = new ArrayList<Client>();
-		if(currentUser instanceof Administrator){
+		if (currentUser instanceof Administrator) {
 			for (Client c : db.getAllClients()) {
 				clients.add(c);
 				JSONObject clientJSON = new JSONObject();
@@ -217,7 +223,7 @@ public class OverviewController {
 				clientJSON.put("fileNumber", c.getClient_id());
 				returns.put(clientJSON);
 			}
-		}else{
+		} else {
 			for (Client c : db.getAllClientsOfUser(currentUser)) {
 				clients.add(c);
 				JSONObject clientJSON = new JSONObject();
@@ -235,7 +241,7 @@ public class OverviewController {
 				clientJSON.put("fileNumber", c.getClient_id());
 				returns.put(clientJSON);
 			}
-		}		
+		}
 		currentUser.setMyClients(clients);
 		return returns;
 	}
@@ -262,10 +268,31 @@ public class OverviewController {
 			userJSON.put("employeeNumber", u.getEmployeeNumber());
 			returns.put(userJSON);
 		}
-		if(user instanceof Administrator){
+		if (user instanceof Administrator) {
 			Administrator admin = (Administrator) user;
 			admin.setUsers(users);
 		}
 		return returns;
+	}
+
+	public JSONArray autoComplete(User currentUser) {
+		JSONArray usersJSON = new JSONArray();
+		if (currentUser instanceof Administrator) {
+			Administrator admin = (Administrator) currentUser;
+
+			try {
+				for (User u : admin.getDbController().getAllUsers()) {
+					JSONObject userJSON = new JSONObject();
+					userJSON.put("label",
+							u.getForename() + " " + u.getSurname() + " | NR: "
+									+ u.getEmployeeNumber());
+					userJSON.put("value", String.valueOf(u.getUser_id()));
+					usersJSON.put(userJSON);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return usersJSON;
 	}
 }

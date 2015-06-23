@@ -64,4 +64,7 @@ public class Administrator extends User {
 	public void setUsers(ArrayList<User> allSocialworkers) {
 		this.users = allSocialworkers;
 	}
+	public ArrayList<User> getUsers() {
+		return users;
+	}
 }
