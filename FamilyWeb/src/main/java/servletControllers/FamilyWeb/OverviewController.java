@@ -224,4 +224,14 @@ public class OverviewController {
 		}
 		return link;
 	}
+
+	public JSONObject RefreshOverviewClients(User currentUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public JSONObject RefreshOverviewUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

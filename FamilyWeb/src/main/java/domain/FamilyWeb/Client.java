@@ -417,9 +417,12 @@ public class Client {
 	/**
 	 * @param fileNumber
 	 *            the fileNumber to set
+	 * @return 
 	 */
-	public void setFileNumber(String fileNumber) {
+	public boolean setFileNumber(String fileNumber) {
 		this.fileNumber = fileNumber;
+		return true;
+		// MOET NOG GEMAAKT WORDEN
 	}
 
 	/**
@@ -467,8 +470,8 @@ public class Client {
 		this.myNetworks = myNetworks;
 	}
 
-	public boolean addDB(User user) {
-		return this.dbController.addClient(this, user);
+	public boolean addDB(int userID) {
+		return this.dbController.addClient(this, userID);
 	}
 
 	// REALISEREN CLIENT KUNNEN KOPPELEN OVERDRAGEN AAN ANDERE USER
