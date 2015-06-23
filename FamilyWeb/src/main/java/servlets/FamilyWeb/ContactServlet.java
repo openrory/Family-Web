@@ -80,6 +80,8 @@ public class ContactServlet extends HttpServlet {
 					}
 				}
 			}
+		}if(contacts.isEmpty()){
+			b = false;
 		}
 		if (b) {
 			String interviewee = req.getParameter("interviewee");
@@ -108,7 +110,13 @@ public class ContactServlet extends HttpServlet {
 						.getRequestDispatcher("/socialworker/family/new_network_questions.jsp");
 			}
 			req.getSession().setAttribute("contacts", contacts);
-		} else {
+		} else if(contacts.isEmpty()){
+			req.setAttribute("message",
+					"Voer minimaal één contact in voor de vragenlijst.");
+			req.setAttribute("messageType", "warning");
+			reqDisp = req
+					.getRequestDispatcher("/socialworker/family/new_network_contacts.jsp");
+		}else {
 			req.setAttribute("message",
 					"Gegevens kloppen niet van één of meerdere contacten.");
 			req.setAttribute("messageType", "warning");

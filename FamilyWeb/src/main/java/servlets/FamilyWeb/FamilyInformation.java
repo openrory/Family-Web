@@ -62,8 +62,6 @@ public class FamilyInformation extends HttpServlet {
 						JSONObject[] networks = OverviewController.getInstance().createJSONNetworks(client);
 						req.getSession().setAttribute("nodesNetwork", networks[0]);
 						req.getSession().setAttribute("linksNetwork", networks[1]);
-						System.out.println(networks[0].toString());
-						System.out.println(networks[1].toString());
 						reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 					} catch (JSONException e) {
 						req.setAttribute("message", "Kan de netwerken van "+client.getForename()+" "+client.getSurname()+" niet goed ophalen, log opnieuw in en probeer het opnieuw.");

@@ -60,7 +60,7 @@
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 		<div id="form_container">
-			<form id="group_form" onsubmit="/FamilyWeb/SurveyServlet.do" method="post">
+			<form id="group_form" action="/FamilyWeb/SurveyServlet.do" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>

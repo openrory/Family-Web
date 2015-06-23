@@ -798,7 +798,15 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setInt(5, network.getTheSurvey().getSurvey_id());
 			pStmt.executeUpdate();
 			//get auto generated id
-			pStmt = conn.prepareStatement("select network_id from networks");
+			pStmt = conn.prepareStatement("select network_id from networks where client_id=? OR member_id=? ORDER BY datecreated DESC LIMIT 1");
+			if(client_id == 0)
+				pStmt.setString(1, null);
+			else
+				pStmt.setInt(1, client_id);
+			if(familymember_id == 0)
+				pStmt.setString(2, null);
+			else
+				pStmt.setInt(2, familymember_id);
 			ResultSet rSet = pStmt.executeQuery();
 			if(rSet.next())
 				network.setNetwork_id(rSet.getInt("network_id"));
@@ -825,7 +833,7 @@ public class MySQLDao implements DatabaseInterface {
 				pStmt.setString(2, c.getRole());
 				pStmt.setInt(3, c.getAge());
 				pStmt.setString(4, c.getCommentary());
-				pStmt.setInt(5, categories.get(c.getCategories().get(0)) );
+				pStmt.setInt(5, c.getCategories().get(0).getGroup_id() );
 				pStmt.setInt(6, network.getNetwork_id());
 				pStmt.executeUpdate();
 				
