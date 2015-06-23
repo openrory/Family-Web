@@ -51,11 +51,7 @@
 			<div class="sidebar">
 			<div class="interviewee">
 			<h1 class="title">Netwerken van:</h1>
-				 <select>
-  					<option value="volvo">Volvo</option>
-  					<option value="saab">Saab</option>
-  					<option value="mercedes">Mercedes</option>
-  					<option value="audi">Audi</option>
+				 <select id = "network1SelectList" onChange = "changePerson(this)">
 				</select> 
 			</div>
 			<div class="contact_groups" >
@@ -64,9 +60,11 @@
 			</ul>
 			</div>
 			</div>
-			<div class="timeline" id = network1range>
+			<div class="timeline">
 				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
+                <div id = "network1range">
 				<input class="slider" type="range" name="points" min="0" max="10">
+                </div>
 			</div>
 			<div class="general_comment">
 				<h1 class="title">Algemeen commentaar</h1>
@@ -79,13 +77,10 @@
 			</div>
 			<div class="sidebar">
 			<div class="interviewee">
-			<h1 class="title">Netwerken van:</h1>
-				 <select>
-  					<option value="volvo">Volvo</option>
-  					<option value="saab">Saab</option>
-  					<option value="mercedes">Mercedes</option>
-  					<option value="audi">Audi</option>
+			<h1 class="title" >Netwerken van:</h1>
+                 <select id = "network2SelectList" onChange = "changePerson(this)">
 				</select> 
+          
 			</div>
 			<div class="contact_groups">
 			<p>Contactgroepen</p>
@@ -101,7 +96,7 @@
 			</ul>
 			</div>
 			</div>
-			<div class="timeline" id = "network2range">
+			<div class="timeline">
 				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
                 <div id = "network2range">
 				<input class="slider" type="range" name="points" min="0" max="10">
@@ -158,6 +153,19 @@ var nodesNetwork =
 												   {"name":"Sjaak","group":3},
 												   {"name":"Klaas","group":3}
 												]
+											},
+											{"15-05-2015":
+												[ 
+												   {"name":"De Client","group":0},
+												   {"name":"Harry","group":1},
+												   {"name":"Hans","group":1},
+												   {"name":"Wouter","group":2},
+												   {"name":"Billy","group":2},
+												   {"name":"Bert","group":3},
+												   {"name":"Sjaak","group":3},
+												   {"name":"Klaas","group":3},
+												   {"name":"Bert","group":4},
+												]
 											}
 									    ]
 									  },
@@ -211,6 +219,18 @@ var linksNetwork = {"allNetworks" : [
 								  { "source": 7, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3}
 								  ]
 								},
+								{"15-05-2015":
+								  [
+								  { "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
+								  { "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
+								  { "source": 3, "target": 0, "distance": 3, "strength": 3, "type": 3, "group":2},
+								  { "source": 4, "target": 0, "distance": 4, "strength": 2, "type": 4, "group":2},
+								  { "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 7, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 8, "target": 0, "distance": 3, "strength": 4, "type": 3, "group":4}
+								  ]
+								},
 							]
 						},
 						{ "person2":
@@ -229,22 +249,67 @@ var linksNetwork = {"allNetworks" : [
 						}
 					]
 				}
-
-
-console.dir(nodesNetwork.allNetworks);
+var personArray = [];
 var chosenPerson = 0;
 var slidervalue = 0;
+var thisPersonDates;
+var contactGroups = ["client","household", "family", "friends","colleagues", "neighbours", "acquaintance", "education","club", "religion", "careinstitution", "youthcare","bureauhalt", "justice" ];
 var networkNameArray = ["network1","network2"];
- 
-for ( i = 0; i < networkNameArray.length; i++ ){
-  draw_graphs(networkNameArray[i], chosenPerson, slidervalue);
-  console.log(networkNameArray[i].toString());
-  var network = networkNameArray[i].toString();
-  createSliders(network);
+
+function createSelectListPersons(network) {
+	var select = document.getElementById(network + "SelectList"); 
+	console.log(network); 
+
+	for(var i = 0; i < nodesNetwork.allNetworks.length; i++) {
+		console.dir(nodesNetwork.allNetworks)
+		allPersons = nodesNetwork.allNetworks[i];
+		console.log(allPersons);
+		for ( var person in allPersons ){
+  			var option = document.createElement("option");
+			option.textContent = person;
+			option.value = i;
+			console.log(option.value);
+			select.appendChild(option);
+  		}
+	}
 }
 
-function createSliders(network) {
-	var slider = document.createElement("input");
+function changePerson(selectList){
+	chosenPerson = selectList.value;
+	var n = selectList.id;
+	console.log(n);
+	console.log(chosenPerson);
+	var split = n.split('SelectList');
+	var selectedNetwork = split[0];
+	console.log(selectedNetwork);
+	d3.select("#"+selectedNetwork).select('svg').remove();
+	slidervalue = 0;
+	draw_graphs(selectedNetwork,chosenPerson,slidervalue)
+}
+
+function onChangeSlider(slider,network) {
+	
+	console.log(slider.id);
+	console.log(slider.value);
+	console.log(network);
+	d3.select("#"+network).select('svg').remove();
+	console.log(document.getElementById(network + "contact_groups"));
+	console.log(network, chosenPerson, slider.value)
+ //   document.getElementById(networkName + "contact_groups").innerHTML == "";
+	draw_graphs(network,chosenPerson,slider.value);
+  }
+
+console.dir(nodesNetwork.allNetworks);
+ 
+for ( i = 0; i < networkNameArray.length; i++ ){
+  var network = networkNameArray[i];
+  console.log(networkNameArray[i].toString());
+  createSelectListPersons(network);
+  draw_graphs(network, chosenPerson, slidervalue);
+}
+
+/*function createSliders(network) {
+  var slider = document.createElement("input");
   slider.type = "range";
   slider.id = network + "range";
   slider.value = function(d) { return d.datum };
@@ -261,7 +326,7 @@ function createSliders(network) {
   console.log(network);
 }
 
-function onChangeSlider(slider,network) {
+function onChangeSlider(slider,network) {s
 	
 	console.log(slider.id);
 	console.log(network);
@@ -270,12 +335,12 @@ function onChangeSlider(slider,network) {
 	console.log(network, chosenPerson, slider.value)
  //   document.getElementById(networkName + "contact_groups").innerHTML == "";
 	draw_graphs(network,chosenPerson,slider.value);
-  }
+  }*/
 
-function draw_graphs(networkName, chosenPerson, slidervalue){ 
+function draw_graphs(networkName, chosenPerson, sliderval){ 
   console.log(chosenPerson);
   var i, selectedPerson, thisDatesNodes, thisPersonLinks, allNetworksDatesThisPerson, selectedNetworkDatesLinks, allNetworksLinksThisPerson, selectedNetworkNodes, selectedNetworkLinks;
-  //Selecteer juist netwerkNodes
+   //Selecteer juist netwerkNodes
   for ( i = 0; i < nodesNetwork.allNetworks.length; i++ ) {
 	  selectedPerson = nodesNetwork.allNetworks[chosenPerson];
 	  console.dir(selectedPerson);
@@ -295,24 +360,24 @@ function draw_graphs(networkName, chosenPerson, slidervalue){
 	 console.dir(selectedNetworkNodes);
   }
 	//Selecteer juist netwerkLinks
-	for ( i = 0; i < linksNetwork.allNetworks.length; i++ ) {
+  for ( i = 0; i < linksNetwork.allNetworks.length; i++ ) {
 	  thisPersonLinks = linksNetwork.allNetworks[chosenPerson];
 	  console.dir(thisPersonLinks);
 	}
-	for (var person in thisPersonLinks)
+  for (var person in thisPersonLinks)
 	{
 	  allNetworksLinksThisPerson = thisPersonLinks[person];
 	  console.dir(allNetworksLinksThisPerson);
 	}
-	for ( i = 0; i < allNetworksLinksThisPerson.length; i++ ) {
+  for ( i = 0; i < allNetworksLinksThisPerson.length; i++ ) {
 	  selectedNetworkDatesLinks = allNetworksLinksThisPerson[slidervalue];
 	  console.dir(selectedNetworkDatesLinks);
 	}
-	for ( var dates in selectedNetworkDatesLinks ) {
+  for ( var dates in selectedNetworkDatesLinks ) {
 	   selectedNetworkLinks = selectedNetworkDatesLinks[dates];
 	   console.dir(selectedNetworkLinks);
 	}
-  console.dir(selectedNetworkLinks);
+  console.dir(selectedNetworkLinks);	
 /*	  for ( var n in nodesNetwork.allnetworks[person]){
 		  allNetworksThisPerson
 	  }
@@ -415,36 +480,63 @@ function draw_graphs(networkName, chosenPerson, slidervalue){
 	  // in the container.
 	  
   //Unieke checkboxes maken
-  var unique = {};
-  var distinct = [];
+  createCheckboxes();
+  var distinct;
+  function createCheckboxes(){
+	var unique = {};
+	distinct = [];
 	  for( var i in selectedNetworkNodes ){
-	   if( typeof(unique[selectedNetworkNodes[i].group]) == "undefined"){
-		distinct.push(selectedNetworkNodes[i].group);
-		}
-	   unique[selectedNetworkNodes[i].group] = 0;
-	 }
-  console.dir(distinct);
-  var ul = document.createElement("ul");
-  var checkboxlist=document.createElement("LI");
-  for ( i = 1; i < distinct.length; i++ ) {
-	  
-	  var label= document.createElement("label");
-	  var description = document.createTextNode(distinct[i].valueOf());
-	  var checkbox = document.createElement("input");
-	  var br = document.createElement("br");
-	  
-	  checkbox.type = "checkbox";    // make the element a checkbox
-	  checkbox.name = "slct[]";      // give it a name we can check on the server side
-	  checkbox.value = distinct[i].valueOf();         // make its value "pair"
-	  checkbox.onclick = function () {
-			  onChangeCheckbox (this);
-		  };
-	  label.appendChild(checkbox);   // add the box to the element
-	  label.appendChild(description);// add the description to the element
-	  checkboxlist.appendChild(label);
-	  checkboxlist.appendChild(br);
+		 if( typeof(unique[selectedNetworkNodes[i].group]) == "undefined"){
+		  distinct.push(selectedNetworkNodes[i].group);
+		  }
+		 unique[selectedNetworkNodes[i].group] = 0;
+	   }
+	console.dir(distinct);
+	var ul = document.createElement("ul");
+	var checkboxlist=document.createElement("LI");
+	for ( i = 1; i < distinct.length; i++ ) {
+		
+		var label= document.createElement("label");
+		var description = document.createTextNode(contactGroups[i]);
+		var checkbox = document.createElement("input");
+		var br = document.createElement("br");
+		
+		checkbox.type = "checkbox";    // make the element a checkbox
+		checkbox.name = "slct[]";      // give it a name we can check on the server side
+		checkbox.value = distinct[i].valueOf();         // make its value "pair"
+		checkbox.onclick = function () {
+				onChangeCheckbox (this);
+			};
+		label.appendChild(checkbox);   // add the box to the element
+		label.appendChild(description);// add the description to the element
+		checkboxlist.appendChild(label);
+		checkboxlist.appendChild(br);
+	}
+	 document.getElementById(networkName + "contact_groups").innerHTML = "";
+	 document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
   }
-   document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
+  
+  createSliders();
+  function createSliders() {
+	var slider = document.createElement("input");
+	slider.type = "range";
+	slider.id = network + "range";
+	slider.description = function(d) { return d.datum };
+	slider.max = thisPersonDates.length - 1;
+	slider.min = 0;
+	slider.defaultValue = sliderval;
+	console.log(network);
+	slider.onchange = function () { 
+	  slidervalue = slider.value;
+	  console.log(slidervalue);
+	  onChangeSlider(slider,networkName);
+	}
+						   
+	console.log(network);
+	document.getElementById(networkName + "range").innerHTML = "";
+	document.getElementById(networkName + "range").appendChild(slider);
+	console.log(network);
+  }
 	  
   var middleX = width / 2;
   var middleY = height / 2; 
