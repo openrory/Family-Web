@@ -116,7 +116,7 @@
 						icon="add"></core-icon-button>
 				</div>
 				<div id="education" class="group">
-					<input id="countereducation" name="counterreducation" type="hidden" value="0" />
+					<input id="countereducation" name="countereducation" type="hidden" value="0" />
 					<h3>Onderwijs</h3>
 					<core-icon-button class="add" onclick="addInput('education')"
 						icon="add"></core-icon-button>

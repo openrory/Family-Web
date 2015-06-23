@@ -10,7 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import servletControllers.FamilyWeb.OverviewController;
 import domain.FamilyWeb.Answer;
+import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Contact;
 import domain.FamilyWeb.Network;
 import domain.FamilyWeb.Question;
@@ -34,11 +39,11 @@ public class SurveyServlet extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getAttribute("user");
+		User user = (User) req.getSession().getAttribute("user");
 		RequestDispatcher reqDisp = null;	
-		if(user != null){
-			int client_id = Integer.parseInt((String) req.getSession().getAttribute("intervieweeC")); 
-			int family_id = Integer.parseInt((String) req.getSession().getAttribute("intervieweeF"));
+		if(user != null){			
+			int client_id = Integer.valueOf(req.getSession().getAttribute("intervieweeC").toString()); 
+			int family_id = Integer.valueOf(req.getSession().getAttribute("intervieweeF").toString());
 			Network newNetwork = new Network(new Date(new java.util.Date().getTime()), req.getParameter("general_comment"));
 			Survey survey = (Survey) req.getSession().getAttribute("survey");
 			ArrayList<Contact> contacts = (ArrayList<Contact>) req.getSession().getAttribute("contacts");
@@ -58,6 +63,19 @@ public class SurveyServlet extends HttpServlet {
 			}
 			newNetwork.setContacts(contacts);
 			user.getDbController().addNetwork(newNetwork, client_id, family_id);
+			JSONObject[] networks;
+			try {
+				networks = OverviewController.getInstance().createJSONNetworks((Client) req.getSession().getAttribute("client"));
+				req.getSession().setAttribute("nodesNetwork", networks[0]);
+				req.getSession().setAttribute("linksNetwork", networks[1]);
+				req.setAttribute("message", "Het nieuwe netwerk is toegevoegd.");
+				req.setAttribute("messageType", "succes");
+				reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
+			} catch (JSONException e) {				
+				req.setAttribute("message", "Het nieuwe netwerk is toegevoegd.");
+				req.setAttribute("messageType", "succes");
+				reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
+			}
 		}else{
 			req.setAttribute("message", "Er is iets onverwachts gelopen, probeer opnieuw in te loggen.");
 			req.setAttribute("messageType", "error");
