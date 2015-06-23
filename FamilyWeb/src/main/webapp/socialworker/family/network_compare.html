@@ -250,8 +250,12 @@ var linksNetwork = {"allNetworks" : [
 					]
 				}
 var personArray = [];
-var chosenPerson = 0;
-var slidervalue = 0;
+var netwerk1ChosenPerson = 0;
+var netwerk2ChosenPerson = 0;
+var netwerk1Slidervalue = 0;
+var netwerk2Slidervalue = 0;
+
+
 var thisPersonDates;
 var contactGroups = ["client","household", "family", "friends","colleagues", "neighbours", "acquaintance", "education","club", "religion", "careinstitution", "youthcare","bureauhalt", "justice" ];
 var networkNameArray = ["network1","network2"];
@@ -275,28 +279,45 @@ function createSelectListPersons(network) {
 }
 
 function changePerson(selectList){
-	chosenPerson = selectList.value;
 	var n = selectList.id;
 	console.log(n);
-	console.log(chosenPerson);
 	var split = n.split('SelectList');
 	var selectedNetwork = split[0];
 	console.log(selectedNetwork);
-	d3.select("#"+selectedNetwork).select('svg').remove();
-	slidervalue = 0;
-	draw_graphs(selectedNetwork,chosenPerson,slidervalue)
+		if (selectedNetwork == "network1") {
+			netwerk1ChosenPerson = selectList.value;
+			d3.select("#"+selectedNetwork).select('svg').remove();
+			netwerk1Slidervalue = 0;
+			draw_graphs(selectedNetwork,netwerk1ChosenPerson,netwerk1Slidervalue);
+		}
+		else if (selectedNetwork == "network2") {
+			netwerk2ChosenPerson = selectList.value;
+			d3.select("#"+selectedNetwork).select('svg').remove();
+			netwerk2Slidervalue = 0;
+			console.log(selectedNetwork,netwerk2ChosenPerson,netwerk2Slidervalue);
+			draw_graphs(selectedNetwork,netwerk2ChosenPerson,netwerk2Slidervalue);
+		}
 }
 
 function onChangeSlider(slider,network) {
 	
 	console.log(slider.id);
 	console.log(slider.value);
+	console.log("slider max = " + slider.max);
 	console.log(network);
-	d3.select("#"+network).select('svg').remove();
 	console.log(document.getElementById(network + "contact_groups"));
-	console.log(network, chosenPerson, slider.value)
- //   document.getElementById(networkName + "contact_groups").innerHTML == "";
-	draw_graphs(network,chosenPerson,slider.value);
+	if (network == "network1") {
+			netwerk1Slidervalue = slider.value;
+			d3.select("#"+network).select('svg').remove();
+			console.log(network,netwerk1ChosenPerson,netwerk1Slidervalue);
+			draw_graphs(network,netwerk1ChosenPerson,netwerk1Slidervalue);
+		}
+	else if (network == "network2") {
+			netwerk2Slidervalue = slider.value;
+			d3.select("#"+network).select('svg').remove();
+			console.log(network,netwerk2ChosenPerson,netwerk2Slidervalue);
+			draw_graphs(network,netwerk2ChosenPerson,netwerk2Slidervalue);
+		}
   }
 
 console.dir(nodesNetwork.allNetworks);
@@ -305,7 +326,7 @@ for ( i = 0; i < networkNameArray.length; i++ ){
   var network = networkNameArray[i];
   console.log(networkNameArray[i].toString());
   createSelectListPersons(network);
-  draw_graphs(network, chosenPerson, slidervalue);
+  draw_graphs(network, netwerk1ChosenPerson, netwerk1Slidervalue);
 }
 
 /*function createSliders(network) {
@@ -338,6 +359,7 @@ function onChangeSlider(slider,network) {s
   }*/
 
 function draw_graphs(networkName, chosenPerson, sliderval){ 
+  console.log("doorgestuurde netwerkname: " + networkName);
   console.log(chosenPerson);
   var i, selectedPerson, thisDatesNodes, thisPersonLinks, allNetworksDatesThisPerson, selectedNetworkDatesLinks, allNetworksLinksThisPerson, selectedNetworkNodes, selectedNetworkLinks;
    //Selecteer juist netwerkNodes
@@ -352,7 +374,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
   for (i = 0; i < thisPersonDates.length; i++ )
 	{
 	  console.dir(thisPersonDates);
-	  allNetworkDatesThisPerson = thisPersonDates[slidervalue];
+	  allNetworkDatesThisPerson = thisPersonDates[sliderval];
 	  console.dir(allNetworkDatesThisPerson);
 	}
   for ( var dates in allNetworkDatesThisPerson ){
@@ -370,7 +392,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  console.dir(allNetworksLinksThisPerson);
 	}
   for ( i = 0; i < allNetworksLinksThisPerson.length; i++ ) {
-	  selectedNetworkDatesLinks = allNetworksLinksThisPerson[slidervalue];
+	  selectedNetworkDatesLinks = allNetworksLinksThisPerson[sliderval];
 	  console.dir(selectedNetworkDatesLinks);
 	}
   for ( var dates in selectedNetworkDatesLinks ) {
@@ -512,6 +534,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 		checkboxlist.appendChild(label);
 		checkboxlist.appendChild(br);
 	}
+	console.log(networkName);
 	 document.getElementById(networkName + "contact_groups").innerHTML = "";
 	 document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
   }
@@ -520,21 +543,25 @@ function draw_graphs(networkName, chosenPerson, sliderval){
   function createSliders() {
 	var slider = document.createElement("input");
 	slider.type = "range";
-	slider.id = network + "range";
+	slider.id = networkName + "range";
 	slider.description = function(d) { return d.datum };
+	console.log("meegegeven Max" + thisPersonDates.length)
 	slider.max = thisPersonDates.length - 1;
 	slider.min = 0;
 	slider.defaultValue = sliderval;
-	console.log(network);
+	console.log(networkName);
 	slider.onchange = function () { 
+	  console.log("Networkname: " + networkName)
 	  slidervalue = slider.value;
 	  console.log(slidervalue);
 	  onChangeSlider(slider,networkName);
 	}
 						   
-	console.log(network);
+	console.log(networkName);
+	console.log(document.getElementById(networkName + "range"));
 	document.getElementById(networkName + "range").innerHTML = "";
 	document.getElementById(networkName + "range").appendChild(slider);
+	console.log(document.getElementById(networkName + "range"));
 	console.log(network);
   }
 	  
@@ -676,7 +703,6 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  console.log("unselected Link: " + groepnummer);
   }
 }
-
 </script>
 </body>
 
