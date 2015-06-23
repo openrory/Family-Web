@@ -92,7 +92,10 @@
 <%-- 						<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name} --%>
 <%-- 						</c:forEach> --%>
 						</div>						
-						</c:forEach>                   		
+						</c:forEach> 
+						<c:when test="${fn:length(contact.commentary) > 1}">
+							<p>Opmerking bij contact: ${contact.commentary}</p>           
+						</c:when>       		
 						<div><input type="button" onclick="closeQuestions(${contact.contact_id})" value="Volgende contactpersoon" /></div>						
 						</div>
 					</div>
