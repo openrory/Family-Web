@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 					//check if administrator
 					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {			
 						try {
+							req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(user));
 							JSONArray usersJSON = OverviewController.getInstance().RefreshOverviewUsers(user);
 							req.getSession().setAttribute("usersJSON", usersJSON);
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
