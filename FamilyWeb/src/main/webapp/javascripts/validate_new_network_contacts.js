@@ -30,6 +30,9 @@ function validateForm() {
                     var age = document.forms["group_form"][groups[i] + "age" + x].value;
 
                     // validatie voor de naam
+                    console.log(name);
+                    name = name.trim();
+                    console.log(name);
                     if (name == null || name == "" || digitsReg.test(name)) {
                     	var test = groups[i] + "name" + "warning" + x;
                     	console.log(test);
@@ -39,6 +42,10 @@ function validateForm() {
                         document.getElementById(groups[i] + "warningname" + x).className = "true";
                     } 
                     
+                    // validatie voor de rol
+                    console.log(role);
+                    role = role.trim();
+                    console.log(role);
                     if (role == null || role == "" || digitsReg.test(role)) {
                         document.getElementById(groups[i] + "warningrole" + x).className = "false";
                         isGood = false;
@@ -46,9 +53,15 @@ function validateForm() {
                         document.getElementById(groups[i] + "warningrole" + x).className = "true";
                     }
                     
+                    // validatie voor de leeftijd
+                    console.log(age);
+                    age = age.trim();
+                    console.log(age);
                     if (age == null || age == "" || nonDigitsReg.test(age)) {
+                    	if(!(parseInt(age) <= 0)){
                         document.getElementById(groups[i] + "warningage" + x).className = "false";
                         isGood = false;
+                    	}
                     } else {
                         document.getElementById(groups[i] + "warningage" + x).className = "true";
                     }
