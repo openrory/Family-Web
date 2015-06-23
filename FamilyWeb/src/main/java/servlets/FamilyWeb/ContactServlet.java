@@ -57,8 +57,8 @@ public class ContactServlet extends HttpServlet {
 						String name = req.getParameter(group + "name" + i)
 								.trim();
 						String commentary = "";
-						String com = req.getParameter(group + "comment" + i);
-						if(com != null && com.trim().equals(""))
+						String com = req.getParameter(group + "comment" + i).toString();
+						if(com != null && !com.trim().equals(""))
 							commentary = com.trim();
 						String role = req.getParameter(group + "role" + i)
 								.trim();
