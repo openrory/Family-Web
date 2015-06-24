@@ -45,62 +45,62 @@
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
-                    <input type="hidden" name=clientID value="${familymember.familymember_id}">
+                    <input type="hidden" name=familymemberID value="${familymember.familymember_id}">
                    <% }%> 
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
                         <label>Voornaam :</label>
-                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${client.forename}" />
+                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${familymember.forename}" />
                     </div>
 					<span id="surnameWarning" class="true">Geen achternaam ingevuld</span>
                     <div class="information">
                         <label>Achternaam :</label>
-                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${client.surname}"/>
+                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${familymember.surname}"/>
                     </div>
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
                         <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${client.dateofbirth}" />
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${familymember.dateofbirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
                         <label>Nationaliteit :</label>
-                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${client.nationality}"/>
+                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${familymember.nationality}"/>
                     </div>
 					<span id="streetWarning" class="true">Geen straatnaam ingevuld</span>
                     <div class="information">
                         <label>Straat :</label>
-                        <input id="street" name="street" type="text" placeholder="Straat" value="${client.street}"/>
+                        <input id="street" name="street" type="text" placeholder="Straat" value="${familymember.street}"/>
                     </div>
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label>Huisnummer :</label>
-                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${client.streetnumber}" />
+                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${familymember.streetnumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
                         <label>Postcode :</label>
-                        <input id="postcode" name="postcode" type="text" placeholder="Postcode" value="${client.postcode}"/>
+                        <input id="postcode" name="postcode" type="text" placeholder="Postcode" value="${familymember.postcode}"/>
                     </div>
 					<span id="cityWarning" class="true">Geen woonplaats ingevuld</span>
                     <div class="information">
                         <label>Woonplaats :</label>
-                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${client.city}"/>
+                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${familymember.city}"/>
                     </div>
 					<span id="phonenumberWarning" class="true">Geen telefoonnummer ingevuld ingevuld</span>
                     <div class="information">
                         <label>Telefoonnummer vast :</label>
-                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${client.phonenumber}"/>
+                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${familymember.phonenumber}"/>
                     </div>
 					<span id="mobileWarning" class="true">Geen mobiel nummer ingevuld</span>
 					<div class="information">
                         <label>Mobiel nummer :</label>
-                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${client.mobile}"/>
+                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${familymember.mobile}"/>
                     </div>
 					<span id="emailWarning" class="true">Geen email ingevuld</span>
                     <div class="information">
                         <label>E-mail :</label>
-                        <input id="email" name="email" type="email" placeholder="E-mail" value="${client.email}"/>
+                        <input id="email" name="email" type="email" placeholder="E-mail" value="${familymember.email}"/>
                     </div>
                     
                     <paper-submit-button-decorator id="button">

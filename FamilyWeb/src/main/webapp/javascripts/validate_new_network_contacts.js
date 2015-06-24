@@ -21,7 +21,6 @@ function validateForm() {
             for(x = 1; x <= counter; x++){
                 // eerst gaan we kijken of het contact nog wel gebruikt gaat worden (en dus niet verwijderd is)
                 var validatequery = groups[i] + "validate" + x;
-                console.log("validatequery: " + validatequery);
             	var validate = document.forms["group_form"][groups[i] + "validate" + x].value;
                 if(validate == "true"){
                     // ophalen van de velden van één contact
@@ -30,12 +29,9 @@ function validateForm() {
                     var age = document.forms["group_form"][groups[i] + "age" + x].value;
 
                     // validatie voor de naam
-                    console.log(name);
                     name = name.trim();
-                    console.log(name);
                     if (name == null || name == "" || digitsReg.test(name)) {
                     	var test = groups[i] + "name" + "warning" + x;
-                    	console.log(test);
                         document.getElementById(groups[i] + "warningname" + x).className = "false";
                         isGood = false;
                     } else {
@@ -43,9 +39,7 @@ function validateForm() {
                     } 
                     
                     // validatie voor de rol
-                    console.log(role);
                     role = role.trim();
-                    console.log(role);
                     if (role == null || role == "" || digitsReg.test(role)) {
                         document.getElementById(groups[i] + "warningrole" + x).className = "false";
                         isGood = false;
@@ -54,9 +48,7 @@ function validateForm() {
                     }
                     
                     // validatie voor de leeftijd
-                    console.log(age);
                     age = age.trim();
-                    console.log(age);
                     if (age == null || age == "" || nonDigitsReg.test(age)) {
                     	if(!(parseInt(age) <= 0)){
                         document.getElementById(groups[i] + "warningage" + x).className = "false";

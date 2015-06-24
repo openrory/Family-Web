@@ -25,84 +25,84 @@ function validateForm() {
 
 
 
-    if (fileid == null || fileid == "" || nonDigitsReg.test(fileid)) {
+    if (fileid == null || fileid == "" || !nonDigitsReg.test(fileid)) {
         document.getElementById("fileidWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("fileidWarning").className = "true";
     }
 
-    if (forename == null || forename == "" || digitsReg.test(forename)) {
+    if (forename == null || forename == "" || !digitsReg.test(forename)) {
         document.getElementById("forenameWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("forenameWarning").className = "true";
     }
 
-    if (surname == null || surname == "" || digitsReg.test(surname)) {
+    if (surname == null || surname == "" || !digitsReg.test(surname)) {
         document.getElementById("surnameWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("surnameWarning").className = "true";
     }
 
-    if (dateofbirth == null || dateofbirth == "" || dateReg.test(dateofbirth)) {
+    if (dateofbirth == null || dateofbirth == "" || !dateReg.test(dateofbirth)) {
         document.getElementById("dateofbirthWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("dateofbirthWarning").className = "true";
     }
 
-    if (nationality == null || nationality == "" || digitsReg.test(nationality)) {
+    if (nationality == null || nationality == "" || !digitsReg.test(nationality)) {
         document.getElementById("nationalityWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("nationalityWarning").className = "true";
     }
 
-    if (street == null || street == "") {
+    if (street == null || street == "" || !digitsReg.test(nationality)) {
         document.getElementById("streetWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("streetWarning").className = "true";
     }
 
-    if (streetnumber == null || streetnumber == "" || nonDigitsReg.test(streetnumber)) {
+    if (streetnumber == null || streetnumber == "" || !nonDigitsReg.test(streetnumber)) {
         document.getElementById("streetnumberWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("streetnumberWarning").className = "true";
     }
 
-    if (postcode == null || postcode == "" || postcodeReg.test(postcode)) {
+    if (postcode == null || postcode == "" || !postcodeReg.test(postcode)) {
         document.getElementById("postcodeWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("postcodeWarning").className = "true";
     }
 
-    if (city == null || city == "" || digitsReg.test(city)) {
+    if (city == null || city == "" || !digitsReg.test(city)) {
         document.getElementById("cityWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("cityWarning").className = "true";
     }
 
-    if (phonenumber == null || phonenumber == "" || nonDigitsReg.test(phonenumber) || phonenumber.length > 15) {
+    if (phonenumber == null || phonenumber == "" || !nonDigitsReg.test(phonenumber) || phonenumber.length > 15) {
         document.getElementById("phonenumberWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("phonenumberWarning").className = "true";
     }
     //
-    if (mobile == null || mobile == "" || nonDigitsReg.test(mobile) || mobile.length > 15) {
+    if (mobile == null || mobile == "" || !nonDigitsReg.test(mobile) || mobile.length > 15) {
         document.getElementById("mobileWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("mobileWarning").className = "true";
     }
 
-    if (email == null || email == "" || email != email_confirmation || email.contains("@") || !emailReg.test(email)) {
+    if (email == null || email == "" || email != email_confirmation || !emailReg.test(email)) {
         document.getElementById("emailWarning").className = "false";
         isGood = false;
     } else {
