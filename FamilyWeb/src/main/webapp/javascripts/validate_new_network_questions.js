@@ -5,7 +5,7 @@ function validateForm() {
     console.log("Totaal aantal contacten : " + totalContacts);
     totalContacts = parseInt(totalContacts) + 1;
     console.log("Totaal aantal contacten na verhogen : " + totalContacts);
-    var totalQuestions = document.forms["questions_form"]["totalContacts"].value;
+    var totalQuestions = document.forms["questions_form"]["totalQuestions"].value;
     console.log("Totaal aantal vragen : " + totalQuestions);
     totalQuestions = parseInt(totalQuestions) + 1;
     console.log("Totaal aantal vragen na verhogen : " + totalQuestions);

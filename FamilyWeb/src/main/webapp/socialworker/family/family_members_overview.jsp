@@ -19,7 +19,7 @@
 	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="stylesheet"
 	href="/FamilyWeb/styles/family_members_overview.css">
-<link rel = "import" hr="/FamilyWeb/webapp/socialworker/startscreen_socialworker">
+
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -35,16 +35,16 @@
 	<div class="bottom fit" horizontal layout>
 		<paper-tabs id="scrollableTabs" selected="0" flex scrollable noink>
 
-		<paper-tab> <a href="family_members_overview.jsp"
+		<paper-tab> <a href="/FamilyWeb/socialworker/family/family_members_overview.jsp"
 			horizontal center-center layout>Gezinsleden</a></paper-tab> 
 		<paper-tab>
-		<a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
-		<paper-tab> <a href="new_network_contacts.jsp" horizontal
+		<a href="/FamilyWeb/socialworker/family/network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+		<paper-tab> <a href="/FamilyWeb/socialworker/family/new_network_contacts.jsp" horizontal
 			center-center layout>Nieuw Netwerk</a></paper-tab> 
 			<paper-tab> <a
-			href="share_networks.jsp" horizontal center-center layout>Netwerk(en)
+			href="/FamilyWeb/socialworker/family/share_networks.jsp" horizontal center-center layout>Netwerk(en)
 			delen</a></paper-tab> 
-			<paper-tab> <a href="transfer.jsp" horizontal
+			<paper-tab> <a href="/FamilyWeb/socialworker/family/transfer.jsp" horizontal
 			center-center layout>Overdragen</a></paper-tab> 
 			</paper-tabs>
 	</div>
