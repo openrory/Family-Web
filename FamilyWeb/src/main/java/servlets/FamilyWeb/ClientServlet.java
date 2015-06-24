@@ -53,8 +53,8 @@ public class ClientServlet extends HttpServlet {
 
 		} else if (option.equals("summary")) {
 
-			if (req.getParameter("clientID") != null) {
-				int clientID = Integer.valueOf((String) req.getParameter("clientID"));
+			if (req.getParameter("currentID") != null) {
+				int clientID = Integer.valueOf((String) req.getParameter("currentID"));
 				this.summary(clientID);
 			} else {
 				this.setMessage(MESSAGE_ERROR, "Onverwachte fout opgetreden, client niet gevonden.");
@@ -139,13 +139,14 @@ public class ClientServlet extends HttpServlet {
 			client.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
 			message = this.setValidation();
 			int socialworkerID = 0;
-						if(currentUser instanceof Administrator) {
-							try {
-								socialworkerID = Integer.valueOf(req.getParameter("socialworker_id"));
-							} catch (NumberFormatException e) {
-								message += "Zorgprofessional niet gevonden."; //e.printStackTrace();
-							}
-						} 
+
+			if(currentUser instanceof Administrator) {
+				try {
+						socialworkerID = Integer.valueOf(req.getParameter("socialworker_id"));
+					} catch (NumberFormatException e) {
+						message += "Zorgprofessional niet gevonden."; //e.printStackTrace();
+					}
+			} 
 			if (message.equals("")) {
 
 				client.updateDB(socialworkerID);
@@ -192,7 +193,7 @@ public class ClientServlet extends HttpServlet {
 			String year = parts[0]; 
 			String month = parts[1]; 
 			String date = parts[2];
-			client.setDateOfBirth(date, month, year);
+			message += (client.setDateOfBirth(date, month, year)) ? "" : "Geboortedatum, ";
 		} else {
 			message += "Geboortedatum, ";
 		}
@@ -208,9 +209,12 @@ public class ClientServlet extends HttpServlet {
 		String email1 = (req.getParameter("email") != null) ? (String) req.getParameter("email") : "";
 		String email2 = (req.getParameter("email_confirmation") != null) ? (String) req.getParameter("email_confirmation") : "";
 		
-		if (!email1.equals("") || !email2.equals("") || email1.equals(email2)) {
+		if (!email1.equals("") && !email2.equals("") && email1.equals(email2)) {
 			message += (client.setEmail(email1)) ? "" : "Email, ";
+		} else {
+			message += "Email, ";
 		}
+		
 		message += (!message.equals("")) ? "niet correct ingevuld" : "";
 		return message;
 	}
@@ -230,8 +234,8 @@ public class ClientServlet extends HttpServlet {
 		
 		User socialworkerClient = null;
 		if (currentUser instanceof Administrator) {
-			for (User u : ((Administrator) currentUser).getUsers()) {		
-				for (Client c : u.getMyClients()) {		
+			for (User u : ((Administrator) currentUser).getUsers()) {
+				for (Client c : currentUser.getDbController().getAllClientsOfUser(u)) {
 					if (client.getClient_id() == c.getClient_id()) {
 						socialworkerClient = u;
 						break;

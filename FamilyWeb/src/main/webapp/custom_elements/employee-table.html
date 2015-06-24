@@ -2,7 +2,7 @@
 <link rel="import" href="/bower_components/core-icons/core-icons.html">
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Zorgproffesional-table">
+<polymer-element name="Employee-table">
     <template>
         <style>
              :host {
@@ -191,7 +191,7 @@
                     <div class="hidden">{{searchObject | filterArray}}</div>
 
                     <tbody>
-                        <template repeat="{{person in zorgproffesionalData}}">
+                        <template repeat="{{person in employeeData}}">
                             <tr class="table_column">
 
                                 
@@ -207,7 +207,7 @@
                                 <td class="table_contents"><p>{{person.houseNumber}}</p></td>
                                 <td class="table_contents"><p>{{person.city}}</p></td>
                                
-                                <td class="icon_content"><p><core-icon icon="search" onclick="submit({{person.user_id}})"  value="" /></p></td>
+                                <td class="icon_content"><p><core-icon icon="create" onclick="submit({{person.user_id}})"  value="" /></p></td>
                             </tr>
                         </template>
 
@@ -218,25 +218,20 @@
 </template>
 
     <script>
-        // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
-            document.getElementById("familyID").value = ID;
-            document.getElementById("familyform").submit();
-        };
-
+    
         Polymer({
             ready: function () {
                 console.log("Tabel is bereikt!");
                 if (this.attributes.hasOwnProperty("initialData")) {
                     console.log("initialData is ontvangen");
-                    this.zorgproffesionalData = JSON.parse(this.attributes['initialData'].value);
+                    this.employeeData = JSON.parse(this.attributes['initialData'].value);
                 }
             },
 
             loadData: function (dt) {
                 console.log("JSON via Javascript ontvangen")
-                this.zorgproffesionalData = dt;
-                this.zorgproffesionalDataBackGround = dt;
+                this.employeeData = dt;
+                this.employeeDataBackGround = dt;
             },
 
             filterArray: function () {
@@ -249,9 +244,9 @@
                 console.log("search value :" + search);
 
 
-                console.log("input array :" + this.zorgproffesionalDataBackGround);
-                if (typeof this.zorgproffesionalDataBackGround !== "undefined") {
-                    this.zorgproffesionalData = jQuery.grep(this.zorgproffesionalDataBackGround, function (element, index) {
+                console.log("input array :" + this.employeeDataBackGround);
+                if (typeof this.employeeDataBackGround !== "undefined") {
+                    this.employeeData = jQuery.grep(this.employeeDataBackGround, function (element, index) {
                         var nrBool = (element.employeeNumber.toLowerCase()).includes(search.toLowerCase());
                         var totalnameBool = (element.forename.toLowerCase() + " " + element.surname.toLowerCase()).includes(search.toLowerCase());
                         var usernameBool = (element.username.toLowerCase()).includes(search.toLocaleLowerCase()) ;
@@ -269,7 +264,7 @@
                             return false;
                         }      
                     })
-                    console.log("filter array :" + this.zorgproffesionalData);
+                    console.log("filter array :" + this.employeeData);
                 }
             }
         });

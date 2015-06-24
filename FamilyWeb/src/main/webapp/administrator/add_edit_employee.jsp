@@ -42,17 +42,17 @@
                         toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
                         Het heeft niet alleen vijf eeuwen overleefd
                     </p>
-                   <% if(request.getAttribute("employee") == null){ %>
+                   <% if(request.getAttribute("employee") == null || request.getAttribute("option") == "create"){ %>
                     <input type="hidden" name="option" value="create">
-                   <% } else{ %>
-                    <input type="hidden" name="option" value="update">
-                    <input type="hidden" name="userID" value="${employee.user_id}">
-                   <% }%>
-					<span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
+                     <span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
                         <label>Personeelnr :</label>
                             <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" value="${employee.employeeNumber}"/>
                     </div>
+                   <% } else{ %>
+                    <input type="hidden" name="option" value="update">
+                    <input type="hidden" name="userID" value="${employee.user_id}">
+                   <% }%>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
                         <label>Voornaam :</label>
@@ -117,7 +117,7 @@
                     	<label>Is actief?</label>
                     	<input id="is_active" name="is_active" type="checkbox">
                     </div>
-                    <% if(request.getAttribute("employee") == null){ %>
+                    <% if(request.getAttribute("employee") == null || request.getAttribute("option") == "create"){ %>
                     <div class="information">
                     	<label>Gebruikersnaam</label>
                     	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="${employee.username}">

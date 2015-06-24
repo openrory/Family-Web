@@ -227,7 +227,7 @@ public class OverviewController {
 				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
 				clientJSON.put("email", c.getEmail());
 				clientJSON.put("fileNumber", c.getFileNumber());
-				clientJSON.put("Client_id", c.getClient_id());				
+				clientJSON.put("client_id", c.getClient_id());				
 				returns.put(clientJSON);
 			}
 		} else {
@@ -246,7 +246,7 @@ public class OverviewController {
 				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
 				clientJSON.put("email", c.getEmail());
 				clientJSON.put("fileNumber", c.getFileNumber());
-				clientJSON.put("Client_id", c.getClient_id());
+				clientJSON.put("client_id", c.getClient_id());
 				returns.put(clientJSON);
 			}
 		}
@@ -274,6 +274,7 @@ public class OverviewController {
 			userJSON.put("mobilePhoneNumber", u.getMobilePhoneNumber());
 			userJSON.put("email", u.getEmail());
 			userJSON.put("employeeNumber", u.getEmployeeNumber());
+			userJSON.put("user_id", u.getUser_id());
 			returns.put(userJSON);
 		}
 		if (user instanceof Administrator) {

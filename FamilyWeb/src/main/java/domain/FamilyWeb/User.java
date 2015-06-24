@@ -3,6 +3,8 @@
  */
 package domain.FamilyWeb;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -128,8 +130,7 @@ public abstract class User {
 		if (!input.trim().equals("")) {
 			String username = input.trim();
 			this.username = username;
-			if (username.matches(USERNAME_PATTERN)
-					&& this.dbController.getUser(username) == null) {
+			if (username.matches(USERNAME_PATTERN)) {
 				this.username = username;
 				return true;
 			} else {
@@ -169,7 +170,7 @@ public abstract class User {
 	 */
 	public boolean setForename(String input) {
 		if (!input.trim().equals("")) {
-			String forename = input.trim();
+			String forename = input.trim().substring(0, 1).toUpperCase() + input.toLowerCase().trim().substring(1);
 			if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
 				this.forename = forename;
 				return true;
@@ -536,8 +537,8 @@ public abstract class User {
 				+ ", EmployeeNumber = " + getEmployeeNumber() + "]";
 	}
 
-	public boolean setDateOfBirth(String inputDay, String inputMonth,
-			String inputYear) {
+	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
+		
 		if (!inputDay.trim().equals("") && !inputMonth.trim().equals("")
 				&& !inputYear.trim().equals("")) {
 			try {
@@ -546,10 +547,26 @@ public abstract class User {
 				int year = Integer.valueOf(inputYear);
 
 				if (year > 0 && month > 0 && day > 0) {
+					
 					Calendar cal = Calendar.getInstance();
 					cal.set(year, month - 1, day, 0, 0, 0);
-					this.dateOfBirth = cal.getTime();
-					return true;
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					
+					if (this.getDateOfBirth() != null && this.getDateOfBirth().toString().equals(dateFormat.format(cal.getTime()))) {
+
+						System.out.println("teeest1");
+						return true;
+					} else if (cal.before(Calendar.getInstance())) {
+
+						System.out.println("teeest2");
+						this.dateOfBirth = cal.getTime();
+						return true;
+					} else {
+
+						System.out.println("teeest3");
+						return false;
+					}
+					
 				} else {
 					return false;
 				}

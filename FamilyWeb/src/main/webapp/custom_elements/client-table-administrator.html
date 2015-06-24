@@ -2,7 +2,7 @@
 <link rel="import" href="/bower_components/core-icons/core-icons.html">
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Client-table-administrator">
+<polymer-element name="client-table-administrator">
     <template>
         <style>
             :host {
@@ -197,11 +197,6 @@
         </div>
     </template>
     <script>
-        // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
-            document.getElementById("familyID").value = ID;
-            document.getElementById("familyform").submit();
-        };
 
         Polymer({
             ready: function () {

@@ -3,6 +3,8 @@
  */
 package domain.FamilyWeb;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -134,8 +136,7 @@ public class Client {
 	 */
 	public boolean setForename(String input) {
 		if (!input.trim().equals("")) {
-			String forename = input.trim().substring(0, 1).toUpperCase()
-					+ input.trim().substring(1);
+			String forename = input.trim().substring(0, 1).toUpperCase() + input.toLowerCase().trim().substring(1);
 			if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
 				this.forename = forename;
 				return true;
@@ -183,22 +184,43 @@ public class Client {
 	 * @param dateOfBirth
 	 *            the dateOfBirth to set
 	 */
-	public boolean setDateOfBirth(String inputDay, String inputMonth,
-			String inputYear) {
-		try {
-			int day = Integer.valueOf(inputDay);
-			int month = Integer.valueOf(inputMonth);
-			int year = Integer.valueOf(inputYear);
+	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
+		
+		if (!inputDay.trim().equals("") && !inputMonth.trim().equals("")
+				&& !inputYear.trim().equals("")) {
+			try {
+				int day = Integer.valueOf(inputDay);
+				int month = Integer.valueOf(inputMonth);
+				int year = Integer.valueOf(inputYear);
 
-			if (year > 0 && month > 0 && day > 0) {
-				Calendar cal = Calendar.getInstance();
-				cal.set(year, month - 1, day, 0, 0, 0);
-				this.dateOfBirth = cal.getTime();
-				return true;
-			} else {
+				if (year > 0 && month > 0 && day > 0) {
+					
+					Calendar cal = Calendar.getInstance();
+					cal.set(year, month - 1, day, 0, 0, 0);
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					
+					if (this.getDateOfBirth() != null && this.getDateOfBirth().toString().equals(dateFormat.format(cal.getTime()))) {
+
+						System.out.println("teeest1");
+						return true;
+					} else if (cal.before(Calendar.getInstance())) {
+
+						System.out.println("teeest2");
+						this.dateOfBirth = cal.getTime();
+						return true;
+					} else {
+
+						System.out.println("teeest3");
+						return false;
+					}
+					
+				} else {
+					return false;
+				}
+			} catch (NumberFormatException e) {
 				return false;
 			}
-		} catch (NumberFormatException e) {
+		} else {
 			return false;
 		}
 	}
