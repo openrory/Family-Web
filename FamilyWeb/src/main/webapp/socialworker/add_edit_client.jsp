@@ -51,7 +51,7 @@
 					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
                         <label>Dossiernummer :</label>
-                            <input id="fileid" type="text" placeholder="Personeelnr" value="${client.filenumber}"/>
+                            <input id="fileid" type="text" placeholder="Personeelnr" value="${client.fileNumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
@@ -66,7 +66,7 @@
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
                         <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${client.dateofbirth}" />
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${client.dateofBirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
@@ -81,7 +81,7 @@
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label>Huisnummer :</label>
-                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${client.streetnumber}" />
+                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${client.houseNumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
@@ -96,12 +96,12 @@
 					<span id="phonenumberWarning" class="true">Geen telefoonnummer ingevuld ingevuld</span>
                     <div class="information">
                         <label>Telefoonnummer vast :</label>
-                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${client.phonenumber}"/>
+                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${client.telephoneNumber}"/>
                     </div>
 					<span id="mobileWarning" class="true">Geen mobiel nummer ingevuld</span>
 					<div class="information">
                         <label>Mobiel nummer :</label>
-                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${client.mobile}"/>
+                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${client.mobilePhoneNumber}"/>
                     </div>
 					<span id="emailWarning" class="true">Geen email ingevuld</span>
                     <div class="information">
@@ -111,7 +111,7 @@
 					<span id="email_confirmationWarning" class="true">Geen 2e email ingevuld</span>
 					<div class="information">
                         <label>E-mail bevestiging :</label>
-                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${client.email1}"/>
+                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${client.email}"/>
                     </div>
                     
                     <paper-submit-button-decorator id="button">

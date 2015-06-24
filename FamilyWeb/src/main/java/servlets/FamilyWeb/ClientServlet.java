@@ -135,6 +135,8 @@ public class ClientServlet extends HttpServlet {
 		if (clientObject != null) {
 			
 			client = (Client) clientObject;
+			// Give client object acces to the databaseinterface.
+			client.setDbController((DatabaseInterface) this.getServletContext().getAttribute("dbController"));
 			message = this.setValidation();
 			int socialworkerID = 0;
 						if(currentUser instanceof Administrator) {
@@ -145,7 +147,7 @@ public class ClientServlet extends HttpServlet {
 							}
 						} 
 			if (message.equals("")) {
-				
+
 				client.updateDB(socialworkerID);
 				req.removeAttribute("client");
 				message = "Client " + client.getForename() + " " + client.getSurname() + " succesvol bijgewerkt.";
@@ -225,6 +227,23 @@ public class ClientServlet extends HttpServlet {
 				break;
 			}
 		}
+		
+		User socialworkerClient = null;
+		if (currentUser instanceof Administrator) {
+			for (User u : ((Administrator) currentUser).getUsers()) {		
+				for (Client c : u.getMyClients()) {		
+					if (client.getClient_id() == c.getClient_id()) {
+						socialworkerClient = u;
+						break;
+					}
+				}
+			}
+			if (socialworkerClient != null) {
+				req.setAttribute("socialworkerID", String.valueOf(socialworkerClient.getUser_id()));
+				req.setAttribute("socialworkerName", socialworkerClient.getForename() + " " + socialworkerClient.getSurname() + " | NR: " + socialworkerClient.getEmployeeNumber());
+			}	
+		}
+		
 		req.setAttribute("client", client);
 		reqDisp = req.getRequestDispatcher(PAGE_CLIENT_ADD_EDIT);
 	}
