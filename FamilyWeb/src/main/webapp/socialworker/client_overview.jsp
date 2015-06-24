@@ -15,7 +15,7 @@
 
 </head>
 <body fullbleed layout vertical>
-    <core-drawer-panel responsivewidth="2160px">
+    <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
 				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
