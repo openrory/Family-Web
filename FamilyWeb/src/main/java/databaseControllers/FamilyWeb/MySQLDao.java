@@ -156,6 +156,9 @@ public class MySQLDao implements DatabaseInterface {
 		if (user instanceof Administrator) {
 			Administrator admin = (Administrator) user;
 			admin.setUsers(getAllSocialworkers());
+		}else{
+			Socialworker soc =  (Socialworker) user;
+			soc.setMyClients(this.getAllClientsOfUser(user));
 		}
 		return user;
 	}
