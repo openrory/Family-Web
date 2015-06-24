@@ -318,10 +318,12 @@ public class OverviewController {
 		familyJSON.put("telephoneNumber", client.getTelephoneNumber());
 		familyJSON.put("mobilePhoneNumber", client.getMobilePhoneNumber());
 		familyJSON.put("email", client.getEmail());
-		familyJSON.put("fileNumber", client.getClient_id());
+		familyJSON.put("type", "client");
+		familyJSON.put("client_id", client.getClient_id());
 		returns.put(familyJSON);
 
 		for (Familymember fm : client.getMyFamilymembers()) {
+			family.add(fm);
 			familyJSON = new JSONObject();
 			familyJSON.put("forename", fm.getForename());
 			familyJSON.put("surname", fm.getSurname());
@@ -334,7 +336,8 @@ public class OverviewController {
 			familyJSON.put("telephoneNumber", fm.getTelephoneNumber());
 			familyJSON.put("mobilePhoneNumber", fm.getMobilePhoneNumber());
 			familyJSON.put("email", fm.getEmail());
-			familyJSON.put("fileNumber", fm.getMember_id());
+			familyJSON.put("type", "familymember");
+			familyJSON.put("member_id", fm.getMember_id());
 			returns.put(familyJSON);
 		}
 		client.setMyFamilymembers(family);		
