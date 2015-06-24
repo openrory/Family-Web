@@ -11,7 +11,7 @@
 <link rel="import"
 	href="../custom_elements/responsive-menu-socialworker.html">
 <link rel="import" href="../custom_elements/options-menu.html">
-<link rel="import" href="../custom_elements/Family-table.html">
+<link rel="import" href="../custom_elements/Client-table-administrator.html">
 <link rel="stylesheet" href="../styles/client_overview.css">
 
 </head>
@@ -33,13 +33,13 @@
 		<%
 			}
 		%>		
-		<form id="familyform" action="/FamilyWeb/FamilyInformation.do"
+		<form id="clientform" action="/FamilyWeb/ClientServlet.do"
 			method="post">
 			<!--                	Hier wordt de id van de familie neergezet voor de servlets -->
-			<input id="familyID" type="text" value="">
+			<input id="clientID" type="text" value="">
 		</form>
 		<!--                	Hieronder moet de tabel van Michiel komen te staan -->
-		<Family-table show="contacts" id="table"></Family-table>
+		<Client-table-administrator show="contacts" id="table"></Client-table-administrator>
 	</div>
 	</core-header-panel> </core-drawer-panel>
 	<script>
@@ -63,7 +63,8 @@
 				"telephoneNumber" : "03566778800",
 				"mobilePhoneNumber" : "0657722020",
 				"email" : "Jan.DeMan@gmail.com",
-				"fileNumber" : "1"
+				"fileNumber" : "1",
+				"client_id"  : "1"
 			}, {
 				"forename" : "John",
 				"surname" : "De Gooijer",
@@ -76,7 +77,8 @@
 				"telephoneNumber" : "03566774800",
 				"mobilePhoneNumber" : "0657722020",
 				"email" : "John.DeGooijer@gmail.com",
-				"fileNumber" : "2"
+				"fileNumber" : "2",
+				"client_id"  : "2"
 			}, {
 				"forename" : "Joery",
 				"surname" : "?",
@@ -89,7 +91,8 @@
 				"telephoneNumber" : "03566778800",
 				"mobilePhoneNumber" : "0657722020",
 				"email" : "Joery.DeMan@gmail.com",
-				"fileNumber" : "3"
+				"fileNumber" : "3",
+			    "client_id"  : "3"
 			} ]
 			console.log("JSON OBJECT before table : " + obj);
 			obj.loadData(data);
