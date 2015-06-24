@@ -56,15 +56,16 @@ public class FamilyInformation extends HttpServlet {
 					req.setAttribute("messageType", "error");
 					reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 				}else{
-					req.getSession().setAttribute("client", client);
+					req.getSession().setAttribute("client", client);					
 					req.getSession().setAttribute("surveys", surveys);	
 					try {
 						JSONObject[] networks = OverviewController.getInstance().createJSONNetworks(client);
+						req.getSession().setAttribute("familyJSON", OverviewController.getInstance().refreshFamilymember(client));
 						req.getSession().setAttribute("nodesNetwork", networks[0]);
 						req.getSession().setAttribute("linksNetwork", networks[1]);
 						reqDisp = req.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 					} catch (JSONException e) {
-						req.setAttribute("message", "Kan de netwerken van "+client.getForename()+" "+client.getSurname()+" niet goed ophalen, log opnieuw in en probeer het opnieuw.");
+						req.setAttribute("message", "Kan degegevens van "+client.getForename()+" "+client.getSurname()+" niet goed ophalen, log opnieuw in en probeer het opnieuw.");
 						req.setAttribute("messageType", "error");
 						reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");						
 					}				

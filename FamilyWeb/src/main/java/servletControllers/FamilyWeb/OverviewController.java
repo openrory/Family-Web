@@ -85,8 +85,12 @@ public class OverviewController {
 				contactsLinks.put(link);
 			}
 			if (i != 0) {
-				nodesPerson.put(n.getDateCreated().toString(), contacts);
-				linksPerson.put(n.getDateCreated().toString(), contactsLinks);
+				nodesPerson.put("commentaar", n.getCommentary());
+				nodesPerson.put("datum", n.getDateCreated().toString());
+				nodesPerson.put("nodes", contacts);
+				linksPerson.put("commentaar", n.getCommentary());
+				linksPerson.put("datum", n.getDateCreated().toString());
+				linksPerson.put("nodes", contactsLinks);
 			}
 		}
 		if (!clientNetworks.isEmpty()) {
@@ -121,7 +125,9 @@ public class OverviewController {
 					contactsLinks.put(link);
 				}
 				if (i != 0) {
-					nodesPerson.put(n.getDateCreated().toString(), contacts);
+					nodesPerson.put("commentaar", n.getCommentary());
+					nodesPerson.put("datum", n.getDateCreated().toString());
+					nodesPerson.put("nodes", contacts);
 					linksPerson.put(n.getDateCreated().toString(),
 							contactsLinks);
 				}
@@ -294,5 +300,44 @@ public class OverviewController {
 			}
 		}
 		return usersJSON;
+	}
+
+	public JSONArray refreshFamilymember(Client client) throws JSONException {
+		JSONArray returns = new JSONArray();
+		ArrayList<Familymember> family = new ArrayList<Familymember>();
+
+		JSONObject familyJSON = new JSONObject();
+		familyJSON.put("forename", client.getForename());
+		familyJSON.put("surname", client.getSurname());
+		familyJSON.put("dateOfBirth", client.getDateOfBirth());
+		familyJSON.put("postcode", client.getPostcode());
+		familyJSON.put("street", client.getStreet());
+		familyJSON.put("houseNumber", client.getHouseNumber());
+		familyJSON.put("city", client.getCity());
+		familyJSON.put("nationality", client.getNationality());
+		familyJSON.put("telephoneNumber", client.getTelephoneNumber());
+		familyJSON.put("mobilePhoneNumber", client.getMobilePhoneNumber());
+		familyJSON.put("email", client.getEmail());
+		familyJSON.put("fileNumber", client.getClient_id());
+		returns.put(familyJSON);
+
+		for (Familymember fm : client.getMyFamilymembers()) {
+			familyJSON = new JSONObject();
+			familyJSON.put("forename", fm.getForename());
+			familyJSON.put("surname", fm.getSurname());
+			familyJSON.put("dateOfBirth", fm.getDateOfBirth());
+			familyJSON.put("postcode", fm.getPostcode());
+			familyJSON.put("street", fm.getStreet());
+			familyJSON.put("houseNumber", fm.getHouseNumber());
+			familyJSON.put("city", fm.getCity());
+			familyJSON.put("nationality", fm.getNationality());
+			familyJSON.put("telephoneNumber", fm.getTelephoneNumber());
+			familyJSON.put("mobilePhoneNumber", fm.getMobilePhoneNumber());
+			familyJSON.put("email", fm.getEmail());
+			familyJSON.put("fileNumber", fm.getMember_id());
+			returns.put(familyJSON);
+		}
+		client.setMyFamilymembers(family);		
+		return returns;
 	}
 }
