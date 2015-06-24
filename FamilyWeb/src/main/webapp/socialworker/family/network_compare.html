@@ -18,6 +18,7 @@
 <link rel="import"
 	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="stylesheet" href="/FamilyWeb/styles/network_compare.css">
+<link rel="import" href="/FamilyWeb/bower_components/paper-slider/paper-slider.html">
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -68,6 +69,7 @@
                 <div id = "network1range">
 				<input class="slider" type="range" name="points" min="0" max="10">
 			</div>
+         </div>
 			<div class="general_comment">
 				<h1 class="title">Algemeen commentaar</h1>
 				<p id = "commentnetwork1">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
@@ -102,7 +104,7 @@
 			</div>
 			<div class="timeline">
 				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
-                 <input type = "text" id="rangedatumnetwork1">
+                 <input type = "text" id="rangedatumnetwork2">
                 <div id = "network2range">
 				<input class="slider" type="range" name="points" min="0" max="10">
                 </div>
@@ -186,7 +188,18 @@ var nodesNetwork =
     										  {"name":"Sjaak","group":3, "commentaar": ""},
     										  {"name":"Eline","group":4, "commentaar": ""}
   										  ]
-									    }
+									    },
+									    {"datum": "19-05-2015", "commentaar": "commentaar persoon 2 17-05-2015", "nodes":
+											  [
+	    										  {"name":"De Client","group":0, "commentaar": ""},
+	    										  {"name":"Truus","group":1, "commentaar": ""},
+	    										  {"name":"Buurmeisje","group":1, "commentaar": ""},
+	    										  {"name":"John","group":2, "commentaar": ""},
+	    										  {"name":"Henkie","group":2, "commentaar": ""},
+	    										  {"name":"Sjaak","group":3, "commentaar": ""},
+	    										  {"name":"Eline","group":4, "commentaar": ""}
+	  										  ]
+										 }
 									  ]
 									}
 								]
@@ -240,7 +253,7 @@ var linksNetwork = {"allNetworks" : [
 						},
 						{ "person2":
 							[
-								{"16-05-2015":
+								{"17-05-2015":
 								  [
 									{ "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
 									{ "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
@@ -249,7 +262,17 @@ var linksNetwork = {"allNetworks" : [
 									{ "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
 									{ "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":4}
 								  ]
-								}
+								},
+								{"19-05-2015":
+									  [
+										{ "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
+										{ "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
+										{ "source": 3, "target": 0, "distance": 3, "strength": 3, "type": 3, "group":2},
+										{ "source": 4, "target": 0, "distance": 5, "strength": 4, "type": 5, "group":2},
+										{ "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+										{ "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":4}
+									  ]
+									}
 							]
 						}
 					]
@@ -453,13 +476,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  .enter().append('line')
 	  .attr('class', 'link')
 	  .style("stroke-width", function(d) { return (d.strength * 2); })
-	  .style("stroke", function(d) { 
-									  for ( i = 0; i < selectedNetworkLinks.length; i++ ){
-										  if ( d.group == i ) {
-											  return colors(i);
-										  }
-									  }
-								  });
+	  .style("stroke", function(d) { return colors(d.group); });
   // Hier worden de eigenschappen van de nodes meegeven
   // Elke node krijgt een kleur op basis van tot welke groep hij behoort
   // verder worden ze nog in cirkels getekend
@@ -471,15 +488,16 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  .data(selectedNetworkNodes)
 	  .enter().append('g')
 	  .attr('class', 'node')
-	  .style("fill", function(d) { 
-									  for ( i = 0; i < selectedNetworkNodes.length; i++ ){
-										  if ( d.group == i ) {
-											  return colors(i);
-										  }
-									  }
-								  })
+	  .style("fill", function(d) {  if ( d.group != 0 ) {
+		   return colors(d.group);
+		   }
+		  else {
+			  return "#adff2f";
+		  }
+	  })
+								  
 	  .on("mouseover", mouseover)
-	  .on("mouseout", mouseout)
+	  .on("mouseout", mouseout);
 	  
   node.append("circle")
 	  .attr("r", sizeNode);
@@ -544,15 +562,15 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	 document.getElementById(networkName + "contact_groups").innerHTML = "";
 	 document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
   }
-  createDate(networkName);
-  function createDate(name) {
-	  document.getElementById("rangedatum" + name).value = thisPersonDates[value].datum;
-	  document.getElementById("datum" + name).innerHTML = "Netwerk gemaakt op " + thisPersonDates[sliderval].datum;
-  }
-  createCommentaar(networkName)
-  function createCommentaar(name) {
-  	document.getElementById("commentaar" + name).innerHTML = thisPersonDates[sliderval].commentaar;
-  }
+  
+ // createDate
+ 		console.log(networkName);
+	  document.getElementById("rangedatum" + networkName).value = thisPersonDates[sliderval].datum;
+	  document.getElementById("datum" + networkName).innerHTML = "Netwerk gemaakt op " + thisPersonDates[sliderval].datum;
+  
+  //createCommentaar
+  	document.getElementById("comment" + networkName).innerHTML = thisPersonDates[sliderval].commentaar;
+
   
   createSliders();
   function createSliders() {
@@ -573,7 +591,6 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  console.log("Networkname: " + networkName)
 	  slidervalue = slider.value;
 	  console.log(slidervalue);
-	  changeDate(slidervalue, networkName);
 	  onChangeSlider(slider,networkName);
 	}
 	
