@@ -120,12 +120,16 @@
             <table id="table" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
                     <tr>
-                        <th id="first_header_tag"><p>Request Nr. <core-icon icon="add" onclick="{{sortArray}}"></core-icon></p></th>
-                        <th class="table_header_tag"><p>Datum Aangemaakt</p></th>
-                        <th class="table_header_tag"><p>Type Request</p></th>
-                        <th class="table_header_tag"><p>Van Socialworker</p></th>
-                        <th class="table_header_tag"><p>Naar Socialworker</p></th>
-                        <th class="table_header_tag"><p>Is Goedgekeurd</p></th>
+                        <th id="first_header_tag"><p>Voornaam</p></th>
+                        <th class="table_header_tag"><p>Achternaam</p></th>
+                        <th class="table_header_tag"><p>Geboorte datum</p></th>
+                        <th class="table_header_tag"><p>Straat</p></th>
+                        <th class="table_header_tag"><p>Huisnummer</p></th>
+                        <th class="table_header_tag"><p>Woonplaats</p></th>
+                        <th class="table_header_tag"><p>Nationaliteit</p></th>
+                        <th class="table_header_tag"><p>Telefoonnummer</p></th>
+                        <th class="table_header_tag"><p>Mobielnummer</p></th>
+                        <th class="table_header_tag"><p>E-mail</p></th>
                         <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
                     </tr>
                 </thead>
@@ -141,7 +145,8 @@
                             <td class="table_contents"><p>{{object.street}}</p></td>
                             <td class="table_contents"><p>{{object.houseNumber}}</p></td>
                             <td class="table_contents"><p>{{object.city}}</p></td>
-                            <td class="table_contents"><p>{{object.nationality}}</p></td>
+                            <td class="table_contents"><p>{{object.nationality}}</p></td>                            
+                            <td class="table_contents"><p>{{object.telephoneNumber}}</p></td>
                             <td class="table_contents"><p>{{object.mobilePhoneNumber}}</p></td>
                             <td class="table_contents"><p>{{object.email}}</p></td>
                             <td class="icon_content"><p><core-icon icon="search" onclick="submit({{object.member_id}})" value="" /></p></td>

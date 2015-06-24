@@ -19,7 +19,8 @@
 	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="stylesheet"
 	href="/FamilyWeb/styles/family_members_overview.css">
-
+<link rel="import"
+	href="/FamilyWeb/custom_elements/family-members-table.html">
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -53,24 +54,8 @@
         <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
-		<div id="family_members_container">
-			<form id="group_form" action="/FamilyWeb/FamilyMembersServlet.do"
-				method="post">
-				<div id="familymembers" class="group">
-					<input id="counterfamilymembers" type="hidden" value="0" />
-					<h3>Gezinsleden toevoegen</h3>
-					<core-icon-button class="add" onclick="addInput('familymembers')"
-						icon="add"></core-icon-button>
-					<div id="submit_button_container">
-						<input type="submit" class="submit_button" value="Opslaan">
-					</div>
-				</div>
 
-			</form>
-			<p>overzicht gezinsleden hieronder</p>
-			<Family-members-table show="contacts" id="table">></Family-members-table>
-		</div>
-
+<Family-members-table show="contacts" id="table"></Family-members-table>
 	</div>
 	</core-header-panel> </core-drawer-panel>
 	<core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
@@ -79,32 +64,7 @@
 	 document.addEventListener('polymer-ready', function () {
          var obj = document.querySelector('#table');
          console.log("Polymer Ready");
-         var data = [
-                      {
-                          "requestNumber": "1",
-                          "createdCreated": "10-01-2015",
-                          "typeRequest": "Transfer",
-                          "fromSocialworker": "Jan De Man",
-                          "toSocialworker" : "Jans De Mans",
-                          "approved": "Yes",
-                      },
-                                               {
-                          "requestNumber": "2",
-                          "createdCreated": "20-06-2015",
-                          "typeRequest": "Share",
-                          "fromSocialworker": "Wouter Staal",
-                          "toSocialworker" : "Jan De Man",
-                          "approved": "No",
-                                               },
-                                                                        {
-                                                   "requestNumber": "3",
-                                                   "createdCreated": "22-06-2015",
-                                                   "typeRequest": "Share",
-                                                   "fromSocialworker": "Jaap Van Noord",
-                                                   "toSocialworker" : "Joery Huiden",
-                                                   "approved": "No",
-                                                                        }
-         ]
+         var data = ${familyJSON};
          console.log("JSON OBJECT before table : " + obj);
          obj.loadData(data);
      });

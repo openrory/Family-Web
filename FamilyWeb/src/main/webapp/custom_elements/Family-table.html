@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <polymer-element name="Client-table">
@@ -168,7 +168,7 @@
 
         </style>
 
-            <div z="3" class="scrollWrapper">
+            <div class="scrollWrapper">
                 <table id="table" cellspacing="0" cellpadding="0">
                     <thead id="table_header">
                         <tr>
@@ -183,10 +183,11 @@
                         </tr>
                     </thead>
 
-                    <h1 id="searchNotFound" class="hidden">No Search Results Found!</h1>
-                    <div class="hidden">{{searchObject | filterArray}}</div>
+
+                    
 
                     <tbody>
+                    {{searchObject | filterArray}}
                         <template repeat="{{person in familyData}}">
                             <tr class="table_column">
 

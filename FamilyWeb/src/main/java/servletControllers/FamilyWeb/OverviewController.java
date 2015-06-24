@@ -226,7 +226,8 @@ public class OverviewController {
 				clientJSON.put("telephoneNumber", c.getTelephoneNumber());
 				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
 				clientJSON.put("email", c.getEmail());
-				clientJSON.put("fileNumber", c.getClient_id());
+				clientJSON.put("fileNumber", c.getFileNumber());
+				clientJSON.put("Client_id", c.getClient_id());				
 				returns.put(clientJSON);
 			}
 		} else {
@@ -244,7 +245,8 @@ public class OverviewController {
 				clientJSON.put("telephoneNumber", c.getTelephoneNumber());
 				clientJSON.put("mobilePhoneNumber", c.getMobilePhoneNumber());
 				clientJSON.put("email", c.getEmail());
-				clientJSON.put("fileNumber", c.getClient_id());
+				clientJSON.put("fileNumber", c.getFileNumber());
+				clientJSON.put("Client_id", c.getClient_id());
 				returns.put(clientJSON);
 			}
 		}

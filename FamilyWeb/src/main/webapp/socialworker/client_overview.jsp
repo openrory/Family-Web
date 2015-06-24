@@ -6,16 +6,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="../elements.html">
-	<link rel="import" href="../custom_elements/responsive-menu-socialworker.html">
-	<link rel="import" href="../custom_elements/options-menu.html">
-	<link rel="import" href="../custom_elements/Family-table.html">
-	<link rel="stylesheet" href="../styles/client_overview.css">
+    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/FamilyWeb/elements.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-socialworker.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/Family-table.html">
+	<link rel="stylesheet" href="/FamilyWeb/styles/client_overview.css">
 
 </head>
 <body fullbleed layout vertical>
-    <core-drawer-panel responsivewidth="2160px">
+    <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
 				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
@@ -39,7 +39,7 @@
                	<input id="familyID" name="familyID" type="hidden" value="">
                	</form>
 <!--                	Hieronder moet de tabel van Michiel komen te staan -->
-                      <Family-table show="contacts" id="table"></Family-table>
+                      <Client-table show="contacts" id="table"></Client-table>
             </div>
         </core-header-panel>
     </core-drawer-panel>
