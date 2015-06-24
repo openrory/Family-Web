@@ -341,7 +341,6 @@ public class OverviewController {
 			returns.put(familyJSON);
 		}
 		client.setMyFamilymembers(family);		
-		System.out.println(returns);
 		return returns;
 	}
 }
