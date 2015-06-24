@@ -45,17 +45,15 @@
 	</core-toolbar>
 	<div class="content" fit layout horizontal>
 		<div class="network_container" id="container1">
-			<h1 class="title">Netwerk gemaakt op 21-02-2015</h1>
+			<h1 class="title">
+            <div id = "datumnetwork1"> Netwerk gemaakt op 21-02-2015</div>
+            </h1>
 			<div class="network" id = "network1">
 			</div>
 			<div class="sidebar">
 			<div class="interviewee">
 			<h1 class="title">Netwerken van:</h1>
-				 <select>
-  					<option value="volvo">Volvo</option>
-  					<option value="saab">Saab</option>
-  					<option value="mercedes">Mercedes</option>
-  					<option value="audi">Audi</option>
+				 <select id = "network1SelectList" onChange = "changePerson(this)">
 				</select> 
 			</div>
 			<div class="contact_groups" >
@@ -64,28 +62,29 @@
 			</ul>
 			</div>
 			</div>
-			<div class="timeline" id = network1range>
-				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
+			<div class="timeline">
+            	<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
+                <input type = "text" id="rangedatumnetwork1">
+                <div id = "network1range">
 				<input class="slider" type="range" name="points" min="0" max="10">
 			</div>
 			<div class="general_comment">
 				<h1 class="title">Algemeen commentaar</h1>
-				<p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
+				<p id = "commentnetwork1">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
 			</div>
 		</div>
 		<div class="network_container" id="container2">
-			<h1 class="title">Netwerk gemaakt op 21-02-2015</h1>
+			<h1 class="title">
+            <div id = "datumnetwork2"> Netwerk gemaakt op 21-02-2015</div>
+            </h1>
 			<div class="network" id = "network2">
 			</div>
 			<div class="sidebar">
 			<div class="interviewee">
-			<h1 class="title">Netwerken van:</h1>
-				 <select>
-  					<option value="volvo">Volvo</option>
-  					<option value="saab">Saab</option>
-  					<option value="mercedes">Mercedes</option>
-  					<option value="audi">Audi</option>
+			<h1 class="title" >Netwerken van:</h1>
+                 <select id = "network2SelectList" onChange = "changePerson(this)">
 				</select> 
+          
 			</div>
 			<div class="contact_groups">
 			<p>Contactgroepen</p>
@@ -101,15 +100,16 @@
 			</ul>
 			</div>
 			</div>
-			<div class="timeline" id = "network2range">
+			<div class="timeline">
 				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
+                 <input type = "text" id="rangedatumnetwork1">
                 <div id = "network2range">
 				<input class="slider" type="range" name="points" min="0" max="10">
                 </div>
 			</div>
 			<div class="general_comment">
 				<h1 class="title">Algemeen commentaar</h1>
-				<p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
+				<p id = "commentnetwork2">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
 			</div>
 		</div>
 		<div class="resolution_warning_picture"></div>
@@ -134,44 +134,57 @@ var nodesNetwork =
 			{"allNetworks" : [ 
 						{"person1" :
 										[
-											{"13-05-2015" :
+											{"datum": "13-05-2015", "commentaar": "Commentaar persoon 1 13-05-2015", "nodes": 
 												[	
-												   {"name":"De Client","group":0},
-												   {"name":"Harry","group":1},
-												   {"name":"Hans","group":1},
-												   {"name":"John","group":2},
-												   {"name":"Wouter","group":2},
-												   {"name":"Billy","group":2},
-												   {"name":"Bert","group":3},
-												   {"name":"Sjaak","group":3},
-												   {"name":"Klaas","group":3}
+												   {"name":"De Client","group":0, "commentaar": ""},
+												   {"name":"Harry","group":1, "commentaar": ""},
+												   {"name":"Hans","group":1, "commentaar": ""},
+												   {"name":"John","group":2, "commentaar": ""},
+												   {"name":"Wouter","group":2, "commentaar": ""},
+												   {"name":"Billy","group":2, "commentaar": ""},
+												   {"name":"Bert","group":3, "commentaar": ""},
+												   {"name":"Sjaak","group":3, "commentaar": ""},
+												   {"name":"Klaas","group":3, "commentaar": ""}
 												]
 											},
-											{"14-05-2015":
+											{"datum": "14-05-2015", "commentaar": "commentaar persoon 1 14-05-2015", "nodes":
 												[ 
-												   {"name":"De Client","group":0},
-												   {"name":"Harry","group":1},
-												   {"name":"Hans","group":1},
-												   {"name":"Wouter","group":2},
-												   {"name":"Billy","group":2},
-												   {"name":"Bert","group":3},
-												   {"name":"Sjaak","group":3},
-												   {"name":"Klaas","group":3}
+												   {"name":"De Client","group":0, "commentaar": ""},
+												   {"name":"Harry","group":1, "commentaar": ""},
+												   {"name":"Hans","group":1, "commentaar": ""},
+												   {"name":"Wouter","group":2, "commentaar": ""},
+												   {"name":"Billy","group":2, "commentaar": ""},
+												   {"name":"Bert","group":3, "commentaar": ""},
+												   {"name":"Sjaak","group":3, "commentaar": ""},
+												   {"name":"Klaas","group":3, "commentaar": ""}
+												]
+											},
+											{"datum": "15-05-2015", "commentaar": "commentaar persoon 1 15-05-2015", "nodes":
+												[ 
+												   {"name":"De Client","group":0, "commentaar": ""},
+												   {"name":"Harry","group":1, "commentaar": ""},
+												   {"name":"Hans","group":1, "commentaar": ""},
+												   {"name":"Wouter","group":2, "commentaar": ""},
+												   {"name":"Billy","group":2, "commentaar": ""},
+												   {"name":"Bert","group":3, "commentaar": ""},
+												   {"name":"Sjaak","group":3, "commentaar": ""},
+												   {"name":"Klaas","group":3, "commentaar": ""},
+												   {"name":"Bert","group":4, "commentaar": ""},
 												]
 											}
 									    ]
 									  },
 						{"person2" :
 									  [
-									    {"16-05-2015":
+									    {"datum": "17-05-2015", "commentaar": "commentaar persoon 2 17-05-2015", "nodes":
 										  [
-    										  {"name":"De Client","group":0},
-    										  {"name":"Truus","group":1},
-    										  {"name":"Buurmeisje","group":1},
-    										  {"name":"John","group":2},
-    										  {"name":"Henkie","group":2},
-    										  {"name":"Sjaak","group":3},
-    										  {"name":"Eline","group":4}
+    										  {"name":"De Client","group":0, "commentaar": ""},
+    										  {"name":"Truus","group":1, "commentaar": ""},
+    										  {"name":"Buurmeisje","group":1, "commentaar": ""},
+    										  {"name":"John","group":2, "commentaar": ""},
+    										  {"name":"Henkie","group":2, "commentaar": ""},
+    										  {"name":"Sjaak","group":3, "commentaar": ""},
+    										  {"name":"Eline","group":4, "commentaar": ""}
   										  ]
 									    }
 									  ]
@@ -211,6 +224,18 @@ var linksNetwork = {"allNetworks" : [
 								  { "source": 7, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3}
 								  ]
 								},
+								{"15-05-2015":
+								  [
+								  { "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
+								  { "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
+								  { "source": 3, "target": 0, "distance": 3, "strength": 3, "type": 3, "group":2},
+								  { "source": 4, "target": 0, "distance": 4, "strength": 2, "type": 4, "group":2},
+								  { "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 7, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+								  { "source": 8, "target": 0, "distance": 3, "strength": 4, "type": 3, "group":4}
+								  ]
+								},
 							]
 						},
 						{ "person2":
@@ -229,22 +254,88 @@ var linksNetwork = {"allNetworks" : [
 						}
 					]
 				}
+var personArray = [];
+var netwerk1ChosenPerson = 0;
+var netwerk2ChosenPerson = 0;
+var netwerk1Slidervalue = 0;
+var netwerk2Slidervalue = 0;
 
 
-console.dir(nodesNetwork.allNetworks);
-var chosenPerson = 0;
-var slidervalue = 0;
+var thisPersonDates;
+var contactGroups = ["client","household", "family", "friends","colleagues", "neighbours", "acquaintance", "education","club", "religion", "careinstitution", "youthcare","bureauhalt", "justice" ];
 var networkNameArray = ["network1","network2"];
- 
-for ( i = 0; i < networkNameArray.length; i++ ){
-  draw_graphs(networkNameArray[i], chosenPerson, slidervalue);
-  console.log(networkNameArray[i].toString());
-  var network = networkNameArray[i].toString();
-  createSliders(network);
+
+function createSelectListPersons(network) {
+	var select = document.getElementById(network + "SelectList"); 
+	console.log(network); 
+
+	for(var i = 0; i < nodesNetwork.allNetworks.length; i++) {
+		console.dir(nodesNetwork.allNetworks)
+		allPersons = nodesNetwork.allNetworks[i];
+		console.log(allPersons);
+		for ( var person in allPersons ){
+  			var option = document.createElement("option");
+			option.textContent = person;
+			option.value = i;
+			console.log(option.value);
+			select.appendChild(option);
+  		}
+	}
 }
 
-function createSliders(network) {
-	var slider = document.createElement("input");
+function changePerson(selectList){
+	var n = selectList.id;
+	console.log(n);
+	var split = n.split('SelectList');
+	var selectedNetwork = split[0];
+	console.log(selectedNetwork);
+		if (selectedNetwork == "network1") {
+			netwerk1ChosenPerson = selectList.value;
+			d3.select("#"+selectedNetwork).select('svg').remove();
+			netwerk1Slidervalue = 0;
+			draw_graphs(selectedNetwork,netwerk1ChosenPerson,netwerk1Slidervalue);
+		}
+		else if (selectedNetwork == "network2") {
+			netwerk2ChosenPerson = selectList.value;
+			d3.select("#"+selectedNetwork).select('svg').remove();
+			netwerk2Slidervalue = 0;
+			console.log(selectedNetwork,netwerk2ChosenPerson,netwerk2Slidervalue);
+			draw_graphs(selectedNetwork,netwerk2ChosenPerson,netwerk2Slidervalue);
+		}
+}
+
+function onChangeSlider(slider,network) {
+	
+	console.log(slider.id);
+	console.log(slider.value);
+	console.log("slider max = " + slider.max);
+	console.log(network);
+	console.log(document.getElementById(network + "contact_groups"));
+	if (network == "network1") {
+			netwerk1Slidervalue = slider.value;
+			d3.select("#"+network).select('svg').remove();
+			console.log(network,netwerk1ChosenPerson,netwerk1Slidervalue);
+			draw_graphs(network,netwerk1ChosenPerson,netwerk1Slidervalue);
+		}
+	else if (network == "network2") {
+			netwerk2Slidervalue = slider.value;
+			d3.select("#"+network).select('svg').remove();
+			console.log(network,netwerk2ChosenPerson,netwerk2Slidervalue);
+			draw_graphs(network,netwerk2ChosenPerson,netwerk2Slidervalue);
+		}
+  }
+
+console.dir(nodesNetwork.allNetworks);
+ 
+for ( i = 0; i < networkNameArray.length; i++ ){
+  var network = networkNameArray[i];
+  console.log(networkNameArray[i].toString());
+  createSelectListPersons(network);
+  draw_graphs(network, netwerk1ChosenPerson, netwerk1Slidervalue);
+}
+
+/*function createSliders(network) {
+  var slider = document.createElement("input");
   slider.type = "range";
   slider.id = network + "range";
   slider.value = function(d) { return d.datum };
@@ -261,7 +352,7 @@ function createSliders(network) {
   console.log(network);
 }
 
-function onChangeSlider(slider,network) {
+function onChangeSlider(slider,network) {s
 	
 	console.log(slider.id);
 	console.log(network);
@@ -270,12 +361,14 @@ function onChangeSlider(slider,network) {
 	console.log(network, chosenPerson, slider.value)
  //   document.getElementById(networkName + "contact_groups").innerHTML == "";
 	draw_graphs(network,chosenPerson,slider.value);
-  }
+  }*/
 
-function draw_graphs(networkName, chosenPerson, slidervalue){ 
+function draw_graphs(networkName, chosenPerson, sliderval){ 
+  console.log("doorgestuurde netwerkname: " + networkName);
+  console.log("sliderval" + sliderval);
   console.log(chosenPerson);
   var i, selectedPerson, thisDatesNodes, thisPersonLinks, allNetworksDatesThisPerson, selectedNetworkDatesLinks, allNetworksLinksThisPerson, selectedNetworkNodes, selectedNetworkLinks;
-  //Selecteer juist netwerkNodes
+   //Selecteer juist netwerkNodes
   for ( i = 0; i < nodesNetwork.allNetworks.length; i++ ) {
 	  selectedPerson = nodesNetwork.allNetworks[chosenPerson];
 	  console.dir(selectedPerson);
@@ -287,7 +380,7 @@ function draw_graphs(networkName, chosenPerson, slidervalue){
   for (i = 0; i < thisPersonDates.length; i++ )
 	{
 	  console.dir(thisPersonDates);
-	  allNetworkDatesThisPerson = thisPersonDates[slidervalue];
+	  allNetworkDatesThisPerson = thisPersonDates[sliderval];
 	  console.dir(allNetworkDatesThisPerson);
 	}
   for ( var dates in allNetworkDatesThisPerson ){
@@ -295,24 +388,24 @@ function draw_graphs(networkName, chosenPerson, slidervalue){
 	 console.dir(selectedNetworkNodes);
   }
 	//Selecteer juist netwerkLinks
-	for ( i = 0; i < linksNetwork.allNetworks.length; i++ ) {
+  for ( i = 0; i < linksNetwork.allNetworks.length; i++ ) {
 	  thisPersonLinks = linksNetwork.allNetworks[chosenPerson];
 	  console.dir(thisPersonLinks);
 	}
-	for (var person in thisPersonLinks)
+  for (var person in thisPersonLinks)
 	{
 	  allNetworksLinksThisPerson = thisPersonLinks[person];
 	  console.dir(allNetworksLinksThisPerson);
 	}
-	for ( i = 0; i < allNetworksLinksThisPerson.length; i++ ) {
-	  selectedNetworkDatesLinks = allNetworksLinksThisPerson[slidervalue];
+  for ( i = 0; i < allNetworksLinksThisPerson.length; i++ ) {
+	  selectedNetworkDatesLinks = allNetworksLinksThisPerson[sliderval];
 	  console.dir(selectedNetworkDatesLinks);
 	}
-	for ( var dates in selectedNetworkDatesLinks ) {
+  for ( var dates in selectedNetworkDatesLinks ) {
 	   selectedNetworkLinks = selectedNetworkDatesLinks[dates];
 	   console.dir(selectedNetworkLinks);
 	}
-  console.dir(selectedNetworkLinks);
+  console.dir(selectedNetworkLinks);	
 /*	  for ( var n in nodesNetwork.allnetworks[person]){
 		  allNetworksThisPerson
 	  }
@@ -415,36 +508,89 @@ function draw_graphs(networkName, chosenPerson, slidervalue){
 	  // in the container.
 	  
   //Unieke checkboxes maken
-  var unique = {};
-  var distinct = [];
+  createCheckboxes();
+  var distinct;
+  function createCheckboxes(){
+	var unique = {};
+	distinct = [];
 	  for( var i in selectedNetworkNodes ){
-	   if( typeof(unique[selectedNetworkNodes[i].group]) == "undefined"){
-		distinct.push(selectedNetworkNodes[i].group);
-		}
-	   unique[selectedNetworkNodes[i].group] = 0;
-	 }
-  console.dir(distinct);
-  var ul = document.createElement("ul");
-  var checkboxlist=document.createElement("LI");
-  for ( i = 1; i < distinct.length; i++ ) {
-	  
-	  var label= document.createElement("label");
-	  var description = document.createTextNode(distinct[i].valueOf());
-	  var checkbox = document.createElement("input");
-	  var br = document.createElement("br");
-	  
-	  checkbox.type = "checkbox";    // make the element a checkbox
-	  checkbox.name = "slct[]";      // give it a name we can check on the server side
-	  checkbox.value = distinct[i].valueOf();         // make its value "pair"
-	  checkbox.onclick = function () {
-			  onChangeCheckbox (this);
-		  };
-	  label.appendChild(checkbox);   // add the box to the element
-	  label.appendChild(description);// add the description to the element
-	  checkboxlist.appendChild(label);
-	  checkboxlist.appendChild(br);
+		 if( typeof(unique[selectedNetworkNodes[i].group]) == "undefined"){
+		  distinct.push(selectedNetworkNodes[i].group);
+		  }
+		 unique[selectedNetworkNodes[i].group] = 0;
+	   }
+	console.dir(distinct);
+	var ul = document.createElement("ul");
+	var checkboxlist=document.createElement("LI");
+	for ( i = 1; i < distinct.length; i++ ) {
+		
+		var label= document.createElement("label");
+		var description = document.createTextNode(contactGroups[i]);
+		var checkbox = document.createElement("input");
+		var br = document.createElement("br");
+		
+		checkbox.type = "checkbox";    // make the element a checkbox
+		checkbox.name = "slct[]";      // give it a name we can check on the server side
+		checkbox.value = distinct[i].valueOf();         // make its value "pair"
+		checkbox.onclick = function () {
+				onChangeCheckbox (this);
+			};
+		label.appendChild(checkbox);   // add the box to the element
+		label.appendChild(description);// add the description to the element
+		checkboxlist.appendChild(label);
+		checkboxlist.appendChild(br);
+	}
+	console.log(networkName);
+	 document.getElementById(networkName + "contact_groups").innerHTML = "";
+	 document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
   }
-   document.getElementById(networkName + "contact_groups").appendChild(checkboxlist);
+  createDate(networkName);
+  function createDate(name) {
+	  document.getElementById("rangedatum" + name).value = thisPersonDates[value].datum;
+	  document.getElementById("datum" + name).innerHTML = "Netwerk gemaakt op " + thisPersonDates[sliderval].datum;
+  }
+  createCommentaar(networkName)
+  function createCommentaar(name) {
+  	document.getElementById("commentaar" + name).innerHTML = thisPersonDates[sliderval].commentaar;
+  }
+  
+  createSliders();
+  function createSliders() {
+	 console.log("sliderval" + sliderval);
+	var slider = document.createElement("paper-slider");
+//	slider.type = "range";
+	slider.id = networkName + "range";
+	slider.description = function(d) { return d.datum };
+	console.log("meegegeven Max" + thisPersonDates.length)
+	slider.max = thisPersonDates.length - 1;
+	slider.min = 0;
+	slider.value = sliderval;
+	slider.step = "1";
+	slider.snaps = true;
+	slider.pin = true;
+	console.log(networkName);
+	slider.onchange = function () { 
+	  console.log("Networkname: " + networkName)
+	  slidervalue = slider.value;
+	  console.log(slidervalue);
+	  changeDate(slidervalue, networkName);
+	  onChangeSlider(slider,networkName);
+	}
+	
+/*	<div>
+                  <span>Ratings</span><span id="ratingsLabel"></span>
+                </div>
+			    <br>
+                  <paper-slider id="datums" pin snaps max="10" step="1" value="5"></paper-slider>
+                </div>
+*/						   
+	console.log(networkName);
+	console.log(document.getElementById(networkName + "range"));
+	document.getElementById(networkName + "range").innerHTML = "";
+	document.getElementById(networkName + "range").appendChild(slider);
+	console.log(document.getElementById(networkName + "range"));
+	console.log(network);
+  }
 	  
   var middleX = width / 2;
   var middleY = height / 2; 
