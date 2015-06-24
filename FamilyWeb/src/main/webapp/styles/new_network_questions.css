@@ -136,6 +136,17 @@ textarea {
     resize: vertical;
 }
 
+.true{
+        display: none;
+}
+
+.false{
+	display: block;
+	width: 200px;
+	margin: 10px auto;
+	color: red;
+}
+
 #submit_button_container{
 	width: 205px;
 	margin: 0 auto;
