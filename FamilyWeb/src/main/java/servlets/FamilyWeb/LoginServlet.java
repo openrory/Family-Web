@@ -51,9 +51,9 @@ public class LoginServlet extends HttpServlet {
 					//check if administrator
 					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {			
 						try {
+							req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
+							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(user));
 							req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(user));
-							JSONArray usersJSON = OverviewController.getInstance().RefreshOverviewUsers(user);
-							req.getSession().setAttribute("usersJSON", usersJSON);
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
 						} catch (JSONException e) {
 							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
