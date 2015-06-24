@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cliënt toevoegen/bijwerken</title>
+	<title>Client toevoegen/bijwerken</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
@@ -13,28 +13,7 @@
 	<link rel="import" href="/FamilyWeb/custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
 	<link rel="stylesheet" href="/FamilyWeb/styles/add_edit_client.css">
 	<script type="text/javascript" src="/FamilyWeb/javascripts/validate_add_edit_client.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  		<link rel="stylesheet" href="/FamilyWeb/styles/autocomplete.css">
-  		  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<!-- AUTOCOMPLETE -->
 
- <script>
- var availableTags = ${users};
-  $(function() {
-    $( "#tags" ).autocomplete({
-    	 source: availableTags,
-         select: function (event, ui) {
-             // Set autocomplete element to display the label
-             this.value = ui.item.label;
-             // Store value in hidden field
-             $('#socialworker_id').val(ui.item.value);
-             // Prevent default behaviour
-             return false;
-          }
-    });
-  });
-  </script>
 </head>
 <body fullbleed layout vertical>
     <core-drawer-panel responsivewidth="1400px">
@@ -48,7 +27,7 @@
         <core-header-panel main>
             <core-toolbar>
 			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-            <div flex>Cliënt toevoegen/bijwerken</div>
+            <div flex>Client toevoegen/bijwerken</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div id="content" >
@@ -56,7 +35,7 @@
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
 			<paper-shadow z="3" animated="true" id="add_edit_client_form">
-                <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/ClientServlet.do">
+                <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/ClientServlet.do" method="post">
                     <p>
                         Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
                         Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
@@ -70,14 +49,6 @@
                     <input type="hidden" name="client_id" value="${client.client_id}">
                    <% }%>
 					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
-                    <input type="hidden" name=clientID value="${client.client_id}"> 
-                    <% } %>
-	                  <div class="information">
-	                  <label>Zorgprofessional: </label>
-					  <input id="tags" name="socialworker" placeholder="Zoeken...">
-					  <input id="socialworker_id" name="socialworker_id" type="hidden" value="">
-					</div>
-					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>  
                     <div class="information">
                         <label>Dossiernummer :</label>
                             <input id="fileid" type="text" placeholder="Personeelnr" value="${client.filenumber}"/>
@@ -157,4 +128,3 @@
     </core-drawer-panel>
 </body>
 </html>
-

@@ -256,23 +256,21 @@ public class MySQLDao implements DatabaseInterface {
 		try {
 			conn = this.getConnection();
 			PreparedStatement pStmt = conn
-					.prepareStatement("insert into clients(forename,surname,dateofbirth,postcode,street,housenumber,city,nationality,telephonenumber,mobilephonenumber,email,filenumber,dateCreated, user_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			pStmt.setString(3, client.getForename());
-			pStmt.setString(4, client.getSurname());
-			pStmt.setDate(5, new java.sql.Date(client.getDateOfBirth()
-					.getTime()));
-			pStmt.setString(6, client.getPostcode());
-			pStmt.setString(7, client.getStreet());
-			pStmt.setString(8, client.getHouseNumber());
-			pStmt.setString(9, client.getCity());
-			pStmt.setString(10, client.getNationality());
-			pStmt.setString(12, client.getTelephoneNumber());
-			pStmt.setString(13, client.getMobilePhoneNumber());
-			pStmt.setString(15, client.getEmail());
-			pStmt.setString(16, client.getFileNumber());
-			pStmt.setDate(17, new java.sql.Date(client.getDateCreated()
-					.getTime()));
-			pStmt.setInt(18, user_id);
+					.prepareStatement("insert into clients(forename,surname,dateofbirth,postcode,street,housenumber,city,nationality,telephonenumber,mobilephonenumber,email,filenumber,dateCreated, user_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			pStmt.setString(1, client.getForename());
+			pStmt.setString(2, client.getSurname());
+			pStmt.setDate(3, new java.sql.Date(client.getDateOfBirth().getTime()));
+			pStmt.setString(4, client.getPostcode());
+			pStmt.setString(5, client.getStreet());
+			pStmt.setString(6, client.getHouseNumber());
+			pStmt.setString(7, client.getCity());
+			pStmt.setString(8, client.getNationality());
+			pStmt.setString(9, client.getTelephoneNumber());
+			pStmt.setString(10, client.getMobilePhoneNumber());
+			pStmt.setString(11, client.getEmail());
+			pStmt.setString(12, client.getFileNumber()); System.out.println("test date" + client.getDateCreated().toString());
+			pStmt.setDate(13, new java.sql.Date(client.getDateCreated().getTime()));
+			pStmt.setInt(14, user_id);
 			pStmt.executeUpdate();
 			b = true;
 		} catch (SQLException e) {
