@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 					//check if active && password must reset first
 					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){						
 						try {
+							// kan weg clientsjson voor socialworker?
 							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(user));
 							req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);

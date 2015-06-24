@@ -40,7 +40,7 @@ public class EmployeeServlet extends HttpServlet {
 
 		this.req = req;
 		option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
-		
+
 		// Get current user
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
@@ -48,14 +48,14 @@ public class EmployeeServlet extends HttpServlet {
 		// Check wich page is called, to overview users, create or update user.
 		if (option.equals("create")) {
 			this.create();
-
+			req.setAttribute("option", "create");
 		} else if (option.equals("update")) {
 			this.update();
 
 		} else if (option.equals("summary")) {
 
-			if (req.getParameter("userID") != null) {
-				int userID = Integer.valueOf((String) req.getParameter("userID"));
+			if (req.getParameter("currentID") != null) {
+				int userID = Integer.valueOf((String) req.getParameter("currentID"));
 				this.summary(userID);
 			} else {
 				this.setMessage(MESSAGE_ERROR, "Onverwachte fout opgetreden, werknemer niet gevonden.");
@@ -120,8 +120,10 @@ public class EmployeeServlet extends HttpServlet {
 		
 		if (req.getParameter("userID") != null) {
 			try {
+				System.out.println("TEST1111111111111");
 				int userID = Integer.valueOf(req.getParameter("userID"));
 				this.summary(userID);
+				System.out.println("TEST1111111111111222222");
 			} catch (NumberFormatException e) {
 				//e.printStackTrace();
 			}
@@ -173,7 +175,25 @@ public class EmployeeServlet extends HttpServlet {
 			reqDisp = req.getRequestDispatcher(PAGE_EMPLOYEE_OVERVIEW);
 		}
 	}
-
+	
+	private boolean employeeNumberExist(String employeenumber) {
+		for (User u : ((Administrator) currentUser).getUsers()) {
+			if (u.getEmployeeNumber().equals(employeenumber)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean usernameExist(String username) {
+		for (User u : ((Administrator) currentUser).getUsers()) {
+			if (u.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Method is used by create or update method, to set the attributes and validate the input.
 	 */
@@ -181,7 +201,10 @@ public class EmployeeServlet extends HttpServlet {
 
 		String message = "";
 		
+		if (!option.equals("update")) {
 		message += (user.setEmployeeNumber((req.getParameter("employeenumber") != null) ? (String) req.getParameter("employeenumber") : "")) ? "" : "Personeelsnummer, ";
+		}
+		
 		message += (user.setForename((req.getParameter("forename") != null) ? (String) req.getParameter("forename") : "")) ? "" : "Voornaam, ";
 		message += (user.setSurname((req.getParameter("surname") != null) ? (String) req.getParameter("surname") : "")) ? "" : "Achternaam, ";
 		
@@ -192,7 +215,7 @@ public class EmployeeServlet extends HttpServlet {
 			String year = parts[0]; 
 			String month = parts[1]; 
 			String date = parts[2];
-			user.setDateOfBirth(date, month, year);
+			message += (user.setDateOfBirth(date, month, year)) ? "" : "Geboortedatum, ";
 		} else {
 			message += "Geboortedatum, ";
 		}
@@ -208,8 +231,10 @@ public class EmployeeServlet extends HttpServlet {
 		String email1 = (req.getParameter("email") != null) ? (String) req.getParameter("email") : "";
 		String email2 = (req.getParameter("email_confirmation") != null) ? (String) req.getParameter("email_confirmation") : "";
 		
-		if (!email1.equals("") || !email2.equals("") || email1.equals(email2)) {
+		if (!email1.equals("") && !email2.equals("") && email1.equals(email2)) {
 			message += (user.setEmail(email1)) ? "" : "Email, ";
+		} else {
+			message += "Email, ";
 		}
 		
 		if (!option.equals("update")) {
@@ -220,7 +245,17 @@ public class EmployeeServlet extends HttpServlet {
 		
 		user.setActive((req.getParameter("is_active") != null ? true : false));
 		
-		message += (!message.equals("")) ? "niet correct ingevuld" : "";
+		message += (!message.equals("")) ? "niet correct ingevuld." : "";
+		
+		if (!option.equals("update")) {
+		message += (!this.employeeNumberExist((user.getEmployeeNumber() != null) ? user.getEmployeeNumber() : "") ? "" : " Personeelsnummer bestaat al.");
+		message += (!this.usernameExist((user.getUsername() != null) ? user.getUsername() : "") ? "" : " Gebruikersnaam bestaat al.");
+			if (!message.equals("")) {
+				req.setAttribute("employee", user);
+				req.setAttribute("option", "create");
+			}
+		}
+		
 		return message;
 	}
 
