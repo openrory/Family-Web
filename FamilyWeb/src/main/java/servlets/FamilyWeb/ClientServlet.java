@@ -1,6 +1,7 @@
 package servlets.FamilyWeb;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -92,14 +93,11 @@ public class ClientServlet extends HttpServlet {
 		
 		if (message.equals("")) {
 			
+			client.setDateCreated(new Date());
 			client.addDB(userID);
-		
-			if (message.equals("")) {
-				message += "Client " + client.getForename() + " " + client.getSurname() + " succesvol toegevoegd.";
-				this.setMessage(MESSAGE_SUCCESS, message);
-			} else {
-				this.setMessage(MESSAGE_ERROR, message);
-			}
+
+			message += "Client " + client.getForename() + " " + client.getSurname() + " succesvol toegevoegd.";
+			this.setMessage(MESSAGE_SUCCESS, message);
 			
 			try {
 				req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(this.currentUser));
