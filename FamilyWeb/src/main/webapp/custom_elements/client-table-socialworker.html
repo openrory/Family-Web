@@ -2,7 +2,7 @@
 <link rel="import" href="/bower_components/core-icons/core-icons.html">
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Client-table-administrator">
+<polymer-element name="Client-table">
     <template>
         <style>
             :host {
@@ -50,6 +50,10 @@
 
             .unhide {
                 display: block;
+            }
+
+            #icon {
+                margin-right: 50%;
             }
 
             p {
@@ -107,63 +111,23 @@
                 p {
                     text-align: center;
                 }
+
+                #icon {
+                    margin-right: 50%;
+                }
             }
 
             @media all and (max-width: 800px) and (min-width: 120px) {
-
-                :host {
-                    position: relative;
-                }
-
-                #table_header {
-                    background-color: #FF5621;
-                    color: white;
-                    height: 100%;
-                    width: 100%;
-                    font-size: 12px;
-                }
-
-                #table {
-                    background-color: #FFCBBB;
-                    margin-left: 5%;
-                    height: 100%;
-                    width: 90%;
-                    min-width: 675px;
-                    border: none;
-                }
-
-                .table_column {
-                    margin-top: 0.5%;
-                    font-size: 12px;
-                }
 
                 .scrollWrapper {
                     height: 100%;
                     width: 90%;
                     overflow: scroll;
                 }
-
-                #searchInput {
-                    background-color: white;
-                    color: black;
-                    height: 80%;
-                    margin-top: 0.35%;
-                }
-
-                .hidden {
-                    display: none;
-                }
-
-                .unhide {
-                    display: block;
-                }
-
-                p {
-                    text-align: center;
-                }
             }
         </style>
-        <div z="3" class="scrollWrapper">
+
+        <div class="scrollWrapper">
             <table id="table" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
                     <tr>
@@ -177,11 +141,14 @@
                         <th class="table_header_options"><p> <paper-input id="searchInput" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
                     </tr>
                 </thead>
+
                 <h1 id="searchNotFound" class="hidden">No Search Results Found!</h1>
                 <div class="hidden">{{searchObject | filterArray}}</div>
+
                 <tbody>
-                    <template repeat="{{person in clientData}}">
+                    <template repeat="{{person in familyData}}">
                         <tr class="table_column">
+
                             <td id="first_table_content"><p>{{person.fileNumber}}</p></td>
                             <td class="table_contents"><p>{{person.forename}}</p></td>
                             <td class="table_contents"><p>{{person.surname}}</p></td>
@@ -189,17 +156,41 @@
                             <td class="table_contents"><p>{{person.street}}</p></td>
                             <td class="table_contents"><p>{{person.houseNumber}}</p></td>
                             <td class="table_contents"><p>{{person.city}}</p>
-                            <td class="icon_content"><p><core-icon icon="create" onclick="submit({{person.client_id}})" value="" /></p></td>
+                            <td class="icon_content">
+                                <p>
+                                    <core-icon id="icon" icon="search" onclick="submitToFamilyInformation({{person.client_id}})" value="" />
+
+                                </p>
+                                <p>
+                                    <core-icon id="icon" icon="create" onclick="submitToClientInformation({{person.client_id}})" value="" />
+                                </p>
+                            </td>
+
                         </tr>
                     </template>
+
                 </tbody>
             </table>
         </div>
+
     </template>
+
     <script>
         // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
+        function submitToFamilyInformation(ID) {
             document.getElementById("familyID").value = ID;
+            console.log("ID:" + ID);
+            console.log("view is aangeroepen!" + document.getElementById("familyID").value);
+            // action call naar "/FamilyWeb/FamilyInformation.do" is al default
+
+            document.getElementById("familyform").submit();
+        };
+
+        function submitToClientInformation(ID) {
+            document.getElementById("familyID").value = ID;
+            console.log("ID:" + ID);
+            console.log("edit is aangeroepen!" + document.getElementById("familyID").value);
+            document.getElementById("familyform").action = "/FamilyWeb/ClientServlet.do";
             document.getElementById("familyform").submit();
         };
 
@@ -208,19 +199,16 @@
                 console.log("Tabel is bereikt!");
                 if (this.attributes.hasOwnProperty("initialData")) {
                     console.log("initialData is ontvangen");
-                    this.clientData = JSON.parse(this.attributes['initialData'].value);
+                    this.familyData = JSON.parse(this.attributes['initialData'].value);
                 }
             },
 
-
-            // Laad de JSON data naar de tabel
             loadData: function (dt) {
                 console.log("JSON via Javascript ontvangen")
-                this.clientData = dt;
-                this.clientDataBackGround = dt;
+                this.familyData = dt;
+                this.familyDataBackGround = dt;
             },
 
-            //zoekt in het array of er gelijke waarden zijn aan de zoek waarde( search waarde staat eerder op de pagina in de HTML als searchObject)
             filterArray: function () {
                 console.log('test');
                 var search = "";
@@ -231,11 +219,10 @@
                 console.log("search value :" + search);
 
 
-                console.log("input array :" + this.clientDataBackGround);
-                if (typeof this.clientDataBackGround !== "undefined") {
+                console.log("input array :" + this.familyDataBackGround);
+                if (typeof this.familyDataBackGround !== "undefined") {
 
-                    //De logica voor het zoeken in de array
-                    this.clientData = jQuery.grep(this.clientDataBackGround, function (element, index) {
+                    this.familyData = jQuery.grep(this.familyDataBackGround, function (element, index) {
                         var fileNumber = (element.fileNumber.toLowerCase()).includes(search.toLowerCase());
                         var totalname = (element.forename.toLowerCase() + " " + element.surname.toLowerCase()).includes(search.toLowerCase());
                         var postcode = (element.postcode.toLowerCase()).includes(search.toLowerCase());
@@ -249,9 +236,10 @@
                             return false;
                         }
                     })
-                    console.log("filter array :" + this.clientData);
+                    console.log("filter array :" + this.familyData);
                 }
             }
         });
     </script>
+
 </polymer-element>

@@ -10,6 +10,7 @@
     <link rel="import" href="/FamilyWeb/elements.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-socialworker.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+	<link rel="import" href="../custom_elements/client-table-socialworker.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/Family-table.html">
 	<link rel="stylesheet" href="/FamilyWeb/styles/client_overview.css">
 
@@ -45,10 +46,10 @@
     </core-drawer-panel>
     <script>
     // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
-            document.getElementById("familyID").value = ID;
-            document.getElementById("familyform").submit()
-        };
+//         function submit(ID) {
+//             document.getElementById("familyID").value = ID;
+//             document.getElementById("familyform").submit();
+//         };
 
         document.addEventListener('polymer-ready', function () {
             var obj = document.querySelector('#table');

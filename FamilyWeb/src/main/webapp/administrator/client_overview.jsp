@@ -33,21 +33,17 @@
 		<%
 			}
 		%>		
-		<form id="clientform" action="/FamilyWeb/ClientServlet.do"
+		<form id="familyform" action="/FamilyWeb/ClientServlet.do"
 			method="post">
 			<!--                	Hier wordt de id van de familie neergezet voor de servlets -->
-			<input id="clientID" type="text" value="">
+			<input id="familyID" name="familyID"  value="" type="hidden">
+			<input id="option" name="option" value="summary" type="hidden">
 		</form>
 		<!--                	Hieronder moet de tabel van Michiel komen te staan -->
 		<Client-table-administrator show="contacts" id="table"></Client-table-administrator>
 	</div>
 	</core-header-panel> </core-drawer-panel>
 	<script>
-		// id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-		function submit(ID) {
-			document.getElementById("familyID").value = ID;
-			document.getElementById("familyform").submit()
-		};
 		document.addEventListener('polymer-ready', function() {
 			var obj = document.querySelector('#table');
 			console.log("Polymer Ready");
