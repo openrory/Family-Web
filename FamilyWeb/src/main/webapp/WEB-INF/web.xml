@@ -76,6 +76,13 @@
 		<servlet-name>SurveyServlet</servlet-name>
 		<servlet-class>servlets.FamilyWeb.SurveyServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>FamilyMemberServlet</display-name>
+		<servlet-name>FamilyMemberServlet</servlet-name>
+		<servlet-class>servlets.FamilyWeb.FamilyMemberServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>ContactServlet</servlet-name>
@@ -92,6 +99,10 @@
 	<servlet-mapping>
 		<servlet-name>SurveyServlet</servlet-name>
 		<url-pattern>/SurveyServlet.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FamilyMemberServlet</servlet-name>
+		<url-pattern>/FamilyMemberServlet.do</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
