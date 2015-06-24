@@ -1,37 +1,15 @@
-@media only screen and (max-width: 3840px) {
-    #button {
-        background-color: rgb(192, 0, 0);
-        color: rgb(255, 255, 255);
-        position: relative;
-        left: 35%;
-        margin-left: auto;
-        margin-top : 2% ;
-         margin-bottom : 2%;
-    }
+body {
+	font-family: sans-serif;
 }
 
-@media only screen and (max-width: 1080px) {
-    #button {
-        background-color: rgb(192, 0, 0);
-        color: rgb(255, 255, 255);
-        position: relative;
-        left: 30%;
-        margin-left: auto;
-        margin-top : 2% ;
-         margin-bottom : 2%;
-    }
+core-toolbar {
+	background-color: #009EE3;
+	width: 100%;
+	text-align:center;
 }
 
-@media only screen and (max-width: 480px) {
-    #button {
-        background-color: rgb(192, 0, 0);
-        color: rgb(255, 255, 255);
-        position: relative;
-        left: 30%;
-        margin-left: auto;
-        margin-top : 2% ;
-        margin-bottom : 2%;
-    }
+[drawer] {
+	background-color: #FFFFFF;
 }
 
 #title {
@@ -44,9 +22,8 @@
 }
 
 #add_edit_client_form {
-	width: 50%;
 	min-width: 300px;
-	max-width:800px;
+	max-width:650px;
 	margin: 20px auto;
 	background-color: #EEEEEE;
 	padding: 5px;
@@ -56,14 +33,13 @@
 }
 
 .information{
-	width: 90%;
+	width: 450px;
 	margin: 10px auto;
 }
 
 .information input{
-	min-width: 200px;
-	max-width: 300px;
-	margin-left: 30px;
+	width: 140px;
+	margin-left: 20px;
 	padding: 5px;
 	background-color: #fff;
 	border: 1px solid;
@@ -74,18 +50,18 @@
 
 .information label {
 	display: inline-block;
-	width: 200px; 
+	width: 170px; 
 	text-align: right;
 }
 
 .information_short{
-	width: 90%;
+	width: 450px;
 	margin: 10px auto;
 }
 
 .information_short input{
 	max-width: 60px;
-	margin-left: 30px;
+	margin-left: 20px;
 	padding: 5px;
 	background-color: #fff;
 	border: 1px solid;
@@ -96,7 +72,7 @@
 
 .information_short label {
 	display: inline-block;
-	width: 200px; 
+	width: 170px; 
 	text-align: right;
 }
 
@@ -109,4 +85,9 @@
 	width: 200px;
 	margin: 2px auto;
 	color: red;
+}
+
+#submit_button_container{
+	width: 150px;
+	margin: 20px auto;
 }

@@ -1,19 +1,19 @@
 function validateForm() {
 
     var isGood = true;
-    var employeeid = document.forms["add_form"]["employeeid"].value;
-    var forename = document.forms["add_form"]["forename"].value;
-    var surname = document.forms["add_form"]["surname"].value;
-    var dateofbirth = document.forms["add_form"]["dateofbirth"].value;
-    var nationality = document.forms["add_form"]["nationality"].value;
-    var street = document.forms["add_form"]["street"].value;
-    var streetnumber = document.forms["add_form"]["streetnumber"].value;
-    var postcode = document.forms["add_form"]["postcode"].value;
-    var city = document.forms["add_form"]["city"].value;
-    var phonenumber = document.forms["add_form"]["phonenumber"].value;
-    var mobile = document.forms["add_form"]["mobile"].value;
-    var email = document.forms["add_form"]["email"].value;
-    var email_confirmation = document.forms["add_form"]["email_confirmation"].value;
+    var employeeid = document.forms["add_edit_employee_form"]["employeeid"].value;
+    var forename = document.forms["add_edit_employee_form"]["forename"].value;
+    var surname = document.forms["add_edit_employee_form"]["surname"].value;
+    var dateofbirth = document.forms["add_edit_employee_form"]["dateofbirth"].value;
+    var nationality = document.forms["add_edit_employee_form"]["nationality"].value;
+    var street = document.forms["add_edit_employee_form"]["street"].value;
+    var streetnumber = document.forms["add_edit_employee_form"]["streetnumber"].value;
+    var postcode = document.forms["add_edit_employee_form"]["postcode"].value;
+    var city = document.forms["add_edit_employee_form"]["city"].value;
+    var phonenumber = document.forms["add_edit_employee_form"]["phonenumber"].value;
+    var mobile = document.forms["add_edit_employee_form"]["mobile"].value;
+    var email = document.forms["add_edit_employee_form"]["email"].value;
+    var email_confirmation = document.forms["add_edit_employee_form"]["email_confirmation"].value;
 
     // Standar REGEX patterns
     var digitsReg = /\d/g ;

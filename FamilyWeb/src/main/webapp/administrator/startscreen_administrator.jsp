@@ -12,21 +12,22 @@
     <link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
     <link rel="import" href="/FamilyWeb/custom_elements/verzoekenTable.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+	<link rel="stylesheet" href="/FamilyWeb/styles/startscreen_administrator.css">
 
 </head>
 <body fullbleed layout vertical>
     <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
-				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
-                <div flex>Menu</div>
+				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
+                <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
             <responsive-menu-administrator current="0"></responsive-menu-administrator>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>
-			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-            <div flex>Startscherm administrator</div>
+			<paper-icon-button class="toolbarButton" core-drawer-toggle icon="menu"></paper-icon-button>
+            <div id="title" flex>Startscherm administrator</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>

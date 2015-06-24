@@ -1,4 +1,18 @@
-﻿#scrollableTabs{
+body {
+	font-family: sans-serif;
+}
+
+core-toolbar {
+	background-color: #009EE3;
+	width: 100%;
+	text-align:center;
+}
+
+[drawer] {
+	background-color: #FFFFFF;
+}
+
+#scrollableTabs{
 	background-color: #DA0000;
 }
 paper-tab a {

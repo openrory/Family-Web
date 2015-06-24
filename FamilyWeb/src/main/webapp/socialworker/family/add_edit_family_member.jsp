@@ -18,15 +18,15 @@
     <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
-				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
-                <div flex>Menu</div>
+				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
+                <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
             <responsive-menu-administrator current="3"></responsive-menu-administrator>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>
-			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-            <div flex>Gezinslid toevoegen/bijwerken</div>
+			<paper-icon-button class="toolbarButton" core-drawer-toggle icon="menu"></paper-icon-button>
+            <div id="title" flex>Gezinslid toevoegen/bijwerken</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div id="content" >
@@ -103,13 +103,15 @@
                         <input id="email" name="email" type="email" placeholder="E-mail" value="${familymember.email}"/>
                     </div>
                     
-                    <paper-submit-button-decorator id="button">
                    <% if(request.getAttribute("familymember") == null){ %>
-                    <button name="op" value="Aanmaken" type="submit">Aanmaken</button> Aanmaken
+                    <div id="submit_button_container">
+                    <input class="submit_button" name="op" type="submit" value="Aanmaken">
+                    </div>
                    <% } else{ %>
-                    <button name="op" value="Opslaan" type="submit">Opslaan</button> Opslaan
+                    <div id="submit_button_container">
+                    <input class="submit_button" name="op" type="submit" value="Opslaan">
+                    </div>
                    <% }%>
-                    </paper-submit-button-decorator>
                 </form>
 				</paper-shadow>
             </div>

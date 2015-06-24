@@ -19,23 +19,23 @@
     <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
-				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
-                <div flex>Menu</div>
+				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
+                <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
             <responsive-menu-administrator current="2"></responsive-menu-administrator>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>
-			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-           <div flex>Personeelslid toevoegen/bijwerken</div>
+			<paper-icon-button class="toolbarButton" core-drawer-toggle icon="menu"></paper-icon-button>
+            <div id="title" flex>Personeelslid toevoegen/bijwerken</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div id="content" >
        		<% if(!(request.getAttribute("message") == null)){%>
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
-			<paper-shadow z="3" animated="true" id="add_edit_employee_form">
-                <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/EmployeeServlet.do" method="post">
+			<paper-shadow z="3" animated="true">
+                <form id="add_edit_employee_form" onsubmit="return validateForm();" action="/FamilyWeb/EmployeeServlet.do" method="post">
                     <p>
                         Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
                         Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
