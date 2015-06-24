@@ -5,3 +5,12 @@
 table, td, th {
     border: 1px solid black;
 }
+
+#title {
+	width:500px;
+	margin:auto;
+	color: #FFFFFF;
+	font-size: 30px;
+	font-weight: bold;
+	text-shadow: rgb(3, 3, 3) 4px 4px 4px;
+}
