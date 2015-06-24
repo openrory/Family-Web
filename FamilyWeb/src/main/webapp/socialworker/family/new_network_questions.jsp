@@ -20,6 +20,8 @@
 <link rel="import"
 	href="/FamilyWeb/bower_components/core-icon-button/core-icon-button.html">
 <link rel="stylesheet" href="/FamilyWeb/styles/new_network_questions.css">
+<script type="text/javascript" src="/FamilyWeb/javascripts/validate_new_network_questions.js"></script>
+
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -60,10 +62,13 @@
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
 		<div id="form_container">
-			<form id="group_form" action="/FamilyWeb/SurveyServlet.do" method="post">
+			<form id="questions_form" onSubmit="return validateForm();" action="/FamilyWeb/SurveyServlet.do" method="post">
 				<!-- elke contact kan ook via een jsp functie worden aangemaakt zolang alle contact al in de sessie staan. Dus die moeten al eerder worden aangemaakt-->
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+				<input id="totalContacts" type="hidden" value="${fn:length(contacts)}">
+				<input id="totalQuestions" type="hidden" value="${fn:length(survey.questions)}">
+				<input type="button" onclick="validateForm()" value="valideren">
 <c:forEach items="${contacts}" var="contact">
 					<div class="contact">
 						<h3>${contact.fullname} - ${contact.role}</h3>
@@ -71,12 +76,13 @@
 						<div id="contact${contact.contact_id}" class="questions">
 						<c:forEach items="${survey.questions}" var="question">
 						<div id="${question.question_id}">
+						<span id="${question.question_id}:${contact.contact_id}:warning" class="true">Deze vraag is niet correct beantwoord!</span>
 						<p class="questionTitle">${question.question}</p>
 						<c:choose>
   						<c:when test="${fn:length(question.theAnswers) < 6}">
    							<c:forEach items="${question.theAnswers}" var="answer">
 								<div class="radio">
-								<input type="radio" name="${question.question_id}:${contact.contact_id}" value="${answer.answer_id}" />${answer.answer}
+								<input type="radio" id="${answer.answer_id}" name="${question.question_id}:${contact.contact_id}" value="${answer.answer_id}" />${answer.answer}
 								</div>
 							</c:forEach>
   						</c:when>
@@ -88,9 +94,6 @@
 						</select>
   						</c:when>
   						</c:choose>
-<%-- 						<c:forEach items="${question.anwsers}" var="anwser"> --%>
-<%-- 						<input type="radio" name="${question.id}" value="${answer.name}" />${answer.name} --%>
-<%-- 						</c:forEach> --%>
 						</div>						
 						</c:forEach> 
 						<c:if test="${fn:length(contact.commentary) > 1}">
