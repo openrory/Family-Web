@@ -1,0 +1,103 @@
+@media only screen and (max-width: 3840px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 35%;
+        margin-left: auto;
+        margin-top : 2% ;
+         margin-bottom : 2%;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 30%;
+        margin-left: auto;
+        margin-top : 2% ;
+         margin-bottom : 2%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #button {
+        background-color: rgb(192, 0, 0);
+        color: rgb(255, 255, 255);
+        position: relative;
+        left: 30%;
+        margin-left: auto;
+        margin-top : 2% ;
+        margin-bottom : 2%;
+    }
+}
+
+#add_edit_client_form {
+	width: 50%;
+	min-width: 300px;
+	max-width:800px;
+	margin: 20px auto;
+	background-color: #EEEEEE;
+	padding: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.information{
+	width: 90%;
+	margin: 10px auto;
+}
+
+.information input{
+	min-width: 200px;
+	max-width: 300px;
+	margin-left: 30px;
+	padding: 5px;
+	background-color: #fff;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information label {
+	display: inline-block;
+	width: 200px; 
+	text-align: right;
+}
+
+.information_short{
+	width: 90%;
+	margin: 10px auto;
+}
+
+.information_short input{
+	max-width: 60px;
+	margin-left: 30px;
+	padding: 5px;
+	background-color: #fff;
+	border: 1px solid;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.information_short label {
+	display: inline-block;
+	width: 200px; 
+	text-align: right;
+}
+
+.true{
+        display: none;
+}
+
+.false{
+	display: block;
+	width: 200px;
+	margin: 2px auto;
+	color: red;
+}

@@ -1,7 +1,6 @@
 function validateForm() {
 
     var isGood = true;
-    var fileid = document.forms["add_form"]["fileid"].value;
     var forename = document.forms["add_form"]["forename"].value;
     var surname = document.forms["add_form"]["surname"].value;
     var dateofbirth = document.forms["add_form"]["dateofbirth"].value;
@@ -13,7 +12,6 @@ function validateForm() {
     var phonenumber = document.forms["add_form"]["phonenumber"].value;
     var mobile = document.forms["add_form"]["mobile"].value;
     var email = document.forms["add_form"]["email"].value;
-    var email_confirmation = document.forms["add_form"]["email_confirmation"].value;
 
     // Standar REGEX patterns
     var digitsReg = /\d/g;
@@ -22,15 +20,6 @@ function validateForm() {
     var dateReg = /^\d{2}[./-]\d{2}[./-]\d{4}$/;
     var postcodeReg = /^\d{4}[-/ ]\D{2}$/;
     var emailReg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-
-
-    if (fileid == null || fileid == "" || nonDigitsReg.test(fileid)) {
-        document.getElementById("fileidWarning").className = "false";
-        isGood = false;
-    } else {
-        document.getElementById("fileidWarning").className = "true";
-    }
 
     if (forename == null || forename == "" || digitsReg.test(forename)) {
         document.getElementById("forenameWarning").className = "false";
@@ -109,11 +98,5 @@ function validateForm() {
         document.getElementById("emailWarning").className = "true";
     }
 
-    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || !emailReg.test(email_confirmation)) {
-        document.getElementById("email_confirmationWarning").className = "false";
-        isGood = false;
-    } else {
-        document.getElementById("email_confirmationWarning").className = "true";
-    }
     return isGood;
 }
