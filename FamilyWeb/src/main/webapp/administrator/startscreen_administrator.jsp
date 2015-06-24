@@ -6,9 +6,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-cable" content="yes">
     <meta charset="utf-8">
-    <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+	
+	<script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/FamilyWeb/elements.html">
     <link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+    <link rel="import" href="/FamilyWeb/custom_elements/verzoekenTable.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
 
 </head>
@@ -32,9 +34,49 @@
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
 			<p>Hier moet een tabel komen met het overzicht van de meldingen</p>
+			<Verzoeken-table show="contacts" id="table"></Verzoeken-table>
             </div>
         </core-header-panel>
     </core-drawer-panel>
+        <script>
+    // id van de familie wordt in zorgproffesionalID neergezet en het formulier wordt verstuurd
+        function submit(ID) {
+            document.getElementById("zorgproffesionalID").value = ID;
+            document.getElementById("zorgproffesionalform").submit()
+        };
+        
+        document.addEventListener('polymer-ready', function () {
+            var obj = document.querySelector('#table');
+            console.log("Polymer Ready");
+            var data = [
+                         {
+                             "requestNumber": "1",
+                             "createdCreated": "10-01-2015",
+                             "typeRequest": "Transfer",
+                             "fromSocialworker": "Jan De Man",
+                             "toSocialworker" : "Jans De Mans",
+                             "approved": "Yes",
+                         },
+                                                  {
+                             "requestNumber": "2",
+                             "createdCreated": "20-06-2015",
+                             "typeRequest": "Share",
+                             "fromSocialworker": "Wouter Staal",
+                             "toSocialworker" : "Jan De Man",
+                             "approved": "No",
+                                                  },
+                                                                           {
+                                                      "requestNumber": "3",
+                                                      "createdCreated": "22-06-2015",
+                                                      "typeRequest": "Share",
+                                                      "fromSocialworker": "Jaap Van Noord",
+                                                      "toSocialworker" : "Joery Huiden",
+                                                      "approved": "No",
+                                                                           }
+            ]
+            console.log("JSON OBJECT before table : " + obj);
+            obj.loadData(data);
+        });
+    </script>
 </body>
 </html>
-

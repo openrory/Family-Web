@@ -1,0 +1,269 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html" />
+
+<!--<link rel="import" href="../filters/filter.html" />-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<polymer-element name="Verzoeken-table">
+    <template>
+        <style>
+            :host {
+                position: relative;
+            }
+            #table_header {
+                background: #49c0f0; /* Old browsers */
+                background: -moz-linear-gradient(top, #49c0f0 0%, #2cafe3 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#49c0f0), color-stop(100%,#2cafe3)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* IE10+ */
+                background: linear-gradient(to bottom, #49c0f0 0%,#2cafe3 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49c0f0', endColorstr='#2cafe3',GradientType=0 ); /* IE6-9 */
+                color: white;
+                height: 100%;
+                width: 100%;
+                font-size: 12px;
+            }
+            #table {
+                background-color: #BBDEFB;
+                margin-left: 5%;
+                height: 100%;
+                width: 90%;
+                min-width: 675px;
+                border: none;
+            }
+            #filtertable {
+                background-color: #BBDEFB;
+                margin-left: 5%;
+                height: 100%;
+                width: 90%;
+                min-width: 675px;
+                border-bottom: 5px;
+                border-bottom-color: black;
+            }
+            .table_column {
+                margin-top: 0.5%;
+                font-size: 12px;
+            }
+            .scrollWrapper {
+                height: 100%;
+                width: 90%;
+                overflow: hidden;
+            }
+            #paperdecoration {
+                background-color: white;
+                color: black;
+                height: 80%;
+                margin-top: 0.35%;
+            }
+            #radio-menu-decoration {
+                background-color: white;
+                color: black;
+                margin-top: 10%;
+            }
+            #filter-button-position {
+                margin-right: 87%;
+                width: 11%;
+            }
+            #filter {
+                display: none;
+            }
+            p {
+                text-align: center;
+            }
+            @media all and (max-width: 2160px) and (min-width: 800px) {
+                :host {
+                    position: relative;
+                }
+                #table_header {
+                    background: #49c0f0; /* Old browsers */
+                    background: -moz-linear-gradient(top, #49c0f0 0%, #2cafe3 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#49c0f0), color-stop(100%,#2cafe3)); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top, #49c0f0 0%,#2cafe3 100%); /* IE10+ */
+                    background: linear-gradient(to bottom, #49c0f0 0%,#2cafe3 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49c0f0', endColorstr='#2cafe3',GradientType=0 ); /* IE6-9 */
+                    color: white;
+                    height: 100%;
+                    width: 100%;
+                    font-size: 12px;
+                }
+                #table {
+                    background-color: #BBDEFB;
+                    margin-left: 5%;
+                    height: 100%;
+                    width: 90%;
+                    min-width: 675px;
+                    border: none;
+                }
+                #filtertable {
+                    background-color: #BBDEFB;
+                    margin-left: 5%;
+                    height: 100%;
+                    width: 90%;
+                    min-width: 675px;
+                    border-bottom: 5px;
+                    border-bottom-color: black;
+                }
+                .table_column {
+                    margin-top: 0.5%;
+                    font-size: 12px;
+                }
+                .scrollWrapper {
+                    height: 100%;
+                    width: 90%;
+                    overflow: hidden;
+                }
+                #paperdecoration {
+                    background-color: white;
+                    color: black;
+                    height: 80%;
+                    margin-top: 0.35%;
+                }
+                #radio-menu-decoration {
+                    background-color: white;
+                    color: black;
+                    margin-top: 10%;
+                }
+                #filter-button-position {
+                    margin-right: 87%;
+                    width: 11%;
+                }
+                #filter {
+                    display: none;
+                }
+                p {
+                    text-align: center;
+                }
+            }
+            @media all and (max-width: 800px) and (min-width: 120px) {
+                .scrollWrapper {
+                    height: 100%;
+                    width: 90%;
+                    overflow: scroll;
+                }
+            }
+        </style>
+
+        <div class="scrollWrapper">
+            <table id="filtertable" cellspacing="0" cellpadding="0">
+                <thead id="table_header">
+                    <tr>
+                        <th>
+                            <paper-button id="filter-button-position" class="heading" on-click="{{toggle}}"><core-icon icon="sort" id="sort"></core-icon>Search Filters</paper-button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <core-collapse id="collapse">
+                                <core-menu horizontal layout>
+                                    <paper-item><paper-checkbox name="Request Nr." label="Request Nr." checked="checked" value="{{checkbox_1 | }}"></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Datum Aangemaakt" label="Datum Aangemaakt" value="{{checkbox_2}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Type Request" label="Type Request" value="{{checkbox_3}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Van Socialworker" label="Van Socialworker" checked="checked" value="{{checkbox_4}}" "></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Naar Socialworker" label="Naar Socialworker" value="{{checkbox_5}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Is Goedgekeurd" label="Is Goedgekeurd" value="{{checkbox_6}}" checked></paper-checkbox></paper-item>
+                                </core-menu>
+                            </core-collapse>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="table" cellspacing="0" cellpadding="0">
+                <thead id="table_header">
+                    <tr>
+                        <th id="first_header_tag"><p>Request Nr. <core-icon icon="add" onclick="{{sortArray}}"></core-icon></p></th>
+                        <th class="table_header_tag"><p>Datum Aangemaakt</p></th>
+                        <th class="table_header_tag"><p>Type Request</p></th>
+                        <th class="table_header_tag"><p>Van Socialworker</p></th>
+                        <th class="table_header_tag"><p>Naar Socialworker</p></th>
+                        <th class="table_header_tag"><p>Is Goedgekeurd</p></th>
+                        <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
+                        <th class="table_header_options">
+                            <p>
+                            </p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{searchObject | filterArray}}
+                    <template repeat="{{object in objectData}}">
+                        <tr class="table_column">
+                            <td id="first_table_content"><p>{{object.requestNumber}}</p></td>
+                            <td class="table_contents"><p>{{object.createdCreated}}</p></td>
+                            <td class="table_contents"><p>{{object.typeRequest}}</p></td>
+                            <td class="table_contents"><p>{{object.fromSocialworker}}</p></td>
+                            <td class="table_contents"><p>{{object.toSocialworker}}</p></td>
+                            <td class="table_contents"><p>{{object.approved}}</p></td>
+                            <td class="icon_content"><p><core-icon icon="search" onclick="submit({{object.RequestNumber}})" value="" /></p></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <script>
+        // id van de familie wordt in notificationID neergezet en het formulier wordt verstuurd
+        function submit(ID) {
+            document.getElementById("notificationID").value = ID;
+            document.getElementById("notificationform").submit();
+        };
+        Polymer({
+            ready: function () {
+                console.log("Tabel is bereikt!");
+                if (this.attributes.hasOwnProperty("initialData")) {
+                    console.log("initialData is ontvangen");
+                    this.objectData = JSON.parse(this.attributes['initialData'].value);
+                }
+            },
+            loadData: function (dt) {
+                console.log("JSON via Javascript ontvangen")
+                this.objectData = dt;
+                this.objectDataBackGround = dt;
+            },
+            toggle: function () {
+                console.log("toggle");
+                this.$.collapse.toggle();
+            },
+            sortArray: function () {
+                console.log("Sorting Array");
+                this.objectDataBackGround = this.objectDataBackGround.sort();
+                this.objectData = this.objectDataBackGround;
+            },
+            filterArray: function () {
+                console.log('test');
+                var search = "";
+                if (this.searchObject !== undefined) {
+                    search = this.searchObject;
+                }
+                console.log("search input :" + this.searchObject);
+                console.log("search value :" + search);
+                console.log("input array :" + this.objectDataBackGround);
+                if (typeof this.objectDataBackGround !== "undefined") {
+                    this.objectData = jQuery.grep(this.objectDataBackGround, function (element, index) {
+                  //      var checkedValue = document.querySelector('#checkbox_1:checked').value;
+                        var checkedValue = $('#checkbox_1:checked').val();
+                       console.log(checkbedValue);
+                        if (checkedValue.checked) {
+                           console.log("checkbox_1, OPTIE 1");
+                    }
+                        var nrBool = (element.requestNumber.toLowerCase()).includes(search.toLowerCase());
+                        var fromToSocialworkerBool = (element.fromSocialworker.toLowerCase() + " " + element.toSocialworker.toLowerCase()).includes(search.toLowerCase());
+                        if (fromToSocialworkerBool || nrBool) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    })
+                    console.log("filter array :" + this.objectData);
+                }
+            }
+        });
+    </script>
+</polymer-element>

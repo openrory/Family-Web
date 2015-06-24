@@ -19,6 +19,7 @@
 	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="stylesheet"
 	href="/FamilyWeb/styles/family_members_overview.css">
+<link rel = "import" hr="/FamilyWeb/webapp/socialworker/startscreen_socialworker">
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
@@ -34,16 +35,16 @@
 	<div class="bottom fit" horizontal layout>
 		<paper-tabs id="scrollableTabs" selected="0" flex scrollable noink>
 
-		<paper-tab> <a href="/FamilyWeb/socialworker/family/family_members_overview.jsp"
+		<paper-tab> <a href="family_members_overview.jsp"
 			horizontal center-center layout>Gezinsleden</a></paper-tab> 
 		<paper-tab>
-		<a href="/FamilyWeb/socialworker/family/network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
-		<paper-tab> <a href="/FamilyWeb/socialworker/family/new_network_contacts.jsp" horizontal
+		<a href="network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+		<paper-tab> <a href="new_network_contacts.jsp" horizontal
 			center-center layout>Nieuw Netwerk</a></paper-tab> 
 			<paper-tab> <a
-			href="/FamilyWeb/socialworker/family/share_networks.jsp" horizontal center-center layout>Netwerk(en)
+			href="share_networks.jsp" horizontal center-center layout>Netwerk(en)
 			delen</a></paper-tab> 
-			<paper-tab> <a href="/FamilyWeb/socialworker/family/transfer.jsp" horizontal
+			<paper-tab> <a href="transfer.jsp" horizontal
 			center-center layout>Overdragen</a></paper-tab> 
 			</paper-tabs>
 	</div>
@@ -67,6 +68,7 @@
 
 			</form>
 			<p>overzicht gezinsleden hieronder</p>
+			<Family-members-table show="contacts" id="table">></Family-members-table>
 		</div>
 
 	</div>
@@ -74,6 +76,39 @@
 	<core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
 
 	<script>
+	 document.addEventListener('polymer-ready', function () {
+         var obj = document.querySelector('#table');
+         console.log("Polymer Ready");
+         var data = [
+                      {
+                          "requestNumber": "1",
+                          "createdCreated": "10-01-2015",
+                          "typeRequest": "Transfer",
+                          "fromSocialworker": "Jan De Man",
+                          "toSocialworker" : "Jans De Mans",
+                          "approved": "Yes",
+                      },
+                                               {
+                          "requestNumber": "2",
+                          "createdCreated": "20-06-2015",
+                          "typeRequest": "Share",
+                          "fromSocialworker": "Wouter Staal",
+                          "toSocialworker" : "Jan De Man",
+                          "approved": "No",
+                                               },
+                                                                        {
+                                                   "requestNumber": "3",
+                                                   "createdCreated": "22-06-2015",
+                                                   "typeRequest": "Share",
+                                                   "fromSocialworker": "Jaap Van Noord",
+                                                   "toSocialworker" : "Joery Huiden",
+                                                   "approved": "No",
+                                                                        }
+         ]
+         console.log("JSON OBJECT before table : " + obj);
+         obj.loadData(data);
+     });
+	 
 		function addInput(groupName) {
 // 			de eerste keer dat deze methode wordt aangeroepen dan hoeft ook pas de submit knop in beeld te komen
 			document.getElementById("submit_button_container").style.display = 'block';
@@ -94,12 +129,10 @@
 					+ ")" + '"></core-icon-button> </div>';
 			document.getElementById("counter" + groupName).value = countBox;
 		}
-
 		function removeInput(personNumber, groupName) {
 			document.getElementById(groupName + personNumber).style.display = 'none';
 			document.getElementById(groupName + "validate" + personNumber).value = "false";
 		}
-
 		document.querySelector('#mediaQuery').addEventListener(
 				'core-media-change',
 				function(e) {
