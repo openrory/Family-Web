@@ -75,7 +75,7 @@
 						<core-icon-button class="add" onclick="viewQuestions(${contact.contact_id})" icon="arrow-drop-down"></core-icon-button>
 						<div id="contact${contact.contact_id}" class="questions">
 						<c:forEach items="${survey.questions}" var="question">
-						<div id="${question.question_id}">
+						<div id="${question.question_id}" class="question">
 						<span id="${question.question_id}:${contact.contact_id}:warning" class="true">Deze vraag is niet correct beantwoord!</span>
 						<p class="questionTitle">${question.question}</p>
 						<c:choose>

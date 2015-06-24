@@ -9,7 +9,7 @@
 <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
 <link rel="import" href="../elements.html">
 <link rel="import"
-	href="../custom_elements/responsive-menu-socialworker.html">
+	href="../custom_elements/responsive-menu-administrator.html">
 <link rel="import" href="../custom_elements/options-menu.html">
 <link rel="import" href="../custom_elements/Family-table.html">
 <link rel="stylesheet" href="../styles/client_overview.css">
