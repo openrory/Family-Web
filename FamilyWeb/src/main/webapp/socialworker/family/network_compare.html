@@ -188,7 +188,18 @@ var nodesNetwork =
     										  {"name":"Sjaak","group":3, "commentaar": ""},
     										  {"name":"Eline","group":4, "commentaar": ""}
   										  ]
-									    }
+									    },
+									    {"datum": "19-05-2015", "commentaar": "commentaar persoon 2 17-05-2015", "nodes":
+											  [
+	    										  {"name":"De Client","group":0, "commentaar": ""},
+	    										  {"name":"Truus","group":1, "commentaar": ""},
+	    										  {"name":"Buurmeisje","group":1, "commentaar": ""},
+	    										  {"name":"John","group":2, "commentaar": ""},
+	    										  {"name":"Henkie","group":2, "commentaar": ""},
+	    										  {"name":"Sjaak","group":3, "commentaar": ""},
+	    										  {"name":"Eline","group":4, "commentaar": ""}
+	  										  ]
+										 }
 									  ]
 									}
 								]
@@ -242,7 +253,7 @@ var linksNetwork = {"allNetworks" : [
 						},
 						{ "person2":
 							[
-								{"16-05-2015":
+								{"17-05-2015":
 								  [
 									{ "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
 									{ "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
@@ -251,7 +262,17 @@ var linksNetwork = {"allNetworks" : [
 									{ "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
 									{ "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":4}
 								  ]
-								}
+								},
+								{"19-05-2015":
+									  [
+										{ "source": 1, "target": 0, "distance": 1, "strength": 5, "type": 1, "group":1},
+										{ "source": 2, "target": 0, "distance": 2, "strength": 1, "type": 2, "group":1},
+										{ "source": 3, "target": 0, "distance": 3, "strength": 3, "type": 3, "group":2},
+										{ "source": 4, "target": 0, "distance": 5, "strength": 4, "type": 5, "group":2},
+										{ "source": 5, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":3},
+										{ "source": 6, "target": 0, "distance": 2, "strength": 2, "type": 4, "group":4}
+									  ]
+									}
 							]
 						}
 					]
@@ -455,13 +476,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  .enter().append('line')
 	  .attr('class', 'link')
 	  .style("stroke-width", function(d) { return (d.strength * 2); })
-	  .style("stroke", function(d) { 
-									  for ( i = 0; i < selectedNetworkLinks.length; i++ ){
-										  if ( d.group == i ) {
-											  return colors(i);
-										  }
-									  }
-								  });
+	  .style("stroke", function(d) { return colors(d.group); });
   // Hier worden de eigenschappen van de nodes meegeven
   // Elke node krijgt een kleur op basis van tot welke groep hij behoort
   // verder worden ze nog in cirkels getekend
@@ -473,15 +488,16 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	  .data(selectedNetworkNodes)
 	  .enter().append('g')
 	  .attr('class', 'node')
-	  .style("fill", function(d) { 
-									  for ( i = 0; i < selectedNetworkNodes.length; i++ ){
-										  if ( d.group == i ) {
-											  return colors(i);
-										  }
-									  }
-								  })
+	  .style("fill", function(d) {  if ( d.group != 0 ) {
+		   return colors(d.group);
+		   }
+		  else {
+			  return "#adff2f";
+		  }
+	  })
+								  
 	  .on("mouseover", mouseover)
-	  .on("mouseout", mouseout)
+	  .on("mouseout", mouseout);
 	  
   node.append("circle")
 	  .attr("r", sizeNode);
