@@ -254,14 +254,20 @@
                     this.zorgproffesionalData = jQuery.grep(this.zorgproffesionalDataBackGround, function (element, index) {
                         var nrBool = (element.employeeNumber.toLowerCase()).includes(search.toLowerCase());
                         var totalnameBool = (element.forename.toLowerCase() + " " + element.surname.toLowerCase()).includes(search.toLowerCase());
-                        
+                        var usernameBool = (element.username.toLowerCase()).includes(search.toLocaleLowerCase()) ;
+                        var isActiveBool = (element.isActive.toLowerCase()).includes(search.toLowerCase())  ;
+                        var dateOfBirthBool = (element.dateOfBirth.toLowerCase()).includes(search.toLowerCase()) ;
+                        var mobilePhoneNumberBool = (element.mobilePhoneNumber.toLocaleLower()).includes(search.toLowerCase()) ;
+                        var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase())  ;
+                        var streetBool  = (element.street.toLowerCase()).includes(search.toLowerCase())  ;
+                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase())  ;
+                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) ;
 
-                        if (totalnameBool || nrBool) {
+                        if (nrBool || totalnameBool || usernameBool || isActiveBool || dateOfBirthBool || mobilePhoneNumberBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
                             return true;
                         } else{
                             return false;
-                        }
-
+                        }      
                     })
                     console.log("filter array :" + this.zorgproffesionalData);
                 }

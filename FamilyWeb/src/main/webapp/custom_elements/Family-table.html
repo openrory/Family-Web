@@ -2,7 +2,7 @@
 <link rel="import" href="/bower_components/core-icons/core-icons.html">
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Family-table">
+<polymer-element name="Client-table">
     <template>
         <style>
              :host {
@@ -242,9 +242,20 @@
 
                 console.log("input array :" + this.familyDataBackGround);
                 if (typeof this.familyDataBackGround !== "undefined") {
-                    var forename = element.forename.toLowerCase();
+        
                     this.familyData = jQuery.grep(this.familyDataBackGround, function (element, index) {
-                        return forename.includes(search);
+                        var fileNumber = (element.fileNumber.toLowerCase()).includes(search.toLowerCase());
+                        var totalname = (element.forename.toLowerCase() + " " + element.surname.toLowerCase()).includes(search.toLowerCase());
+                        var postcode = (element.postcode.toLowerCase()).includes(search.toLowerCase()) ;
+                        var street   = (element.street.toLowerCase()).includes(search.toLowerCase())   ;
+                        var houseNumber = (element.houseNumber.toLowerCase()).includes(search.toLowerCase())        ;
+                        var city = (element.city.toLowerCase()).includes(search.toLowerCase())                      ;
+                        
+                        if (fileNumber || totalname || postcode || street || houseNumber || city) {
+                            return true ;
+                        } else {
+                            return false;
+                        }
                     })
                     console.log("filter array :" + this.familyData);
                 }
