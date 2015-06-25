@@ -2,6 +2,7 @@ package servlets.FamilyWeb;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 
 import servletControllers.FamilyWeb.OverviewController;
+import util.FamilyWeb.Validation;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Client;
@@ -24,19 +26,23 @@ public class ClientServlet extends HttpServlet {
 	private final String MESSAGE_SUCCESS = "success";
 	private final String MESSAGE_ERROR = "error";
 	
-	private final String PAGE_CLIENT_OVERVIEW = "/administrator/client_overview.jsp";
-	private final String PAGE_CLIENT_ADD_EDIT = "/administrator/add_edit_client.jsp";
+	private String PAGE_CLIENT_OVERVIEW = "";
+	private String PAGE_CLIENT_ADD_EDIT = "";
 	
 	private RequestDispatcher reqDisp = null;
 	private HttpServletRequest req = null;
 	private Client client = null;
 	private User currentUser = null;
+	private Validation validation = Validation.getInstance();
 	
 	private String option = "";
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		PAGE_CLIENT_OVERVIEW = "client_overview.jsp";
+		PAGE_CLIENT_ADD_EDIT = "add_edit_client.jsp";
+		
 		this.req = req;
 		option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
 		
@@ -44,6 +50,14 @@ public class ClientServlet extends HttpServlet {
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
 
+		if (currentUser instanceof Administrator) {
+			PAGE_CLIENT_OVERVIEW = "/administrator/" + PAGE_CLIENT_OVERVIEW;
+			PAGE_CLIENT_ADD_EDIT = "/administrator/" + PAGE_CLIENT_ADD_EDIT;
+		} else {
+			PAGE_CLIENT_OVERVIEW = "/socialworker/" + PAGE_CLIENT_OVERVIEW;
+			PAGE_CLIENT_ADD_EDIT = "/socialworker/" + PAGE_CLIENT_ADD_EDIT;
+		}
+		
 		// Check wich page is called, to overview users, create or update user.
 		if (option.equals("create")) {
 			this.create();
@@ -182,40 +196,50 @@ public class ClientServlet extends HttpServlet {
 
 		String message = "";
 		
-		message += (client.setFileNumber((req.getParameter("filenumber") != null) ? (String) req.getParameter("filenumber") : "")) ? "" : "Dossiernummer, ";
-		message += (client.setForename((req.getParameter("forename") != null) ? (String) req.getParameter("forename") : "")) ? "" : "Voornaam, ";
-		message += (client.setSurname((req.getParameter("surname") != null) ? (String) req.getParameter("surname") : "")) ? "" : "Achternaam, ";
-	
-		String dateOfBirth = (req.getParameter("dateofbirth") != null) ? (String) req.getParameter("dateofbirth") : "";
+		String filenumber = req.getParameter("filenumber");
+		String forename = validation.validateForename(req.getParameter("forename"));
+		String surname = validation.validateSurname(req.getParameter("surname"));
+		
+		String dateOfBirth = req.getParameter("dateofbirth");
 		
 		if (!dateOfBirth.equals("")) {
 			String[] parts = dateOfBirth.split("-");
 			String year = parts[0]; 
 			String month = parts[1]; 
 			String date = parts[2];
-			message += (client.setDateOfBirth(date, month, year)) ? "" : "Geboortedatum, ";
+			Date dateofbirth = validation.validateDateOfBirth(date, month, year);
+			if (dateofbirth != null) {
+				client.setDateOfBirth(dateofbirth);
+			} else {
+				message += "Geboortedatum, ";
+			}
 		} else {
 			message += "Geboortedatum, ";
 		}
+
+		String nationality = validation.validateNationality(req.getParameter("nationality"));
+		String street = validation.validateStreet(req.getParameter("street"));
+		String housenumber = validation.validateHouseNumber(req.getParameter("streetnumber"));
+		String postcode = validation.validatePostcode(req.getParameter("postcode"));
+		String city = validation.validateCity(req.getParameter("city"));
+		String phonenumber = validation.validateTelephoneNumber(req.getParameter("phonenumber"));
+		String mobile = validation.validateMobilePhoneNumber(req.getParameter("mobile"));
+		String email = validation.validateEmail(req.getParameter("email"), req.getParameter("email_confirmation"));
 		
-		message += (client.setNationality((req.getParameter("nationality") != null) ? (String) req.getParameter("nationality") : "")) ? "" : "Nationaliteit, ";
-		message += (client.setStreet((req.getParameter("street") != null) ? (String) req.getParameter("street") : "")) ? "" : "Straat, ";
-		message += (client.setHouseNumber((req.getParameter("streetnumber") != null) ? (String) req.getParameter("streetnumber") : "")) ? "" : "Huisnummer, ";
-		message += (client.setPostcode((req.getParameter("postcode") != null) ? (String) req.getParameter("postcode") : "")) ? "" : "Postcode, ";
-		message += (client.setCity((req.getParameter("city") != null) ? (String) req.getParameter("city") : "")) ? "" : "Stad, ";
-		message += (client.setTelephoneNumber((req.getParameter("phonenumber") != null) ? (String) req.getParameter("phonenumber") : "")) ? "" : "Telefoonnummer, ";
-		message += (client.setMobilePhoneNumber((req.getParameter("mobile") != null) ? (String) req.getParameter("mobile") : "")) ? "" : "Mobiel nummer, ";
+		if (filenumber != null) { client.setFileNumber(filenumber); } else { message += "Dossiernummer, "; }
+		if (forename != null) { client.setForename(forename); } else { message += "Voornaam, "; }
+		if (surname != null) { client.setSurname(surname); } else { message += "Achternaam, "; }
+		if (nationality != null) { client.setNationality(nationality); } else { message += "Nationaliteit, "; }
+		if (street != null) { client.setStreet(street); } else { message += "Straat, "; }
+		if (housenumber != null) { client.setHouseNumber(housenumber); } else { message += "Huisnummer, "; }
+		if (postcode != null) { client.setPostcode(postcode); } else { message += "Postcode, "; }
+		if (city != null) { client.setCity(city); } else { message += "Woonplaats, "; }
+		if (phonenumber != null) { client.setTelephoneNumber(phonenumber); } else { message += "Telefoonnummer, "; }
+		if (mobile != null) { client.setMobilePhoneNumber(mobile); } else { message += "Mobielnummer, "; }
+		if (email != null) { client.setEmail(email); } else { message += "Email, "; }
 		
-		String email1 = (req.getParameter("email") != null) ? (String) req.getParameter("email") : "";
-		String email2 = (req.getParameter("email_confirmation") != null) ? (String) req.getParameter("email_confirmation") : "";
-		
-		if (!email1.equals("") && !email2.equals("") && email1.equals(email2)) {
-			message += (client.setEmail(email1)) ? "" : "Email, ";
-		} else {
-			message += "Email, ";
-		}
-		
-		message += (!message.equals("")) ? "niet correct ingevuld" : "";
+		message += (!message.equals("")) ? "niet correct ingevuld." : "";
+
 		return message;
 	}
 

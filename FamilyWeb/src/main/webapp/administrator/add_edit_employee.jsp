@@ -81,7 +81,7 @@
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
                         <label><span class="required">* </span>Huisnummer :</label>
-                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" required value="${employee.houseNumber}" />
+                        <input class="short_input" id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" required value="${employee.houseNumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">

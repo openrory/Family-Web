@@ -2,6 +2,7 @@ package servlets.FamilyWeb;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import org.json.JSONException;
 
 import servletControllers.FamilyWeb.OverviewController;
 import util.FamilyWeb.MailService;
+import util.FamilyWeb.Validation;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 import domain.FamilyWeb.Administrator;
 import domain.FamilyWeb.Socialworker;
@@ -32,6 +34,7 @@ public class EmployeeServlet extends HttpServlet {
 	private HttpServletRequest req = null;
 	private User user = null;
 	private User currentUser = null;
+	private Validation validation = Validation.getInstance();
 	
 	private String option = "";
 
@@ -201,59 +204,65 @@ public class EmployeeServlet extends HttpServlet {
 
 		String message = "";
 		
-		if (!option.equals("update")) {
-		message += (user.setEmployeeNumber((req.getParameter("employeenumber") != null) ? (String) req.getParameter("employeenumber") : "")) ? "" : "Personeelsnummer, ";
-		}
+		String forename = validation.validateForename(req.getParameter("forename"));
+		String surname = validation.validateSurname(req.getParameter("surname"));
+		String dateOfBirth = req.getParameter("dateofbirth");
+		String nationality = validation.validateNationality(req.getParameter("nationality"));
+		String street = validation.validateStreet(req.getParameter("street"));
+		String housenumber = validation.validateHouseNumber(req.getParameter("streetnumber"));
+		String postcode = validation.validatePostcode(req.getParameter("postcode"));
+		String city = validation.validateCity(req.getParameter("city"));
+		String phonenumber = validation.validateTelephoneNumber(req.getParameter("phonenumber"));
+		String mobile = validation.validateMobilePhoneNumber(req.getParameter("mobile"));
+		String email = validation.validateEmail(req.getParameter("email"), req.getParameter("email_confirmation"));
 		
-		message += (user.setForename((req.getParameter("forename") != null) ? (String) req.getParameter("forename") : "")) ? "" : "Voornaam, ";
-		message += (user.setSurname((req.getParameter("surname") != null) ? (String) req.getParameter("surname") : "")) ? "" : "Achternaam, ";
-		
-		String dateOfBirth = (req.getParameter("dateofbirth") != null) ? (String) req.getParameter("dateofbirth") : "";
-		
+		if (forename != null) { user.setForename(forename); } else { message += "Voornaam, "; }
+		if (surname != null) { user.setSurname(surname); } else { message += "Achternaam, "; }
 		if (!dateOfBirth.equals("")) {
 			String[] parts = dateOfBirth.split("-");
 			String year = parts[0]; 
 			String month = parts[1]; 
 			String date = parts[2];
-			message += (user.setDateOfBirth(date, month, year)) ? "" : "Geboortedatum, ";
+			Date dateofbirth = validation.validateDateOfBirth(date, month, year);
+			if (dateofbirth != null) {
+				user.setDateOfBirth(dateofbirth);
+			} else {
+				message += "Geboortedatum, ";
+			}
 		} else {
 			message += "Geboortedatum, ";
 		}
-		
-		message += (user.setNationality((req.getParameter("nationality") != null) ? (String) req.getParameter("nationality") : "")) ? "" : "Nationaliteit, ";
-		message += (user.setStreet((req.getParameter("street") != null) ? (String) req.getParameter("street") : "")) ? "" : "Straat, ";
-		message += (user.setHouseNumber((req.getParameter("housenumber") != null) ? (String) req.getParameter("housenumber") : "")) ? "" : "Huisnummer, ";
-		message += (user.setPostcode((req.getParameter("postcode") != null) ? (String) req.getParameter("postcode") : "")) ? "" : "Postcode, ";
-		message += (user.setCity((req.getParameter("city") != null) ? (String) req.getParameter("city") : "")) ? "" : "Stad, ";
-		message += (user.setTelephoneNumber((req.getParameter("phonenumber") != null) ? (String) req.getParameter("phonenumber") : "")) ? "" : "Telefoonnummer, ";
-		message += (user.setMobilePhoneNumber((req.getParameter("mobile") != null) ? (String) req.getParameter("mobile") : "")) ? "" : "Mobiel nummer, ";
-		
-		String email1 = (req.getParameter("email") != null) ? (String) req.getParameter("email") : "";
-		String email2 = (req.getParameter("email_confirmation") != null) ? (String) req.getParameter("email_confirmation") : "";
-		
-		if (!email1.equals("") && !email2.equals("") && email1.equals(email2)) {
-			message += (user.setEmail(email1)) ? "" : "Email, ";
-		} else {
-			message += "Email, ";
-		}
+		if (nationality != null) { user.setNationality(nationality); } else { message += "Nationaliteit, "; }
+		if (street != null) { user.setStreet(street); } else { message += "Straat, "; }
+		if (housenumber != null) { user.setHouseNumber(housenumber); } else { message += "Huisnummer, "; }
+		if (postcode != null) { user.setPostcode(postcode); } else { message += "Postcode, "; }
+		if (city != null) { user.setCity(city); } else { message += "Woonplaats, "; }
+		if (phonenumber != null) { user.setTelephoneNumber(phonenumber); } else { message += "Telefoonnummer, "; }
+		if (mobile != null) { user.setMobilePhoneNumber(mobile); } else { message += "Mobielnummer, "; }
+		if (email != null) { user.setEmail(email); } else { message += "Email, "; }
+
+		user.setActive((req.getParameter("is_active") != null ? true : false));
 		
 		if (!option.equals("update")) {
-		message += (user.setUsername((req.getParameter("username") != null) ? (String) req.getParameter("username") : "")) ? "" : "Gebruikersnaam, ";
-		String password = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
-		user.setPassword(password);
-		}
 		
-		user.setActive((req.getParameter("is_active") != null ? true : false));
+		String EmployeeNumber = validation.validateEmployeeNumber((req.getParameter("employeenumber")));
+		String username = validation.validateUsername(req.getParameter("username"));
+		String password = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
+		if (username != null) { user.setUsername(username); } else { message += "Gebruikersnaam, "; }
+		if (EmployeeNumber != null) { user.setEmployeeNumber(EmployeeNumber); } else { message += "Personeelsnummer, "; }
+		
+		user.setPassword(password);
 		
 		message += (!message.equals("")) ? "niet correct ingevuld." : "";
 		
-		if (!option.equals("update")) {
-		message += (!this.employeeNumberExist((user.getEmployeeNumber() != null) ? user.getEmployeeNumber() : "") ? "" : " Personeelsnummer bestaat al.");
-		message += (!this.usernameExist((user.getUsername() != null) ? user.getUsername() : "") ? "" : " Gebruikersnaam bestaat al.");
+		message += (!this.employeeNumberExist((EmployeeNumber != null) ? EmployeeNumber : "") ? "" : " Personeelsnummer bestaat al.");
+		message += (!this.usernameExist((username != null) ? username : "") ? "" : " Gebruikersnaam bestaat al.");
 			if (!message.equals("")) {
 				req.setAttribute("employee", user);
 				req.setAttribute("option", "create");
 			}
+		} else {
+			message += (!message.equals("")) ? "niet correct ingevuld." : "";
 		}
 		
 		return message;

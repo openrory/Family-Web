@@ -14,6 +14,7 @@ public class MyServletContextListener implements ServletContextListener {
 		DatabaseInterface dbController = new MySQLDao();
 		
 		new LoginController(dbController);
+		new Validation();
 		
 		sce.getServletContext().setAttribute("dbController", dbController);		
 	}

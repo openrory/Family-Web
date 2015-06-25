@@ -35,7 +35,7 @@
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
 			<paper-shadow z="3" animated="true">
-                <form id="add_edit_client_form" onsubmit="return validateForm();" action="/FamilyWeb/ClientServlet.do" method="post">
+                <form id="add_edit_client_form" action="/FamilyWeb/ClientServlet.do" method="post">
                     <p>
                         Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
                         Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
@@ -66,7 +66,7 @@
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
                         <label><span class="required">* </span>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" required value="${client.dateofBirth}" />
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" required value="${client.dateOfBirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">

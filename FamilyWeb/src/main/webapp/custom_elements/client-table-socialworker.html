@@ -176,23 +176,6 @@
     </template>
 
     <script>
-        // id van de familie wordt in familyID neergezet en het formulier wordt verstuurd
-        function submitToFamilyInformation(ID) {
-            document.getElementById("familyID").value = ID;
-            console.log("ID:" + ID);
-            console.log("view is aangeroepen!" + document.getElementById("familyID").value);
-            // action call naar "/FamilyWeb/FamilyInformation.do" is al default
-
-            document.getElementById("familyform").submit();
-        };
-
-        function submitToClientInformation(ID) {
-            document.getElementById("familyID").value = ID;
-            console.log("ID:" + ID);
-            console.log("edit is aangeroepen!" + document.getElementById("familyID").value);
-            document.getElementById("familyform").action = "/FamilyWeb/ClientServlet.do";
-            document.getElementById("familyform").submit();
-        };
 
         Polymer({
             ready: function () {
