@@ -206,10 +206,10 @@
                         </tr>
                     </thead>
 
-                    <h1 id="searchNotFound" class="hidden">No Search Results Found!</h1>
-                    <div class="hidden">{{searchObject | filterArray}}</div>
+               
 
                     <tbody>
+                    {{searchObject | filterArray}}
                         <template repeat="{{person in employeeData}}">
                             <tr class="table_column">
 
