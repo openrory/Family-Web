@@ -9,10 +9,12 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `question_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int(10) NOT NULL,
   `name` varchar(35) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `clients` (
   `client_id` int(10) NOT NULL,
@@ -47,13 +49,13 @@ CREATE TABLE IF NOT EXISTS `familymembers` (
   `forename` varchar(35) NOT NULL,
   `surname` varchar(35) NOT NULL,
   `dateofbirth` date DEFAULT NULL,
-  `postcode` varchar(10) NOT NULL,
-  `street` varchar(50) NOT NULL,
-  `housenumber` varchar(30) NOT NULL,
-  `city` varchar(50) NOT NULL,
+  `postcode` varchar(10) DEFAULT NULL,
+  `street` varchar(50) DEFAULT NULL,
+  `housenumber` varchar(30) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
   `telephonenumber` varchar(50) DEFAULT NULL,
-  `mobilephonenumber` varchar(50) NOT NULL,
-  `nationality` varchar(50) NOT NULL,
+  `mobilephonenumber` varchar(50) DEFAULT NULL,
+  `nationality` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `client_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -102,6 +104,8 @@ CREATE TABLE IF NOT EXISTS `results` (
   `answer_id` int(10) NOT NULL,
   `contact_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+
 
 CREATE TABLE IF NOT EXISTS `shares` (
   `share_id` int(10) NOT NULL,
@@ -263,84 +267,92 @@ ADD CONSTRAINT `FKSurveys_qu168997` FOREIGN KEY (`question_id`) REFERENCES `ques
 ADD CONSTRAINT `FKSurveys_qu287896` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`);
 
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'N');
-INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'N');
+INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES
+(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'N'),
+(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'N');
 
 
-INSERT INTO `surveys` (`survey_id`, `name`) VALUES(1, 'Standaard vragen');
+INSERT INTO `categories` (`category_id`, `name`) VALUES
+(6, 'acquantance'),
+(12, 'bureauhalt'),
+(10, 'careinstitution'),
+(8, 'club'),
+(4, 'colleagues'),
+(7, 'education'),
+(2, 'family'),
+(3, 'friends'),
+(1, 'household'),
+(13, 'justice'),
+(5, 'neighbours'),
+(9, 'religion'),
+(11, 'youthcare');
+INSERT INTO `surveys` (`survey_id`, `name`) VALUES
+(1, 'Standaard vragen');
+
+INSERT INTO `questions` (`question_id`, `question`) VALUES
+(1, 'Wat is de meest gebruikelijke manier om contact te hebben met deze persoon?'),
+(2, 'Hoe vaak heeft u contact met deze persoon?'),
+(3, 'Hoever bevind deze persoon zich bij u vandaan?');
 
 
-INSERT INTO `categories` (`category_id`, `name`) VALUES(6, 'acquantance');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(12, 'bureauhalt');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(10, 'careinstitution');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(8, 'club');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(4, 'colleagues');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(7, 'education');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(2, 'family');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(3, 'friends');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(1, 'household');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(13, 'justice');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(5, 'neighbours');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(9, 'religion');
-INSERT INTO `categories` (`category_id`, `name`) VALUES(11, 'youthcare');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES
+(1, 'Telefonisch', 1),
+(2, 'Social media', 1),
+(3, 'Video chat', 1),
+(4, 'Face-to-Face', 1),
+(5, 'Brievenpost', 1),
+(6, 'E-mail', 1),
+(7, 'Maandelijks of langer', 2),
+(8, 'Een aantal keer per maand', 2),
+(9, 'Wekelijks', 2),
+(10, 'Een aantal keer per week', 2),
+(11, 'Dagelijks', 2),
+(12, '< 5 km', 3),
+(13, '5 tot 10 km', 3),
+(14, '10 tot 50 km', 3),
+(15, '50 tot 200 km', 3),
+(16, '> 200 km', 3);
 
-INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
-
-INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
-
-INSERT INTO `questions` (`question_id`, `question`) VALUES(1, 'Wat is de meest gebruikelijke manier om contact te hebben met deze persoon?');
-INSERT INTO `questions` (`question_id`, `question`) VALUES(2, 'Hoe vaak heeft u contact met deze persoon?');
-INSERT INTO `questions` (`question_id`, `question`) VALUES(3, 'Hoever bevind deze persoon zich bij u vandaan?');
-
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(1, 'Telefonisch', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(2, 'Social media', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(3, 'Video chat', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(4, 'Face-to-Face', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(5, 'Brievenpost', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(6, 'E-mail', 1);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(7, 'Maandelijks of langer', 2);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(8, 'Een aantal keer per maand', 2);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(9, 'Wekelijks', 2);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(10, 'Een aantal keer per week', 2);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(11, 'Dagelijks', 2);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(12, '< 5 km', 3);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(13, '5 tot 10 km', 3);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(14, '10 tot 50 km', 3);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(15, '50 tot 200 km', 3);
-INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES(16, '> 200 km', 3);
-
-INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES(1, 1, 1);
-INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES(2, 1, 2);
-INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES(3, 1, 3);
+INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 
-INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES(1, '2015-06-17', 'Jan is een stille persoon die moeilijk uit zijn woorden komt.', 1, NULL, 1);
-INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES(4, '2015-06-23', 'De baas heeft het nogal gemunt op Jan.', 1, NULL, 1);
+INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
+(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
 
+INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
+(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
 
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(1, 'Kees van Aken', 'Beste vriend & buurjongen', 6, 'Naast de beste vriend van Jan is het ook direct een buur jongen.', 3, 1);
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(2, 'Jan', 'Buurman', 40, 'Aardige vent, maar vaak niet thuis', 5, 1);
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(3, 'Jans', 'Buurvrouw', 40, 'Rare dame, komt nogal depressief over.', 5, 1);
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(4, 'Katrein', 'Buurmeisje', 12, 'Lieve meid, wilt vaak komen spelen', 5, 1);
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(5, 'Ron', 'Baas', 46, '', 4, 4);
-INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES(6, 'Jannie', 'koffie jufvrouw', 78, 'Heeft nogal een zware rokers stem', 4, 4);
+INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES
+(1, '2015-06-17', 'Jan is een stille persoon die moeilijk uit zijn woorden komt.', 1, NULL, 1),
+(4, '2015-06-23', 'De baas heeft het nogal gemunt op Jan.', 1, NULL, 1);
 
+INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES
+(1, 'Kees van Aken', 'Beste vriend & buurjongen', 6, 'Naast de beste vriend van Jan is het ook direct een buur jongen.', 3, 1),
+(2, 'Jan', 'Buurman', 40, 'Aardige vent, maar vaak niet thuis', 5, 1),
+(3, 'Jans', 'Buurvrouw', 40, 'Rare dame, komt nogal depressief over.', 5, 1),
+(4, 'Katrein', 'Buurmeisje', 12, 'Lieve meid, wilt vaak komen spelen', 5, 1),
+(5, 'Ron', 'Baas', 46, '', 4, 4),
+(6, 'Jannie', 'koffie jufvrouw', 78, 'Heeft nogal een zware rokers stem', 4, 4);
 
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(1, 1, 4, 1);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(2, 2, 10, 1);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(3, 3, 12, 1);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(4, 1, 4, 2);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(5, 2, 8, 2);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(6, 3, 12, 2);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(7, 1, 4, 3);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(8, 2, 9, 3);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(9, 3, 12, 3);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(10, 1, 4, 4);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(11, 2, 10, 4);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(12, 3, 12, 4);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(13, 1, 4, 5);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(14, 2, 10, 5);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(15, 3, 14, 5);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(16, 1, 4, 6);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(17, 2, 9, 6);
-INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES(18, 3, 15, 6);
+INSERT INTO `results` (`result_id`, `question_id`, `answer_id`, `contact_id`) VALUES
+(1, 1, 4, 1),
+(2, 2, 10, 1),
+(3, 3, 12, 1),
+(4, 1, 4, 2),
+(5, 2, 8, 2),
+(6, 3, 12, 2),
+(7, 1, 4, 3),
+(8, 2, 9, 3),
+(9, 3, 12, 3),
+(10, 1, 4, 4),
+(11, 2, 10, 4),
+(12, 3, 12, 4),
+(13, 1, 4, 5),
+(14, 2, 10, 5),
+(15, 3, 14, 5),
+(16, 1, 4, 6),
+(17, 2, 9, 6),
+(18, 3, 15, 6);
