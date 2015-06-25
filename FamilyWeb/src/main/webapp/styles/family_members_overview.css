@@ -160,3 +160,6 @@ paper-tab a {
 	width: 100px;
 	margin: 20px auto;
 }
+.bold{
+	font-weight: bold;
+}
