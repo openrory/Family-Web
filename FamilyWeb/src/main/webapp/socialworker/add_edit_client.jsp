@@ -46,12 +46,12 @@
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
-                    <input type="hidden" name="client_id" value="${client.client_id}">
+                    <input type="hidden" name="clientID" value="${client.client_id}">
                    <% }%>
 					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
                         <label><span class="required">* </span>Dossiernummer :</label>
-                            <input id="fileid" type="text" placeholder="Personeelnr" value="${client.fileNumber}"/>
+                          <input id="fileid" name="filenumber" type="text" placeholder="Personeelnr" required value="${client.fileNumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">

@@ -123,10 +123,8 @@ public class EmployeeServlet extends HttpServlet {
 		
 		if (req.getParameter("userID") != null) {
 			try {
-				System.out.println("TEST1111111111111");
 				int userID = Integer.valueOf(req.getParameter("userID"));
 				this.summary(userID);
-				System.out.println("TEST1111111111111222222");
 			} catch (NumberFormatException e) {
 				//e.printStackTrace();
 			}
