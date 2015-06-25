@@ -36,7 +36,7 @@ public class FamilyInformation extends HttpServlet {
 		user = (User) req.getSession().getAttribute("user");
 		RequestDispatcher reqDisp = null;		
 		if(user != null){
-			int client_id = Integer.parseInt((req.getParameter("familyID").trim()));
+			int client_id = Integer.parseInt((req.getParameter("currentID").trim()));
 			ArrayList<Client> clients = (ArrayList<Client>) req.getSession().getAttribute("clients");			
 			Client client = null;
 			if(clients != null && !clients.isEmpty()){

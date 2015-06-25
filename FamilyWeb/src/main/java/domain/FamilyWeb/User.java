@@ -3,14 +3,11 @@
  */
 package domain.FamilyWeb;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.management.Notification;
 
 import databaseControllers.FamilyWeb.DatabaseInterface;
@@ -21,16 +18,6 @@ import databaseControllers.FamilyWeb.DatabaseInterface;
  * @since 2015-04-20
  */
 public abstract class User {
-
-	// Regular Expression Pattern
-	private static final String FORENAME_PATTERN = "[A-Z][a-zA-Z]*";
-	private static final String SURNAME_PATTERN = "[a-zA-z]+([ '-][a-zA-Z]+)*";
-	private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
-	private static final String LETTER_PATTERN = "([a-zA-Z]*(\\s)*)*";
-	private static final String NL_POSTCODE_PATTERN = "^[1-9][0-9]{3}[\\s]?[A-Za-z]{2}$";
-	private static final String NL_PHONENUMBER = "^(((0)[1-9]{2}[0-9][-]?[1-9][0-9]{5})|((\\\\+31|0|0031)[1-9][0-9][-]?[1-9][0-9]{6}))$";
-	private static final String NL_MOBILEPHONENUMBER = "^(((\\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$";
-	private static final String LETTER_NUMBER_WHITESPACE = "([ ]*+[0-9A-Za-z]++[ ]*+)+";
 
 	private String username;
 	private String password;
@@ -113,408 +100,172 @@ public abstract class User {
 		this.notifications = new ArrayList<Notification>();
 		this.myClients = new ArrayList<Client>();
 	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * @param username
-	 *            the username to set
-	 * @return
-	 */
-	public boolean setUsername(String input) {
-		if (!input.trim().equals("")) {
-			String username = input.trim();
-			this.username = username;
-			if (username.matches(USERNAME_PATTERN)) {
-				this.username = username;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * @return the forename
-	 */
-	public String getForename() {
-		return forename;
-	}
-
-	/**
-	 * @param forename
-	 *            the forename to set
-	 * @return
-	 */
-	public boolean setForename(String input) {
-		if (!input.trim().equals("")) {
-			String forename = input.trim().substring(0, 1).toUpperCase() + input.toLowerCase().trim().substring(1);
-			if (forename.matches(FORENAME_PATTERN) && forename.length() <= 35) {
-				this.forename = forename;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the surname
-	 */
-	public String getSurname() {
-		return surname;
-	}
-
-	/**
-	 * @param surname
-	 *            the surname to set
-	 * @return
-	 */
-	public boolean setSurname(String input) {
-		if (!input.trim().equals("")) {
-			String surname = input.trim();
-			if (surname.matches(SURNAME_PATTERN) && surname.length() <= 35) {
-				this.surname = surname;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the dateOfBirth
-	 */
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	/**
-	 * @return the postcode
-	 */
-	public String getPostcode() {
-		return postcode;
-	}
-
-	/**
-	 * @param postcode
-	 *            the postcode to set
-	 * @return
-	 */
-	public boolean setPostcode(String input) {
-		if (!input.trim().equals("")) {
-			String postcode = input.trim();
-			if (postcode.matches(NL_POSTCODE_PATTERN)) {
-				this.postcode = postcode;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the street
-	 */
-	public String getStreet() {
-		return street;
-	}
-
-	/**
-	 * @param street
-	 *            the street to set
-	 * @return
-	 */
-	public boolean setStreet(String input) {
-		if (!input.trim().equals("")) {
-			String street = input.trim();
-			if (street.matches(LETTER_PATTERN) && street.length() <= 35) {
-				this.street = street;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the houseNumber
-	 */
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-
-	/**
-	 * @param houseNumber
-	 *            the houseNumber to set
-	 * @return
-	 */
-	public boolean setHouseNumber(String input) {
-		if (!input.trim().equals("")) {
-			String houseNumber = input.trim();
-			if (houseNumber.matches(LETTER_NUMBER_WHITESPACE)
-					&& houseNumber.length() <= 10) {
-				this.houseNumber = houseNumber;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the city
-	 */
-	public String getCity() {
-		return city;
-	}
-
-	/**
-	 * @param city
-	 *            the city to set
-	 * @return
-	 */
-	public boolean setCity(String input) {
-		if (!input.trim().equals("")) {
-			String city = input.trim();
-			if (city.matches(LETTER_PATTERN) && city.length() <= 50) {
-				this.city = city;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the nationality
-	 */
-	public String getNationality() {
-		return nationality;
-	}
-
-	/**
-	 * @param nationality
-	 *            the nationality to set
-	 * @return
-	 */
-	public boolean setNationality(String input) {
-		if (!input.trim().equals("")) {
-			String nationality = input.trim();
-			if (nationality.matches(LETTER_PATTERN)
-					&& nationality.length() <= 50) {
-				this.nationality = nationality;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the telephoneNumber
-	 */
-	public String getTelephoneNumber() {
-		return telephoneNumber;
-	}
-
-	/**
-	 * @param telephoneNumber
-	 *            the telephoneNumber to set
-	 * @return
-	 */
-	public boolean setTelephoneNumber(String input) {
-		if (!input.trim().equals("")) {
-			String telephoneNumber = input.trim();
-			if (telephoneNumber.matches(NL_PHONENUMBER)) {
-				this.telephoneNumber = telephoneNumber;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the mobilePhoneNumber
-	 */
-	public String getMobilePhoneNumber() {
-		return mobilePhoneNumber;
-	}
-
-	/**
-	 * @param mobilePhoneNumber
-	 *            the mobilePhoneNumber to set
-	 * @return
-	 */
-	public boolean setMobilePhoneNumber(String input) {
-		if (!input.trim().equals("")) {
-			String mobilePhoneNumber = input.trim();
-			if (mobilePhoneNumber.matches(NL_MOBILEPHONENUMBER)) {
-				this.mobilePhoneNumber = mobilePhoneNumber;
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 * @return
-	 */
-	public boolean setEmail(String input) {
-		if (!input.trim().equals("")) {
-			boolean result = true;
-			String email = input.trim();
-			try {
-				InternetAddress emailAddr = new InternetAddress(email);
-				emailAddr.validate();
-				this.email = email;
-			} catch (AddressException ex) {
-				result = false;
-			}
-			return result;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the isActive
-	 */
-	public boolean isActive() {
-		return isActive;
-	}
-
-	/**
-	 * @param isActive
-	 *            the isActive to set
-	 */
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	/**
-	 * @return the employeeNumber
-	 */
-	public String getEmployeeNumber() {
-		return employeeNumber;
-	}
-
-	/**
-	 * @param employeeNumber
-	 *            the employeeNumber to set
-	 * @return
-	 */
-	public boolean setEmployeeNumber(String input) {
-		if (!input.trim().equals("")) {
-			this.employeeNumber = input.trim();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the notifications
-	 */
-	public ArrayList<Notification> getNotifications() {
-		return notifications;
-	}
-
-	/**
-	 * @param notifications
-	 *            the notifications to set
-	 */
-	public void setNotifications(ArrayList<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
-	/**
-	 * @return the myClients
-	 */
-	public ArrayList<Client> getMyClients() {
-		return myClients;
-	}
-
-	/**
-	 * @param myClients
-	 *            the myClients to set
-	 */
-	public void setMyClients(ArrayList<Client> myClients) {
-		this.myClients = myClients;
-	}
-
-	/**
-	 * @return the user_id
-	 */
-	public int getUser_id() {
-		return user_id;
-	}
-
-	/**
-	 * @param user_id
-	 *            the user_id to set
-	 */
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
+	
 	public boolean addDB() {
 		return this.dbController.addUser(this);
 	}
 
 	public boolean updateDB() {
 		return this.dbController.updateUser(this);
+	}
+
+	/**
+	 * @return the wwreset
+	 */
+	public boolean isWwreset() {
+		return wwreset;
+	}
+
+	/**
+	 * @param wwreset
+	 *            the wwreset to set
+	 */
+	public void setWwreset(boolean wwreset) {
+		this.wwreset = wwreset;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getForename() {
+		return forename;
+	}
+
+	public void setForename(String forename) {
+		this.forename = forename;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getTelephoneNumber() {
+		return telephoneNumber;
+	}
+
+	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
+	}
+
+	public String getMobilePhoneNumber() {
+		return mobilePhoneNumber;
+	}
+
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+	public void setEmployeeNumber(String employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public ArrayList<Client> getMyClients() {
+		return myClients;
+	}
+
+	public void setMyClients(ArrayList<Client> myClients) {
+		this.myClients = myClients;
 	}
 
 	/*
@@ -535,62 +286,6 @@ public abstract class User {
 				+ ", MobilePhoneNumber = " + getMobilePhoneNumber()
 				+ ", Email = " + getEmail() + ", isActive = " + isActive()
 				+ ", EmployeeNumber = " + getEmployeeNumber() + "]";
-	}
-
-	public boolean setDateOfBirth(String inputDay, String inputMonth, String inputYear) {
-		
-		if (!inputDay.trim().equals("") && !inputMonth.trim().equals("")
-				&& !inputYear.trim().equals("")) {
-			try {
-				int day = Integer.valueOf(inputDay);
-				int month = Integer.valueOf(inputMonth);
-				int year = Integer.valueOf(inputYear);
-
-				if (year > 0 && month > 0 && day > 0) {
-					
-					Calendar cal = Calendar.getInstance();
-					cal.set(year, month - 1, day, 0, 0, 0);
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					
-					if (this.getDateOfBirth() != null && this.getDateOfBirth().toString().equals(dateFormat.format(cal.getTime()))) {
-
-						System.out.println("teeest1");
-						return true;
-					} else if (cal.before(Calendar.getInstance())) {
-
-						System.out.println("teeest2");
-						this.dateOfBirth = cal.getTime();
-						return true;
-					} else {
-
-						System.out.println("teeest3");
-						return false;
-					}
-					
-				} else {
-					return false;
-				}
-			} catch (NumberFormatException e) {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @return the wwreset
-	 */
-	public boolean isWwreset() {
-		return wwreset;
-	}
-
-	/**
-	 * @param wwreset
-	 *            the wwreset to set
-	 */
-	public void setWwreset(boolean wwreset) {
-		this.wwreset = wwreset;
 	}
 
 }
