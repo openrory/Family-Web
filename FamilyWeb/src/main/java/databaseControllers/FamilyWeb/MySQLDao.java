@@ -20,11 +20,25 @@ import domain.FamilyWeb.Socialworker;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
+/**
+ * The Class MySQLDao.
+ */
 public class MySQLDao implements DatabaseInterface {
+	
+	/** The username to login into the database. */
 	private String username = "root";
+	
+	/** The password to login into the database. */
 	private String passwd = "wachtwoord";
+	
+	/** The database location. */
 	private String dbLocation = "jdbc:mysql://localhost/familyweb";
 
+	/**
+	 * Creates the connection.
+	 *
+	 * @return the connection
+	 */
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
@@ -37,6 +51,11 @@ public class MySQLDao implements DatabaseInterface {
 		return conn;
 	}
 
+	/**
+	 * Close the connection.
+	 *
+	 * @param conn the connection
+	 */
 	public void closeConnection(Connection conn) {
 		try {
 			conn.close();
@@ -45,6 +64,9 @@ public class MySQLDao implements DatabaseInterface {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addUser(domain.FamilyWeb.User)
+	 */
 	public boolean addUser(User user) {
 		Connection conn = null;
 		boolean b = false;
@@ -81,6 +103,12 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/**
+	 * Check username.
+	 *
+	 * @param username the username
+	 * @return true, if successful
+	 */
 	public boolean checkUsername(String username){
 		boolean b = true;
 		Connection conn = null;
@@ -98,6 +126,10 @@ public class MySQLDao implements DatabaseInterface {
 		}
 		return b;
 	}
+	
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getUser(java.lang.String)
+	 */
 	public User getUser(String username) {
 		User user = null;
 		Connection conn = null;
@@ -163,6 +195,9 @@ public class MySQLDao implements DatabaseInterface {
 		return user;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#updateUser(domain.FamilyWeb.User)
+	 */
 	public boolean updateUser(User user) {
 		Connection conn = null;
 		boolean b = false;
@@ -199,6 +234,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#authentication(java.lang.String, java.lang.String)
+	 */
 	public boolean authentication(String username, String password) {
 		boolean auth = false;
 		Connection conn = null;
@@ -220,6 +258,9 @@ public class MySQLDao implements DatabaseInterface {
 		return auth;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getAllSocialworkers()
+	 */
 	public ArrayList<User> getAllSocialworkers() {
 		Connection conn = null;
 		ArrayList<User> users = new ArrayList<User>();
@@ -253,6 +294,9 @@ public class MySQLDao implements DatabaseInterface {
 		return users;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addClient(domain.FamilyWeb.Client, int)
+	 */
 	public boolean addClient(Client client, int user_id) {
 		Connection conn = null;
 		boolean b = false;
@@ -286,6 +330,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#updateClient(domain.FamilyWeb.Client, int)
+	 */
 	public boolean updateClient(Client client, int user_id) {
 		Connection conn = null;
 		boolean b = false;
@@ -332,6 +379,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getAllClientsOfUser(domain.FamilyWeb.User)
+	 */
 	public ArrayList<Client> getAllClientsOfUser(User user) {
 		Connection conn = null;
 		ArrayList<Client> clients = new ArrayList<Client>();
@@ -364,6 +414,9 @@ public class MySQLDao implements DatabaseInterface {
 		return clients;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addFamilymember(domain.FamilyWeb.Familymember, domain.FamilyWeb.Client)
+	 */
 	public boolean addFamilymember(Familymember famMember, Client client) {
 		Connection conn = null;
 		boolean b = false;
@@ -394,6 +447,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#updateFamilymember(domain.FamilyWeb.Familymember)
+	 */
 	public boolean updateFamilymember(Familymember famMember) {
 		Connection conn = null;
 		boolean b = false;
@@ -424,6 +480,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getFamilymembersOfClient(domain.FamilyWeb.Client)
+	 */
 	public ArrayList<Familymember> getFamilymembersOfClient(Client client) {
 		Connection conn = null;
 		ArrayList<Familymember> members = new ArrayList<Familymember>();
@@ -454,6 +513,9 @@ public class MySQLDao implements DatabaseInterface {
 		return members;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getClient(int)
+	 */
 	public Client getClient(int client_id) {
 		Connection conn = null;
 		Client client = null;
@@ -483,6 +545,9 @@ public class MySQLDao implements DatabaseInterface {
 		return client;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addSurvey(domain.FamilyWeb.Survey)
+	 */
 	public boolean addSurvey(Survey survey) {
 		Connection conn = null;
 		boolean b = true;
@@ -556,6 +621,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#updateSurvey(domain.FamilyWeb.Survey)
+	 */
 	public boolean updateSurvey(Survey survey) {
 		Connection conn = null;
 		boolean b = true;
@@ -580,6 +648,9 @@ public class MySQLDao implements DatabaseInterface {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getSurvey(java.lang.String)
+	 */
 	public Survey getSurvey(String surveyName) {
 		Survey survey = null;
 		Connection conn = null;
@@ -628,6 +699,9 @@ public class MySQLDao implements DatabaseInterface {
 		return (b) ? survey : null;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addQuestion(domain.FamilyWeb.Question)
+	 */
 	public boolean addQuestion(Question question) {
 		Connection conn = null;
 		boolean b = true;
@@ -663,6 +737,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#updateQuestion(domain.FamilyWeb.Question)
+	 */
 	public boolean updateQuestion(Question question) {
 		Connection conn = null;
 		boolean b = true;
@@ -700,6 +777,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getQuestion(int)
+	 */
 	public Question getQuestion(int question_id) {
 		Question question = null;
 		Connection conn = null;
@@ -738,6 +818,9 @@ public class MySQLDao implements DatabaseInterface {
 		return question;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getAllClients()
+	 */
 	public ArrayList<Client> getAllClients() {
 		Connection conn = null;
 		ArrayList<Client> clients = new ArrayList<Client>();
@@ -769,6 +852,9 @@ public class MySQLDao implements DatabaseInterface {
 		return clients;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getSurveyNames()
+	 */
 	public ArrayList<String> getSurveyNames() {
 		Connection conn = null;
 		ArrayList<String> names = new ArrayList<String>();
@@ -788,6 +874,9 @@ public class MySQLDao implements DatabaseInterface {
 		return names;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#addNetwork(domain.FamilyWeb.Network, int, int)
+	 */
 	public boolean addNetwork(Network network, int client_id,
 			int familymember_id) {
 		Connection conn = null;
@@ -877,6 +966,9 @@ public class MySQLDao implements DatabaseInterface {
 		return b;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getNetworks(int, int)
+	 */
 	public ArrayList<Network> getNetworks(int client_id, int familymember_id) {
 		Connection conn = null;
 		ArrayList<Network> networks = new ArrayList<Network>();
@@ -915,6 +1007,12 @@ public class MySQLDao implements DatabaseInterface {
 		return networks;
 	}
 
+	/**
+	 * Sets the results contacts.
+	 *
+	 * @param n the n
+	 * @return the array list
+	 */
 	private ArrayList<Contact> setResultsContacts(Network n) {
 		Connection conn = null;
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -948,6 +1046,12 @@ public class MySQLDao implements DatabaseInterface {
 		return contacts;
 	}
 
+	/**
+	 * Gets the contacts.
+	 *
+	 * @param n the n
+	 * @return the contacts
+	 */
 	private ArrayList<Contact> getContacts(Network n) {
 		Connection conn = null;
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -973,6 +1077,9 @@ public class MySQLDao implements DatabaseInterface {
 		return contacts;
 	}
 
+	/* (non-Javadoc)
+	 * @see databaseControllers.FamilyWeb.DatabaseInterface#getAllUsers()
+	 */
 	public ArrayList<User> getAllUsers() {
 		User user = null;
 		Connection conn = null;

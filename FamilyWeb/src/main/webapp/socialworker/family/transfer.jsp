@@ -32,7 +32,7 @@
                     <paper-tabs id="scrollableTabs" selected="4" flex scrollable noink>
 
                         <paper-tab><a href="/FamilyWeb/socialworker/family/family_members_overview.jsp" horizontal center-center layout>Gezinsleden</a></paper-tab>
-                        <paper-tab><a href="/FamilyWeb/socialworker/family/network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+                        <paper-tab><a href="/FamilyWeb/socialworker/family/network_compare.jsp" horizontal center-center layout>Netwerken</a></paper-tab>
                         <paper-tab><a href="/FamilyWeb/socialworker/family/new_network_contacts.jsp" horizontal center-center layout>Nieuw Netwerk</a></paper-tab>
                         <paper-tab><a href="/FamilyWeb/socialworker/family/share_networks.jsp" horizontal center-center layout>Netwerk(en) delen</a></paper-tab>
                         <paper-tab><a href="/FamilyWeb/socialworker/family/transfer.jsp" horizontal center-center layout>Overdragen</a></paper-tab>
