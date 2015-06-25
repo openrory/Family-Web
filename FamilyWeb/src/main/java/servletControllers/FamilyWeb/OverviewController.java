@@ -307,25 +307,9 @@ public class OverviewController {
 
 	public JSONArray refreshFamilymember(Client client) throws JSONException {
 		JSONArray returns = new JSONArray();
-		ArrayList<Familymember> family = new ArrayList<Familymember>();
-
-		JSONObject familyJSON = new JSONObject();
-		familyJSON.put("forename", client.getForename());
-		familyJSON.put("surname", client.getSurname());
-		familyJSON.put("dateOfBirth", client.getDateOfBirth());
-		familyJSON.put("postcode", client.getPostcode());
-		familyJSON.put("street", client.getStreet());
-		familyJSON.put("houseNumber", client.getHouseNumber());
-		familyJSON.put("city", client.getCity());
-		familyJSON.put("nationality", client.getNationality());
-		familyJSON.put("telephoneNumber", client.getTelephoneNumber());
-		familyJSON.put("mobilePhoneNumber", client.getMobilePhoneNumber());
-		familyJSON.put("email", client.getEmail());
-		familyJSON.put("type", "client");
-		familyJSON.put("client_id", client.getClient_id());
-		returns.put(familyJSON);
-
+		ArrayList<Familymember> family = new ArrayList<Familymember>();		
 		for (Familymember fm : client.getMyFamilymembers()) {
+			JSONObject familyJSON = new JSONObject();
 			family.add(fm);
 			familyJSON = new JSONObject();
 			familyJSON.put("forename", fm.getForename());

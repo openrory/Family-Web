@@ -25,12 +25,32 @@ public class FamilyMemberServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { }
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher reqDisp = null;
 		String option = (req.getParameter("option") != null) ? (String) req.getParameter("option") : "";
 		Client client = (Client) req.getSession().getAttribute("client");
 		
-		if(option.equals("Aanmaken")){
+		if(option.equals("summary")){
+			Familymember familymember = null;
+			int id = Integer.valueOf(req.getParameter("currentID"));
+			if(id == 0){
+				req.setAttribute("familymember", null);
+			}else{
+				for(Familymember fm : client.getMyFamilymembers()){
+					if(id == fm.getMember_id()){
+						familymember = fm;
+						break;
+					}
+				}
+				req.setAttribute("familymember", familymember);
+			}
+			reqDisp = req.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
+		}else if(option.equals("Aanmaken")){
 			String forename = req.getParameter("forename");
 			String surname = req.getParameter("surname");
 			String dateOfBirthString = req.getParameter("dateofbirth");
@@ -63,6 +83,7 @@ public class FamilyMemberServlet extends HttpServlet {
 			String telephoneNumber = req.getParameter("phonenumber");
 			String mobilePhoneNumber = req.getParameter("mobile");
 			String email = req.getParameter("email");
+			
 			Familymember fm = new Familymember(forename, surname, dateOfBirth, postcode, street, houseNumber, city, nationality, telephoneNumber, mobilePhoneNumber, email);
 			fm.setMember_id(id);
 			OverviewController.getInstance().getDb().updateFamilymember(fm);
@@ -82,12 +103,5 @@ public class FamilyMemberServlet extends HttpServlet {
 			reqDisp = req.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 		}
 		reqDisp.forward(req, resp);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 }

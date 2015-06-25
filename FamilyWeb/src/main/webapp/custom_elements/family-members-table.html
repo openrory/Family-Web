@@ -122,13 +122,13 @@
                     <tr>
                         <th id="first_header_tag"><p>Voornaam</p></th>
                         <th class="table_header_tag"><p>Achternaam</p></th>
-                        <th class="table_header_tag"><p>Geboorte datum</p></th>
+                        <th class="table_header_tag"><p>Geb.datum</p></th>
                         <th class="table_header_tag"><p>Straat</p></th>
-                        <th class="table_header_tag"><p>Huisnummer</p></th>
+                        <th class="table_header_tag"><p>Huisnr</p></th>
                         <th class="table_header_tag"><p>Woonplaats</p></th>
                         <th class="table_header_tag"><p>Nationaliteit</p></th>
-                        <th class="table_header_tag"><p>Telefoonnummer</p></th>
-                        <th class="table_header_tag"><p>Mobielnummer</p></th>
+                        <th class="table_header_tag"><p>Telefoon</p></th>
+                        <th class="table_header_tag"><p>Mobiel</p></th>
                         <th class="table_header_tag"><p>E-mail</p></th>
                         <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
                     </tr>
@@ -149,10 +149,9 @@
                             <td class="table_contents"><p>{{object.telephoneNumber}}</p></td>
                             <td class="table_contents"><p>{{object.mobilePhoneNumber}}</p></td>
                             <td class="table_contents"><p>{{object.email}}</p></td>
-                            <td class="icon_content"><p><core-icon icon="search" onclick="submit({{object.member_id}})" value="" /></p></td>
+                            <td class="icon_content"><p><core-icon icon="create" onclick="submit({{object.member_id}})" value="" /></p></td>
                         </tr>
                     </template>
-
                 </tbody>
             </table>
         </div>
@@ -161,10 +160,7 @@
 
     <script>
         // id van de familie wordt in notificationID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
-            document.getElementById("notificationID").value = ID;
-            document.getElementById("notificationform").submit();
-        };
+        
         Polymer({
             ready: function () {
                 console.log("Tabel is bereikt!");
