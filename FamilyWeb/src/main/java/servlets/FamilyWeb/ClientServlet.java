@@ -202,11 +202,12 @@ public class ClientServlet extends HttpServlet {
 		
 		String dateOfBirth = req.getParameter("dateofbirth");
 		
-		if (!dateOfBirth.equals("")) {
+		if (dateOfBirth != null && !dateOfBirth.equals("")) {
 			String[] parts = dateOfBirth.split("-");
 			String year = parts[0]; 
 			String month = parts[1]; 
 			String date = parts[2];
+
 			Date dateofbirth = validation.validateDateOfBirth(date, month, year);
 			if (dateofbirth != null) {
 				client.setDateOfBirth(dateofbirth);

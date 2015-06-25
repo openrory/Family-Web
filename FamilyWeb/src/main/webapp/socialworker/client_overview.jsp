@@ -28,9 +28,9 @@
 	
 		<!-- INFORMATION MESSAGE -->
 		<% if (!(request.getAttribute("message") == null)) { %>
-		<message-window- ${messageType} message="${message}"></message-window-${messageType}>
+		<message-window-${messageType} message="${message}"></message-window-${messageType}>
 		<% } %>
-		
+
 		<p>Hieronder ziet u een overzicht van alle cliënten.</p>
 		
 		<!-- THIS DATA IS SEND TO THE SERVLET -->
