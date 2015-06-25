@@ -1,17 +1,17 @@
 function validateForm() {
 
     var isGood = true;
-    var forename = document.forms["add_form"]["forename"].value;
-    var surname = document.forms["add_form"]["surname"].value;
-    var dateofbirth = document.forms["add_form"]["dateofbirth"].value;
-    var nationality = document.forms["add_form"]["nationality"].value;
-    var street = document.forms["add_form"]["street"].value;
-    var streetnumber = document.forms["add_form"]["streetnumber"].value;
-    var postcode = document.forms["add_form"]["postcode"].value;
-    var city = document.forms["add_form"]["city"].value;
-    var phonenumber = document.forms["add_form"]["phonenumber"].value;
-    var mobile = document.forms["add_form"]["mobile"].value;
-    var email = document.forms["add_form"]["email"].value;
+    var forename = document.forms["add_edit_family_member_form"]["forename"].value;
+    var surname = document.forms["add_edit_family_member_form"]["surname"].value;
+    var dateofbirth = document.forms["add_edit_family_member_form"]["dateofbirth"].value;
+    var nationality = document.forms["add_edit_family_member_form"]["nationality"].value;
+    var street = document.forms["add_edit_family_member_form"]["street"].value;
+    var streetnumber = document.forms["add_edit_family_member_form"]["streetnumber"].value;
+    var postcode = document.forms["add_edit_family_member_form"]["postcode"].value;
+    var city = document.forms["add_edit_family_member_form"]["city"].value;
+    var phonenumber = document.forms["add_edit_family_member_form"]["phonenumber"].value;
+    var mobile = document.forms["add_edit_family_member_form"]["mobile"].value;
+    var email = document.forms["add_edit_family_member_form"]["email"].value;
 
     // Standar REGEX patterns
     var digitsReg = /\d/g;

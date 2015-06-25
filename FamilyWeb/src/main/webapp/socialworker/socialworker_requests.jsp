@@ -20,7 +20,7 @@
 				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
                 <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
-            <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
+            <responsive-menu-socialworker current="2"></responsive-menu-socialworker>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>

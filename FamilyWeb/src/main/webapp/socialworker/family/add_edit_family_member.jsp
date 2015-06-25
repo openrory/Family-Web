@@ -33,8 +33,8 @@
         	<% if(!(request.getAttribute("message") == null)){%>
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
-			<paper-shadow z="3" animated="true" id="add_edit_client_form">
-                <form id="add_form" onsubmit="return validateForm();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">
+			<paper-shadow z="3" animated="true">
+                <form id="add_edit_family_member_form" onsubmit="return validateForm();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">
                     <p>
                         Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
                         Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
@@ -49,13 +49,13 @@
                    <% }%> 
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
-                        <label>Voornaam :</label>
-                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${familymember.forename}" />
+                        <label><span class="required">* </span>Voornaam :</label>
+                        <input id="forename" name="forename" type="text" placeholder="Voornaam" required value="${familymember.forename}" />
                     </div>
 					<span id="surnameWarning" class="true">Geen achternaam ingevuld</span>
                     <div class="information">
-                        <label>Achternaam :</label>
-                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${familymember.surname}"/>
+                        <label><span class="required">* </span>Achternaam :</label>
+                        <input id="surname" name="surname" type="text" placeholder="Achternaam" required value="${familymember.surname}"/>
                     </div>
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">

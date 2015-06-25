@@ -50,7 +50,7 @@ core-toolbar {
 
 .information label {
 	display: inline-block;
-	width: 170px; 
+	width: 175px; 
 	text-align: right;
 }
 
@@ -72,7 +72,7 @@ core-toolbar {
 
 .information_short label {
 	display: inline-block;
-	width: 170px; 
+	width: 175px; 
 	text-align: right;
 }
 
@@ -85,6 +85,10 @@ core-toolbar {
 	width: 200px;
 	margin: 2px auto;
 	color: red;
+}
+
+.required{
+	color: #FF0000;
 }
 
 #submit_button_container{

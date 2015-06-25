@@ -46,8 +46,8 @@
                     <input type="hidden" name="option" value="create">
                      <span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
-                        <label>Personeelnr :</label>
-                            <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" value="${employee.employeeNumber}"/>
+                        <label><span class="required">* </span>Personeelnr :</label>
+                            <input id="employeeid" name="employeenumber" type="text" placeholder="Personeelnr" required value="${employee.employeeNumber}"/>
                     </div>
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
@@ -55,63 +55,63 @@
                    <% }%>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
-                        <label>Voornaam :</label>
-                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${employee.forename}" />
+                        <label><span class="required">* </span>Voornaam :</label>
+                        <input id="forename" name="forename" type="text" placeholder="Voornaam" required value="${employee.forename}" />
                     </div>
 					<span id="surnameWarning" class="true">Geen achternaam ingevuld</span>
                     <div class="information">
-                        <label>Achternaam :</label>
-                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${employee.surname}"/>
+                        <label><span class="required">* </span>Achternaam :</label>
+                        <input id="surname" name="surname" type="text" placeholder="Achternaam" required value="${employee.surname}"/>
                     </div>
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
-                        <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-YYYY" value="${employee.dateOfBirth}" />
+                        <label><span class="required">* </span>Geboortedatum :</label>
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-YYYY" required value="${employee.dateOfBirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
-                        <label>Nationaliteit :</label>
-                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${employee.nationality}"/>
+                        <label><span class="required">* </span>Nationaliteit :</label>
+                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" required value="${employee.nationality}"/>
                     </div>
 					<span id="streetWarning" class="true">Geen straatnaam ingevuld</span>
                     <div class="information">
-                        <label>Straat :</label>
-                        <input id="street" name="street" type="text" placeholder="Straat" value="${employee.street}"/>
+                        <label><span class="required">* </span>Straat :</label>
+                        <input id="street" name="street" type="text" placeholder="Straat" required value="${employee.street}"/>
                     </div>
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
-                        <label>Huisnummer :</label>
-                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" value="${employee.houseNumber}" />
+                        <label><span class="required">* </span>Huisnummer :</label>
+                        <input class="short_input" id="streetnumber" name="housenumber" type="text" placeholder="Huisnr" required value="${employee.houseNumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
-                        <label>Postcode :</label>
-                        <input class="short_input" id="postcode" name="postcode" type="text" placeholder="Postcode" value="${employee.postcode}"/>
+                        <label><span class="required">* </span>Postcode :</label>
+                        <input class="short_input" id="postcode" name="postcode" type="text" placeholder="Postcode" required value="${employee.postcode}"/>
                     </div>
 					<span id="cityWarning" class="true">Geen woonplaats ingevuld</span>
                     <div class="information">
-                        <label>Woonplaats :</label>
-                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${employee.city}"/>
+                        <label><span class="required">* </span>Woonplaats :</label>
+                        <input id="city" name="city" type="text" placeholder="Woonplaats" required value="${employee.city}"/>
                     </div>
 					<span id="phonenumberWarning" class="true">Geen telefoonnummer ingevuld ingevuld</span>
                     <div class="information">
-                        <label>Telefoonnummer vast :</label>
-                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${employee.telephoneNumber}"/>
+                        <label><span class="required">* </span>Telefoonnummer vast :</label>
+                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" required value="${employee.telephoneNumber}"/>
                     </div>
 					<span id="mobileWarning" class="true">Geen mobiel nummer ingevuld</span>
 					<div class="information">
-                        <label>Mobiel nummer :</label>
-                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${employee.mobilePhoneNumber}"/>
+                        <label><span class="required">* </span>Mobiel nummer :</label>
+                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" required value="${employee.mobilePhoneNumber}"/>
                     </div>
 					<span id="emailWarning" class="true">Geen email ingevuld</span>
                     <div class="information">
-                        <label>E-mail :</label>
-                        <input id="email" name="email" type="email" placeholder="E-mail" value="${employee.email}"/>
+                        <label><span class="required">* </span>E-mail :</label>
+                        <input id="email" name="email" type="email" placeholder="E-mail" required value="${employee.email}"/>
                     </div>
 					<span id="email_confirmationWarning" class="true">Geen 2e email ingevuld</span>
 					<div class="information">
-                        <label>E-mail bevestiging :</label>
-                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${employee.email}"/>
+                        <label><span class="required">* </span>E-mail bevestiging :</label>
+                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" required value="${employee.email}"/>
                     </div>
                     <div class="information">
                     	<label>Is actief?</label>
@@ -119,8 +119,8 @@
                     </div>
                     <% if(request.getAttribute("employee") == null || request.getAttribute("option") == "create"){ %>
                     <div class="information">
-                    	<label>Gebruikersnaam</label>
-                    	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" value="${employee.username}">
+                    	<label><span class="required">* </span>Gebruikersnaam</label>
+                    	<input id="username" name="username" type="text" placeholder="Gebruikersnaam" required value="${employee.username}">
                     </div>
                      <div class="information">
                     	<label>Is administrator?</label>

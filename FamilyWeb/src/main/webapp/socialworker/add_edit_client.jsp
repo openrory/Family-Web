@@ -50,68 +50,68 @@
                    <% }%>
 					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
                     <div class="information">
-                        <label>Dossiernummer :</label>
+                        <label><span class="required">* </span>Dossiernummer :</label>
                             <input id="fileid" type="text" placeholder="Personeelnr" value="${client.fileNumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">
-                        <label>Voornaam :</label>
-                        <input id="forename" name="forename" type="text" placeholder="Voornaam" value="${client.forename}" />
+                        <label><span class="required">* </span>Voornaam :</label>
+                        <input id="forename" name="forename" type="text" placeholder="Voornaam" required value="${client.forename}" />
                     </div>
 					<span id="surnameWarning" class="true">Geen achternaam ingevuld</span>
                     <div class="information">
-                        <label>Achternaam :</label>
-                        <input id="surname" name="surname" type="text" placeholder="Achternaam" value="${client.surname}"/>
+                        <label><span class="required">* </span>Achternaam :</label>
+                        <input id="surname" name="surname" type="text" placeholder="Achternaam" required value="${client.surname}"/>
                     </div>
 					<span id="dateofbirthWarning" class="true">Geen geboortedatum ingevuld</span>
 					<div class="information">
-                        <label>Geboortedatum :</label>
-                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" value="${client.dateofBirth}" />
+                        <label><span class="required">* </span>Geboortedatum :</label>
+                        <input id="dateofbirth" name="dateofbirth" type="date" placeholder="DD-MM-JJJJ" required value="${client.dateofBirth}" />
                     </div>
 					<span id="nationalityWarning" class="true">Geen nationaliteit ingevuld</span>
 					<div class="information">
-                        <label>Nationaliteit :</label>
-                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" value="${client.nationality}"/>
+                        <label><span class="required">* </span>Nationaliteit :</label>
+                        <input id="nationality" name="nationality" type="text" placeholder="Nationaliteit" required value="${client.nationality}"/>
                     </div>
 					<span id="streetWarning" class="true">Geen straatnaam ingevuld</span>
                     <div class="information">
-                        <label>Straat :</label>
-                        <input id="street" name="street" type="text" placeholder="Straat" value="${client.street}"/>
+                        <label><span class="required">* </span>Straat :</label>
+                        <input id="street" name="street" type="text" placeholder="Straat" required value="${client.street}"/>
                     </div>
 					<span id="streetnumberWarning" class="true">Geen huisnummer ingevuld</span>
                     <div class="information_short">
-                        <label>Huisnummer :</label>
-                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" value="${client.houseNumber}" />
+                        <label><span class="required">* </span>Huisnummer :</label>
+                        <input id="streetnumber" name="streetnumber" type="text" placeholder="Huisnr" required value="${client.houseNumber}" />
                     </div>
 					<span id="postcodeWarning" class="true">Geen postcode ingevuld</span>
                     <div class="information_short">
-                        <label>Postcode :</label>
-                        <input id="postcode" name="postcode" type="text" placeholder="Postcode" value="${client.postcode}"/>
+                        <label><span class="required">* </span>Postcode :</label>
+                        <input id="postcode" name="postcode" type="text" placeholder="Postcode" required value="${client.postcode}"/>
                     </div>
 					<span id="cityWarning" class="true">Geen woonplaats ingevuld</span>
                     <div class="information">
-                        <label>Woonplaats :</label>
-                        <input id="city" name="city" type="text" placeholder="Woonplaats" value="${client.city}"/>
+                        <label><span class="required">* </span>Woonplaats :</label>
+                        <input id="city" name="city" type="text" placeholder="Woonplaats" required value="${client.city}"/>
                     </div>
 					<span id="phonenumberWarning" class="true">Geen telefoonnummer ingevuld ingevuld</span>
                     <div class="information">
-                        <label>Telefoonnummer vast :</label>
-                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" value="${client.telephoneNumber}"/>
+                        <label><span class="required">* </span>Telefoonnummer vast :</label>
+                        <input id="phonenumber" name="phonenumber" type="tel" placeholder="Telefoonnummer" required value="${client.telephoneNumber}"/>
                     </div>
 					<span id="mobileWarning" class="true">Geen mobiel nummer ingevuld</span>
 					<div class="information">
-                        <label>Mobiel nummer :</label>
-                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" value="${client.mobilePhoneNumber}"/>
+                        <label><span class="required">* </span>Mobiel nummer :</label>
+                        <input id="mobile" name="mobile" type="tel" placeholder="Mobiel nummer" required value="${client.mobilePhoneNumber}"/>
                     </div>
 					<span id="emailWarning" class="true">Geen email ingevuld</span>
                     <div class="information">
-                        <label>E-mail :</label>
-                        <input id="email" name="email" type="email" placeholder="E-mail" value="${client.email}"/>
+                        <label><span class="required">* </span>E-mail :</label>
+                        <input id="email" name="email" type="email" placeholder="E-mail" required value="${client.email}"/>
                     </div>
 					<span id="email_confirmationWarning" class="true">Geen 2e email ingevuld</span>
 					<div class="information">
-                        <label>E-mail bevestiging :</label>
-                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" value="${client.email}"/>
+                        <label><span class="required">* </span>E-mail bevestiging :</label>
+                        <input id="email_confirmation" name="email_confirmation" type="email" placeholder="E-mail bevestiging" required value="${client.email}"/>
                     </div>
                     
                    <% if(request.getAttribute("client") == null){ %>
