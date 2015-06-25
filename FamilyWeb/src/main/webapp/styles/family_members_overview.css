@@ -156,3 +156,7 @@ paper-tab a {
 	width: 115px;
 	margin: 0 auto;
 }
+#login_button_container {
+	width: 100px;
+	margin: 20px auto;
+}

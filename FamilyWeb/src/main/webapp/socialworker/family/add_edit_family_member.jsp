@@ -34,16 +34,18 @@
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
 			<paper-shadow z="3" animated="true">
-                <form id="add_edit_family_member_form" onsubmit="return validateForm();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">
-                    <p>
-                        Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
-                        Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
-                        toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
-                        Het heeft niet alleen vijf eeuwen overleefd
-                    </p>
+                <form id="add_edit_family_member_form" onsubmit="return validateForm();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">                    
                    <% if(request.getAttribute("familymember") == null){ %>
+                   <p>
+                        Hieronder kunt u een nieuw gezinslid toevoegen aan de client, let op dat sommige velden goed ingevuld worden.
+                        Na de gegevens te hebben ingevoerd kunt u het gezinslid toevoegen door op de knop "Aanmaaken" te drukken.
+                    </p>
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
+                   <p>
+                        Hieronder kunt u een gezinslid wijzigen, let op dat sommige velden goed ingevuld worden. 
+                        Na de gegevens te wijzigen kunt u de gegevens opslaan door op de knop "Opslaan" te drukken.
+                    </p>
                     <input type="hidden" name="option" value="update">
                     <input type="hidden" name=familymemberID value="${familymember.familymember_id}">
                    <% }%> 

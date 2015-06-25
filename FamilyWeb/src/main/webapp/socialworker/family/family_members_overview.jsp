@@ -54,8 +54,15 @@
         <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
-
+<div>Hieronder ziet u de gezinsleden van de cliënt: ${client.forename} ${client.surname}, U kunt de gegevens wijzigen van de gezinlid of een nieuw gezinslid toevoegen.</div>
 <Family-members-table show="contacts" id="table"></Family-members-table>
+		<form id="tableForm" onsubmit="return create();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">			
+		<div id="login_button_container">
+			<input class="submit_button" type="submit" value="Nieuw gezinslid toevoegen">
+		</div>
+			<input id="currentID" name="currentID" type="hidden" value=""> 
+			<input name="option" type="hidden" value="summary">
+		</form>
 	</div>
 	</core-header-panel> </core-drawer-panel>
 	<core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
@@ -68,38 +75,15 @@
          console.log("JSON OBJECT before table : " + obj);
          obj.loadData(data);
      });
-	 
-		function addInput(groupName) {
-// 			de eerste keer dat deze methode wordt aangeroepen dan hoeft ook pas de submit knop in beeld te komen
-			document.getElementById("submit_button_container").style.display = 'block';
-			var countBox = parseInt(document.getElementById("counter"
-					+ groupName).value);
-			countBox += 1;
-			var name = "name" + countBox;
-			var role = "role" + countBox;
-			var age = "age" + countBox;
-			var validate = "validate" + countBox;
-			document.getElementById(groupName).innerHTML += '<div id="' + groupName + countBox + '" class="person"> <div class="contact"> <div class="information"> <label>Naam:</label> <input type="text" id="' + groupName + name + '" name="' + groupName + name + '" placeholder="Volledige naam"/> </div> <div class="information"> <label>Rol:</label> <input type="text" id="' + groupName + role + '" name="' + groupName + role + '" placeholder="Rol" /> </div> <div class="information"> <label>Leeftijd:</label> <input type="text" id="' + groupName + age + '" name="' + groupName + age + '" placeholder="Leeftijd" /> </div> <input type="hidden" id="' + groupName + validate + '" name="' + groupName + validate + '" value="true" /> </div> <core-icon-button class="remove" icon="highlight-remove" onclick="'
-					+ " removeInput("
-					+ countBox
-					+ ","
-					+ "'"
-					+ groupName
-					+ "'"
-					+ ")" + '"></core-icon-button> </div>';
-			document.getElementById("counter" + groupName).value = countBox;
-		}
-		function removeInput(personNumber, groupName) {
-			document.getElementById(groupName + personNumber).style.display = 'none';
-			document.getElementById(groupName + "validate" + personNumber).value = "false";
-		}
-		document.querySelector('#mediaQuery').addEventListener(
-				'core-media-change',
-				function(e) {
-					document.body.classList.toggle('core-narrow',
-							e.detail.matches);
-					document.querySelector('#scrollableTabs').updateBar();
-				});
+	 function submit(ID) {
+         document.getElementById("currentID").value = ID;
+         document.getElementById("tableForm").submit();
+     };	 
+     function create() {
+    	 document.getElementById("currentID").value = 0;
+         document.getElementById("tableForm").submit();
+     }
+		
 	</script>
 </body>
 

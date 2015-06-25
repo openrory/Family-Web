@@ -1,3 +1,4 @@
+
 package servletControllers.FamilyWeb;
 
 import java.util.ArrayList;
@@ -16,20 +17,40 @@ import domain.FamilyWeb.Network;
 import domain.FamilyWeb.Result;
 import domain.FamilyWeb.User;
 
+/**
+ * The Class OverviewController.
+ */
 public class OverviewController {
+	
+	/** The overviewController for Singleton pattern. */
 	private static OverviewController oc;
+	
+	/** The database interface to acces the dao. */
 	private DatabaseInterface db = null;
 
+	/**
+	 * Instantiates a new overview controller.
+	 */
 	private OverviewController() {
 		this.db = new MySQLDao();
 		oc = this;
 	}
 
+	/**
+	 * Instantiates a new overview controller.
+	 *
+	 * @param db the databaseInterface to use.
+	 */
 	public OverviewController(DatabaseInterface db) {
 		this.db = db;
 		oc = this;
 	}
 
+	/**
+	 * Gets the single instance of OverviewController.
+	 *
+	 * @return single instance of OverviewController
+	 */
 	public static OverviewController getInstance() {
 		if (oc == null) {
 			oc = new OverviewController();
@@ -38,6 +59,8 @@ public class OverviewController {
 	}
 
 	/**
+	 * Gets the databaseInterface.
+	 *
 	 * @return the db
 	 */
 	public DatabaseInterface getDb() {
@@ -45,16 +68,22 @@ public class OverviewController {
 	}
 
 	/**
-	 * @param db
-	 *            the db to set
+	 * Sets the databaseInterface.
+	 *
+	 * @param db            the databaseInterface to set
 	 */
 	public void setDb(DatabaseInterface db) {
 		this.db = db;
 	}
 
+	/**
+	 * Creates the json networks how the compare networks page works.
+	 *
+	 * @param client the client
+	 * @return the JSON object[]
+	 * @throws JSONException the JSON exception
+	 */
 	public JSONObject[] createJSONNetworks(Client client) throws JSONException {
-		// client.getForename() + " " + client.getSurname()
-		// fm.getForename() + " " + fm.getSurname()
 		JSONArray netwerkNodes = new JSONArray();
 		JSONArray netwerkLinks = new JSONArray();
 		JSONArray netwerks1 = new JSONArray();
@@ -149,6 +178,13 @@ public class OverviewController {
 		return network;
 	}
 
+	/**
+	 * Creates the links between the network, depending on the results of the survey.
+	 *
+	 * @param myResults the my results
+	 * @return the JSON object
+	 * @throws JSONException the JSON exception
+	 */
 	private JSONObject createLink(ArrayList<Result> myResults)
 			throws JSONException {
 		JSONObject link = new JSONObject();
@@ -207,6 +243,13 @@ public class OverviewController {
 		return link;
 	}
 
+	/**
+	 * Refresh overview clients.
+	 *
+	 * @param currentUser the current user
+	 * @return the JSON array
+	 * @throws JSONException the JSON exception
+	 */
 	public JSONArray RefreshOverviewClients(User currentUser)
 			throws JSONException {
 		JSONArray returns = new JSONArray();
@@ -254,6 +297,13 @@ public class OverviewController {
 		return returns;
 	}
 
+	/**
+	 * Refresh overview users.
+	 *
+	 * @param user the user
+	 * @return the JSON array
+	 * @throws JSONException the JSON exception
+	 */
 	public JSONArray RefreshOverviewUsers(User user) throws JSONException {
 		JSONArray returns = new JSONArray();
 		ArrayList<User> users = new ArrayList<User>();
@@ -284,6 +334,12 @@ public class OverviewController {
 		return returns;
 	}
 
+	/**
+	 * Auto complete.
+	 *
+	 * @param currentUser the current user
+	 * @return the JSON array
+	 */
 	public JSONArray autoComplete(User currentUser) {
 		JSONArray usersJSON = new JSONArray();
 		if (currentUser instanceof Administrator) {
@@ -305,27 +361,18 @@ public class OverviewController {
 		return usersJSON;
 	}
 
+	/**
+	 * Refresh familymember.
+	 *
+	 * @param client the client
+	 * @return the JSON array
+	 * @throws JSONException the JSON exception
+	 */
 	public JSONArray refreshFamilymember(Client client) throws JSONException {
 		JSONArray returns = new JSONArray();
-		ArrayList<Familymember> family = new ArrayList<Familymember>();
-
-		JSONObject familyJSON = new JSONObject();
-		familyJSON.put("forename", client.getForename());
-		familyJSON.put("surname", client.getSurname());
-		familyJSON.put("dateOfBirth", client.getDateOfBirth());
-		familyJSON.put("postcode", client.getPostcode());
-		familyJSON.put("street", client.getStreet());
-		familyJSON.put("houseNumber", client.getHouseNumber());
-		familyJSON.put("city", client.getCity());
-		familyJSON.put("nationality", client.getNationality());
-		familyJSON.put("telephoneNumber", client.getTelephoneNumber());
-		familyJSON.put("mobilePhoneNumber", client.getMobilePhoneNumber());
-		familyJSON.put("email", client.getEmail());
-		familyJSON.put("type", "client");
-		familyJSON.put("client_id", client.getClient_id());
-		returns.put(familyJSON);
-
+		ArrayList<Familymember> family = new ArrayList<Familymember>();		
 		for (Familymember fm : client.getMyFamilymembers()) {
+			JSONObject familyJSON = new JSONObject();
 			family.add(fm);
 			familyJSON = new JSONObject();
 			familyJSON.put("forename", fm.getForename());

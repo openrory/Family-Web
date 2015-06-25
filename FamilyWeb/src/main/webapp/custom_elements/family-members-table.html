@@ -1,170 +1,198 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-icons/core-icons.html">
-<link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
-<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import"
+	href="../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import"
+	href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import"
+	href="../bower_components/paper-radio-button/paper-radio-button.html">
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Family-members-table">
-    <template>
-        <style>
-            :host {
-                position: relative;
-            }
-            #table_header {
-                background-color: #FF5621;
-                color: white;
-                height: 100%;
-                width: 100%;
-                font-size: 12px;
-            }
-            #table {
-                background-color: #FFCBBB;
-                margin-left: 5%;
-                height: 100%;
-                width: 90%;
-                min-width: 675px;
-                border: none;
-            }
-            .table_column {
-                margin-top: 0.5%;
-                font-size: 12px;
-            }
-            .scrollWrapper {
-                height: 100%;
-                width: 90%;
-                overflow: hidden;
-            }
-            #paperdecoration {
-                background-color: white;
-                color: black;
-                height: 80%;
-                margin-top: 0.35%;
-            }
-            #radio-menu-decoration {
-                background-color: white;
-                color: black;
-                margin-top: 10%;
-            }
-            #filter-button-position {
-                float: left;
-                width: 100%;
-            }
-            #filter {
-                display: none;
-            }
-            p {
-                text-align: center;
-            }
-            @media all and (max-width: 2160px) and (min-width: 800px) {
-                :host {
-                    position: relative;
-                }
-                #table_header {
-                    background-color: #FF5621;
-                    color: white;
-                    height: 100%;
-                    width: 100%;
-                    font-size: 12px;
-                }
-                #table {
-                    background-color: #FFCBBB;
-                    margin-left: 5%;
-                    height: 100%;
-                    width: 90%;
-                    min-width: 675px;
-                    border: none;
-                }
-                .table_column {
-                    margin-top: 0.5%;
-                    font-size: 12px;
-                }
-                .scrollWrapper {
-                    height: 100%;
-                    width: 90%;
-                    overflow: hidden;
-                }
-                #paperdecoration {
-                    background-color: white;
-                    color: black;
-                    height: 80%;
-                    margin-top: 0.35%;
-                }
-                #radio-menu-decoration {
-                    background-color: white;
-                    color: black;
-                    margin-top: 10%;
-                }
-                #filter-button-position {
-                    float: left;
-                    width: 100%;
-                }
-                #filter {
-                    display: none;
-                }
-                p {
-                    text-align: center;
-                }
-            }
-            @media all and (max-width: 800px) and (min-width: 120px) {
-                .scrollWrapper {
-                    height: 100%;
-                    width: 90%;
-                    overflow: scroll;
-                }
-            }
-        </style>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<polymer-element name="Family-members-table"> <template>
+<style>
+:host {
+	position: relative;
+}
 
-        <div class="scrollWrapper">
-            <table id="table" cellspacing="0" cellpadding="0">
-                <thead id="table_header">
-                    <tr>
-                        <th id="first_header_tag"><p>Voornaam</p></th>
-                        <th class="table_header_tag"><p>Achternaam</p></th>
-                        <th class="table_header_tag"><p>Geboorte datum</p></th>
-                        <th class="table_header_tag"><p>Straat</p></th>
-                        <th class="table_header_tag"><p>Huisnummer</p></th>
-                        <th class="table_header_tag"><p>Woonplaats</p></th>
-                        <th class="table_header_tag"><p>Nationaliteit</p></th>
-                        <th class="table_header_tag"><p>Telefoonnummer</p></th>
-                        <th class="table_header_tag"><p>Mobielnummer</p></th>
-                        <th class="table_header_tag"><p>E-mail</p></th>
-                        <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
-                    </tr>
-                </thead>
+#table_header {
+	background: #49c0f0; /* Old browsers */
+	background: -moz-linear-gradient(top, #49c0f0 0%, #2cafe3 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #49c0f0),
+		color-stop(100%, #2cafe3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #49c0f0 0%, #2cafe3 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #49c0f0 0%, #2cafe3 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #49c0f0 0%, #2cafe3 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #49c0f0 0%, #2cafe3 100%);
+	/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49c0f0',
+		endColorstr='#2cafe3', GradientType=0); /* IE6-9 */
+	color: white;
+	height: 100%;
+	width: 100%;
+	font-size: 12px;
+}
+
+#table {
+	background-color: #BBDEFB;
+	margin-left: 5%;
+	height: 100%;
+	width: 90%;
+	min-width: 675px;
+	border: none;
+}
+
+.table_column {
+	margin-top: 0.5%;
+	font-size: 12px;
+}
+
+.scrollWrapper {
+	height: 100%;
+	width: 90%;
+	overflow: hidden;
+}
+
+#paperdecoration {
+	background-color: white;
+	color: black;
+	height: 80%;
+	margin-top: 0.35%;
+}
+
+#radio-menu-decoration {
+	background-color: white;
+	color: black;
+	margin-top: 10%;
+}
+
+#filter-button-position {
+	float: left;
+	width: 100%;
+}
+
+#filter {
+	display: none;
+}
+
+p {
+	text-align: center;
+}
+
+@media all and (max-width: 2160px) and (min-width: 800px) {
+	:host {
+		position: relative;
+	}
+	#table_header {
+		background-color: #FF5621;
+		color: white;
+		height: 100%;
+		width: 100%;
+		font-size: 12px;
+	}
+	#table {
+		background-color: #FFCBBB;
+		margin-left: 5%;
+		height: 100%;
+		width: 90%;
+		min-width: 675px;
+		border: none;
+	}
+	.table_column {
+		margin-top: 0.5%;
+		font-size: 12px;
+	}
+	.scrollWrapper {
+		height: 100%;
+		width: 90%;
+		overflow: hidden;
+	}
+	#paperdecoration {
+		background-color: white;
+		color: black;
+		height: 80%;
+		margin-top: 0.35%;
+	}
+	#radio-menu-decoration {
+		background-color: white;
+		color: black;
+		margin-top: 10%;
+	}
+	#filter-button-position {
+		float: left;
+		width: 100%;
+	}
+	#filter {
+		display: none;
+	}
+	p {
+		text-align: center;
+	}
+}
+
+@media all and (max-width: 800px) and (min-width: 120px) {
+	.scrollWrapper {
+		height: 100%;
+		width: 90%;
+		overflow: scroll;
+	}
+}
+</style>
+
+<div class="scrollWrapper">
+	<table id="table" cellspacing="0" cellpadding="0">
+		<thead id="table_header">
+			<tr>
+				<th id="first_header_tag"><p>Voornaam</p></th>
+				<th class="table_header_tag"><p>Achternaam</p></th>
+				<th class="table_header_tag"><p>Geb.datum</p></th>
+				<th class="table_header_tag"><p>Straat</p></th>
+				<th class="table_header_tag"><p>Huisnr</p></th>
+				<th class="table_header_tag"><p>Woonplaats</p></th>
+				<th class="table_header_tag"><p>Nationaliteit</p></th>
+				<th class="table_header_tag"><p>Telefoon</p></th>
+				<th class="table_header_tag"><p>Mobiel</p></th>
+				<th class="table_header_tag"><p>E-mail</p></th>
+				<th class="table_header_options"><p>
+						<paper-input id="paperdecoration" type="text" name="search"
+							value="{{searchObject}}"></paper-input>
+					</p></th>
+			</tr>
+		</thead>
 
 
-                <tbody>
-                    {{searchObject | filterArray}}
-                    <template repeat="{{object in objectData}}">
-                        <tr class="table_column">
-                            <td id="first_table_content"><p>{{object.forename}}</p></td>
-                            <td class="table_contents"><p>{{object.surname}}</p></td>
-                            <td class="table_contents"><p>{{object.dateOfBirth}}</p></td>
-                            <td class="table_contents"><p>{{object.street}}</p></td>
-                            <td class="table_contents"><p>{{object.houseNumber}}</p></td>
-                            <td class="table_contents"><p>{{object.city}}</p></td>
-                            <td class="table_contents"><p>{{object.nationality}}</p></td>                            
-                            <td class="table_contents"><p>{{object.telephoneNumber}}</p></td>
-                            <td class="table_contents"><p>{{object.mobilePhoneNumber}}</p></td>
-                            <td class="table_contents"><p>{{object.email}}</p></td>
-                            <td class="icon_content"><p><core-icon icon="search" onclick="submit({{object.member_id}})" value="" /></p></td>
-                        </tr>
-                    </template>
+		<tbody>
+			{{searchObject | filterArray}}
+			<template repeat="{{object in objectData}}">
+			<tr class="table_column">
+				<td id="first_table_content"><p>{{object.forename}}</p></td>
+				<td class="table_contents"><p>{{object.surname}}</p></td>
+				<td class="table_contents"><p>{{object.dateOfBirth}}</p></td>
+				<td class="table_contents"><p>{{object.street}}</p></td>
+				<td class="table_contents"><p>{{object.houseNumber}}</p></td>
+				<td class="table_contents"><p>{{object.city}}</p></td>
+				<td class="table_contents"><p>{{object.nationality}}</p></td>
+				<td class="table_contents"><p>{{object.telephoneNumber}}</p></td>
+				<td class="table_contents"><p>{{object.mobilePhoneNumber}}</p></td>
+				<td class="table_contents"><p>{{object.email}}</p></td>
+				<td class="icon_content"><p>
+						<core-icon icon="create" onclick="submit({{object.member_id}})"
+							value="" />
+					</p></td>
+			</tr>
+			</template>
+		</tbody>
+	</table>
+</div>
 
-                </tbody>
-            </table>
-        </div>
-
-    </template>
-
-    <script>
+</template> <script>
         // id van de familie wordt in notificationID neergezet en het formulier wordt verstuurd
-        function submit(ID) {
-            document.getElementById("notificationID").value = ID;
-            document.getElementById("notificationform").submit();
-        };
+        
         Polymer({
             ready: function () {
                 console.log("Tabel is bereikt!");
@@ -210,6 +238,4 @@
                 }
             }
         });
-    </script>
-
-</polymer-element>
+    </script> </polymer-element>
