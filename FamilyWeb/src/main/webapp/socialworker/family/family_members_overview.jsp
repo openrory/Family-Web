@@ -58,7 +58,7 @@
 <Family-members-table show="contacts" id="table"></Family-members-table>
 		<form id="tableForm" onsubmit="return create();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">			
 		<div id="login_button_container">
-			<input class="submit_button" type="submit" value="Inloggen">
+			<input class="submit_button" type="submit" value="Nieuw gezinslid toevoegen">
 		</div>
 			<input id="currentID" name="currentID" type="hidden" value=""> 
 			<input name="option" type="hidden" value="summary">
