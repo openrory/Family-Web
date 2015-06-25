@@ -14,20 +14,33 @@ import org.json.JSONException;
 import servletControllers.FamilyWeb.OverviewController;
 import domain.FamilyWeb.Client;
 import domain.FamilyWeb.Familymember;
-import domain.FamilyWeb.User;
 
 /**
- * Servlet implementation class FamilyMemberServlet
+ * Servlet implementation class FamilyMemberServlet.
  */
 public class FamilyMemberServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;   
 
 	/**
+	 * Do get.
+	 *
+	 * @param req the request
+	 * @param resp the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { }
 
 	/**
+	 * Do post.
+	 *
+	 * @param req the request
+	 * @param resp the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
