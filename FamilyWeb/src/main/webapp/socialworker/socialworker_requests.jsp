@@ -10,21 +10,22 @@
     <link rel="import" href="/FamilyWeb/elements.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-socialworker.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
+	<link rel="stylesheet" href="/FamilyWeb/styles/socialworker_requests.css">
 
 </head>
 <body fullbleed layout vertical>
     <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
-				<core-icon-button core-drawer-toggle icon="close"></core-icon-button>
-                <div flex>Menu</div>
+				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
+                <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
-            <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
+            <responsive-menu-socialworker current="2"></responsive-menu-socialworker>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>
-			<core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-            <div flex>Overzicht verzoeken</div>
+		<paper-icon-button class="toolbarButton" core-drawer-toggle icon="menu"></paper-icon-button>
+            <div id="title" flex>Overzicht verzoeken</div>
 			<options-menu></options-menu>
             </core-toolbar>
             <div class="content" fit layout vertical>

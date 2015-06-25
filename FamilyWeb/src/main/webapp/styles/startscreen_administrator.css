@@ -12,14 +12,6 @@ core-toolbar {
 	background-color: #FFFFFF;
 }
 
-#familyID{
-	display: none;
-}
-
-table, td, th {
-    border: 1px solid black;
-}
-
 #title {
 	width:500px;
 	margin:auto;

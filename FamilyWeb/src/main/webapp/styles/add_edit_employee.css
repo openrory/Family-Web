@@ -1,3 +1,17 @@
+body {
+	font-family: sans-serif;
+}
+
+core-toolbar {
+	background-color: #009EE3;
+	width: 100%;
+	text-align:center;
+}
+
+[drawer] {
+	background-color: #FFFFFF;
+}
+
 #title {
 	width:500px;
 	margin:auto;
@@ -36,7 +50,7 @@
 
 .information label {
 	display: inline-block;
-	width: 170px; 
+	width: 175px; 
 	text-align: right;
 }
 
@@ -58,7 +72,7 @@
 
 .information_short label {
 	display: inline-block;
-	width: 170px; 
+	width: 175px; 
 	text-align: right;
 }
 
@@ -73,7 +87,11 @@
 	color: red;
 }
 
+.required{
+	color: #FF0000;
+}
+
 #submit_button_container{
 	width: 150px;
-	margin: 0 auto;
+	margin: 20px auto;
 }

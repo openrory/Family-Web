@@ -18,15 +18,15 @@
     <core-drawer-panel responsivewidth="1400px">
         <core-header-panel drawer>
             <core-toolbar>
-                <core-icon-button core-drawer-toggle icon="close"></core-icon-button>
-                <div flex>Menu</div>
+				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
+                <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
             <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar class="medium-tall">
-                <core-icon-button core-drawer-toggle icon="menu"></core-icon-button>
-                <div flex>Overdragen</div>
+			<paper-icon-button class="toolbarButton" core-drawer-toggle icon="menu"></paper-icon-button>
+            <div id="title" flex>Overdragen</div>
                 <options-menu></options-menu>
                 <div class="bottom fit" horizontal layout>
                     <paper-tabs id="scrollableTabs" selected="4" flex scrollable noink>
