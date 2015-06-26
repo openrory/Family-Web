@@ -115,7 +115,7 @@
                     </div>
                     <div class="information">
                     	<label>Is actief?</label>
-                    	<input id="is_active" name="is_active" type="checkbox">
+                    	<input id="is_active" name="is_active" type="checkbox" checked="checked">
                     </div>
                     <% if(request.getAttribute("employee") == null || request.getAttribute("option") == "create"){ %>
                     <div class="information">
