@@ -163,13 +163,12 @@
                         <th>
                             <core-collapse id="collapse">
                                 <core-menu horizontal layout>
-                                    <paper-item><paper-checkbox name="Request Nr." label="Request Nr." checked="{{checkbox_1 |  checkedCheckboxes}}"></paper-checkbox></paper-item>
-                                    <paper-item><paper-input-decorator label="test"><input type="checkbox" id="test" /></paper-input-decorator></paper-item>
-                                    <paper-item><paper-checkbox name="Datum Aangemaakt" label="Datum Aangemaakt" value="{{checkbox_2}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="Type Request" label="Type Request" value="{{checkbox_3}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="Van Socialworker" label="Van Socialworker" checked="checked" value="{{checkbox_4}}" "></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="Naar Socialworker" label="Naar Socialworker" value="{{checkbox_5}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="Is Goedgekeurd" label="Is Goedgekeurd" value="{{checkbox_6}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Request_Nr" id="Request_Nr" label="Request Nr."  on-change="{{requestNrFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Datum Aangemaakt" label="Datum Aangemaakt"  on-change="{{createdCreatedFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Type Request" label="Type Request" on-change="{{typeRequestFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Van Socialworker" label="Van Socialworker"  on-change="{{fromSocialworkerFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Naar Socialworker" label="Naar Socialworker"  on-change="{{toSocialworkerFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="Is Goedgekeurd" label="Is Goedgekeurd"  on-change="{{approvedFunc}}" checked></paper-checkbox></paper-item>
                                 </core-menu>
                             </core-collapse>
                         </th>
@@ -179,7 +178,7 @@
             <table id="table" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
                     <tr>
-                        <th id="first_header_tag"><p>Request Nr. <core-icon icon="add" onclick="{{sortArray}}"></core-icon></p></th>
+                        <th id="first_header_tag"><p>Request Nr.</p></th>
                         <th class="table_header_tag"><p>Datum Aangemaakt</p></th>
                         <th class="table_header_tag"><p>Type Request</p></th>
                         <th class="table_header_tag"><p>Van Socialworker</p></th>
@@ -215,6 +214,19 @@
             document.getElementById("notificationID").value = ID;
             document.getElementById("notificationform").submit();
         };
+
+        function setCheckboxValue(checkboxValue) {
+
+            console.log("function test before: " + checkboxValue);
+            if (checkboxValue) {
+                checkboxValue = false;
+            } else {
+                checkboxValue = true;
+            }
+            console.log("function test after: " + checkboxValue);
+            return checkboxValue;
+        } ;
+        
         Polymer({
             ready: function () {
                 console.log("Tabel is bereikt!");
@@ -222,23 +234,55 @@
                     console.log("initialData is ontvangen");
                     this.objectData = JSON.parse(this.attributes['initialData'].value);
                 }
+
+                this.requestNr        = true;
+                this.createdCreated        = true ;
+                this.typeRequest      = true ;
+                this.toSocialworker   = true ;
+                this.fromSocialworker = true ;
+                this.approved      = true ;
             },
+
             loadData: function (dt) {
                 console.log("JSON via Javascript ontvangen")
+                // Initiating JSON files
                 this.objectData = dt;
                 this.objectDataBackGround = dt;
             },
+
+            requestNrFunc: function(){
+                this.requestNr = setCheckboxValue(this.requestNr) ;
+            },
+
+            typeRequestFunc: function () {
+                console.log("type request: " + this.typeRequest);
+                this.typeRequest = setCheckboxValue(this.typeRequest);
+            },
+
+            createdCreatedFunc: function(){
+                this.createdCreated = setCheckboxValue(this.createdCreated) ;
+            },
+
+            toSocialworkerFunc: function(){
+                this.toSocialworker = setCheckboxValue(this.toSocialworker) ;
+            },
+
+            fromSocialworkerFunc: function(){
+                this.fromSocialworker = setCheckboxValue(this.fromSocialworker) ;
+            },
+
+            approvedFunc: function(){
+                this.approved = setCheckboxValue(this.approved) ;
+            },
+
             toggle: function () {
                 console.log("toggle");
                 this.$.collapse.toggle();
             },
-            sortArray: function () {
-                console.log("Sorting Array");
-                this.objectDataBackGround = this.objectDataBackGround.sort();
-                this.objectData = this.objectDataBackGround;
-            },
+
+
             filterArray: function () {
-                console.log('test');
+           
                 var search = "";
                 if (this.searchObject !== undefined) {
                     search = this.searchObject;
@@ -246,17 +290,26 @@
                 console.log("search input :" + this.searchObject);
                 console.log("search value :" + search);
                 console.log("input array :" + this.objectDataBackGround);
+
+                var requestNr = this.requestNr;
+                console.log("this nr : " + this.requestNr);
+                var typeRequest = this.typeRequest;
+                var createdCreated = this.createdCreated;
+                console.log("this date : " + this.createdCreated);
+                var fromSocialworker = this.fromSocialworker;
+                var toSocialworker = this.toSocialworker;
+                var approved = this.approved;
+
                 if (typeof this.objectDataBackGround !== "undefined") {
                     this.objectData = jQuery.grep(this.objectDataBackGround, function (element, index) {
-                  //      var checkedValue = document.querySelector('#checkbox_1:checked').value;
-                        var checkedValue = $('#checkbox_1:checked').val();
-                       console.log(checkbedValue);
-                        if (checkedValue.checked) {
-                           console.log("checkbox_1, OPTIE 1");
-                    }
-                        var nrBool = (element.requestNumber.toLowerCase()).includes(search.toLowerCase());
-                        var fromToSocialworkerBool = (element.fromSocialworker.toLowerCase() + " " + element.toSocialworker.toLowerCase()).includes(search.toLowerCase());
-                        if (fromToSocialworkerBool || nrBool) {
+                        var nrBool = (element.requestNumber.toLowerCase()).includes(search.toLowerCase()) && requestNr;
+                        var typeRequestBool = (element.typeRequest.toLowerCase()).includes(search.toLowerCase()) && typeRequest;
+                        var createdCreatedBool = (element.createdCreated.toLowerCase()).includes(search.toLowerCase()) && createdCreated;
+                        var fromSocialworkerBool = (element.fromSocialworker.toLowerCase()).includes(search.toLowerCase()) && fromSocialworker;
+                        var toSocialworkerBool = (element.toSocialworker.toLowerCase()).includes(search.toLowerCase()) && toSocialworker;
+                        var approvedBool = (element.approved.toLowerCase()).includes(search.toLowerCase()) && approved;
+
+                        if (nrBool || typeRequestBool || createdCreatedBool || fromSocialworkerBool || toSocialworkerBool || approvedBool) {
                             return true;
                         } else {
                             return false;

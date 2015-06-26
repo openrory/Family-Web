@@ -6,7 +6,7 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html" />
 <!--<link rel="import" href="../filters/filter.html" />-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<polymer-element name="Client-table">
+<polymer-element name="client-table-administrator">
     <template>
         <style>
             :host {
@@ -169,8 +169,6 @@
                 }
             }
         </style>
-
-
         <div class="scrollWrapper">
             <table id="filtertable" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
@@ -189,7 +187,7 @@
                                     <paper-item><paper-checkbox name="forename" label="voornaam" on-change="{{forenameFunc}}" checked></paper-checkbox></paper-item>
                                     <paper-item><paper-checkbox name="surname" label="achternaam" on-change="{{surnameFunc}}" checked></paper-checkbox></paper-item>
                                     <paper-item><paper-checkbox name="postcode" label="postcode" on-change="{{postcodeFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="street" label="straat" on-change="{{streetFunc}}" checked></paper-checkbox></paper-item>
+                                    <paper-item><paper-checkbox name="street" label="straatt" on-change="{{streetFunc}}" checked></paper-checkbox></paper-item>
                                     <paper-item><paper-checkbox name="huisNr" label="huisNr" on-change="{{huisNrFunc}}" checked></paper-checkbox></paper-item>
                                     <paper-item><paper-checkbox name="city" label="stad" on-change="{{cityFunc}}" checked></paper-checkbox></paper-item>
                                 </core-menu>
@@ -211,13 +209,11 @@
                         <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
                     </tr>
                 </thead>
-            
 
+                {{searchObject | filterArray}}
                 <tbody>
-                    {{searchObject | filterArray}}
                     <template repeat="{{person in objectData}}">
                         <tr class="table_column">
-
                             <td id="first_table_content"><p>{{person.fileNumber}}</p></td>
                             <td class="table_contents"><p>{{person.forename}}</p></td>
                             <td class="table_contents"><p>{{person.surname}}</p></td>
@@ -225,35 +221,25 @@
                             <td class="table_contents"><p>{{person.street}}</p></td>
                             <td class="table_contents"><p>{{person.houseNumber}}</p></td>
                             <td class="table_contents"><p>{{person.city}}</p>
-                            <td class="icon_content">
-                                <p>
-                                    <core-icon id="icon" icon="search" onclick="submitToFamilyInformation({{person.client_id}})" value="" />
-
-                                </p>
-                                <p>
-                                    <core-icon id="icon" icon="create" onclick="submitToClientInformation({{person.client_id}})" value="" />
-                                </p>
-                            </td>
-
+                            <td class="icon_content"><p><core-icon icon="create" onclick="submit({{person.client_id}})" value="" /></p></td>
                         </tr>
                     </template>
-
                 </tbody>
             </table>
         </div>
-
     </template>
-
     <script>
+
         function setCheckboxValue(checkboxValue) {
-        console.log("function test before: " + checkboxValue);
-        if (checkboxValue) {
-            checkboxValue = false;
-        } else {
-            checkboxValue = true;
-        }
-        console.log("function test after: " + checkboxValue);
-        return checkboxValue;
+
+            console.log("function test before: " + checkboxValue);
+            if (checkboxValue) {
+                checkboxValue = false;
+            } else {
+                checkboxValue = true;
+            }
+            console.log("function test after: " + checkboxValue);
+            return checkboxValue;
         };
 
         Polymer({
@@ -266,7 +252,7 @@
 
                 this.fileNr = true;
                 this.forename = true;
-                this.surname = true;
+               this.surname = true;
                 this.street = true;
                 this.postcode = true;
                 this.huisNr = true;
@@ -286,7 +272,7 @@
 
             surnameFunc: function () {
                 console.log("type request: " +this.surname);
-                this.surname = setCheckboxValue(this.surname);
+               this.surname = setCheckboxValue(this.surname);
             },
 
             forenameFunc: function () {
@@ -341,7 +327,7 @@
 
                     //De logica voor het zoeken in de array
                     this.clientData = jQuery.grep(this.objectDataBackGround, function (element, index) {
-                    //    var fileNumberBool = (element.fileNumber.toLowerCase()).includes(search.toLowerCase()) && fileNr;
+                       // var fileNumberBool = (element.fileNumber.toLowerCase()).includes(search.toLowerCase()) && fileNr;
                         var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase()) && forename ;
                         var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase()) && surname;
                         var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase()) && postcode;
@@ -349,16 +335,15 @@
                         var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) && huisNr;
                         var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) && city;
 
-                        if ( forenameBool || surnameBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
+                        if (forenameBool || surnameBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
                             return true;
                         } else {
                             return false;
                         }
                     })
-                    console.log("filter array :" + this.objectData);
+                    console.log("filter array :" + this.clientData);
                 }
             }
         });
     </script>
-
 </polymer-element>
