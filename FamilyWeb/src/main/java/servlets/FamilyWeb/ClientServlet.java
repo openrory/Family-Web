@@ -48,6 +48,11 @@ public class ClientServlet extends HttpServlet {
 		Object cUser = req.getSession().getAttribute("user");
 		currentUser = (cUser instanceof Administrator) ? (Administrator) cUser : (Socialworker) cUser;
 
+		// If currentUser is administrator refresh autocomplete that is required to choose socialworker 
+		if (currentUser instanceof Administrator) {
+			req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(currentUser));
+		}
+		
 		// Check if currentuser is administrator or socialworker to load correct page
 		if (currentUser instanceof Administrator) {
 			PAGE_CLIENT_OVERVIEW = "/administrator/" + PAGE_CLIENT_OVERVIEW;
@@ -269,11 +274,6 @@ public class ClientServlet extends HttpServlet {
 	 * @param clientID the client id used to load the correct client.
 	 */
 	private void summary(int clientID) {
-		
-		// If currentUser is administrator refresh autocomplete that is required to choose socialworker 
-		if (currentUser instanceof Administrator) {
-			req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(currentUser));
-		}
 		
 		// Get client
 		this.client = null;
