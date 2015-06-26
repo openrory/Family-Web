@@ -17,86 +17,93 @@ import org.json.JSONException;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
-	
+
 	private LoginController controller = LoginController.getInstance();
+	private HttpServletRequest req = null;
 	private RequestDispatcher reqDisp = null;
 	
 	private final String PAGE_STARTSCREEN_ADMINISTRATOR = "/administrator/startscreen_administrator.jsp";
 	private final String PAGE_STARTSCREEN_SOCIALWORKER = "/socialworker/startscreen_socialworker.jsp";
 	private final String PAGE_PASSWORD_RESET = "/password_reset.jsp";
 	private final String PAGE_LOGIN = "/login.jsp";
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	
-		if (req.getParameter("username") == null && req.getParameter("username") == null) {
-			req.setAttribute("message", "Gebruikersnaam of wachtwoord niet ingevuld.");
-			req.setAttribute("messageType", "warning");
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		this.req = req;
+		
+		if (req.getParameter("username") == null && req.getParameter("password") == null) {
+			this.setMessage("warning", "Gebruikersnaam of wachtwoord niet ingevuld.");
 			reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
 		} else {
-			
-			//Get username and password from form
+
+			// Get username and password from form
 			String username = req.getParameter("username").trim();
 			String password = req.getParameter("password").trim();
-			
+
 			if (!username.equals("") && !password.equals("")) {
-				
-				//check if username/password exists in db
+
+				// check if username/password exists in db
 				if (controller.authentication(username, password)) {
-					
+
 					// get the user account
 					User user = (User) controller.getUser(username);
 					req.getSession().setAttribute("user", user);
-					
-					//check if administrator
-					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {			
+
+					// check if user is administrator and is active and no password reset
+					if (controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {
 						try {
+							// load/set users and clients in overview tables
 							req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
 							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(user));
+							// load/set users for autocomple client add/edit page
 							req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(user));
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_ADMINISTRATOR);
 						} catch (JSONException e) {
-							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
-							req.setAttribute("messageType", "error");
+							this.setMessage("error", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
 							reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
-						}						
-					//check if active && password must reset first
-					}else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()){						
+						}
+					//  check if user is socialworker and is active and no password reset
+					} else if (!controller.isAdministrator(user) && user.isActive() && !user.isWwreset()) {
 						try {
+							// load/set clients in overview tables
 							req.getSession().setAttribute("clientsJSON", OverviewController.getInstance().RefreshOverviewClients(user));
-							req.getSession().setAttribute("clients", user.getDbController().getAllClientsOfUser(user));
+							req.getSession().setAttribute("clients",user.getDbController().getAllClientsOfUser(user));
 							reqDisp = req.getRequestDispatcher(PAGE_STARTSCREEN_SOCIALWORKER);
 						} catch (JSONException e) {
-							req.setAttribute("message", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
-							req.setAttribute("messageType", "error");
+							this.setMessage("error", "Kon de gegevens niet goed inladen, probeer opnieuw in te loggen.");
 							reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
-						}						
-					//check if password must reset first
+						}
+					// check if user is active and password must reset first
 					} else if (user.isActive() && user.isWwreset()) {
-						req.setAttribute("message", "Wachtwoord reset aangevraagd, verander het wachtwoord.");
-						req.setAttribute("messageType", "warning");
+						this.setMessage("warning", "Wachtwoord reset aangevraagd, verander het wachtwoord.");
 						reqDisp = req.getRequestDispatcher(PAGE_PASSWORD_RESET);
-					//not active user
+					// the user is not active 
 					} else {
-						req.setAttribute("message", "Je kunt niet inloggen, je account is niet actief.");
-						req.setAttribute("messageType", "warning");
+						this.setMessage("warning", "Je kunt niet inloggen, je account is niet actief.");
 						reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
 					}
-				} 
-				// not valid username/password
+				}
+				// not valid login, username/password combination is wrong
 				else {
-					req.setAttribute("message", "Gebruikersnaam of wachtwoord onjuist.");
-					req.setAttribute("messageType", "error");
+					this.setMessage("warning", "Gebruikersnaam of wachtwoord onjuist.");
 					reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
 				}
-			// not valid username/password
+				// not valid login, username/password is null or empty
 			} else {
-				req.setAttribute("message", "Gebruikersnaam of wachtwoord niet ingevuld.");
-				req.setAttribute("messageType", "warning");
+				this.setMessage("error", "Gebruikersnaam of wachtwoord niet ingevuld.");
 				reqDisp = req.getRequestDispatcher(PAGE_LOGIN);
 			}
 		}
 		reqDisp.forward(req, resp);
 	}
 	
+	/**
+	 * Method to set information message on page.
+	 * @param messageType String type of message could be success, error or warning
+	 * @param message String the message to display
+	 */
+	private void setMessage(String messageType, String message) {
+		req.setAttribute("messageType", messageType);
+		req.setAttribute("message", message);
+	}
 }
