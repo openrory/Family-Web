@@ -59,7 +59,7 @@ U kunt de gegevens wijzigen van de gezinlid of een nieuw gezinslid toevoegen.</d
 <Family-members-table show="contacts" id="table"></Family-members-table>
 		<form id="tableForm" action="/FamilyWeb/FamilyMemberServlet.do" method="post">			
 		<div id="login_button_container">
-			<input class="submit_button" type="submit" value="Nieuw gezinslid toevoegen">
+			<input class="submit_button" name = "new" type="submit" value="Nieuw gezinslid toevoegen">
 		</div>
 			<input id="currentID" name="currentID" type="hidden" value="0"> 
 			<input name="option" type="hidden" value="summary">

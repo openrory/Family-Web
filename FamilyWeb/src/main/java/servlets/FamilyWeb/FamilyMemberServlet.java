@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import servletControllers.FamilyWeb.OverviewController;
 import util.FamilyWeb.Validation;
@@ -50,18 +52,20 @@ public class FamilyMemberServlet extends HttpServlet {
 
 		if (option.equals("summary")) {
 			Familymember familymember = null;
-			int id = Integer.valueOf(req.getParameter("currentID"));
-			if (id == 0) {
-				req.setAttribute("familymember", null);
-			} else {
-				for (Familymember fm : client.getMyFamilymembers()) {
-					if (id == fm.getMember_id()) {
-						familymember = fm;
-						break;
-					}
+			String button = req.getParameter("new");
+			if(button == null){
+				int id = Integer.valueOf(req.getParameter("currentID"));
+				System.out.println(id);
+				if (id != 0) {
+					for (Familymember fm : client.getMyFamilymembers()) {
+						if (id == fm.getMember_id()) {
+							familymember = fm;
+							break;
+						}
+					}				
 				}
-				req.setAttribute("familymember", familymember);
-			}
+			}			
+			req.setAttribute("familymember", familymember);
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
 		} else if (option.equals("create")) {
@@ -98,6 +102,10 @@ public class FamilyMemberServlet extends HttpServlet {
 						nationality, telephoneNumber, mobilePhoneNumber, email);
 				OverviewController.getInstance().getDb()
 						.addFamilymember(fm, client);
+				ArrayList<Familymember> members= client.getMyFamilymembers();
+				members.add(fm);
+				client.setMyFamilymembers(members);
+				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid Aangemaakt.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
@@ -132,12 +140,20 @@ public class FamilyMemberServlet extends HttpServlet {
 				String telephoneNumber = req.getParameter("phonenumber");
 				String mobilePhoneNumber = req.getParameter("mobile");
 				String email = req.getParameter("email");
-
 				Familymember fm = new Familymember(forename, surname,
 						dateOfBirth, postcode, street, houseNumber, city,
 						nationality, telephoneNumber, mobilePhoneNumber, email);
 				fm.setMember_id(id);
 				OverviewController.getInstance().getDb().updateFamilymember(fm);
+				ArrayList<Familymember> members= new ArrayList<Familymember>();
+				for(Familymember f : client.getMyFamilymembers()){
+					if(f.getMember_id() == fm.getMember_id())
+						members.add(fm);
+					else
+						members.add(f);
+				}
+				client.setMyFamilymembers(members);
+				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid opgeslagen.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
@@ -158,7 +174,7 @@ public class FamilyMemberServlet extends HttpServlet {
 		} catch (JSONException e) {
 			req.setAttribute(
 					"message",
-					"Kan degegevens van "
+					"Kan de gegevens van "
 							+ client.getForename()
 							+ " "
 							+ client.getSurname()
@@ -167,6 +183,13 @@ public class FamilyMemberServlet extends HttpServlet {
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 		}
+		JSONObject[] networks;
+		try {
+			networks = OverviewController.getInstance().createJSONNetworks(client);
+			req.getSession().setAttribute("familyJSON", OverviewController.getInstance().refreshFamilymember(client));
+			req.getSession().setAttribute("nodesNetwork", networks[0]);
+			req.getSession().setAttribute("linksNetwork", networks[1]);
+		} catch (JSONException e) {	}		
 		reqDisp.forward(req, resp);
 	}
 }

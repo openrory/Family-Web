@@ -71,9 +71,14 @@ public class MySQLDao implements DatabaseInterface {
 		Connection conn = null;
 		boolean b = false;
 		try {
+			// create connection
 			conn = this.getConnection();
+			
+			// setup query to insert an new User
 			PreparedStatement pStmt = conn
 					.prepareStatement("insert into users(username,password,forename,surname,dateofbirth,postcode,street,housenumber,city,nationality,telephonenumber,mobilephonenumber,usertype,email,isactive,employeenumber,wwreset) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+			// set values in query
 			pStmt.setString(1, user.getUsername());
 			pStmt.setString(2, user.getPassword());
 			pStmt.setString(3, user.getForename());
@@ -93,6 +98,8 @@ public class MySQLDao implements DatabaseInterface {
 			pStmt.setString(15, user.isActive() ? "Y" : "N");
 			pStmt.setString(16, user.getEmployeeNumber());
 			pStmt.setString(17, "Y");
+			
+			// execute query to the connection with database
 			pStmt.executeUpdate();
 			b = true;
 		} catch (SQLException e) {
@@ -104,7 +111,7 @@ public class MySQLDao implements DatabaseInterface {
 	}
 
 	/**
-	 * Check username.
+	 * Check if username exists.
 	 *
 	 * @param username the username
 	 * @return true, if successful
