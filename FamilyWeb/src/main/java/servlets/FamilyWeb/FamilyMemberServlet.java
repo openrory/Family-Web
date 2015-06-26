@@ -44,18 +44,24 @@ public class FamilyMemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		RequestDispatcher reqDisp = null;
+		// get the status from the option
 		String option = (req.getParameter("option") != null) ? (String) req
 				.getParameter("option") : "";
+		// get the client from the session
 		Client client = (Client) req.getSession().getAttribute("client");
-
+		// set date format
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
+		// if status was overview
 		if (option.equals("summary")) {
-			Familymember familymember = null;
+			Familymember familymember = null;			
 			String button = req.getParameter("new");
+			// check if the button for an new familymember was pushed
 			if(button == null){
+				// if not, get the familymeber that wants to edit
 				int id = Integer.valueOf(req.getParameter("currentID"));
 				if (id != 0) {
+					// check for each member if it is equal to the id
 					for (Familymember fm : client.getMyFamilymembers()) {
 						if (id == fm.getMember_id()) {
 							familymember = fm;
@@ -64,15 +70,22 @@ public class FamilyMemberServlet extends HttpServlet {
 					}				
 				}
 			}			
+			// send the user to the add or edit page and give family with it, for add this value is null otherwise the familymember is the member that was selected
 			req.setAttribute("familymember", familymember);
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
-		} else if (option.equals("create")) {
+		} 
+		// if create was selected, validate the input
+		else if (option.equals("create")) {
+			// valdate forename
 			String forename = Validation.getInstance().validateForename(
 					req.getParameter("forename"));
+			// validat surname
 			String surname = Validation.getInstance().validateSurname(
 					req.getParameter("surname"));
+			// if validation fail
 			if (forename == null || surname == null) {
+				// set error message and return user 
 				req.setAttribute("message",
 						"Voornaam en/of achternaam zijn onjuist.");
 				req.setAttribute("messageType", "error");
