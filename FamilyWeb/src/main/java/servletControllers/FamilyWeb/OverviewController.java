@@ -100,6 +100,10 @@ public class OverviewController {
 		for (Network n : clientNetworks) {
 			JSONArray contacts = new JSONArray();
 			JSONArray contactsLinks = new JSONArray();
+			JSONObject clientNode = new JSONObject();
+			clientNode.put("name", client.getForename()+" "+client.getSurname());
+			clientNode.put("group", 0);
+			contacts.put(clientNode);
 			int i = 0;
 			for (Contact c : n.getContacts()) {
 				i++;
@@ -117,9 +121,7 @@ public class OverviewController {
 				nodesPerson.put("commentaar", n.getCommentary());
 				nodesPerson.put("datum", n.getDateCreated().toString());
 				nodesPerson.put("nodes", contacts);
-				linksPerson.put("commentaar", n.getCommentary());
-				linksPerson.put("datum", n.getDateCreated().toString());
-				linksPerson.put("nodes", contactsLinks);
+				linksPerson.put(n.getDateCreated().toString(), contactsLinks);
 			}
 		}
 		if (!clientNetworks.isEmpty()) {
