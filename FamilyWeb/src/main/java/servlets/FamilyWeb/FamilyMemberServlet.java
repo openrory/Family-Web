@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import servletControllers.FamilyWeb.OverviewController;
 import util.FamilyWeb.Validation;
@@ -42,34 +44,48 @@ public class FamilyMemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		RequestDispatcher reqDisp = null;
+		// get the status from the option
 		String option = (req.getParameter("option") != null) ? (String) req
 				.getParameter("option") : "";
+		// get the client from the session
 		Client client = (Client) req.getSession().getAttribute("client");
-
+		// set date format
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
+		// if status was overview
 		if (option.equals("summary")) {
-			Familymember familymember = null;
-			int id = Integer.valueOf(req.getParameter("currentID"));
-			if (id == 0) {
-				req.setAttribute("familymember", null);
-			} else {
-				for (Familymember fm : client.getMyFamilymembers()) {
-					if (id == fm.getMember_id()) {
-						familymember = fm;
-						break;
-					}
+			Familymember familymember = null;			
+			String button = req.getParameter("new");
+			// check if the button for an new familymember was pushed
+			if(button == null){
+				// if not, get the familymeber that wants to edit
+				int id = Integer.valueOf(req.getParameter("currentID"));
+				if (id != 0) {
+					// check for each member if it is equal to the id
+					for (Familymember fm : client.getMyFamilymembers()) {
+						if (id == fm.getMember_id()) {
+							familymember = fm;
+							break;
+						}
+					}				
 				}
-				req.setAttribute("familymember", familymember);
-			}
+			}			
+			// send the user to the add or edit page and give family with it, for add this value is null otherwise the familymember is the member that was selected
+			req.setAttribute("familymember", familymember);
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
-		} else if (option.equals("create")) {
+		} 
+		// if create was selected, validate the input
+		else if (option.equals("create")) {
+			// valdate forename
 			String forename = Validation.getInstance().validateForename(
 					req.getParameter("forename"));
+			// validat surname
 			String surname = Validation.getInstance().validateSurname(
 					req.getParameter("surname"));
+			// if validation fail
 			if (forename == null || surname == null) {
+				// set error message and return user 
 				req.setAttribute("message",
 						"Voornaam en/of achternaam zijn onjuist.");
 				req.setAttribute("messageType", "error");
@@ -98,6 +114,10 @@ public class FamilyMemberServlet extends HttpServlet {
 						nationality, telephoneNumber, mobilePhoneNumber, email);
 				OverviewController.getInstance().getDb()
 						.addFamilymember(fm, client);
+				ArrayList<Familymember> members= client.getMyFamilymembers();
+				members.add(fm);
+				client.setMyFamilymembers(members);
+				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid Aangemaakt.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
@@ -132,12 +152,20 @@ public class FamilyMemberServlet extends HttpServlet {
 				String telephoneNumber = req.getParameter("phonenumber");
 				String mobilePhoneNumber = req.getParameter("mobile");
 				String email = req.getParameter("email");
-
 				Familymember fm = new Familymember(forename, surname,
 						dateOfBirth, postcode, street, houseNumber, city,
 						nationality, telephoneNumber, mobilePhoneNumber, email);
 				fm.setMember_id(id);
 				OverviewController.getInstance().getDb().updateFamilymember(fm);
+				ArrayList<Familymember> members= new ArrayList<Familymember>();
+				for(Familymember f : client.getMyFamilymembers()){
+					if(f.getMember_id() == fm.getMember_id())
+						members.add(fm);
+					else
+						members.add(f);
+				}
+				client.setMyFamilymembers(members);
+				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid opgeslagen.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
@@ -158,7 +186,7 @@ public class FamilyMemberServlet extends HttpServlet {
 		} catch (JSONException e) {
 			req.setAttribute(
 					"message",
-					"Kan degegevens van "
+					"Kan de gegevens van "
 							+ client.getForename()
 							+ " "
 							+ client.getSurname()
@@ -167,6 +195,13 @@ public class FamilyMemberServlet extends HttpServlet {
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 		}
+		JSONObject[] networks;
+		try {
+			networks = OverviewController.getInstance().createJSONNetworks(client);
+			req.getSession().setAttribute("familyJSON", OverviewController.getInstance().refreshFamilymember(client));
+			req.getSession().setAttribute("nodesNetwork", networks[0]);
+			req.getSession().setAttribute("linksNetwork", networks[1]);
+		} catch (JSONException e) {	}		
 		reqDisp.forward(req, resp);
 	}
 }

@@ -34,7 +34,7 @@
         	<message-window-${messageType} message="${message}"></message-window-${messageType}>
         	<% } %>
 			<paper-shadow z="3" animated="true">
-                <form id="add_edit_family_member_form" onsubmit="return validateForm();" action="/FamilyWeb/FamilyMemberServlet.do" method="post">                    
+                <form id="add_edit_family_member_form" action="/FamilyWeb/FamilyMemberServlet.do" method="post">                    
                    <% if(request.getAttribute("familymember") == null){ %>
                    <p>
                         Hieronder kunt u een nieuw gezinslid toevoegen aan de client.<br>

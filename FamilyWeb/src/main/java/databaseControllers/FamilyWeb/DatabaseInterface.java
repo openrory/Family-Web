@@ -9,7 +9,6 @@ import domain.FamilyWeb.Question;
 import domain.FamilyWeb.Survey;
 import domain.FamilyWeb.User;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface DatabaseInterface.
  */
@@ -17,6 +16,7 @@ public interface DatabaseInterface {
 	
 /**
  * Authentication.
+ * If username and password combination in the database exists, than the authentication will pass otherwise it will fail and returns false
  *
  * @param username the username
  * @param password the password
@@ -25,7 +25,7 @@ public interface DatabaseInterface {
 	public boolean authentication(String username, String password);
 	
 	/**
-	 * Gets the user.
+	 * Gets an user from the database
 	 *
 	 * @param username the username
 	 * @return the user
@@ -33,7 +33,7 @@ public interface DatabaseInterface {
 	public User getUser(String username);
 	
 /**
- * Adds the user.
+ * Adds the user to the database
  *
  * @param user the user
  * @return true, if successful
@@ -41,7 +41,7 @@ public interface DatabaseInterface {
 	public boolean addUser(User user);
 	
 	/**
-	 * Update an user.
+	 * Update an user in the database
 	 *
 	 * @param user the user
 	 * @return true, if successful
@@ -49,15 +49,15 @@ public interface DatabaseInterface {
 	public boolean updateUser(User user);
 	
 	/**
-	 * Gets the all socialworkers.
+	 * Gets the all socialworkers existed in the database
 	 *
-	 * @return the all socialworkers
+	 * @return all socialworkers that exists
 	 */
 	public ArrayList<User> getAllSocialworkers();
 	
 	
 	/**
-	 * Adds the client to the database.
+	 * Add the client to the database.
 	 *
 	 * @param client the client
 	 * @param userID the user id of an Socialworker
@@ -67,15 +67,16 @@ public interface DatabaseInterface {
 	
 	/**
 	 * Update client in the database.
+	 * if the userID is 0, than the user_id won't update, else the user_id will update to the given userID
 	 *
 	 * @param client the client
-	 * @param userID the user id
+	 * @param userID the user id, 0 if the user doesn't need to change
 	 * @return true, if successful
 	 */
 	public boolean updateClient(Client client, int userID);
 	
 	/**
-	 * Gets the client.
+	 * Get the client equal to the integer from the database
 	 *
 	 * @param client_id the client_id
 	 * @return the client
@@ -83,7 +84,7 @@ public interface DatabaseInterface {
 	public Client getClient(int client_id);
 	
 	/**
-	 * Gets the all clients of user.
+	 * Get all clients of user from the database
 	 *
 	 * @param user the user
 	 * @return the all clients of user
@@ -91,23 +92,23 @@ public interface DatabaseInterface {
 	public ArrayList<Client> getAllClientsOfUser(User user);
 	
 	/**
-	 * Gets the all clients.
+	 * Get all clients that existes in the database.
 	 *
 	 * @return the all clients
 	 */
 	public ArrayList<Client> getAllClients();
 	
 	/**
-	 * Adds the familymember.
+	 * Add the familymember into the database, connect the familymember to the client in the database
 	 *
-	 * @param famMember the fam member
-	 * @param client the client
+	 * @param famMember the familymember
+	 * @param client the client to connect to
 	 * @return true, if successful
 	 */
 	public boolean addFamilymember(Familymember famMember, Client client);
 	
 	/**
-	 * Update familymember.
+	 * Update familymember in the database
 	 *
 	 * @param famMember the fam member
 	 * @return true, if successful
@@ -115,7 +116,7 @@ public interface DatabaseInterface {
 	public boolean updateFamilymember(Familymember famMember);
 	
 	/**
-	 * Gets the familymembers of client.
+	 * Get all familymembers of client from the database.
 	 *
 	 * @param client the client
 	 * @return the familymembers of client
@@ -123,7 +124,7 @@ public interface DatabaseInterface {
 	public ArrayList<Familymember> getFamilymembersOfClient(Client client);
 	
 	/**
-	 * Adds the survey.
+	 * Adds the survey to the databse.
 	 *
 	 * @param survey the survey
 	 * @return true, if successful
@@ -131,7 +132,7 @@ public interface DatabaseInterface {
 	public boolean addSurvey(Survey survey);
 	
 	/**
-	 * Update survey.
+	 * Update survey in the database
 	 *
 	 * @param survey the survey
 	 * @return true, if successful
@@ -139,7 +140,7 @@ public interface DatabaseInterface {
 	public boolean updateSurvey(Survey survey);
 	
 	/**
-	 * Gets the survey.
+	 * Get the survey from the database equal to the unique name
 	 *
 	 * @param surveyName the survey name
 	 * @return the survey
@@ -147,14 +148,14 @@ public interface DatabaseInterface {
 	public Survey getSurvey(String surveyName);
 	
 	/**
-	 * Gets the survey names.
+	 * Get all survey names from the database.
 	 *
 	 * @return the survey names
 	 */
 	public ArrayList<String> getSurveyNames();
 	
 	/**
-	 * Adds the question.
+	 * Add the question to the database.
 	 *
 	 * @param question the question
 	 * @return true, if successful
@@ -162,7 +163,7 @@ public interface DatabaseInterface {
 	public boolean addQuestion(Question question);
 	
 	/**
-	 * Update question.
+	 * Update question the question in the database.
 	 *
 	 * @param question the question
 	 * @return true, if successful
@@ -170,7 +171,7 @@ public interface DatabaseInterface {
 	public boolean updateQuestion(Question question);
 	
 	/**
-	 * Gets the question.
+	 * Get the question equal to the integer in the database.
 	 *
 	 * @param question_id the question_id
 	 * @return the question
@@ -178,27 +179,30 @@ public interface DatabaseInterface {
 	public Question getQuestion(int question_id);
 	
 	/**
-	 * Gets the all users.
+	 * Get all users from the database.
 	 *
 	 * @return the all users
 	 */
 	public ArrayList<User> getAllUsers();			
 	
 	/**
-	 * Adds the network.
+	 * Add the network to the client or familymember.
+	 * when to add it to the client use 0 for familymember, if the network belongs to an familymember use 0 for client_id
 	 *
 	 * @param network the network
-	 * @param client_id the client_id
-	 * @param familymember_id the familymember_id
+	 * @param client_id the client_id, 0 if network doesn't belongs to a client
+	 * @param familymember_id the familymember_id, 0 if network doesn't belongs to a familymember
 	 * @return true, if successful
 	 */
 	public boolean addNetwork(Network network, int client_id, int familymember_id);
 	
 	/**
-	 * Gets the networks.
+	 * Get the networks from client or familymember.
+	 * when to get it from an client use 0 for familymember, if to get from an familymember use 0 for client_id
+	 * if both are not 0, then it returns null
 	 *
-	 * @param client_id the client_id
-	 * @param familymember_id the familymember_id
+	 * @param client_id the client_id, 0 if doesn't want to get from the client
+	 * @param familymember_id the familymember_id, 0 if doesn't want to get from an family member
 	 * @return the networks
 	 */
 	public ArrayList<Network> getNetworks(int client_id,int familymember_id);
