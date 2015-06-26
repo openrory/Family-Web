@@ -6,24 +6,44 @@ package domain.FamilyWeb;
 import java.util.ArrayList;
 
 /**
- * @author Joery
+ * The Class Contact.
+ *
+ * @author Team His
  * @version 0.1
  * @since 2015-04-21
  */
 public class Contact {
+	
+	/** The fullname. */
 	private String fullname;
+	
+	/** The commentary. */
 	private String commentary;	
+	
+	/** The role. */
 	private String role;
+	
+	/** The age. */
 	private int age;
+	
+	/** The categories. */
 	private ArrayList<Category> categories;
+	
+	/** The my results. */
 	private ArrayList<Result> myResults;
+	
+	/** The contact_id. */
 	private int contact_id;
 	
 	/**
-	 * Constructor with fields
-	 * 
-	 * @param fullname
-	 * @param commentary
+	 * Constructor with fields.
+	 *
+	 * @param fullname the fullname
+	 * @param commentary the commentary
+	 * @param role the role
+	 * @param age the age
+	 * @param group the group
+	 * @param group_id the group_id
 	 */
 	public Contact(String fullname, String commentary, String role, int age, String group,int group_id) {			
 		this.fullname = fullname;
@@ -36,7 +56,7 @@ public class Contact {
 	}
 
 	/**
-	 * clean constructor
+	 * clean constructor.
 	 */
 	public Contact() {
 		this.categories = new ArrayList<Category>();
@@ -44,6 +64,8 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the fullname.
+	 *
 	 * @return the fullname
 	 */
 	public String getFullname() {
@@ -51,6 +73,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the fullname.
+	 *
 	 * @param fullname the fullname to set
 	 */
 	public void setFullname(String fullname) {
@@ -58,6 +82,8 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the commentary.
+	 *
 	 * @return the commentary
 	 */
 	public String getCommentary() {
@@ -65,6 +91,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the commentary.
+	 *
 	 * @param commentary the commentary to set
 	 */
 	public void setCommentary(String commentary) {
@@ -72,6 +100,8 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the categories.
+	 *
 	 * @return the categories
 	 */
 	public ArrayList<Category> getCategories() {
@@ -79,6 +109,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the categories.
+	 *
 	 * @param categories the categories to set
 	 */
 	public void setCategories(ArrayList<Category> categories) {
@@ -86,6 +118,8 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the my results.
+	 *
 	 * @return the myResults
 	 */
 	public ArrayList<Result> getMyResults() {
@@ -93,6 +127,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the my results.
+	 *
 	 * @param myResults the myResults to set
 	 */
 	public void setMyResults(ArrayList<Result> myResults) {
@@ -109,6 +145,8 @@ public class Contact {
 	}
 	
 	/**
+	 * Gets the role.
+	 *
 	 * @return the role
 	 */
 	public String getRole() {
@@ -116,6 +154,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the role.
+	 *
 	 * @param role the role to set
 	 */
 	public void setRole(String role) {
@@ -123,6 +163,8 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the age.
+	 *
 	 * @return the age
 	 */
 	public int getAge() {
@@ -130,6 +172,8 @@ public class Contact {
 	}
 
 	/**
+	 * Sets the age.
+	 *
 	 * @param age the age to set
 	 */
 	public void setAge(int age) {
@@ -137,6 +181,8 @@ public class Contact {
 	}
 	
 	/**
+	 * Gets the contact_id.
+	 *
 	 * @return the contact_id
 	 */
 	public int getContact_id() {
@@ -144,8 +190,10 @@ public class Contact {
 	}
 	
 	/**
-	* @param contact_id the contact_id to set
-	*/
+	 * Sets the contact_id.
+	 *
+	 * @param contact_id the contact_id to set
+	 */
 	public void setContact_id(int contact_id) {
 		this.contact_id = contact_id;
 	}

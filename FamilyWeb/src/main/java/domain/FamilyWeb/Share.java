@@ -7,18 +7,22 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * @author Joery
+ * The Class Share.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public class Share extends Request {
+	
+	/** The shared networks. */
 	private ArrayList<Network> sharedNetworks;
 	
 	/**
-	 * Clean constructor, with fields from Notifiaction
-	 * 
-	 * @param notification
-	 * @param createdCreated
+	 * Clean constructor, with fields from Notifiaction.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
 	 */
 	public Share(String notification, Date createdCreated) {
 		super(notification, createdCreated);
@@ -26,15 +30,15 @@ public class Share extends Request {
 	}
 	
 	/**
-	 * Clean constructor, with fields from Request
-	 * 
-	 * @param notification
-	 * @param createdCreated
-	 * @param commentary
-	 * @param commentaryAdmin
-	 * @param approved
-	 * @param toSocialworker
-	 * @param fromSocialworker
+	 * Clean constructor, with fields from Request.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
+	 * @param commentary the commentary
+	 * @param commentaryAdmin the commentary admin
+	 * @param approved the approved
+	 * @param toSocialworker the to socialworker
+	 * @param fromSocialworker the from socialworker
 	 */
 	
 	public Share(String notification, Date createdCreated, String commentary,
@@ -47,14 +51,16 @@ public class Share extends Request {
 
 	
 	/**
-	 * @param notification
-	 * @param createdCreated
-	 * @param commentary
-	 * @param commentaryAdmin
-	 * @param approved
-	 * @param toSocialworker
-	 * @param fromSocialworker
-	 * @param sharedNetworks
+	 * Instantiates a new share.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
+	 * @param commentary the commentary
+	 * @param commentaryAdmin the commentary admin
+	 * @param approved the approved
+	 * @param toSocialworker the to socialworker
+	 * @param fromSocialworker the from socialworker
+	 * @param sharedNetworks the shared networks
 	 */
 	public Share(String notification, Date createdCreated, String commentary,
 			String commentaryAdmin, boolean approved, User toSocialworker,
@@ -65,6 +71,8 @@ public class Share extends Request {
 	}
 
 	/**
+	 * Gets the shared networks.
+	 *
 	 * @return the sharedNetworks
 	 */
 	public ArrayList<Network> getSharedNetworks() {
@@ -72,6 +80,8 @@ public class Share extends Request {
 	}
 
 	/**
+	 * Sets the shared networks.
+	 *
 	 * @param sharedNetworks the sharedNetworks to set
 	 */
 	public void setSharedNetworks(ArrayList<Network> sharedNetworks) {

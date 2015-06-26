@@ -7,22 +7,34 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * @author Joery
+ * The Class Network.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public class Network {
+	
+	/** The network_id. */
 	private int network_id;
+	
+	/** The date created. */
 	private Date dateCreated;
+	
+	/** The commentary. */
 	private String commentary;
+	
+	/** The contacts. */
 	private ArrayList<Contact> contacts;
+	
+	/** The survey. */
 	private Survey theSurvey;
 	
 	/**
-	 * Constructor with fields
-	 * 
-	 * @param dateCreated
-	 * @param commentary
+	 * Constructor with fields.
+	 *
+	 * @param dateCreated the date created
+	 * @param commentary the commentary
 	 */
 	public Network(Date dateCreated, String commentary) {
 		this.dateCreated = dateCreated;
@@ -32,7 +44,7 @@ public class Network {
 
 
 	/**
-	 * Clean constructor
+	 * Clean constructor.
 	 */
 	public Network() {
 		this.contacts = new ArrayList<Contact>();
@@ -40,6 +52,8 @@ public class Network {
 
 
 	/**
+	 * Gets the date created.
+	 *
 	 * @return the dateCreated
 	 */
 	public Date getDateCreated() {
@@ -48,6 +62,8 @@ public class Network {
 
 
 	/**
+	 * Sets the date created.
+	 *
 	 * @param dateCreated the dateCreated to set
 	 */
 	public void setDateCreated(Date dateCreated) {
@@ -56,6 +72,8 @@ public class Network {
 
 
 	/**
+	 * Gets the commentary.
+	 *
 	 * @return the commentary
 	 */
 	public String getCommentary() {
@@ -64,6 +82,8 @@ public class Network {
 
 
 	/**
+	 * Sets the commentary.
+	 *
 	 * @param commentary the commentary to set
 	 */
 	public void setCommentary(String commentary) {
@@ -71,6 +91,8 @@ public class Network {
 	}
 
 	/**
+	 * Gets the the survey.
+	 *
 	 * @return the theSurvey
 	 */
 	public Survey getTheSurvey() {
@@ -79,6 +101,8 @@ public class Network {
 
 
 	/**
+	 * Sets the the survey.
+	 *
 	 * @param theSurvey the theSurvey to set
 	 */
 	public void setTheSurvey(Survey theSurvey) {
@@ -87,6 +111,8 @@ public class Network {
 
 
 	/**
+	 * Gets the contacts.
+	 *
 	 * @return the contacts
 	 */
 	public ArrayList<Contact> getContacts() {
@@ -95,6 +121,8 @@ public class Network {
 
 
 	/**
+	 * Sets the contacts.
+	 *
 	 * @param contacts the contacts to set
 	 */
 	public void setContacts(ArrayList<Contact> contacts) {
@@ -102,6 +130,8 @@ public class Network {
 	}
 	
 	/**
+	 * Gets the network_id.
+	 *
 	 * @return the network_id
 	 */
 	public int getNetwork_id() {
@@ -109,6 +139,8 @@ public class Network {
 	}
 		
 	/**
+	 * Sets the network_id.
+	 *
 	 * @param network_id the network_id to set
 	 */
 	public void setNetwork_id(int network_id) {

@@ -4,17 +4,25 @@
 package domain.FamilyWeb;
 
 /**
- * @author Joery
+ * The Class Category.
+ *
+ * @author Team His
  * @version 0.1
  * @since 2015-04-21
  */
 public class Category {
+	
+	/** The name. */
 	private String name;
+	
+	/** The group_id. */
 	private int group_id;
 
 	/**
-	 * Constructor with fields
-	 * @param name
+	 * Constructor with fields.
+	 *
+	 * @param name the name
+	 * @param id the id
 	 */
 	public Category(String name, int id) {
 		this.name = name;
@@ -22,6 +30,8 @@ public class Category {
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -29,6 +39,8 @@ public class Category {
 	}
 
 	/**
+	 * Sets the name.
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -44,6 +56,8 @@ public class Category {
 	}
 
 	/**
+	 * Gets the group_id.
+	 *
 	 * @return the group_id
 	 */
 	public int getGroup_id() {
@@ -51,6 +65,8 @@ public class Category {
 	}
 
 	/**
+	 * Sets the group_id.
+	 *
 	 * @param group_id the group_id to set
 	 */
 	public void setGroup_id(int group_id) {

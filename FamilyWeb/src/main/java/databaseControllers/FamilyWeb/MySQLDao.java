@@ -46,7 +46,7 @@ public class MySQLDao implements DatabaseInterface {
 			conn = DriverManager.getConnection(dbLocation, username, passwd);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("failed to connect to database");
+			// System.out.println("failed to connect to database");
 		}
 		return conn;
 	}

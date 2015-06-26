@@ -7,40 +7,67 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * @author Joery
+ * The Class Familymember.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-20
  */
 public class Familymember {
+	
+	/** The member_id. */
 	private int member_id;
+	
+	/** The forename. */
 	private String forename;
+	
+	/** The surname. */
 	private String surname;
+	
+	/** The date of birth. */
 	private Date dateOfBirth;
+	
+	/** The postcode. */
 	private String postcode;
+	
+	/** The street. */
 	private String street;
+	
+	/** The house number. */
 	private String houseNumber;
+	
+	/** The city. */
 	private String city;
+	
+	/** The nationality. */
 	private String nationality;
+	
+	/** The telephone number. */
 	private String telephoneNumber;
+	
+	/** The mobile phone number. */
 	private String mobilePhoneNumber;
+	
+	/** The email. */
 	private String email;	
 
+	/** The my networks. */
 	private ArrayList<Network> myNetworks;
 	
 	/**
-	 * Constructor with parameters
-	 * 
-	 * @param forename
-	 * @param surname
-	 * @param dateOfBirth
-	 * @param postcode
-	 * @param street
-	 * @param houseNumber
-	 * @param city
-	 * @param nationality
-	 * @param telephoneNumber
-	 * @param mobilePhoneNumber
-	 * @param email
+	 * Constructor with parameters.
+	 *
+	 * @param forename the forename
+	 * @param surname the surname
+	 * @param dateOfBirth the date of birth
+	 * @param postcode the postcode
+	 * @param street the street
+	 * @param houseNumber the house number
+	 * @param city the city
+	 * @param nationality the nationality
+	 * @param telephoneNumber the telephone number
+	 * @param mobilePhoneNumber the mobile phone number
+	 * @param email the email
 	 */
 	public Familymember(String forename, String surname, Date dateOfBirth,
 			String postcode, String street, String houseNumber, String city,
@@ -62,13 +89,15 @@ public class Familymember {
 	}
 	
 	/**
-	 * Clean constructor
+	 * Clean constructor.
 	 */
 	public Familymember() {
 		this.myNetworks = new ArrayList<Network>();
 	}
 
 	/**
+	 * Gets the forename.
+	 *
 	 * @return the forename
 	 */
 	public String getForename() {
@@ -76,6 +105,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the forename.
+	 *
 	 * @param forename the forename to set
 	 */
 	public void setForename(String forename) {
@@ -83,6 +114,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the surname.
+	 *
 	 * @return the surname
 	 */
 	public String getSurname() {
@@ -90,6 +123,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the surname.
+	 *
 	 * @param surname the surname to set
 	 */
 	public void setSurname(String surname) {
@@ -97,6 +132,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the date of birth.
+	 *
 	 * @return the dateOfBirth
 	 */
 	public Date getDateOfBirth() {
@@ -104,6 +141,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the date of birth.
+	 *
 	 * @param dateOfBirth the dateOfBirth to set
 	 */
 	public void setDateOfBirth(Date dateOfBirth) {
@@ -111,6 +150,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the postcode.
+	 *
 	 * @return the postcode
 	 */
 	public String getPostcode() {
@@ -118,6 +159,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the postcode.
+	 *
 	 * @param postcode the postcode to set
 	 */
 	public void setPostcode(String postcode) {
@@ -125,6 +168,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the street.
+	 *
 	 * @return the street
 	 */
 	public String getStreet() {
@@ -132,6 +177,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the street.
+	 *
 	 * @param street the street to set
 	 */
 	public void setStreet(String street) {
@@ -139,6 +186,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the house number.
+	 *
 	 * @return the houseNumber
 	 */
 	public String getHouseNumber() {
@@ -146,6 +195,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the house number.
+	 *
 	 * @param houseNumber the houseNumber to set
 	 */
 	public void setHouseNumber(String houseNumber) {
@@ -153,6 +204,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the city.
+	 *
 	 * @return the city
 	 */
 	public String getCity() {
@@ -160,6 +213,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the city.
+	 *
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
@@ -167,6 +222,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the nationality.
+	 *
 	 * @return the nationality
 	 */
 	public String getNationality() {
@@ -174,6 +231,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the nationality.
+	 *
 	 * @param nationality the nationality to set
 	 */
 	public void setNationality(String nationality) {
@@ -181,6 +240,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the telephone number.
+	 *
 	 * @return the telephoneNumber
 	 */
 	public String getTelephoneNumber() {
@@ -188,6 +249,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the telephone number.
+	 *
 	 * @param telephoneNumber the telephoneNumber to set
 	 */
 	public void setTelephoneNumber(String telephoneNumber) {
@@ -195,6 +258,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the mobile phone number.
+	 *
 	 * @return the mobilePhoneNumber
 	 */
 	public String getMobilePhoneNumber() {
@@ -202,6 +267,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the mobile phone number.
+	 *
 	 * @param mobilePhoneNumber the mobilePhoneNumber to set
 	 */
 	public void setMobilePhoneNumber(String mobilePhoneNumber) {
@@ -209,6 +276,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the email.
+	 *
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -216,6 +285,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the email.
+	 *
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
@@ -223,6 +294,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the my networks.
+	 *
 	 * @return the myNetworks
 	 */
 	public ArrayList<Network> getMyNetworks() {
@@ -230,6 +303,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the my networks.
+	 *
 	 * @param myNetworks the myNetworks to set
 	 */
 	public void setMyNetworks(ArrayList<Network> myNetworks) {
@@ -237,6 +312,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Gets the member_id.
+	 *
 	 * @return the member_id
 	 */
 	public int getMember_id() {
@@ -244,6 +321,8 @@ public class Familymember {
 	}
 
 	/**
+	 * Sets the member_id.
+	 *
 	 * @param member_id the member_id to set
 	 */
 	public void setMember_id(int member_id) {

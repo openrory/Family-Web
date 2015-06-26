@@ -75,23 +75,26 @@ public class FamilyMemberServlet extends HttpServlet {
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
 		} 
-		// if create was selected, validate the input
+		// if create was selected
 		else if (option.equals("create")) {
-			// valdate forename
+			// validate forename
 			String forename = Validation.getInstance().validateForename(
 					req.getParameter("forename"));
-			// validat surname
+			// validate surname
 			String surname = Validation.getInstance().validateSurname(
 					req.getParameter("surname"));
-			// if validation fail
+			// if validation was failed
 			if (forename == null || surname == null) {
-				// set error message and return user 
+				// set error message and send back
 				req.setAttribute("message",
 						"Voornaam en/of achternaam zijn onjuist.");
 				req.setAttribute("messageType", "error");
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
-			} else {
+			} 
+			// validation was good
+			else {
+				// get all input
 				String dateOfBirthString = req.getParameter("dateofbirth");
 				Date dateOfBirth = null;
 				try {
@@ -109,33 +112,46 @@ public class FamilyMemberServlet extends HttpServlet {
 				String mobilePhoneNumber = req.getParameter("mobile");
 				String email = req.getParameter("email");
 
+				// create familymember object
 				Familymember fm = new Familymember(forename, surname,
 						dateOfBirth, postcode, street, houseNumber, city,
 						nationality, telephoneNumber, mobilePhoneNumber, email);
+				// add familymember object into database
 				OverviewController.getInstance().getDb()
 						.addFamilymember(fm, client);
+				// add member to existing client in session
 				ArrayList<Familymember> members= client.getMyFamilymembers();
 				members.add(fm);
 				client.setMyFamilymembers(members);
+				// send user to family member overview with succes message
 				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid Aangemaakt.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 			}
-		} else if (option.equals("update")) {
+		} 
+		// if update was the status
+		else if (option.equals("update")) {
+			// get id that needs to update
 			int id = Integer.valueOf(req.getParameter("familymemberID"));
+			// validate forename
 			String forename = Validation.getInstance().validateForename(
 					req.getParameter("forename"));
+			// validate surname
 			String surname = Validation.getInstance().validateSurname(
 					req.getParameter("surname"));
+			// if validation has failed set error message and return user to edit page
 			if (forename == null || surname == null) {
 				req.setAttribute("message",
 						"Voornaam en/of achternaam zijn onjuist.");
 				req.setAttribute("messageType", "error");
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/add_edit_family_member.jsp");
-			} else {
+			} 
+			// validation went well
+			else {
+				// get all input from form
 				String dateOfBirthString = req.getParameter("dateofbirth");
 				Date dateOfBirth = null;
 				try {
@@ -152,11 +168,16 @@ public class FamilyMemberServlet extends HttpServlet {
 				String telephoneNumber = req.getParameter("phonenumber");
 				String mobilePhoneNumber = req.getParameter("mobile");
 				String email = req.getParameter("email");
+				
+				// create familymember object 
 				Familymember fm = new Familymember(forename, surname,
 						dateOfBirth, postcode, street, houseNumber, city,
 						nationality, telephoneNumber, mobilePhoneNumber, email);
 				fm.setMember_id(id);
+				// update familymember in the database
 				OverviewController.getInstance().getDb().updateFamilymember(fm);
+				
+				// update member in the session
 				ArrayList<Familymember> members= new ArrayList<Familymember>();
 				for(Familymember f : client.getMyFamilymembers()){
 					if(f.getMember_id() == fm.getMember_id())
@@ -165,13 +186,17 @@ public class FamilyMemberServlet extends HttpServlet {
 						members.add(f);
 				}
 				client.setMyFamilymembers(members);
+				// set succes message and return user to familymembers overview
 				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid opgeslagen.");
 				req.setAttribute("messageType", "succes");
 				reqDisp = req
 						.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 			}
-		} else {
+		} 
+		// create/edit/summary are the only options the servlet provide, so there went something wrong
+		else {
+			// set error message and return user to the overview
 			req.setAttribute("message",
 					"Onverwachte fout opgetreden, pagina niet gevonden.");
 			req.setAttribute("messageType", "error");
@@ -179,6 +204,7 @@ public class FamilyMemberServlet extends HttpServlet {
 					.getRequestDispatcher("/socialworker/family/family_members_overview.jsp");
 		}
 		try {
+			// refresh familymembers overview table by updating the JSON
 			req.getSession().setAttribute(
 					"familyJSON",
 					OverviewController.getInstance()
@@ -195,6 +221,7 @@ public class FamilyMemberServlet extends HttpServlet {
 			reqDisp = req
 					.getRequestDispatcher("/socialworker/startscreen_socialworker.jsp");
 		}
+		// update networks in the session
 		JSONObject[] networks;
 		try {
 			networks = OverviewController.getInstance().createJSONNetworks(client);

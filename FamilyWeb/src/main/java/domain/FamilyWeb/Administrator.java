@@ -7,15 +7,19 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
+ * The Class Administrator.
+ *
  * @author Joery
  * @version 0.1
  * @since 2015-04-20
  */
 public class Administrator extends User {
+	
+	/** The users. */
 	protected ArrayList<User> users;
 	
 	/**
-	 * Clean constructor
+	 * Clean constructor.
 	 */
 	public Administrator() {
 		super();
@@ -23,23 +27,24 @@ public class Administrator extends User {
 	}
 
 	/**
-	 * Constructor with all parameters
-	 * 
-	 * @param username
-	 * @param password
-	 * @param forename
-	 * @param surname
-	 * @param dateOfBirth
-	 * @param postcode
-	 * @param street
-	 * @param houseNumber
-	 * @param city
-	 * @param nationality
-	 * @param telephoneNumber
-	 * @param mobilePhoneNumber
-	 * @param email
-	 * @param isActive
-	 * @param employeeNumber
+	 * Constructor with all parameters.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param forename the forename
+	 * @param surname the surname
+	 * @param dateOfBirth the date of birth
+	 * @param postcode the postcode
+	 * @param street the street
+	 * @param houseNumber the house number
+	 * @param city the city
+	 * @param nationality the nationality
+	 * @param telephoneNumber the telephone number
+	 * @param mobilePhoneNumber the mobile phone number
+	 * @param email the email
+	 * @param isActive the is active
+	 * @param employeeNumber the employee number
+	 * @param users the users
 	 */
 	public Administrator(String username, String password, String forename,
 			String surname, Date dateOfBirth, String postcode, String street,
@@ -61,9 +66,20 @@ public class Administrator extends User {
 				+ this.users + "]";
 	}
 
+	/**
+	 * Sets the users.
+	 *
+	 * @param allSocialworkers the new users
+	 */
 	public void setUsers(ArrayList<User> allSocialworkers) {
 		this.users = allSocialworkers;
 	}
+	
+	/**
+	 * Gets the users.
+	 *
+	 * @return the users
+	 */
 	public ArrayList<User> getUsers() {
 		return users;
 	}

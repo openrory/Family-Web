@@ -105,8 +105,6 @@ CREATE TABLE IF NOT EXISTS `results` (
   `contact_id` int(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
-
-
 CREATE TABLE IF NOT EXISTS `shares` (
   `share_id` int(10) NOT NULL,
   `request_id` int(10) NOT NULL,
@@ -189,7 +187,7 @@ ALTER TABLE `surveys_questions`
   ADD PRIMARY KEY (`survey_question_id`), ADD KEY `FKSurveys_qu287896` (`survey_id`), ADD KEY `FKSurveys_qu168997` (`question_id`);
 
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`), ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `employeenumber` (`employeenumber`), ADD UNIQUE KEY `user_id` (`user_id`), ADD UNIQUE KEY `email` (`email`);
 
 
 ALTER TABLE `answers`
@@ -271,6 +269,11 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `
 (2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'N'),
 (3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'N');
 
+INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
+(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
+
+INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
+(1, 'Truus', 'de Vries', '1988-06-10', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
 
 INSERT INTO `categories` (`category_id`, `name`) VALUES
 (6, 'acquantance'),
@@ -286,6 +289,7 @@ INSERT INTO `categories` (`category_id`, `name`) VALUES
 (5, 'neighbours'),
 (9, 'religion'),
 (11, 'youthcare');
+
 INSERT INTO `surveys` (`survey_id`, `name`) VALUES
 (1, 'Standaard vragen');
 
@@ -313,21 +317,16 @@ INSERT INTO `answers` (`answer_id`, `answer`, `question_id`) VALUES
 (15, '50 tot 200 km', 3),
 (16, '> 200 km', 3);
 
+
 INSERT INTO `surveys_questions` (`survey_question_id`, `survey_id`, `question_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3);
 
-
-INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
-(1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);
-
-INSERT INTO `familymembers` (`member_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `telephonenumber`, `mobilephonenumber`, `nationality`, `email`, `client_id`) VALUES
-(1, 'Truus', 'Jansen', '2000-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', '123456798', '', 'Nederlands', 'joeryhuiden@hotmail.com', 1);
-
 INSERT INTO `networks` (`network_id`, `datecreated`, `commentary`, `client_id`, `member_id`, `survey_id`) VALUES
 (1, '2015-06-17', 'Jan is een stille persoon die moeilijk uit zijn woorden komt.', 1, NULL, 1),
 (4, '2015-06-23', 'De baas heeft het nogal gemunt op Jan.', 1, NULL, 1);
+
 
 INSERT INTO `contacts` (`contact_id`, `fullname`, `role`, `age`, `commentary`, `category_id`, `network_id`) VALUES
 (1, 'Kees van Aken', 'Beste vriend & buurjongen', 6, 'Naast de beste vriend van Jan is het ook direct een buur jongen.', 3, 1),
