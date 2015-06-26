@@ -16,7 +16,7 @@ import domain.FamilyWeb.User;
 /**
  * Servlet Filter implementation class ÀdminFilter
  */
-public class ÀdminFilter implements Filter {	
+public class AdminFilter implements Filter {	
 
 	private final String PAGE_STARTSCREEN_SOCIALWORKER = "/socialworker/startscreen_socialworker.jsp";
 	private final String PAGE_PASSWORD_RESET = "/password_reset.jsp";
