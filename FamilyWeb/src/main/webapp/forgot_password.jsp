@@ -19,12 +19,13 @@
         <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
-            <form id="forgot_password_form" action="/FamilyWeb/ResetPasswordServlet.do" method="POST">
+            <form id="forgot_password_form" action="/FamilyWeb/LoginSupportServlet.do" method="POST">
                 <fieldset>
                     <legend>Wachtwoord vergeten</legend>
                     <div class="information">
                         <label>Gebruikersnaam :</label>
-                        <input id="username" type="text" placeholder="Gebruikersnaam" />
+                        <input id="username" name="username" type="text" placeholder="Gebruikersnaam" />
+                        <input name="option" value="forgotPassword" type="hidden" />
                     </div>
 					<div id="reset_button_container">
                         <input class="submit_button" type="submit" value="Resetten">

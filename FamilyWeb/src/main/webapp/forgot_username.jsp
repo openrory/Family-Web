@@ -19,12 +19,13 @@
         <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
-            <form id="forgot_username_form" action="/FamilyWeb/RetrieveUsernameServlet.do" method="POST">
+            <form id="forgot_username_form" action="/FamilyWeb/LoginSupportServlet.do" method="POST">
                 <fieldset>
                     <legend>Gebruikersnaam opvragen</legend>
                     <div class="information">
                         <label>Email :</label>
-                        <input id="email" type="email" placeholder="Email" />
+                        <input id="email" name="email" type="email" placeholder="Email" />
+                        <input name="option" value="forgotUsername" type="hidden" />
                     </div>
 					<div id="retrieve_button_container">
                         <input class="submit_button" type="submit" value="Opvragen">

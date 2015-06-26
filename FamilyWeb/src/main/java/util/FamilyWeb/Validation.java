@@ -6,6 +6,10 @@ import java.util.Date;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Validation.
+ */
 public class Validation {
 
 	// Regular Expression Pattern
@@ -18,12 +22,21 @@ public class Validation {
 	private static final String NL_MOBILEPHONENUMBER = "^(((\\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$";
 	private static final String LETTER_NUMBER_WHITESPACE = "([ ]*+[0-9A-Za-z]++[ ]*+)+";
 
+	/** The vd. */
 	private static Validation vd;
 	
+	/**
+	 * Instantiates a new validation.
+	 */
 	public Validation(){
 		vd = this;
 	}
 	
+	/**
+	 * Gets the single instance of Validation.
+	 *
+	 * @return single instance of Validation
+	 */
 	public static Validation getInstance() {
 		if(vd == null){
 			vd = new Validation();
@@ -31,6 +44,12 @@ public class Validation {
 		return vd;
 	}
 	
+	/**
+	 * Validate employee number.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateEmployeeNumber(String input) {
 		if (input != null && !input.trim().equals("")) {
 			return input.trim();
@@ -39,6 +58,12 @@ public class Validation {
 		}
 	}
 	
+	/**
+	 * Validate username.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateUsername(String input) {
 
 		if (input != null && !input.trim().equals("")) {
@@ -54,6 +79,12 @@ public class Validation {
 
 	}
 
+	/**
+	 * Validate forename.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateForename(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String forename = input.trim().substring(0, 1).toUpperCase()
@@ -68,6 +99,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate surname.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateSurname(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String surname = input.trim();
@@ -81,6 +118,14 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate date of birth.
+	 *
+	 * @param inputDay the input day
+	 * @param inputMonth the input month
+	 * @param inputYear the input year
+	 * @return Date if null validation failed else passed 
+	 */
 	public Date validateDateOfBirth(String inputDay, String inputMonth, String inputYear) {
 
 		if (inputDay != null && inputMonth != null && inputYear != null) {
@@ -114,6 +159,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate postcode.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validatePostcode(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String postcode = input.trim();
@@ -127,6 +178,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate street.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateStreet(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String street = input.trim();
@@ -140,6 +197,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate city.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateCity(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String city = input.trim();
@@ -153,6 +216,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate nationality.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateNationality(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String nationality = input.trim();
@@ -167,6 +236,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate mobile phone number.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateMobilePhoneNumber(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String mobilePhoneNumber = input.trim();
@@ -180,6 +255,13 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate email.
+	 *
+	 * @param input the input
+	 * @param input2 the input2
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateEmail(String input, String input2) {
 
 		if (input != null && input2 != null & !input.trim().equals("") && !input2.trim().equals("")) {
@@ -203,6 +285,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate house number.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateHouseNumber(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String houseNumber = input.trim();
@@ -216,6 +304,12 @@ public class Validation {
 		}
 	}
 
+	/**
+	 * Validate telephone number.
+	 *
+	 * @param input the input
+	 * @return String if null validation failed else passed 
+	 */
 	public String validateTelephoneNumber(String input) {
 		if (input != null && !input.trim().equals("")) {
 			String telephoneNumber = input.trim();
