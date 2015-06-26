@@ -1,4 +1,4 @@
-﻿<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-icons/core-icons.html">
 <link rel="import" href="../bower_components/paper-dropdown/paper-dropdown.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
@@ -172,35 +172,6 @@
         </style>
 
         <div class="scrollWrapper">
-            <table id="filtertable" cellspacing="0" cellpadding="0">
-                <thead id="table_header">
-                    <tr>
-                        <th>
-                            <paper-button id="filter-button-position" class="heading" on-click="{{toggle}}"><core-icon icon="sort" id="sort"></core-icon>Search Filters</paper-button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>
-                            <core-collapse id="collapse">
-                                <core-menu horizontal layout>
-                                    <paper-item><paper-checkbox name="forename" label="voornaam" on-change="{{forenameFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="surname" label="achternaam" on-change="{{surnameFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="dateofbirth" label="geboortedatum" on-change="{{dateofBirthFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="street" label="straat" on-change="{{streetFunc}}" checked></paper-checkbox></paper-item> 
-                                    <paper-item><paper-checkbox name="huisNr" label="huisNr" on-change="{{huisNrFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="city" label="stad" on-change="{{cityFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="nationality" label="nationaliteit" on-change="{{nationalityFunc}}" checked></paper-checkbox></paper-item> 
-                                    <paper-item><paper-checkbox name="telephoneNumber" label="telefoon Nr" on-change="{{telephonenumberFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="mobilePhoneNumber" label="mobiele Nr" on-change="{{mobilePhoneNumberFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="email" label="email" on-change="{{emailFunc}}" checked></paper-checkbox></paper-item> 
-                                </core-menu>
-                            </core-collapse>
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
             <table id="table" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
                     <tr>
@@ -370,17 +341,17 @@
                 if (typeof this.objectDataBackGround !== "undefined") {
 
                     //De logica voor het zoeken in de array
-                    this.clientData = jQuery.grep(this.objectDataBackGround, function (element, index) {
-                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase()) && forename;
-                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase()) && surname;
-                        var dateofBirthBool = (element.dateOfBirth.toLowerCase()).includes(search.toLowerCase()) && dateofBirth;
-                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase()) && street;
-                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) && houseNumber;
-                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) && city;
-                        var nationalityBool = (element.nationality.toLowerCase()).includes(search.toLowerCase()) && nationality;
-                        var telephoneNumberBool = (element.telephoneNumber.toLowerCase()).includes(search.toLowerCase()) && telephoneNumber;
-                        var mobilePhoneNumberBool = (element.mobilePhoneNumber.toLowerCase()).includes(search.toLowerCase()) && mobilePhoneNumber;
-                        var emailBool = (element.email.toLowerCase()).includes(search.toLowerCase()) && email;
+                    this.objectData = jQuery.grep(this.objectDataBackGround, function (element, index) {
+                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase()) ;
+                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase())   ;
+                        var dateofBirthBool = (element.dateOfBirth.toLowerCase()).includes(search.toLowerCase()) ;
+                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase()) ;
+                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) ;
+                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) ;
+                        var nationalityBool = (element.nationality.toLowerCase()).includes(search.toLowerCase()) ;
+                        var telephoneNumberBool = (element.telephoneNumber.toLowerCase()).includes(search.toLowerCase()) ;
+                        var mobilePhoneNumberBool = (element.mobilePhoneNumber.toLowerCase()).includes(search.toLowerCase());
+                        var emailBool = (element.email.toLowerCase()).includes(search.toLowerCase()) ;
 
                         if (forenameBool || surnameBool || dateofBirthBool || streetBool || houseNumberBool || ciyBool || nationalityBool || teleponeNumberBool || mobilePhoneNumberBool || emailBool) {
                             return true;

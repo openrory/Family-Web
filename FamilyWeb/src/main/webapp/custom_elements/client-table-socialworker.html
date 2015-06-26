@@ -170,34 +170,7 @@
             }
         </style>
 
-
         <div class="scrollWrapper">
-            <table id="filtertable" cellspacing="0" cellpadding="0">
-                <thead id="table_header">
-                    <tr>
-                        <th>
-                            <paper-button id="filter-button-position" class="heading" on-click="{{toggle}}"><core-icon icon="sort" id="sort"></core-icon>Search Filters</paper-button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>
-                            <core-collapse id="collapse">
-                                <core-menu horizontal layout>
-                                    <paper-item><paper-checkbox name="fileNr" id="fileNr" label="file Nr." on-change="{{fileNrFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="forename" label="voornaam" on-change="{{forenameFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="surname" label="achternaam" on-change="{{surnameFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="postcode" label="postcode" on-change="{{postcodeFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="street" label="straat" on-change="{{streetFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="huisNr" label="huisNr" on-change="{{huisNrFunc}}" checked></paper-checkbox></paper-item>
-                                    <paper-item><paper-checkbox name="city" label="stad" on-change="{{cityFunc}}" checked></paper-checkbox></paper-item>
-                                </core-menu>
-                            </core-collapse>
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
             <table id="table" cellspacing="0" cellpadding="0">
                 <thead id="table_header">
                     <tr>
@@ -211,13 +184,11 @@
                         <th class="table_header_options"><p> <paper-input id="paperdecoration" type="text" name="search" value="{{searchObject}}"></paper-input> </p></th>
                     </tr>
                 </thead>
-            
 
                 <tbody>
                     {{searchObject | filterArray}}
                     <template repeat="{{person in objectData}}">
                         <tr class="table_column">
-
                             <td id="first_table_content"><p>{{person.fileNumber}}</p></td>
                             <td class="table_contents"><p>{{person.forename}}</p></td>
                             <td class="table_contents"><p>{{person.surname}}</p></td>
@@ -228,22 +199,17 @@
                             <td class="icon_content">
                                 <p>
                                     <core-icon id="icon" icon="search" onclick="submitToFamilyInformation({{person.client_id}})" value="" />
-
                                 </p>
                                 <p>
                                     <core-icon id="icon" icon="create" onclick="submitToClientInformation({{person.client_id}})" value="" />
                                 </p>
                             </td>
-
                         </tr>
                     </template>
-
                 </tbody>
             </table>
         </div>
-
     </template>
-
     <script>
         function setCheckboxValue(checkboxValue) {
         console.log("function test before: " + checkboxValue);
@@ -340,16 +306,27 @@
                 if (typeof this.objectDataBackGround !== "undefined") {
 
                     //De logica voor het zoeken in de array
-                    this.clientData = jQuery.grep(this.objectDataBackGround, function (element, index) {
-                    //    var fileNumberBool = (element.fileNumber.toLowerCase()).includes(search.toLowerCase()) && fileNr;
-                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase()) && forename ;
-                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase()) && surname;
-                        var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase()) && postcode;
-                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase()) && street;
-                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) && huisNr;
-                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) && city;
+                    this.objectData = jQuery.grep(this.objectDataBackGround, function (element, index) {
+                        var fileNumberBool = false;
+                        if (typeof element.fileNumber !== "undefined") {
+                            fileNumberBool = (element.fileNumber.toString().toLowerCase()).includes(search.toLowerCase());
+                        }
+                        console.log("filenumber: " + fileNumberBool);
+                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase());
+                        console.log("forenameBool: " + forenameBool);
+                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase());
+                        console.log("surnameBool: " + surnameBool);
+                        var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase());
+                        console.log("prostcodeBool: " + postcodeBool);
+                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase());
+                        console.log("streetBool: " + streetBool);
+                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase());
+                        console.log("huiseNumberBool: " + houseNumberBool);
+                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase());
+                        console.log("cityBool: " + cityBool);
 
-                        if ( forenameBool || surnameBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
+
+                        if (fileNumberBool || forenameBool || surnameBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
                             return true;
                         } else {
                             return false;
@@ -360,5 +337,4 @@
             }
         });
     </script>
-
 </polymer-element>

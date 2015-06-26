@@ -172,35 +172,6 @@
 
 
             <div class="scrollWrapper">
-                <table id="filtertable" cellspacing="0" cellpadding="0">
-                    <thead id="table_header">
-                        <tr>
-                            <th>
-                                <paper-button id="filter-button-position" class="heading" on-click="{{toggle}}"><core-icon icon="sort" id="sort"></core-icon>Search Filters</paper-button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <core-collapse id="collapse">
-                                    <core-menu horizontal layout>
-                                        <paper-item><paper-checkbox name="employeeNr" label="employeeNr" on-change="{{employeeNumberFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="forename" label="voornaam" on-change="{{forenameFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="surname" label="achternaam" on-change="{{surnameFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="isActive" label="is actief" on-change="{{isActiveFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="dateofbirth" label="geboortedatum" on-change="{{dateofBirthFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="mobilePhoneNumber" label="Mobiele Nr." on-change="{{mobilePhoneNumberFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="postcode" label="postcode" on-change="{{postcodeFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="street" label="straat" on-change="{{streetFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="huisNr" label="huisNr" on-change="{{huisNrFunc}}" checked></paper-checkbox></paper-item>
-                                        <paper-item><paper-checkbox name="city" label="stad" on-change="{{cityFunc}}" checked></paper-checkbox></paper-item>
-                                    </core-menu>
-                                </core-collapse>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
                 <table id="table" cellspacing="0" cellpadding="0">
                     <thead id="table_header">
                         <tr>
@@ -354,7 +325,7 @@
                 console.log("search input :" + this.searchObject);
                 console.log("search value :" + search);
 
-                console.log("input array :" + this.clientDataBackGround);
+                console.log("input array :" + this.objectDataBackGround);
 
 
 
@@ -374,20 +345,22 @@
                 console.log("input array :" + this.objectDataBackGround);
                 if (typeof this.objectDataBackGround !== "undefined") {
                     this.objectData = jQuery.grep(this.objectDataBackGround, function (element, index) {
-                        var nrBool = (element.employeeNumber.toLowerCase()).includes(search.toLowerCase()) && employeeNr;
-                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase()) && forename;
-                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase()) && surname;
-                        var usernameBool = (element.username.toLowerCase()).includes(search.toLocaleLowerCase()) && username;
-                        var isActiveBool = element.isActive && isActive;
-                      //  var isActiveBool = (element.isActive.toLowerCase()).includes(search.toLowerCase()) && isActive;
-                        var dateOfBirthBool = (element.dateOfBirth.toLowerCase()).includes(search.toLowerCase()) && dateofbirth;
-                     //   var mobilePhoneNumberBool = (element.mobilePhoneNumber.toLowerCase()).includes(search.toLowerCase()) && mobilePhoneNumber;
-                        var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase()) && postcode;
-                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase()) && street;
-                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) && houseNumber;
-                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) && city;
+                        var nrBool = (element.employeeNumber.toString().toLowerCase()).includes(search.toLowerCase());
+                        var forenameBool = (element.forename.toLowerCase()).includes(search.toLowerCase());
+                        var surnameBool = (element.surname.toLowerCase()).includes(search.toLowerCase())  ;
+                        var usernameBool = (element.username.toLowerCase()).includes(search.toLocaleLowerCase()) ;
+                        var isActiveBool = ((element.isActive.toString()).toLowerCase()).includes(search.toLowerCase());
+                     //   var isActiveBool = (element.isActive.toLowerCase()).includes(search.toLowerCase()) ;
+                        var dateOfBirthBool = (element.dateOfBirth.toLowerCase()).includes(search.toLowerCase());
+                        if (typeof element.mobilePhoneNumber !== "undefined") {
+                            var mobilePhoneNumberBool = (element.mobilePhoneNumber.toLowerCase()).includes(search.toLowerCase());
+                        }
+                        var postcodeBool = (element.postcode.toLowerCase()).includes(search.toLowerCase()) ;
+                        var streetBool = (element.street.toLowerCase()).includes(search.toLowerCase()) ;
+                        var houseNumberBool = (element.houseNumber.toLowerCase()).includes(search.toLowerCase()) ;
+                        var cityBool = (element.city.toLowerCase()).includes(search.toLowerCase()) ;
 
-                        if (nrBool || forenameBool || surnameBool || usernameBool || isActiveBool || dateOfBirthBool || /*mobilePhoneNumberBool ||*/ postcodeBool || streetBool || houseNumberBool || cityBool) {
+                        if (nrBool || forenameBool || surnameBool || usernameBool || isActiveBool || dateOfBirthBool || mobilePhoneNumberBool || postcodeBool || streetBool || houseNumberBool || cityBool) {
                             return true;
                         } else {
                             return false;
