@@ -55,7 +55,6 @@ public class FamilyMemberServlet extends HttpServlet {
 			String button = req.getParameter("new");
 			if(button == null){
 				int id = Integer.valueOf(req.getParameter("currentID"));
-				System.out.println(id);
 				if (id != 0) {
 					for (Familymember fm : client.getMyFamilymembers()) {
 						if (id == fm.getMember_id()) {
