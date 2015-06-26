@@ -88,10 +88,7 @@ public class OverviewController {
 		JSONArray netwerkNodes = new JSONArray();
 		JSONArray netwerkLinks = new JSONArray();
 		JSONArray netwerks1 = new JSONArray();
-		JSONArray netwerks2 = new JSONArray();
-
-		JSONObject nodesPerson = new JSONObject();
-		JSONObject linksPerson = new JSONObject();
+		JSONArray netwerks2 = new JSONArray();		
 		JSONObject netwerkPerson = new JSONObject();
 		JSONObject netwerkLink = new JSONObject();
 		JSONObject netwerkN = new JSONObject();
@@ -100,6 +97,9 @@ public class OverviewController {
 				client.getClient_id(), 0);
 		// add networks from the client
 		for (Network n : clientNetworks) {
+			JSONObject nodesPerson = new JSONObject();
+			JSONObject linksPerson = new JSONObject();
+			System.out.println(n);
 			JSONArray contacts = new JSONArray();
 			JSONArray contactsLinks = new JSONArray();
 			JSONObject clientNode = new JSONObject();
@@ -109,6 +109,7 @@ public class OverviewController {
 			int i = 0;
 			// for each contact create JSON object for basic info and for results
 			for (Contact c : n.getContacts()) {
+				System.out.println("\n"+c);
 				i++;
 				JSONObject contact = new JSONObject();
 				contact.put("name", c.getFullname());
@@ -125,31 +126,35 @@ public class OverviewController {
 				nodesPerson.put("datum", n.getDateCreated().toString());
 				nodesPerson.put("nodes", contacts);
 				linksPerson.put(n.getDateCreated().toString(), contactsLinks);
+				netwerkNodes.put(nodesPerson);
+				netwerkLinks.put(linksPerson);	
 			}
 		}
-		if (!clientNetworks.isEmpty()) {
-			netwerkNodes.put(nodesPerson);
-			netwerkLinks.put(linksPerson);
+		if (!clientNetworks.isEmpty()) {			
 			netwerkPerson.put(client.getForename() + " " + client.getSurname(),
 					netwerkNodes);
 			netwerkLink.put(client.getForename() + " " + client.getSurname(),
-					netwerkLinks);
+					netwerkLinks);					
 			netwerks1.put(netwerkPerson);
 			netwerks2.put(netwerkLink);
 		}
 		// for each familymember connected to the client 
 		for (Familymember fm : client.getMyFamilymembers()) {
-			nodesPerson = new JSONObject();
-			linksPerson = new JSONObject();
+			JSONObject nodesPerson = new JSONObject();
+			JSONObject linksPerson = new JSONObject();
 			ArrayList<Network> familyNetworks = db.getNetworks(0,
 					fm.getMember_id());
 			// create JSON object for each network
 			for (Network n : familyNetworks) {
 				JSONArray contacts = new JSONArray();
 				JSONArray contactsLinks = new JSONArray();
+				JSONObject clientNode = new JSONObject();
+				clientNode.put("name", client.getForename()+" "+client.getSurname());
+				clientNode.put("group", 0);
+				contacts.put(clientNode);
 				int i = 0;
 				for (Contact c : n.getContacts()) {
-					i++;
+					i++;					
 					JSONObject contact = new JSONObject();
 					contact.put("name", c.getFullname());
 					contact.put("group", c.getCategories().get(0).getGroup_id());
@@ -166,11 +171,11 @@ public class OverviewController {
 					nodesPerson.put("nodes", contacts);
 					linksPerson.put(n.getDateCreated().toString(),
 							contactsLinks);
+					netwerkNodes.put(nodesPerson);
+					netwerkLinks.put(linksPerson);
 				}
 			}
-			if (!familyNetworks.isEmpty()) {
-				netwerkNodes.put(nodesPerson);
-				netwerkLinks.put(linksPerson);
+			if (!familyNetworks.isEmpty()) {				
 				netwerkPerson.put(fm.getForename() + " " + fm.getSurname(),
 						netwerkNodes);
 				netwerkLink.put(fm.getForename() + " " + fm.getSurname(),
@@ -182,6 +187,8 @@ public class OverviewController {
 		netwerkN.put("allNetworks", netwerks1);
 		netwerkL.put("allNetworks", netwerks2);
 		JSONObject[] network = { netwerkN, netwerkL };
+		System.out.println(netwerkN);
+		System.out.println(netwerkL);
 		return network;
 	}
 
