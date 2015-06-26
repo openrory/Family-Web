@@ -84,6 +84,7 @@ public class OverviewController {
 	 * @throws JSONException the JSON exception
 	 */
 	public JSONObject[] createJSONNetworks(Client client) throws JSONException {
+		// intialize arrays and object
 		JSONArray netwerkNodes = new JSONArray();
 		JSONArray netwerkLinks = new JSONArray();
 		JSONArray netwerks1 = new JSONArray();
@@ -97,6 +98,7 @@ public class OverviewController {
 		JSONObject netwerkL = new JSONObject();
 		ArrayList<Network> clientNetworks = db.getNetworks(
 				client.getClient_id(), 0);
+		// add networks from the client
 		for (Network n : clientNetworks) {
 			JSONArray contacts = new JSONArray();
 			JSONArray contactsLinks = new JSONArray();
@@ -105,6 +107,7 @@ public class OverviewController {
 			clientNode.put("group", 0);
 			contacts.put(clientNode);
 			int i = 0;
+			// for each contact create JSON object for basic info and for results
 			for (Contact c : n.getContacts()) {
 				i++;
 				JSONObject contact = new JSONObject();
@@ -134,11 +137,13 @@ public class OverviewController {
 			netwerks1.put(netwerkPerson);
 			netwerks2.put(netwerkLink);
 		}
+		// for each familymember connected to the client 
 		for (Familymember fm : client.getMyFamilymembers()) {
 			nodesPerson = new JSONObject();
 			linksPerson = new JSONObject();
 			ArrayList<Network> familyNetworks = db.getNetworks(0,
 					fm.getMember_id());
+			// create JSON object for each network
 			for (Network n : familyNetworks) {
 				JSONArray contacts = new JSONArray();
 				JSONArray contactsLinks = new JSONArray();
@@ -257,6 +262,7 @@ public class OverviewController {
 		JSONArray returns = new JSONArray();
 		ArrayList<Client> clients = new ArrayList<Client>();
 		if (currentUser instanceof Administrator) {
+			// for each client make an JSON Object and put it into the array
 			for (Client c : db.getAllClients()) {
 				clients.add(c);
 				JSONObject clientJSON = new JSONObject();
@@ -276,6 +282,7 @@ public class OverviewController {
 				returns.put(clientJSON);
 			}
 		} else {
+			// for each client make an JSON Object and put it into the array
 			for (Client c : db.getAllClientsOfUser(currentUser)) {
 				clients.add(c);
 				JSONObject clientJSON = new JSONObject();
@@ -295,6 +302,7 @@ public class OverviewController {
 				returns.put(clientJSON);
 			}
 		}
+		// update clients for user
 		currentUser.setMyClients(clients);
 		return returns;
 	}
@@ -310,6 +318,7 @@ public class OverviewController {
 		JSONArray returns = new JSONArray();
 		ArrayList<User> users = new ArrayList<User>();
 		for (User u : db.getAllUsers()) {
+			// for each user, create JSON Object and put it into the array
 			JSONObject userJSON = new JSONObject();
 			users.add(u);
 			userJSON.put("forename", u.getForename());
@@ -330,6 +339,7 @@ public class OverviewController {
 			returns.put(userJSON);
 		}
 		if (user instanceof Administrator) {
+			// set users to administrator
 			Administrator admin = (Administrator) user;
 			admin.setUsers(users);
 		}
@@ -348,6 +358,7 @@ public class OverviewController {
 			Administrator admin = (Administrator) currentUser;
 
 			try {
+				// create JSON object for each user
 				for (User u : admin.getDbController().getAllUsers()) {
 					JSONObject userJSON = new JSONObject();
 					userJSON.put("label",
@@ -374,6 +385,7 @@ public class OverviewController {
 		JSONArray returns = new JSONArray();
 		ArrayList<Familymember> family = new ArrayList<Familymember>();		
 		for (Familymember fm : client.getMyFamilymembers()) {
+			// for each familymember, create JSON Object and add it to the array
 			JSONObject familyJSON = new JSONObject();
 			family.add(fm);
 			familyJSON = new JSONObject();
@@ -392,6 +404,7 @@ public class OverviewController {
 			familyJSON.put("member_id", fm.getMember_id());
 			returns.put(familyJSON);
 		}
+		// update clients family
 		client.setMyFamilymembers(family);		
 		return returns;
 	}

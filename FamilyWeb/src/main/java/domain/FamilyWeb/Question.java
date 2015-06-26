@@ -6,27 +6,36 @@ package domain.FamilyWeb;
 import java.util.ArrayList;
 
 /**
- * @author Joery
+ * The Class Question.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public class Question {
+	
+	/** The question_id. */
 	private int question_id;
+	
+	/** The question. */
 	private String question;
+	
+	/** The answers. */
 	private ArrayList<Answer> theAnswers;
 	
 	/**
-	 * clean constructor
+	 * clean constructor.
 	 */
 	public Question() {
 		this.theAnswers = new ArrayList<Answer>();
 	}
 	
 	/**
-	 * Constructor with fields
-	 * 
-	 * @param question
-	 * @param theAnswers
+	 * Constructor with fields.
+	 *
+	 * @param id the id
+	 * @param question the question
+	 * @param theAnswers the the answers
 	 */
 	public Question(int id, String question, ArrayList<Answer> theAnswers) {
 		this.setQuestion_id(id);
@@ -35,6 +44,8 @@ public class Question {
 	}	
 
 	/**
+	 * Gets the question_id.
+	 *
 	 * @return the question_id
 	 */
 	public int getQuestion_id() {
@@ -42,6 +53,8 @@ public class Question {
 	}
 
 	/**
+	 * Sets the question_id.
+	 *
 	 * @param question_id the question_id to set
 	 */
 	public void setQuestion_id(int question_id) {
@@ -49,6 +62,8 @@ public class Question {
 	}
 
 	/**
+	 * Gets the question.
+	 *
 	 * @return the question
 	 */
 	public String getQuestion() {
@@ -56,6 +71,8 @@ public class Question {
 	}
 
 	/**
+	 * Sets the question.
+	 *
 	 * @param question the question to set
 	 */
 	public void setQuestion(String question) {
@@ -63,6 +80,8 @@ public class Question {
 	}
 
 	/**
+	 * Gets the the answers.
+	 *
 	 * @return the theAnswers
 	 */
 	public ArrayList<Answer> getTheAnswers() {
@@ -70,6 +89,8 @@ public class Question {
 	}
 
 	/**
+	 * Sets the the answers.
+	 *
 	 * @param theAnswers the theAnswers to set
 	 */
 	public void setTheAnswers(ArrayList<Answer> theAnswers) {

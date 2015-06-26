@@ -4,19 +4,25 @@
 package domain.FamilyWeb;
 
 /**
- * @author Joery
+ * The Class Result.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public class Result {
+	
+	/** The question. */
 	private Question theQuestion;
+	
+	/** The my answer. */
 	private Answer myAnswer;
 	
 	/**
-	 * Constructor with fields
-	 * 
-	 * @param theQuestion
-	 * @param myAnswer
+	 * Constructor with fields.
+	 *
+	 * @param theQuestion the the question
+	 * @param myAnswer the my answer
 	 */
 	public Result(Question theQuestion, Answer myAnswer) {
 		super();
@@ -25,6 +31,8 @@ public class Result {
 	}
 
 	/**
+	 * Gets the the question.
+	 *
 	 * @return the theQuestion
 	 */
 	public Question getTheQuestion() {
@@ -32,6 +40,8 @@ public class Result {
 	}
 
 	/**
+	 * Sets the the question.
+	 *
 	 * @param theQuestion the theQuestion to set
 	 */
 	public void setTheQuestion(Question theQuestion) {
@@ -39,6 +49,8 @@ public class Result {
 	}
 
 	/**
+	 * Gets the my answer.
+	 *
 	 * @return the myAnswer
 	 */
 	public Answer getMyAnswer() {
@@ -46,6 +58,8 @@ public class Result {
 	}
 
 	/**
+	 * Sets the my answer.
+	 *
 	 * @param myAnswer the myAnswer to set
 	 */
 	public void setMyAnswer(Answer myAnswer) {

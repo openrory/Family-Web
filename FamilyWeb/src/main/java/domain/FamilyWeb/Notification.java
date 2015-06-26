@@ -6,19 +6,25 @@ package domain.FamilyWeb;
 import java.sql.Date;
 
 /**
- * @author Joery
+ * The Class Notification.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public abstract class Notification {
+	
+	/** The notification. */
 	private String notification;
+	
+	/** The created created. */
 	private Date createdCreated;
 	
 	/**
-	 * Constructor with fields
-	 * 
-	 * @param notification
-	 * @param createdCreated
+	 * Constructor with fields.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
 	 */
 	public Notification(String notification, Date createdCreated) {
 		super();
@@ -27,6 +33,8 @@ public abstract class Notification {
 	}
 
 	/**
+	 * Gets the notification.
+	 *
 	 * @return the notification
 	 */
 	public String getNotification() {
@@ -34,6 +42,8 @@ public abstract class Notification {
 	}
 
 	/**
+	 * Sets the notification.
+	 *
 	 * @param notification the notification to set
 	 */
 	public void setNotification(String notification) {
@@ -41,6 +51,8 @@ public abstract class Notification {
 	}
 
 	/**
+	 * Gets the created created.
+	 *
 	 * @return the createdCreated
 	 */
 	public Date getCreatedCreated() {
@@ -48,6 +60,8 @@ public abstract class Notification {
 	}
 
 	/**
+	 * Sets the created created.
+	 *
 	 * @param createdCreated the createdCreated to set
 	 */
 	public void setCreatedCreated(Date createdCreated) {

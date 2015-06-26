@@ -6,21 +6,27 @@ package domain.FamilyWeb;
 import java.sql.Date;
 
 /**
- * @author Joery
+ * The Class Transfer.
+ *
+ * @author Team HIS
  * @version 0.1
  * @since 2015-04-21
  */
 public class Transfer extends Request {
+	
+	/** The client. */
 	private Client theClient;
+	
 	/**
-	 * Clean construct, with fields from Request
-	 * @param notification
-	 * @param createdCreated
-	 * @param commentary
-	 * @param commentaryAdmin
-	 * @param approved
-	 * @param toSocialworker
-	 * @param fromSocialworker
+	 * Clean construct, with fields from Request.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
+	 * @param commentary the commentary
+	 * @param commentaryAdmin the commentary admin
+	 * @param approved the approved
+	 * @param toSocialworker the to socialworker
+	 * @param fromSocialworker the from socialworker
 	 */
 	public Transfer(String notification, Date createdCreated,
 			String commentary, String commentaryAdmin, boolean approved,
@@ -30,15 +36,18 @@ public class Transfer extends Request {
 	}
 
 	/**
-	 * Clean constructor, with fields from Notification
-	 * @param notification
-	 * @param createdCreated
+	 * Clean constructor, with fields from Notification.
+	 *
+	 * @param notification the notification
+	 * @param createdCreated the created created
 	 */
 	public Transfer(String notification, Date createdCreated) {
 		super(notification, createdCreated);
 	}
 
 	/**
+	 * Gets the the client.
+	 *
 	 * @return the theClient
 	 */
 	public Client getTheClient() {
@@ -46,6 +55,8 @@ public class Transfer extends Request {
 	}
 
 	/**
+	 * Sets the the client.
+	 *
 	 * @param theClient the theClient to set
 	 */
 	public void setTheClient(Client theClient) {
