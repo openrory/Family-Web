@@ -469,7 +469,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
   // We geven aan hoe dik ze moeten zijn dmv Strength wat aangeeft hoevaak er contact is. Hoe dikker hoe meer
   // We geven aan welke kleur ze moeten zijn dmv type wat het meest gebruikte medium voorstelt. Elke kleur eigen medium
   
-  var colors = d3.scale.category20();
+  var colors = d3.scale.category20().domain(d3.range(0,20));
   
   var link = svg.selectAll('.link')
 	  .data(selectedNetworkLinks)
@@ -543,7 +543,7 @@ function draw_graphs(networkName, chosenPerson, sliderval){
 	for ( i = 1; i < distinct.length; i++ ) {
 		
 		var label= document.createElement("label");
-		var description = document.createTextNode(contactGroups[i]);
+		var description = document.createTextNode(contactGroups[distinct[i]]);
 		var checkbox = document.createElement("input");
 		var br = document.createElement("br");
 		
