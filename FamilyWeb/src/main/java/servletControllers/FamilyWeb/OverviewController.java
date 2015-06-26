@@ -99,7 +99,6 @@ public class OverviewController {
 		for (Network n : clientNetworks) {
 			JSONObject nodesPerson = new JSONObject();
 			JSONObject linksPerson = new JSONObject();
-			System.out.println(n);
 			JSONArray contacts = new JSONArray();
 			JSONArray contactsLinks = new JSONArray();
 			JSONObject clientNode = new JSONObject();
@@ -109,7 +108,6 @@ public class OverviewController {
 			int i = 0;
 			// for each contact create JSON object for basic info and for results
 			for (Contact c : n.getContacts()) {
-				System.out.println("\n"+c);
 				i++;
 				JSONObject contact = new JSONObject();
 				contact.put("name", c.getFullname());
@@ -187,8 +185,6 @@ public class OverviewController {
 		netwerkN.put("allNetworks", netwerks1);
 		netwerkL.put("allNetworks", netwerks2);
 		JSONObject[] network = { netwerkN, netwerkL };
-		System.out.println(netwerkN);
-		System.out.println(netwerkL);
 		return network;
 	}
 
