@@ -6,7 +6,6 @@ package domain.FamilyWeb;
 import java.util.Date;
 import java.util.ArrayList;
 
-import servletControllers.FamilyWeb.OverviewController;
 import databaseControllers.FamilyWeb.DatabaseInterface;
 
 /**
@@ -430,7 +429,7 @@ public class Client {
 	 * @return true, if successful
 	 */
 	public boolean addDB(int userID) {
-		return OverviewController.getInstance().getDb().addClient(this, userID);
+		return this.dbController.addClient(this, userID);
 	}
 
 	/**
@@ -439,7 +438,6 @@ public class Client {
 	 * @param user_id the user_id
 	 * @return true, if successful
 	 */
-	// REALISEREN CLIENT KUNNEN KOPPELEN OVERDRAGEN AAN ANDERE USER
 	public boolean updateDB(int user_id) {
 		return this.dbController.updateClient(this, user_id);
 	}
