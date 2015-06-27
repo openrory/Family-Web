@@ -95,3 +95,9 @@ core-toolbar {
 	width: 150px;
 	margin: 20px auto;
 }
+
+@media screen and (max-width: 550px){
+  #title{
+  	font-size: 20px;
+  }
+}

@@ -122,9 +122,9 @@
 	<filter>
 		<description>
 		</description>
-		<display-name>ÀdminFilter</display-name>
-		<filter-name>ÀdminFilter</filter-name>
-		<filter-class>util.FamilyWeb.ÀdminFilter</filter-class>
+		<display-name>AdminFilter</display-name>
+		<filter-name>AdminFilter</filter-name>
+		<filter-class>util.FamilyWeb.AdminFilter</filter-class>
 	</filter>
 	<filter>
 		<description>
@@ -134,7 +134,7 @@
 		<filter-class>util.FamilyWeb.SocialworkerFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>ÀdminFilter</filter-name>
+		<filter-name>AdminFilter</filter-name>
 		<url-pattern>/administrator/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
