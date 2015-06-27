@@ -54,8 +54,8 @@
         <% if(!(request.getAttribute("message") == null)){%>
         <message-window-${messageType} message="${message}"></message-window-${messageType}>
         <% } %>
-<div>Hieronder ziet u de gezinsleden van de cliënt: <span class="bold">${client.forename} ${client.surname}</span><br>
-U kunt de gegevens wijzigen van de gezinlid of een nieuw gezinslid toevoegen.</div>
+<div class="manual"><p>Hieronder ziet u de gezinsleden van de cliënt: <span class="bold">${client.forename} ${client.surname}</span><br>
+U kunt de gegevens wijzigen van de gezinlid of een nieuw gezinslid toevoegen.</p></div>
 <Family-members-table show="contacts" id="table"></Family-members-table>
 		<form id="tableForm" action="/FamilyWeb/FamilyMemberServlet.do" method="post">			
 		<div id="login_button_container">

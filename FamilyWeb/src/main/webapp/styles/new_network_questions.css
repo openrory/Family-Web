@@ -47,7 +47,7 @@ paper-tab a {
     max-width: 700px;
 	margin: 15px auto;
 	padding: 5px;
-	background-color: #d50000;
+	background-color: #FFFFFF;
 	border: solid 1px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -58,7 +58,15 @@ paper-tab a {
 	max-width: 450px;
 	margin: 10px auto;
     padding: 10px;
-    background-color: #ff5252;
+    	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#499bea+0,207ce5+100;Blue+3d+%237 */
+	background: #499bea; /* Old browsers */
+	background: -moz-linear-gradient(top,  #499bea 0%, #207ce5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#207ce5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #499bea 0%,#207ce5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #499bea 0%,#207ce5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #499bea 0%,#207ce5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #499bea 0%,#207ce5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); /* IE6-9 */
     -webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
@@ -89,15 +97,22 @@ paper-tab a {
 .questions {
 	display:none;
     margin-top: 10px;
-    background-color: #ff8a80;
     -webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
 
 .question {
+	margin-top: 5px;
     padding: 5px;
-    background-color: azure;
+    background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
     border: 1px solid black;
     -webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -151,7 +166,7 @@ select{
 textarea {
     margin: 5px auto;
     display: block;
-    width: 250px;
+    width: 350px;
     height: 100px;
     border: 1px solid;
     -webkit-border-radius: 2px;
@@ -180,6 +195,9 @@ textarea {
   #title{
   	font-size: 20px;
   }
+   textarea{
+  	width: 250px;
+  }
 }
 
 paper-tabs{
@@ -191,4 +209,36 @@ paper-tabs{
 	background: -ms-linear-gradient(top,  #fcfff4 0%,#dfe5d7 85%,#b3bead 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #fcfff4 0%,#dfe5d7 85%,#b3bead 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+}
+
+.displayButton {
+	width: 80px;
+    margin: 5px auto;
+	-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	-webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
+	background:-moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+	background:-webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+	background:-o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+	background:-ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa',GradientType=0);
+	background-color:#2dabf9;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+ 	padding: 2px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+
+.commentLabel{
+	margin-left: 25px;
 }

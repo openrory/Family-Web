@@ -98,12 +98,12 @@
 						<c:if test="${fn:length(contact.commentary) > 1}">
 							<p>Opmerking bij contact: ${contact.commentary}</p>           
 						</c:if>       		
-						<div><input type="button" onclick="closeQuestions(${contact.contact_id})" value="Verbergen" /></div>						
+						<div><input class="displayButton" type="button" onclick="closeQuestions(${contact.contact_id})" value="Verbergen" /></div>						
 						</div>
 					</div>
 				</c:forEach>
 				<div>
-                    <h4><label>Algemene opmerking:</label></h4>
+                    <h4><label class="commentLabel">Algemene opmerking:</label></h4>
                     <textarea name="general_comment" placeholder="Algemene opmerking"></textarea>
                 </div>
 				<div id="submit_button_container">

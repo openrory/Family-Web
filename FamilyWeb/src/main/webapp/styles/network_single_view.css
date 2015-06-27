@@ -34,7 +34,7 @@ paper-tab a {
 
 .network_container{
 	display: none;
-	min-width: 620px;
+	max-width: 1000px;
 	margin: 20px auto;
 	padding: 10px;
 	background-color: #FFFFFF;
@@ -50,8 +50,8 @@ paper-tab a {
 }
 
 .network{
-	width: 450px;
-	height: 350px;
+	width: 800px;
+	height: 600px;
 	margin-bottom: 5px;
 	background-color: #7E7D7D;
 	float: left;
