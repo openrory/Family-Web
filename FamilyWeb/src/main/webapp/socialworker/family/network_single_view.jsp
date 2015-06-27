@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Netwerken vergelijken</title>
+<title>Enkel netwerk</title>
 <meta name="viewport"
 	content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,18 +19,19 @@
 	href="/FamilyWeb/bower_components/paper-tabs/paper-tabs.html">
 <link rel="import"
 	href="/FamilyWeb/bower_components/core-icon-button/core-icon-button.html">
-<link rel="stylesheet" href="/FamilyWeb/styles/network_compare.css">
+<link rel="stylesheet" href="/FamilyWeb/styles/network_single_view.css">
 <link rel="import" href="/FamilyWeb/bower_components/paper-slider/paper-slider.html">
 </head>
 <body fullbleed layout vertical>
 	<core-drawer-panel responsivewidth="1400px"> <core-header-panel
-		drawer> <core-toolbar> <paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
-                <div class="menuTitle" flex>Menu</div>
+		drawer> <core-toolbar> <core-icon-button
+		core-drawer-toggle icon="close"></core-icon-button>
+	<div flex>Menu</div>
 	</core-toolbar> <responsive-menu-socialworker current="1"></responsive-menu-socialworker>
 	</core-header-panel> <core-header-panel main> <core-toolbar
 		class="medium-tall"> <core-icon-button
 		core-drawer-toggle icon="menu"></core-icon-button>
-	<div id="title" flex>Netwerken vergelijken</div>
+	<div id="title" flex>Enkel netwerk</div>
 	<options-menu></options-menu>
 	<div class="bottom fit" horizontal layout>
 		<paper-tabs id="scrollableTabs" selected="1" flex scrollable noink>
@@ -49,7 +50,6 @@
 		<div class="network_container" id="container1">
             <div class="title">
             <div class="date" id="datumnetwork1"> Netwerk gemaakt op 21-02-2015</div>
-            <core-icon-button class="fullscreen" onclick="WAT TE DOEN HIER?" icon="fullscreen"></core-icon-button>
 			</div>
 			<div class="network" id = "network1">
 			</div>
@@ -75,46 +75,6 @@
 			<div class="general_comment">
 				<h1 class="title">Algemeen commentaar</h1>
 				<p id = "commentnetwork1">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
-			</div>
-		</div>
-		<div class="network_container" id="container2">
-			<div class="title">
-            <div class="date" id="datumnetwork2"> Netwerk gemaakt op 21-02-2015</div>
-            <core-icon-button class="fullscreen" onclick="WAT TE DOEN HIER?" icon="fullscreen"></core-icon-button>
-			</div>
-			<div class="network" id = "network2">
-			</div>
-			<div class="sidebar">
-			<div class="interviewee">
-			<h1 class="title" >Netwerken van:</h1>
-                 <select id = "network2SelectList" onChange = "changePerson(this)">
-				</select> 
-          
-			</div>
-			<div class="contact_groups">
-			<p>Contactgroepen</p>
-			<ul id = "network2contact_groups">
-			<li>Family<input type="checkbox" value="test"></li>
-			<li>Collega's<input type="checkbox" value="test"></li>
-			<li>Justitie<input type="checkbox" value="test"></li>
-			<li>Religie<input type="checkbox" value="test"></li>
-			<li>Family<input type="checkbox" value="test"></li>
-			<li>Justitie<input type="checkbox" value="test"></li>
-			<li>Religie<input type="checkbox" value="test"></li>
-			<li>Family<input type="checkbox" value="test"></li>
-			</ul>
-			</div>
-			</div>
-			<div class="timeline">
-				<h1 class="title">Tijdlijn met gemaakte netwerken</h1>
-                 <input type = "text" id="rangedatumnetwork2">
-                <div id = "network2range">
-				<input class="slider" type="range" name="points" min="0" max="10">
-                </div>
-			</div>
-			<div class="general_comment">
-				<h1 class="title">Algemeen commentaar</h1>
-				<p id = "commentnetwork2">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting</p>
 			</div>
 		</div>
 		<div class="resolution_warning_picture"></div>
