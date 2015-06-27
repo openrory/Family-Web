@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <script src="/FamilyWeb/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/FamilyWeb/elements.html">
-	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-administrator.html">
+	<link rel="import" href="/FamilyWeb/custom_elements/responsive-menu-socialworker.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/options-menu.html">
 	<link rel="import" href="/FamilyWeb/custom_elements/paper-form-element-decorators/paper-submit-button-decorator.html">
 	<link rel="stylesheet" href="/FamilyWeb/styles/add_edit_family_member.css">
@@ -21,7 +21,7 @@
 				<paper-icon-button class="toolbarButton" core-drawer-toggle icon="close"></paper-icon-button>
                 <div class="menuTitle" flex>Menu</div>
             </core-toolbar>
-            <responsive-menu-administrator current="3"></responsive-menu-administrator>
+            <responsive-menu-socialworker current="3"></responsive-menu-socialworker>
         </core-header-panel>
         <core-header-panel main>
             <core-toolbar>

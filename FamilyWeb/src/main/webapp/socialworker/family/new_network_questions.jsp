@@ -68,7 +68,6 @@
 				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 				<input id="totalContacts" type="hidden" value="${fn:length(contacts)}">
 				<input id="totalQuestions" type="hidden" value="${fn:length(survey.questions)}">
-				<input type="button" onclick="validateForm()" value="valideren">
 <c:forEach items="${contacts}" var="contact">
 					<div class="contact">
 						<h3>${contact.fullname} - ${contact.role}</h3>
@@ -99,7 +98,7 @@
 						<c:if test="${fn:length(contact.commentary) > 1}">
 							<p>Opmerking bij contact: ${contact.commentary}</p>           
 						</c:if>       		
-						<div><input type="button" onclick="closeQuestions(${contact.contact_id})" value="Volgende contactpersoon" /></div>						
+						<div><input type="button" onclick="closeQuestions(${contact.contact_id})" value="Verbergen" /></div>						
 						</div>
 					</div>
 				</c:forEach>
