@@ -84,7 +84,7 @@ paper-tab a {
 	padding: 2px;
 	background-color: #FFFFFF;
 	overflow: auto;
-	margin: 0px auto;
+	margin: 5px auto;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -96,6 +96,18 @@ paper-tab a {
 
 .contact_groups li{
 	margin-left: -20px;
+}
+
+.comments_selected_person{
+	width: 140px;
+	height: 235px;
+	padding: 2px;
+	background-color: #FFFFFF;
+	overflow: auto;
+	margin: 0px auto;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .timeline{
