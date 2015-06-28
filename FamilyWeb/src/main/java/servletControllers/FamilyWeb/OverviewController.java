@@ -1,4 +1,3 @@
-
 package servletControllers.FamilyWeb;
 
 import java.util.ArrayList;
@@ -112,6 +111,11 @@ public class OverviewController {
 				JSONObject contact = new JSONObject();
 				contact.put("name", c.getFullname());
 				contact.put("group", c.getCategories().get(0).getGroup_id());
+				String commentary = c.getCommentary();
+				if(commentary == null || commentary.trim().equals(""))
+					contact.put("commentary","" );
+				else
+					contact.put("commentary",commentary);
 				contacts.put(contact);
 				JSONObject link = createLink(c.getMyResults());
 				link.put("group", c.getCategories().get(0).getGroup_id());
@@ -138,6 +142,8 @@ public class OverviewController {
 		}
 		// for each familymember connected to the client 
 		for (Familymember fm : client.getMyFamilymembers()) {
+			netwerkPerson = new JSONObject();
+			netwerkLink = new JSONObject();
 			JSONObject nodesPerson = new JSONObject();
 			JSONObject linksPerson = new JSONObject();
 			ArrayList<Network> familyNetworks = db.getNetworks(0,
@@ -156,6 +162,11 @@ public class OverviewController {
 					JSONObject contact = new JSONObject();
 					contact.put("name", c.getFullname());
 					contact.put("group", c.getCategories().get(0).getGroup_id());
+					String commentary = c.getCommentary();
+					if(commentary == null)
+						contact.put("commentary","" );
+					else
+						contact.put("commentary",commentary);
 					contacts.put(contact);
 					JSONObject link = createLink(c.getMyResults());
 					link.put("group", c.getCategories().get(0).getGroup_id());
