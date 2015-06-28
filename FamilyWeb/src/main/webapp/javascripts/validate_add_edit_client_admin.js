@@ -48,7 +48,7 @@ function validateForm() {
         document.getElementById("surnameWarning").className = "true";
     }
 
-    if (dateofbirth == null || dateofbirth == "" || !dateReg.test(dateofbirth)) {
+    if (dateofbirth == null || dateofbirth == "" || dateReg.test(dateofbirth)) {
         document.getElementById("dateofbirthWarning").className = "false";
         isGood = false;
     } else {
@@ -104,15 +104,17 @@ function validateForm() {
         document.getElementById("mobileWarning").className = "true";
     }
 
-    if (email == null || email == "" || email != email_confirmation || !email.contains("@") || emailReg.test(email)) {
+    if (email == null || email == "" || email != email_confirmation || !emailReg.test(email)) {
         document.getElementById("emailWarning").className = "false";
+        console.log("confirmation niet goed");
         isGood = false;
     } else {
         document.getElementById("emailWarning").className = "true";
     }
 
-    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || emailReg.test(email_confirmation)) {
-        document.getElementById("email_confirmationWarning").className = "false";
+    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || !emailReg.test(email_confirmation)) {
+        console.log("confirmation niet goed");
+    	document.getElementById("email_confirmationWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("email_confirmationWarning").className = "true";

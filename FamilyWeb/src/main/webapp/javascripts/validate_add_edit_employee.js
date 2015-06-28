@@ -103,21 +103,14 @@ function validateForm() {
         document.getElementById("mobileWarning").className = "true";
     }
     
-    console.log("email is gelijk aan: " + email != email_confirmation);
-    console.log("heeft @ " + email.contains("@"));
-    console.log("regex email: " + emailReg.test(email));
-    
-    if (email == null || email == "" || email != email_confirmation || !email.contains("@") || emailReg.test(email)) {
+    if (email == null || email == "" || email != email_confirmation || !emailReg.test(email)) {
         document.getElementById("emailWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("emailWarning").className = "true";
     }
-
-    console.log("email is gelijk aan: " + email_confirmation != email);
-    console.log("regex emailC: " + emailReg.test(email_confirmation));
     
-    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || emailReg.test(email_confirmation)) {
+    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || !emailReg.test(email_confirmation)) {
         document.getElementById("email_confirmationWarning").className = "false";
         isGood = false;
     } else {
