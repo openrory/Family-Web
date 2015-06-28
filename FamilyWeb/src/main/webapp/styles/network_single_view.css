@@ -189,7 +189,7 @@ svg {
     stroke-width: 2px;
 }
 
-@media screen and (max-width:1260px){
+@media screen and (min-width:1000px){
     .network_container {
         display:block;
     }
