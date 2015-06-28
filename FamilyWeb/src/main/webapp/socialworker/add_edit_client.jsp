@@ -36,22 +36,32 @@
         	<% } %>
 			<paper-shadow z="3" animated="true">
                 <form id="add_edit_client_form" action="/FamilyWeb/ClientServlet.do" method="post">
-                    <p>
-                        Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
-                        Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
-                        toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
-                        Het heeft niet alleen vijf eeuwen overleefd
+                   <% if(request.getAttribute("client") == null){ %>
+                   <p>
+                        Hieronder kunt u een nieuwe client toevoegen.<br>
+                        Let op dat sommige velden goed ingevuld worden.<br>
+                        Na de gegevens te hebben ingevoerd kunt u de client toevoegen,<br>
+                        door op de knop "Aanmaken" te drukken.<br>
                     </p>
+                    <input type="hidden" name="option" value="create">
+                   <% } else{ %>
+                   <p>
+                        Hieronder kunt u een client wijzigen.<br>
+                        Let op dat sommige velden goed ingevuld worden.<br> 
+                        Na de gegevens te wijzigen kunt u de gegevens opslaan,<br>
+                        door op de knop "Opslaan" te drukken.<br>
+                    </p>
+                    <%} %>
                    <% if(request.getAttribute("client") == null){ %>
                     <input type="hidden" name="option" value="create">
                    <% } else{ %>
                     <input type="hidden" name="option" value="update">
                     <input type="hidden" name="clientID" value="${client.client_id}">
                    <% }%>
-					<span id="fileidWarning" class="true">Geen personeelnr ingevuld</span>
+					<span id="fileidWarning" class="true">Geen dossiernr ingevuld</span>
                     <div class="information">
                         <label><span class="required">* </span>Dossiernummer :</label>
-                          <input id="fileid" name="filenumber" type="text" placeholder="Personeelnr" required value="${client.fileNumber}"/>
+                          <input id="fileid" name="filenumber" type="text" placeholder="Dossiernr" required value="${client.fileNumber}"/>
                     </div>
 					<span id="forenameWarning" class="true">Geen voornaam ingevuld</span>
                     <div class="information">

@@ -24,8 +24,6 @@ function validateForm() {
     var emailReg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-
-
     if (employeeid == null || employeeid == "" || nonDigitsReg.test(employeeid)) {
         document.getElementById("employeeidWarning").className = "false";
         isGood = false;
@@ -46,6 +44,8 @@ function validateForm() {
     } else {
         document.getElementById("surnameWarning").className = "true";
     }
+    
+    console.log("Date reg: " + dateReg.test(dateofbirth));
 
     if (dateofbirth == null || dateofbirth == "" || dateReg.test(dateofbirth)) {
         document.getElementById("dateofbirthWarning").className = "false";
@@ -60,8 +60,8 @@ function validateForm() {
     } else {
         document.getElementById("nationalityWarning").className = "true";
     }
-
-    if (street == null || street == "") {
+    
+    if (street == null || street == "" || DigitsReg.test(street)) {
         document.getElementById("streetWarning").className = "false";
         isGood = false;
     } else {
@@ -76,7 +76,7 @@ function validateForm() {
     }
 
     if (postcode == null || postcode == "" || postcodeReg.test(postcode)) {
-        ////document.getElementById("postcoKdeWarning").className = "false";
+        document.getElementById("postcodeWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("postcodeWarning").className = "true";
@@ -102,15 +102,22 @@ function validateForm() {
     } else {
         document.getElementById("mobileWarning").className = "true";
     }
-
-    if (email == null || email == "" || email != email_confirmation || email.contains("@") || !emailReg.test(email)) {
+    
+    console.log("email is gelijk aan: " + email != email_confirmation);
+    console.log("heeft @ " + email.contains("@"));
+    console.log("regex email: " + emailReg.test(email));
+    
+    if (email == null || email == "" || email != email_confirmation || !email.contains("@") || emailReg.test(email)) {
         document.getElementById("emailWarning").className = "false";
         isGood = false;
     } else {
         document.getElementById("emailWarning").className = "true";
     }
 
-    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || !emailReg.test(email_confirmation)) {
+    console.log("email is gelijk aan: " + email_confirmation != email);
+    console.log("regex emailC: " + emailReg.test(email_confirmation));
+    
+    if (email_confirmation == null || email_confirmation == "" || email_confirmation != email || emailReg.test(email_confirmation)) {
         document.getElementById("email_confirmationWarning").className = "false";
         isGood = false;
     } else {

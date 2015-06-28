@@ -36,12 +36,22 @@
         	<% } %>
 			<paper-shadow z="3" animated="true">
                 <form id="add_edit_employee_form" onsubmit="return validateForm();" action="/FamilyWeb/EmployeeServlet.do" method="post">
-                    <p>
-                        Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. 
-                        Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, 
-                        toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. 
-                        Het heeft niet alleen vijf eeuwen overleefd
+                   <% if(request.getAttribute("employee") == null){ %>
+                   <p>
+                        Hieronder kunt u een nieuwe zorgprofessional toevoegen.<br>
+                        Let op dat sommige velden goed ingevuld worden.<br>
+                        Na de gegevens te hebben ingevoerd kunt u de zorgprofessional toevoegen,<br>
+                        door op de knop "Aanmaken" te drukken.<br>
                     </p>
+                    <input type="hidden" name="option" value="create">
+                   <% } else{ %>
+                   <p>
+                        Hieronder kunt u een zorgprofessional wijzigen.<br>
+                        Let op dat sommige velden goed ingevuld worden.<br> 
+                        Na de gegevens te wijzigen kunt u de gegevens opslaan,<br>
+                        door op de knop "Opslaan" te drukken.<br>
+                    </p>
+                    <%} %>
                    <% if(request.getAttribute("employee") == null || request.getAttribute("option") == "create"){ %>
                     <input type="hidden" name="option" value="create">
                      <span id="employeeidWarning" class="true">Geen personeelnr ingevuld</span>
