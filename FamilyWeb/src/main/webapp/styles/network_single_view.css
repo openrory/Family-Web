@@ -34,7 +34,7 @@ paper-tab a {
 
 .network_container{
 	display: none;
-	max-width: 1000px;
+	width: 1000px;
 	margin: 20px auto;
 	padding: 10px;
 	background-color: #FFFFFF;
@@ -189,7 +189,7 @@ svg {
     stroke-width: 2px;
 }
 
-@media screen and (min-width:1260px){
+@media screen and (max-width:1260px){
     .network_container {
         display:block;
     }
