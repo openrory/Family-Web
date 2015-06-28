@@ -49,7 +49,13 @@
 		<div class="network_container" id="container1">
             <div class="title">
             <div class="date" id="datumnetwork1"> Netwerk gemaakt op 21-02-2015</div>
-            <core-icon-button class="fullscreen" onclick="W" icon="fullscreen"></core-icon-button>
+            
+            <form action="network_single_view.jsp" method="POST">
+            	<input type="hidden" id="hidden1" name="selectedSlider" value="">
+            	<input type="hidden" id="hidden2" name="selectedPerson" value="1">
+            	<button type="submit">Submit</button>
+<!--             	<core-icon-button class="fullscreen" icon="fullscreen" type ="submit"></core-icon-button> -->
+			</form>
 			</div>
 			<div class="network" id = "network1">
 			</div>
@@ -80,7 +86,12 @@
 		<div class="network_container" id="container2">
 			<div class="title">
             <div class="date" id="datumnetwork2"> Netwerk gemaakt op 21-02-2015</div>
-            <core-icon-button class="fullscreen" onclick="W" icon="fullscreen"></core-icon-button>
+           <form action="network_single_view.jsp" method="POST">
+            	<input type="hidden" id="hidden5" name="selectedSlider" value=Network2Slidervalue>
+            	<input type="hidden" id="hidden6" name="selectedPerson" value=Network2ChosenPerson>
+            	<button type="submit">Submit</button>
+<!--             	<core-icon-button class="fullscreen" icon="fullscreen" type ="submit"></core-icon-button> -->
+			</form>
 			</div>
 			<div class="network" id = "network2">
 			</div>
@@ -135,7 +146,9 @@
     <script>
 
  // nodes is een array waarin elk uniek contact instaat. Er staat een naam bij, bij welke groep het contact hoort (vrienden, Buren etc)
-    var nodesNetwork = ${nodesNetwork};//{"allNetworks" : [ 
+    var nodesNetwork = ${nodesNetwork};
+    //{"allNetworks" : [ 
+                            
 //    						{"person1" :
 //    										[
 //    											{"datum": "13-05-2015", "commentaar": "Commentaar persoon 1 13-05-2015", "nodes": 
@@ -362,7 +375,7 @@
 
 
     var thisPersonDates;
-    var contactGroups = ["client","household", "family", "friends","colleagues", "neighbours", "acquaintance", "education","club", "religion", "careinstitution", "youthcare","bureauhalt", "justice" ];
+    var contactGroups = ["Client","Gezin", "Familie", "Vrienden","Collega's", "Buren", "Kennissen", "Onderwijs","Verenigingen", "Religie", "Zorginstellingen", "Jeugdzorg","Bureau HALT", "Justitie" ];
     var networkNameArray = ["network1","network2"];
 
     function createSelectListPersons(network) {
@@ -824,6 +837,14 @@
     			  selectedLinks.splice(index,1);
     		  }
     	  console.log("unselected Link: " + groepnummer);
+      }
+      if (networkName == "network1") {
+    	  document.getElementById("hidden1").value = sliderval;
+    	  document.getElementById("hidden2").value = chosenPerson;
+      }
+      else if (networkName == "network2") {
+    	  document.getElementById("hidden5").value = sliderval;
+    	  document.getElementById("hidden6").value = chosenPerson;
       }
     }
 
