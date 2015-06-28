@@ -142,6 +142,8 @@ public class OverviewController {
 		}
 		// for each familymember connected to the client 
 		for (Familymember fm : client.getMyFamilymembers()) {
+			netwerkNodes = new JSONArray();
+			netwerkLinks = new JSONArray();
 			netwerkPerson = new JSONObject();
 			netwerkLink = new JSONObject();
 			JSONObject nodesPerson = new JSONObject();
