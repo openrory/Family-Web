@@ -110,6 +110,10 @@ public class EmployeeServlet extends HttpServlet {
 			
 			// Refresh employee overview page
 			try {
+				// If currentUser is administrator refresh autocomplete that is required to choose socialworker 
+				if (currentUser instanceof Administrator) {
+					req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(currentUser));
+				}
 				req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
 			} catch (JSONException e) {
 				message += " Overzicht door een onbekende fout niet herladen.";
@@ -176,6 +180,10 @@ public class EmployeeServlet extends HttpServlet {
 				
 				// Refresh employee overview page
 				try {
+					// If currentUser is administrator refresh autocomplete that is required to choose socialworker 
+					if (currentUser instanceof Administrator) {
+						req.getSession().setAttribute("users", OverviewController.getInstance().autoComplete(currentUser));
+					}
 					req.getSession().setAttribute("usersJSON", OverviewController.getInstance().RefreshOverviewUsers(user));
 				} catch (JSONException e) {
 					message += " Overzicht door een onbekende fout niet herladen.";
