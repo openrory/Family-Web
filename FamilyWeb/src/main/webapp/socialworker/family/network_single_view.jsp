@@ -38,7 +38,7 @@
 
 		<paper-tab> <a href="/FamilyWeb/socialworker/family/family_members_overview.jsp"
 			horizontal center-center layout>Gezinsleden</a></paper-tab> <paper-tab>
-		<a href="/FamilyWeb/socialworker/family/network_compare.html" horizontal center-center layout>Netwerken</a></paper-tab>
+		<a href="/FamilyWeb/socialworker/family/network_compare.jsp" horizontal center-center layout>Netwerken</a></paper-tab>
 		<paper-tab> <a href="/FamilyWeb/socialworker/family/new_network_contacts.jsp" horizontal
 			center-center layout>Nieuw Netwerk</a></paper-tab> <paper-tab> <a
 			href="/FamilyWeb/socialworker/family/share_networks.jsp" horizontal center-center layout>Netwerk(en)
@@ -127,7 +127,7 @@
        }
 
        var thisPersonDates;
-       var contactGroups = ["client","household", "family", "friends","colleagues", "neighbours", "acquaintance", "education","club", "religion", "careinstitution", "youthcare","bureauhalt", "justice" ];
+       var contactGroups = ["Client","Gezin", "Familie", "Vrienden","Collega's", "Buren", "Kennissen", "Onderwijs","Verenigingen", "Religie", "Zorginstellingen", "Jeugdzorg","Bureau HALT", "Justitie" ];
        var networkNameArray = ["network1"];
 
        function createSelectListPersons(network) {
@@ -199,35 +199,6 @@
          draw_graphs(network, netwerk1ChosenPerson, netwerk1Slidervalue);
        }
 
-       /*function createSliders(network) {
-         var slider = document.createElement("input");
-         slider.type = "range";
-         slider.id = network + "range";
-         slider.value = function(d) { return d.datum };
-         slider.defaultValue = 0;
-         slider.max = thisPersonDates.length - 1;
-         slider.min = 0;
-         console.log(network);
-         slider.onchange = function () { 
-         	onChangeSlider(slider,network);
-         }
-        						 
-          console.log(network);
-         document.getElementById(network + "range").appendChild(slider);
-         console.log(network);
-       }
-
-       function onChangeSlider(slider,network) {s
-       	
-       	console.log(slider.id);
-       	console.log(network);
-       	d3.select("#"+network).select('svg').remove();
-       	console.log(document.getElementById(network + "contact_groups"));
-       	console.log(network, chosenPerson, slider.value)
-        //   document.getElementById(networkName + "contact_groups").innerHTML == "";
-       	draw_graphs(network,chosenPerson,slider.value);
-         }*/
-
        function draw_graphs(networkName, chosenPerson, sliderval){ 
          console.log("doorgestuurde netwerkname: " + networkName);
          console.log("sliderval" + sliderval);
@@ -250,10 +221,7 @@
        	  selectedNetworkNodes = thisPersonDates[sliderval].nodes;
        	  console.dir(selectedNetworkNodes);
        	}
-       //  allNetworksDatesThisPerson.forEach(function(nodesArray) { 
-//         	 	selectedNetworkNodes = nodesArray.datum;
-//       	 	console.dir(selectedNetworkNodes);
-       //  })
+         
        	//Selecteer juist netwerkLinks
          for ( i = 0; i < linksNetwork.allNetworks.length; i++ ) {
        	  thisPersonLinks = linksNetwork.allNetworks[chosenPerson];
@@ -273,18 +241,6 @@
        	   console.dir(selectedNetworkLinks);
        	}
          console.dir(selectedNetworkLinks);	
-       /*	  for ( var n in nodesNetwork.allnetworks[person]){
-       		  allNetworksThisPerson
-       	  }
-       	}
-       	console.dir(allPersons);
-       	allNetworksThisPerson = allPersons[chosenPerson];
-       	console.dir(allNetworksThisPerson);
-       	for ( i = 0; i < allNetworksThisPerson.length; i++ ){
-       		selectedNetworkNodes = allNetworksThisPerson[slidervalue];
-       	}
-       	console.dir(selectedNetworkNodes);
-       	console.log(selectedNetworkNodes);*/
        	
          var width = 800,
        	  height = 600;
@@ -307,7 +263,7 @@
        	  .nodes(selectedNetworkNodes)
        	  .links(selectedNetworkLinks)
        	  .charge(-100)
-       	  .linkDistance( function(selectedNetworkLinks) {return selectedNetworkLinks.distance*30})
+       	  .linkDistance( function(selectedNetworkLinks) {return 325 - (selectedNetworkLinks.distance*50)})
        	  .on('tick', tick)
        	  .start();
          
@@ -343,7 +299,7 @@
        	  })
        	  .on("click", function(d) {
        	  	document.getElementById("comments_single").innerHTML = "commentaar bij " + d.name; 
-       		document.getElementById("comment_single_person").innerHTML = d.commentaar; 
+       		document.getElementById("comment_single_person").innerHTML = d.commentary; 
        		} 
        	)					  
        	  .on("mouseover", mouseover)
@@ -361,19 +317,6 @@
        	  
          
          // Dit geeft aan of er een animatie in zit of dat eerst alles berekend moet worden voordat het netwerk in beeld komt.
-       	  // When this function executes, the force layout
-       	  // calculations have concluded. The layout will
-       	  // have set various properties in our nodes and
-       	  // links objects that we can use to position them
-       	  // within the SVG container.
-         
-       	  // First let's reposition the nodes. As the force
-       	  // layout runs it updates the `x` and `y` properties
-       	  // that define where the node should be centered.
-       	  // To move the node, we set the appropriate SVG
-       	  // attributes to their new values. We also have to
-       	  // give the node a non-zero radius so that it's visible
-       	  // in the container.
        	  
          //Unieke checkboxes maken
          createCheckboxes();
@@ -438,7 +381,7 @@
        	slider.pin = true;
        	console.log(networkName);
        	slider.onchange = function () { 
-       	  console.log("Networkname: " + networkName)
+       	  console.log("Networkname: " + networkName);
        	  slidervalue = slider.value;
        	  console.log(slidervalue);
        	  onChangeSlider(slider,networkName);
@@ -457,7 +400,7 @@
        	document.getElementById(networkName + "range").appendChild(slider);
        	console.log(document.getElementById(networkName + "range"));
        	console.log(network);
-         }
+      }
        	  
          var middleX = width / 2;
          var middleY = height / 2; 
@@ -503,13 +446,6 @@
        		
        		node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
          }
-         
-         // Dit stopt de drukke animatie in het begin
-         //var k = 0;
-         //while ((force.alpha() > 1e-2) && (k < 150)) {
-          //   force.tick(),
-       	//  k = k + 1;
-         //}
          
          // grappige overgang om met je muis aan te wijzen. 
          // de cirkel die je aanwijst wordt een beetje groter en weer kleiner als je met je muis er weer vanaf gaat.
