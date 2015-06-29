@@ -266,8 +266,8 @@ ADD CONSTRAINT `FKSurveys_qu287896` FOREIGN KEY (`survey_id`) REFERENCES `survey
 
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `usertype`, `email`, `isactive`, `employeenumber`, `wwreset`) VALUES
-(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'N'),
-(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'N');
+(2, 'admin', 'admin', 'admin', 'admin', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Administrator', 'admin@admin.nl', 'Y', '1', 'Y'),
+(3, 'test', 'test', 'test', 'test', '2000-01-01', '3769TB', 'Apollo', '95', 'Soesterberg', 'nederlands', '0123456789', NULL, 'Socialworker', 'test@test.nl', 'Y', '2', 'Y');
 
 INSERT INTO `clients` (`client_id`, `forename`, `surname`, `dateofbirth`, `postcode`, `street`, `housenumber`, `city`, `nationality`, `telephonenumber`, `mobilephonenumber`, `email`, `filenumber`, `dateCreated`, `user_id`) VALUES
 (1, 'Jan', 'Jansen', '2010-06-17', '1234AB', 'Nijenoord', '1', 'Utrecht', 'Nederlands', '123456789', NULL, 'joery.huiden@gmail.com', NULL, '2015-06-17', 3);

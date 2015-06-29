@@ -1040,8 +1040,9 @@ public class MySQLDao implements DatabaseInterface {
 				pStmt.setInt(4, familymember_id);
 			pStmt.setInt(5, network.getTheSurvey().getSurvey_id());
 			pStmt.executeUpdate();
+			
 			//get auto generated id
-			pStmt = conn.prepareStatement("select network_id from networks where client_id=? OR member_id=? ORDER BY datecreated DESC LIMIT 1");
+			pStmt = conn.prepareStatement("select MAX(network_id) from networks where client_id=? OR member_id=?");
 			if(client_id == 0)
 				pStmt.setString(1, null);
 			else
@@ -1050,10 +1051,13 @@ public class MySQLDao implements DatabaseInterface {
 				pStmt.setString(2, null);
 			else
 				pStmt.setInt(2, familymember_id);
+			
+			// set latest generated id from network
 			ResultSet rSet = pStmt.executeQuery();
 			if(rSet.next())
-				network.setNetwork_id(rSet.getInt("network_id"));
-			rSet.close();			
+				network.setNetwork_id(rSet.getInt(1));
+			rSet.close();	
+			
 			//intitialize categories
 			HashMap<String,Integer> categories = new HashMap<String,Integer>();
 				categories.put("household", 1);
