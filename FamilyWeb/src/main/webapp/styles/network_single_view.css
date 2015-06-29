@@ -227,3 +227,7 @@ paper-tabs{
 .fullscreen{
 	margin-top: -5px;
 }
+
+.selectInput{
+	width: 120px;
+}

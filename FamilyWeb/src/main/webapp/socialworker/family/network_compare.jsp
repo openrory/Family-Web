@@ -63,7 +63,7 @@
 			<div class="sidebar">
 			<div class="interviewee">
 			<h1 class="title">Netwerken van:</h1>
-				 <select id = "network1SelectList" onChange = "changePerson(this)">
+				 <select class="selectInput" id = "network1SelectList" onChange = "changePerson(this)">
 				</select> 
 			</div>
 			<div class="contact_groups" >
@@ -99,7 +99,7 @@
 			<div class="sidebar">
 			<div class="interviewee">
 			<h1 class="title" >Netwerken van:</h1>
-                 <select id = "network2SelectList" onChange = "changePerson(this)">
+                 <select  class="selectInput" id = "network2SelectList" onChange = "changePerson(this)">
 				</select> 
           
 			</div>
