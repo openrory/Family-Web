@@ -41,7 +41,7 @@ public class FamilyInformation extends HttpServlet {
 			// get the client that is selected
 			int client_id = Integer.parseInt((req.getParameter("currentID").trim()));
 			// get clients from the user
-			ArrayList<Client> clients = (ArrayList<Client>) req.getSession().getAttribute("clients");			
+			ArrayList<Client> clients = user.getDbController().getAllClientsOfUser(user);		
 			Client client = null;
 			// check if user has clients
 			if(clients != null && !clients.isEmpty()){

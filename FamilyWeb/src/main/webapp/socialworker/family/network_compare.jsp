@@ -54,7 +54,7 @@
             <form action="network_single_view.jsp" method="POST">
             	<input type="hidden" id="hidden1" name="selectedSlider" value="">
             	<input type="hidden" id="hidden2" name="selectedPerson" value="1">
-            	<button type="submit">Submit</button>
+            	<button class="displayButton" type="submit">Fullscreen</button>
 <!--             	<core-icon-button class="fullscreen" icon="fullscreen" type ="submit"></core-icon-button> -->
 			</form>
 			</div>
@@ -90,7 +90,7 @@
            <form action="network_single_view.jsp" method="POST">
             	<input type="hidden" id="hidden5" name="selectedSlider" value=Network2Slidervalue>
             	<input type="hidden" id="hidden6" name="selectedPerson" value=Network2ChosenPerson>
-            	<button type="submit">Submit</button>
+            	<button class="displayButton" type="submit">Fullscreen</button>
 <!--             	<core-icon-button class="fullscreen" icon="fullscreen" type ="submit"></core-icon-button> -->
 			</form>
 			</div>

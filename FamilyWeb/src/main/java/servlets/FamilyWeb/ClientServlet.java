@@ -287,7 +287,7 @@ public class ClientServlet extends HttpServlet {
 		// If currentUser is administrator load the socialworker to fill the default socialworker into autocomplete field.
 		User socialworkerClient = null;
 		if (currentUser instanceof Administrator) {
-			for (User u : ((Administrator) currentUser).getUsers()) {
+			for (User u : currentUser.getDbController().getAllUsers()) {
 				for (Client c : currentUser.getDbController().getAllClientsOfUser(u)) {
 					if (client.getClient_id() == c.getClient_id()) {
 						socialworkerClient = u;
