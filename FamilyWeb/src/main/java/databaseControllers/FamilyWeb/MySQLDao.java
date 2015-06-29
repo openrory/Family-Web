@@ -1,6 +1,7 @@
 package databaseControllers.FamilyWeb;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -490,8 +491,11 @@ public class MySQLDao implements DatabaseInterface {
 			// set each value
 			pStmt.setString(1, famMember.getForename());
 			pStmt.setString(2, famMember.getSurname());
-			pStmt.setDate(3, new java.sql.Date(famMember.getDateOfBirth()
-					.getTime()));
+			java.sql.Date birth = famMember.getDateOfBirth();
+			if(birth == null)				
+				pStmt.setDate(3, null);
+			else
+				pStmt.setDate(3, new Date(birth.getTime()));
 			pStmt.setString(4, famMember.getPostcode());
 			pStmt.setString(5, famMember.getStreet());
 			pStmt.setString(6, famMember.getHouseNumber());

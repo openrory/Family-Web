@@ -116,13 +116,15 @@ public class FamilyMemberServlet extends HttpServlet {
 				Familymember fm = new Familymember(forename, surname,
 						dateOfBirth, postcode, street, houseNumber, city,
 						nationality, telephoneNumber, mobilePhoneNumber, email);
+				
 				// add familymember object into database
 				OverviewController.getInstance().getDb()
 						.addFamilymember(fm, client);
+				OverviewController.getInstance().getDb().getFamilymembersOfClient(client);
+				
 				// add member to existing client in session
-				ArrayList<Familymember> members= client.getMyFamilymembers();
-				members.add(fm);
-				client.setMyFamilymembers(members);
+				client.setMyFamilymembers(OverviewController.getInstance().getDb().getFamilymembersOfClient(client));
+				
 				// send user to family member overview with succes message
 				req.getSession().setAttribute("client", client);
 				req.setAttribute("message", "Gezinslid Aangemaakt.");
